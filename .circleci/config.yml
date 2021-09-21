@@ -3,6 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/node:10.0
+      - image: selenium/standalone-chrome:3.1.0
     working_directory: ~/iamlautre/bookshelf
     steps:
       - checkout
