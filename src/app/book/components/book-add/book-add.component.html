@@ -1,0 +1,30 @@
+<div class="container pt-3">
+  <div class="text-center">
+    <h2>Add a new book</h2>
+  </div>
+  <div class="d-flex justify-content-center">
+    <form class="mt-2 col-4" [formGroup]="formAddBook" (ngSubmit)="onSubmit()">
+      <mat-form-field class="flex-row w-100">
+        <input matInput formControlName="isbnCtrl" required title="book's isbn" placeholder="ISBN">
+        <mat-hint align="end" *ngIf="isbnCtrl.value.length <= 10">{{isbnCtrl.value.length}} / 10</mat-hint>
+        <mat-hint align="end" *ngIf="isbnCtrl.value.length > 10">{{isbnCtrl.value.length}} / 13</mat-hint>
+        <button mat-button *ngIf="!isbnCtrl.pristine" matSuffix mat-icon-button aria-label="Clear"
+                (click)="isbnCtrl.setValue(''); isbnCtrl.markAsPristine({onlySelf: true})">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-icon matSuffix>import_contacts</mat-icon>
+        <mat-error *ngIf="isbnCtrl.hasError('pattern') && !isbnCtrl.hasError('required')">
+          The ISBN is a string of 10 or 13 number
+        </mat-error>
+        <mat-error *ngIf="isbnCtrl.hasError('required')">
+          ISBN is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <div class="flex-row mt-2">
+        <button type="submit" class="w-100" mat-raised-button
+                [disabled]="formAddBook.pristine || formAddBook.invalid">Add the book
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

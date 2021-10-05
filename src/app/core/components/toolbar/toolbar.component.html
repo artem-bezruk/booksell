@@ -1,0 +1,10 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <span>Bookshelf</span>
+    <button mat-button class="ml-3" [matMenuTriggerFor]="menu">Books</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item disabled [routerLink]="['book','list']">List</button>
+      <button mat-menu-item [routerLink]="['book','add']">Add</button>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>
