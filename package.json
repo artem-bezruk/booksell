@@ -6,7 +6,7 @@
     "start": "ng serve --progress=false",
     "build": "ng build",
     "build-ci": "ng build --prod --progress=false",
-    "test": "ng test ",
+    "test": "ng test --watch=true --progress=false",
     "test-ci": "ng test --progress=false --watch=false",
     "lint": "ng lint",
     "e2e": "ng e2e"
