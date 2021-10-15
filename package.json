@@ -8,6 +8,7 @@
     "build-ci": "ng build --prod --progress=false",
     "test": "ng test --watch=true --progress=false",
     "test-ci": "ng test --progress=false --watch=false",
+    "publish-test-coverage": "cat ./coverage/lcov.info | codacy-coverage",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -25,6 +26,7 @@
     "@angular/platform-browser-dynamic": "^6.0.0",
     "@angular/router": "^6.0.0",
     "bootstrap": "^4.1.1",
+    "codacy-coverage": "^3.0.0",
     "core-js": "^2.5.4",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
