@@ -16,5 +16,5 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: npm run test-ci
-      - run: npm run publish-test-coverag
+      - run: npm run publish-test-coverage
       - run: npm run build-ci
