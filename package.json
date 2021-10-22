@@ -7,7 +7,7 @@
     "build": "ng build",
     "build-ci": "ng build --prod --progress=false",
     "test": "ng test --watch=true --progress=false",
-    "test-ci": "ng test --progress=false --watch=false",
+    "test-ci": "ng test --progress=false --watch=false --code-coverage",
     "publish-test-coverage": "cat ./coverage/lcov.info | codacy-coverage",
     "lint": "ng lint",
     "e2e": "ng e2e"
