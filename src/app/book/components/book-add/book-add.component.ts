@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material';
-import {AwsProductAdvertApiService} from '../../../core/aws-product-advert-api.service';
 @Component({
   selector: 'app-book-add',
   templateUrl: './book-add.component.html',
@@ -10,7 +9,7 @@ import {AwsProductAdvertApiService} from '../../../core/aws-product-advert-api.s
 export class BookAddComponent implements OnInit {
   public formAddBook: FormGroup;
   public isbnCtrl: FormControl;
-  constructor(private fb: FormBuilder, private snackBar: MatSnackBar, private awsProductAdvertApiService: AwsProductAdvertApiService) {
+  constructor(private fb: FormBuilder, private snackBar: MatSnackBar) {
   }
   ngOnInit() {
     this.isbnCtrl = this.fb.control('', [
@@ -21,10 +20,7 @@ export class BookAddComponent implements OnInit {
     });
   }
   onSubmit() {
-    this.awsProductAdvertApiService.searchBookByIsbn(this.isbnCtrl.value).subscribe(
-      data => console.log(data),
-      error => console.log(error),
-      () => console.log('finished'));
+    this.openSnackBar(this.isbnCtrl.value);
   }
   openSnackBar(isbn: string) {
     this.snackBar.open('You\'ve just added the book [' + isbn + '] to your library', 'close', {
