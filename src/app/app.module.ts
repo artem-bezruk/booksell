@@ -4,33 +4,17 @@ import {AppComponent} from './app.component';
 import {CoreModule} from './core/core.module';
 import {BookModule} from './book/book.module';
 import {APP_BASE_HREF} from '@angular/common';
-import {HomeComponent} from './tmp/home/home.component';
-import {PasswordFlowLoginComponent} from './tmp/login/password-flow-login.component';
-import {FormsModule} from '@angular/forms';
-import {AccountDetailsComponent} from './tmp/account-details/account-details.component';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {CookieService} from 'ngx-cookie-service';
-import {OAuthModule} from 'angular-oauth2-oidc';
+import {SharedModule} from './shared/shared.module';
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent,
-    PasswordFlowLoginComponent,
-    AccountDetailsComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     CoreModule,
-    BookModule,
-    HttpClientModule,
-    FormsModule,
-    OAuthModule.forRoot({
-      resourceServer: {
-        sendAccessToken: true
-      }
-    })
+    BookModule
   ],
-  providers: [{provide: APP_BASE_HREF, useValue: '/'}, HttpClient, CookieService],
+  providers: [{provide: APP_BASE_HREF, useValue : '/' }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
