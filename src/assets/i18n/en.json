@@ -1,0 +1,31 @@
+{
+  "HEADER": {
+    "APP_TITLE": "Bookshelf",
+    "HOME": "Home",
+    "BOOK": {
+      "LIST": "LIST",
+      "ADD": "ADD"
+    },
+    "SIGN_IN": {
+      "LABEL": "login"
+    },
+    "MY_PROFILE": "My Profil",
+    "SIGN_OUT": "logout"
+  },
+  "ERROR": {
+    "EMAIL": {
+      "REQUIRED": "",
+      "VALID": ""
+    },
+    "PWD": {
+      "REQUIRED": ""
+    }
+  },
+  "SIGN_IN": {
+    "TITLE": "Login",
+    "EMAIL_PLACEHOLDER": "Email",
+    "PWD_PLACEHOLDER": "password",
+    "CANCEL": "Cancel",
+    "VALIDATE": "login"
+  }
+}

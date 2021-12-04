@@ -1,0 +1,3 @@
+<div *ngIf="!userConnected()">
+  <button [fxFlexOffset]="'20px'" (click)="openSignInModal()" mat-button>{{'HEADER.SIGN_IN.LABEL' | translate}}</button>
+</div>

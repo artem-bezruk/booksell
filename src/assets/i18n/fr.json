@@ -1,0 +1,37 @@
+{
+  "HEADER": {
+    "APP_TITLE": "Bibliothéque",
+    "APP_TITLE_ADMIN": "Administration de la Bibliothéque",
+    "HOME": "Accueil",
+    "BOOK": {
+      "LIST": "Livres",
+      "ADD": "Ajout de livres"
+    },
+    "SIGN_IN": {
+      "LABEL": "Administration"
+    },
+    "MY_PROFILE": "Mon Profil",
+    "SIGN_OUT": "Déconnexion"
+  },
+  "FOOTER": {
+    "SIGN_IN": {
+      "LABEL": "Administration"
+    }
+  },
+  "ERROR": {
+    "EMAIL": {
+      "REQUIRED": "L'email est <strong>obligatoire</strong>",
+      "VALID": "Veuillez entrez une addresse email valide"
+    },
+    "PWD": {
+      "REQUIRED": "Le mot de passe est <strong>obligatoire</strong>"
+    }
+  },
+  "SIGN_IN": {
+    "TITLE": "Connexion",
+    "EMAIL_PLACEHOLDER": "Email",
+    "PWD_PLACEHOLDER": "Mot de passe",
+    "CANCEL": "Annuler",
+    "VALIDATE": "Connexion"
+  }
+}

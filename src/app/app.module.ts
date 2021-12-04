@@ -4,17 +4,20 @@ import {AppComponent} from './app.component';
 import {CoreModule} from './core/core.module';
 import {BookModule} from './book/book.module';
 import {APP_BASE_HREF} from '@angular/common';
-import {SharedModule} from './shared/shared.module';
+import {HttpClient} from '@angular/common/http';
+import {CookieService} from 'ngx-cookie-service';
+import {AuthModule} from './auth/auth.module';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     CoreModule,
-    BookModule
+    BookModule,
+    AuthModule
   ],
-  providers: [{provide: APP_BASE_HREF, useValue : '/' }],
+  providers: [{provide: APP_BASE_HREF, useValue: '/'}, HttpClient, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
