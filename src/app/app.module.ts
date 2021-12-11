@@ -11,7 +11,7 @@ import {ConfigService} from './core/services/config.service';
 import {catchError, map} from 'rxjs/operators';
 import {Observable, ObservableInput, of} from 'rxjs';
 import {AppConfig} from './core/model/appConfig';
-function load(http: HttpClient, config: ConfigService): (() => Promise<boolean>) {
+export function load(http: HttpClient, config: ConfigService): (() => Promise<boolean>) {
   return (): Promise<boolean> => {
     return new Promise<boolean>((resolve: (a: boolean) => void): void => {
       http.get('./assets/config/config.json')
