@@ -11,6 +11,6 @@ COPY docker/nginx/default.conf /etc/nginx/conf.d/
 RUN rm -rf /usr/share/nginx/html/*
 COPY --from=builder /ng-app/dist /usr/share/nginx/html
 COPY docker/assets/config/config.json /usr/share/nginx/html/assets/config/config.json
-RUN sed -i 's/#CLIENT_ID#/$CLIENT_ID/g' /usr/share/nginx/html/assets/config/config.json
-RUN sed -i 's/#CLIENT_SECRET#/$CLIENT_SECRET/g'/usr/share/nginx/html/assets/config/config.json
+RUN sed -i 's/#CLIENT_ID#/$CLIENT_ID/g' /usr/share/nginx/html/assets/config/config.json && \
+    sed -i 's/#CLIENT_SECRET#/$CLIENT_SECRET/g' /usr/share/nginx/html/assets/config/config.json
 CMD ["nginx", "-g", "daemon off;"]
