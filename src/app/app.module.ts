@@ -4,13 +4,14 @@ import {AppComponent} from './app.component';
 import {CoreModule} from './core/core.module';
 import {BookModule} from './book/book.module';
 import {APP_BASE_HREF} from '@angular/common';
-import {HttpClient} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient} from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
 import {AuthModule} from './auth/auth.module';
 import {ConfigService} from './core/services/config.service';
 import {catchError, map} from 'rxjs/operators';
 import {Observable, ObservableInput, of} from 'rxjs';
 import {AppConfig} from './core/model/appConfig';
+import {JwtInterceptorService} from './auth/services/jwt-interceptor.service';
 export function load(http: HttpClient, config: ConfigService): (() => Promise<boolean>) {
   return (): Promise<boolean> => {
     return new Promise<boolean>((resolve: (a: boolean) => void): void => {
@@ -48,6 +49,7 @@ export function load(http: HttpClient, config: ConfigService): (() => Promise<bo
     AuthModule
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },
     {
       provide: APP_INITIALIZER,
       useFactory: load,
