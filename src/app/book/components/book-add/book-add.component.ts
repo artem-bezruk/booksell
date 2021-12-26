@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material';
+import {BookSearch} from '../../models/book-search';
+import {BookService} from '../../services/book.service';
+import {BehaviorSubject, Observable} from 'rxjs';
 @Component({
   selector: 'app-book-add',
   templateUrl: './book-add.component.html',
@@ -9,7 +12,13 @@ import {MatSnackBar} from '@angular/material';
 export class BookAddComponent implements OnInit {
   public formAddBook: FormGroup;
   public isbnCtrl: FormControl;
-  constructor(private fb: FormBuilder, private snackBar: MatSnackBar) {
+  private _searchResults: BehaviorSubject<BookSearch[]> = new BehaviorSubject([]);
+  get searchResults(): Observable<BookSearch[]> {
+    return this._searchResults.asObservable();
+  }
+  constructor(private fb: FormBuilder,
+              private snackBar: MatSnackBar,
+              private bookService: BookService) {
   }
   ngOnInit() {
     this.isbnCtrl = this.fb.control('', [
@@ -20,11 +29,10 @@ export class BookAddComponent implements OnInit {
     });
   }
   onSubmit() {
-    this.openSnackBar(this.isbnCtrl.value);
-  }
-  openSnackBar(isbn: string) {
-    this.snackBar.open('You\'ve just added the book [' + isbn + '] to your library', 'close', {
-      panelClass: 'accent'
+    this.bookService.searchBooks(this.isbnCtrl.value).subscribe(res => {
+      const array = this._searchResults.value;
+      array.push(res);
+      this._searchResults.next(array);
     });
   }
 }

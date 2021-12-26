@@ -21,10 +21,11 @@
         </mat-error>
       </mat-form-field>
       <div class="flex-row mt-2">
-        <button type="submit" class="w-100" mat-raised-button
+        <button type="submit" class="w-100" mat-raised-button (click)="searchBook"
                 [disabled]="formAddBook.pristine || formAddBook.invalid">Add the book
         </button>
       </div>
     </form>
   </div>
+  {{searchResults | async | json}}
 </div>
