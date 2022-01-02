@@ -8,6 +8,8 @@ FROM nginx:1.14.1-alpine
 ENV CLIENT_ID="dummy-client-id"
 ENV CLIENT_SECRET="dummy-client-secret"
 COPY docker/nginx/default.conf /etc/nginx/conf.d/
+RUN sed -i 's/#AUTH_SERVER#/$AUTH_SERVER/g' /etc/nginx/conf.d/default.conf && \
+    sed -i 's/#API_SERVER#/$API_SERVER/g' /etc/nginx/conf.d/default.conf
 RUN rm -rf /usr/share/nginx/html/*
 COPY --from=builder /ng-app/dist /usr/share/nginx/html
 COPY docker/assets/config/config.json /usr/share/nginx/html/assets/config/config.json
