@@ -2,34 +2,6 @@
     <div fxLayout="row"  fxLayoutAlign="center" >
         <h1 style="text-align: center">Add book</h1>
     </div>
-    <form fxLayout="row" fxLayoutAlign="space-evenly" [formGroup]="formAddBook"
-          (ngSubmit)="onSubmit()">
-        <mat-form-field fxFlex="40">
-            <input matInput formControlName="isbnCtrl" required title="book's isbn" placeholder="ISBN">
-            <mat-hint align="end" *ngIf="isbnCtrl.value.length <= 10">{{isbnCtrl.value.length}} / 10</mat-hint>
-            <mat-hint align="end" *ngIf="isbnCtrl.value.length > 10">{{isbnCtrl.value.length}} / 13</mat-hint>
-            <button mat-button *ngIf="!isbnCtrl.pristine" matSuffix mat-icon-button aria-label="Clear"
-                    (click)="isbnCtrl.setValue(''); isbnCtrl.markAsPristine({onlySelf: true})">
-                <mat-icon>close</mat-icon>
-            </button>
-            <mat-icon matSuffix>import_contacts</mat-icon>
-            <mat-error *ngIf="isbnCtrl.hasError('pattern') && !isbnCtrl.hasError('required')">
-                The ISBN is a string of 10 or 13 number
-            </mat-error>
-            <mat-error *ngIf="isbnCtrl.hasError('required')">
-                ISBN is <strong>required</strong>
-            </mat-error>
-        </mat-form-field>
-        <div fxFlex="25" fxFlexAlign="center">
-            <button type="submit" mat-raised-button [fxFlex]="'100'"
-                    [disabled]="formAddBook.pristine || formAddBook.invalid">
-                Search book for ISBN
-            </button>
-        </div>
-    </form>
-    <div fxLayout="row">
-        <div fxLayoutAlign="start">
-            {{searchResults | async | json}}
-        </div>
-    </div>
+    <app-isbn-search></app-isbn-search>
+    <app-search-result></app-search-result>
 </div>
