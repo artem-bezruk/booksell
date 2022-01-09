@@ -15,7 +15,7 @@ export class IsbnSearchComponent implements OnInit {
               private bookService: BookService) {
   }
   ngOnInit() {
-    this.isbnCtrl = this.fb.control('', [
+    this.isbnCtrl = this.fb.control('9791026813712', [
       Validators.required,
       Validators.pattern(/^(?:[\d]{10}|[\d]{13})$/)]);
     this.formAddBook = this.fb.group({
