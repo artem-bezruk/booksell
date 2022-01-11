@@ -1,30 +1,43 @@
-<form fxLayout="column" fxFlex="50" fxFlexOffset="25" fxLayoutAlign="center">
-    <mat-list>
-        <h2 mat-subheader>Book's general information</h2>
-        <mat-list-item> Title: {{(searchResult | async).title}} </mat-list-item>
-        <mat-list-item>
-            <h4 mat-line> Series: {{(searchResult | async).series}} </h4>
-            <p mat-line> Tome: {{(searchResult | async).tome}} </p>
-        </mat-list-item>
-        <mat-list-item> Year: {{(searchResult | async).year}} </mat-list-item>
-        <mat-list-item>
-            <h4 mat-line> Editor: {{(searchResult | async).editor}}</h4>
-            <p mat-line> Collection: {{(searchResult | async).collection}} </p>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-        <h2 mat-subheader>Book's authors</h2>
-        <mat-list-item *ngFor="let author of (searchResult | async).authors">
-            <h4 mat-line>Name: {{author.name}}</h4>
-            <p mat-line> Role(s): {{author.role | json}} </p>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-        <h2 mat-subheader>Book's technical information</h2>
-        <mat-list-item> ISBN: {{(searchResult|async).isbn}}</mat-list-item>
-        <mat-list-item> ARK Id: {{(searchResult|async).arkId}}</mat-list-item>
-        <mat-divider></mat-divider>
-        <h2 mat-subheader>Raw data</h2>
-        <mat-list-item *ngFor="let rolesByAuthor of (searchResult | async).rolesByAuthors">
-          {{rolesByAuthor}}
-        </mat-list-item>
-    </mat-list>
+<form fxLayout="column" fxFlex="80" fxFlexOffset="10" fxLayoutAlign="center">
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    ISBN: {{(searchResult|async).isbn}}
+                </mat-panel-title>
+                <mat-panel-description>
+                    ARK Id: {{(searchResult|async).arkId}}
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div fxLayout="row">
+                <mat-list fxFlex="50" dense>
+                    <h2 mat-subheader>Book's general information</h2>
+                    <mat-list-item> Title: {{(searchResult | async).title}} </mat-list-item>
+                    <mat-list-item>
+                        <h4 mat-line> Series: {{(searchResult | async).series}} </h4>
+                        <p mat-line> Tome: {{(searchResult | async).tome}} </p>
+                    </mat-list-item>
+                    <mat-list-item> Year: {{(searchResult | async).year}} </mat-list-item>
+                    <mat-list-item>
+                        <h4 mat-line> Editor: {{(searchResult | async).editor}}</h4>
+                        <p mat-line> Collection: {{(searchResult | async).collection}} </p>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <h2 mat-subheader>Book's authors</h2>
+                    <mat-list-item *ngFor="let author of (searchResult | async).authors">
+                        <h4 mat-line>Name: {{author.name}}</h4>
+                        <p mat-line> Role(s): {{author.role | json}} </p>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <h2 mat-subheader>Raw data</h2>
+                    <mat-list-item *ngFor="let rolesByAuthor of (searchResult | async).rolesByAuthors">
+                        {{rolesByAuthor}}
+                    </mat-list-item>
+                </mat-list>
+              <div fxFlex="25">
+                <img src="" [alt]="(searchResult | async).cover">
+              </div>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
 </form>

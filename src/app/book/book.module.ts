@@ -7,14 +7,15 @@ import {BookRoutingModule} from './book-routing.module';
 import { IsbnSearchComponent } from './components/isbn-search/isbn-search.component';
 import { SearchResultComponent } from './components/search-result/search-result.component';
 import { FormsModule } from '@angular/forms';
-import {MatListModule} from '@angular/material';
+import {MatExpansionModule, MatListModule} from '@angular/material';
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
     FormsModule,
     BookRoutingModule,
-    MatListModule
+    MatListModule,
+    MatExpansionModule
   ],
   declarations: [BookLayoutComponent, BookAddComponent, IsbnSearchComponent, SearchResultComponent]
 })
