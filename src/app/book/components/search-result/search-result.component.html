@@ -12,27 +12,37 @@
             <div fxFlex="50" fxLayoutAlign="center center">
                 <img [src]="'/covers/search/' + (searchResult | async).cover" [alt]="(searchResult | async).cover">
             </div>
-            <div fxFlex>
-                <mat-list fxFlex="50">
-                    <h1 mat-subheader>General information</h1>
-                    <mat-list-item><strong>Title</strong>: {{(searchResult | async).title}}</mat-list-item>
-                    <mat-list-item>
-                        <h4 mat-line><strong>Series</strong>: {{(searchResult | async).series}} </h4>
-                        <p mat-line><strong>Tome</strong>: {{(searchResult | async).tome}} </p>
-                    </mat-list-item>
-                    <mat-list-item><strong>Year</strong>: {{(searchResult | async).year}} </mat-list-item>
-                    <mat-list-item>
-                        <h4 mat-line><strong>Editor</strong>: {{(searchResult | async).editor}}</h4>
-                        <p mat-line><strong>Collection</strong>: {{(searchResult | async).collection}} </p>
-                    </mat-list-item>
-                </mat-list>
-                <mat-list fxFlex="50">
-                    <h1 mat-subheader>Authors</h1>
-                    <mat-list-item *ngFor="let author of (searchResult | async).authors">
-                        <h4 mat-line><strong>Name:</strong> {{author.name}}</h4>
-                        <p mat-line><strong>Role(s):</strong> {{author.role | json}} </p>
-                    </mat-list-item>
-                </mat-list>
+            <div fxFlex fxLayout="column">
+                <div fxLayout="row">
+                    <mat-list fxFlex="50">
+                        <h1 mat-subheader>General information</h1>
+                        <mat-list-item><strong>Title</strong>: {{(searchResult | async).title}}</mat-list-item>
+                        <mat-list-item>
+                            <h4 mat-line><strong>Series</strong>: {{(searchResult | async).series}} </h4>
+                            <p mat-line><strong>Tome</strong>: {{(searchResult | async).tome}} </p>
+                        </mat-list-item>
+                        <mat-list-item><strong>Year</strong>: {{(searchResult | async).year}} </mat-list-item>
+                        <mat-list-item>
+                            <h4 mat-line><strong>Editor</strong>: {{(searchResult | async).editor}}</h4>
+                            <p mat-line><strong>Collection</strong>: {{(searchResult | async).collection}} </p>
+                        </mat-list-item>
+                    </mat-list>
+                    <mat-list fxFlex="50">
+                        <h1 mat-subheader>Authors</h1>
+                        <mat-list-item *ngFor="let author of (searchResult | async).authors">
+                            <h4 mat-line><strong>Name:</strong> {{author.name}}</h4>
+                            <p mat-line><strong>Role(s):</strong> {{author.role | json}} </p>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+                <div fxLayout="row">
+                    <mat-list dense>
+                        <h1 mat-subheader>Raw data</h1>
+                        <mat-list-item *ngFor="let rolesByAuthor of (searchResult | async).rolesByAuthors">
+                            {{rolesByAuthor}}
+                        </mat-list-item>
+                    </mat-list>
+                </div>
             </div>
         </div>
     </mat-expansion-panel>
