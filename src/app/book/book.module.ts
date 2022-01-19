@@ -8,9 +8,11 @@ import { IsbnSearchComponent } from './components/isbn-search/isbn-search.compon
 import { SearchResultComponent } from './components/search-result/search-result.component';
 import { FormsModule } from '@angular/forms';
 import {MatExpansionModule, MatListModule} from '@angular/material';
+import {CoreModule} from '../core/core.module';
 @NgModule({
   imports: [
     CommonModule,
+    CoreModule,
     SharedModule,
     FormsModule,
     BookRoutingModule,

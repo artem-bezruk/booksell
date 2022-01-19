@@ -9,17 +9,17 @@
       <mat-icon>close</mat-icon>
     </button>
     <mat-icon matSuffix>import_contacts</mat-icon>
-    <mat-error *ngIf="isbnCtrl.hasError('pattern') && !isbnCtrl.hasError('required')">
-      The ISBN is a string of 10 or 13 number
+    <mat-error *ngIf="isbnCtrl.hasError('pattern') && !isbnCtrl.hasError('required')"
+               [innerHTML]="'BOOK.SEARCH.ERRORS.ISBN_FOMART' | translate">
     </mat-error>
-    <mat-error *ngIf="isbnCtrl.hasError('required')">
-      ISBN is <strong>required</strong>
+    <mat-error *ngIf="isbnCtrl.hasError('required')"
+               [innerHTML]="'BOOK.SEARCH.ERRORS.ISBN_REQUIRED' | translate">
     </mat-error>
   </mat-form-field>
   <div fxFlex="25" fxFlexAlign="center">
     <button type="submit" mat-raised-button [fxFlex]="'100'" color="primary"
             [disabled]="formAddBook.pristine || formAddBook.invalid">
-      Search book for ISBN
+      {{'BOOK.SEARCH.ACTION_BUTTON' | translate}}
     </button>
   </div>
 </form>

@@ -27,5 +27,16 @@
     "PWD_PLACEHOLDER": "password",
     "CANCEL": "Cancel",
     "VALIDATE": "login"
+  },
+  "BOOK": {
+    "SEARCH": {
+      "ERRORS": {
+        "ISBN_FOMART": "The ISBN is a string of 10 or 13 number",
+        "ISBN_REQUIRED": "ISBN is <strong>required</strong>"
+      },
+      "ACTION_BUTTON" : "Search",
+      "RESULTS": {
+      }
+    }
   }
 }

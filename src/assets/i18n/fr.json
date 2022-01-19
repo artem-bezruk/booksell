@@ -33,5 +33,16 @@
     "PWD_PLACEHOLDER": "Mot de passe",
     "CANCEL": "Annuler",
     "VALIDATE": "Connexion"
+  },
+  "BOOK": {
+    "SEARCH": {
+      "ERRORS": {
+        "ISBN_FOMART": "L'ISBN est une chaine numérique de 10 ou 13 chiffres",
+        "ISBN_REQUIRED": "L'ISBN est <strong>obligatoire</strong>"
+      },
+      "ACTION_BUTTON" : "Rechercher",
+      "RESULTS": {
+      }
+    }
   }
 }
