@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {BookService} from '../../services/book.service';
 import {MatSnackBar} from '@angular/material';
+import {TranslateService} from '@ngx-translate/core';
 @Component({
   selector: 'app-isbn-search',
   templateUrl: './isbn-search.component.html',
@@ -12,7 +13,8 @@ export class IsbnSearchComponent implements OnInit {
   public isbnCtrl: FormControl;
   constructor(private fb: FormBuilder,
               private snackBar: MatSnackBar,
-              private bookService: BookService) {
+              private bookService: BookService,
+              private translateService: TranslateService) {
   }
   ngOnInit() {
     this.isbnCtrl = this.fb.control('9791026813712', [
@@ -24,12 +26,13 @@ export class IsbnSearchComponent implements OnInit {
   }
   onSubmit() {
     this.bookService.searchBooks(this.isbnCtrl.value).subscribe(
-      () => {},
+      () => {
+      },
       err => {
         if (err.status === 404) {
-          this.snackBar.open('The ISBN ' + this.isbnCtrl.value + ' doesn\'t correspond to any book.');
+          this.snackBar.open(this.translateService.instant('BOOK.SEARCH.ERRORS.NO_RESULT_ISBN', {isbn: this.isbnCtrl.value}));
         } else if (err.status === 401) {
-          this.snackBar.open('You\'re not authorized to search book with ISBN, please log in.');
+          this.snackBar.open(this.translateService.instant('BOOK.SEARCH.ERRORS.NOT_AUTHORIZED'));
         }
       });
   }

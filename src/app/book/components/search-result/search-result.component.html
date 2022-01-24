@@ -1,11 +1,11 @@
 <mat-accordion fxLayout="column" fxFlex="80" fxFlexOffset="10" fxLayoutAlign="center">
     <mat-expansion-panel>
         <mat-expansion-panel-header>
-            <mat-panel-title>
-                <strong>ISBN: </strong>{{(searchResult|async).isbn}}
+            <mat-panel-title
+                    [innerHTML]="'BOOK.SEARCH.RESULTS.ISBN' | translate:{value: (searchResult|async).isbn}">
             </mat-panel-title>
-            <mat-panel-description>
-                <strong>ARK Id: </strong>{{(searchResult|async).arkId}}
+            <mat-panel-description
+                    [innerHTML]="'BOOK.SEARCH.RESULTS.ARK_ID' | translate:{value: (searchResult|async).arkId}">
             </mat-panel-description>
         </mat-expansion-panel-header>
         <div fxLayout="row">
@@ -15,29 +15,45 @@
             <div fxFlex fxLayout="column">
                 <div fxLayout="row">
                     <mat-list fxFlex="50">
-                        <h1 mat-subheader>General information</h1>
-                        <mat-list-item><strong>Title</strong>: {{(searchResult | async).title}}</mat-list-item>
+                        <h1 mat-subheader>{{'BOOK.SEARCH.RESULTS.SECTION_TITLE.GLOBAL_INFORMATION' | translate}}</h1>
                         <mat-list-item>
-                            <h4 mat-line><strong>Series</strong>: {{(searchResult | async).series}} </h4>
-                            <p mat-line><strong>Tome</strong>: {{(searchResult | async).tome}} </p>
+                            <span [innerHTML]="'BOOK.SEARCH.RESULTS.TITLE' | translate:{value: (searchResult|async).title}"></span>
                         </mat-list-item>
-                        <mat-list-item><strong>Year</strong>: {{(searchResult | async).year}} </mat-list-item>
                         <mat-list-item>
-                            <h4 mat-line><strong>Editor</strong>: {{(searchResult | async).editor}}</h4>
-                            <p mat-line><strong>Collection</strong>: {{(searchResult | async).collection}} </p>
+                            <h4 mat-line
+                                [innerHTML]="'BOOK.SEARCH.RESULTS.SERIES' | translate:{value: (searchResult|async).series}">
+                            </h4>
+                            <p mat-line
+                               [innerHTML]="'BOOK.SEARCH.RESULTS.TOME' | translate:{value: (searchResult|async).tome}">
+                            </p>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <span [innerHTML]="'BOOK.SEARCH.RESULTS.YEAR' | translate:{value: (searchResult|async).year}"></span>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <h4 mat-line
+                                [innerHTML]="'BOOK.SEARCH.RESULTS.EDITOR' | translate:{value: (searchResult|async).editor}">
+                            </h4>
+                            <p mat-line
+                               [innerHTML]="'BOOK.SEARCH.RESULTS.COLLECTION' | translate:{value: (searchResult|async).collection}">
+                            </p>
                         </mat-list-item>
                     </mat-list>
                     <mat-list fxFlex="50">
-                        <h1 mat-subheader>Authors</h1>
+                        <h1 mat-subheader>{{'BOOK.SEARCH.RESULTS.SECTION_TITLE.AUTHOR' | translate}}</h1>
                         <mat-list-item *ngFor="let author of (searchResult | async).authors">
-                            <h4 mat-line><strong>Name:</strong> {{author.name}}</h4>
-                            <p mat-line><strong>Role(s):</strong> {{author.role | json}} </p>
+                            <h4 mat-line
+                                [innerHTML]="'BOOK.SEARCH.RESULTS.AUTHOR.NAME' | translate:{value: author.name}">
+                            </h4>
+                            <p mat-line
+                               [innerHTML]="'BOOK.SEARCH.RESULTS.AUTHOR.ROLES' | translate:{value: (author.role | json)}">
+                            </p>
                         </mat-list-item>
                     </mat-list>
                 </div>
                 <div fxLayout="row">
                     <mat-list dense>
-                        <h1 mat-subheader>Raw data</h1>
+                        <h1 mat-subheader>{{'BOOK.SEARCH.RESULTS.SECTION_TITLE.RAW_DATA' | translate}}</h1>
                         <mat-list-item *ngFor="let rolesByAuthor of (searchResult | async).rolesByAuthors">
                             {{rolesByAuthor}}
                         </mat-list-item>

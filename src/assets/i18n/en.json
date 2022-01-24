@@ -32,10 +32,29 @@
     "SEARCH": {
       "ERRORS": {
         "ISBN_FOMART": "The ISBN is a string of 10 or 13 number",
-        "ISBN_REQUIRED": "ISBN is <strong>required</strong>"
+        "ISBN_REQUIRED": "ISBN is <strong>required</strong>",
+        "NO_RESULT_ISBN": "The ISBN {{isbn}} doesn't correspond to any book.",
+        "NOT_AUTHORIZED": "You're not authorized to search book with ISBN, please log in."
       },
-      "ACTION_BUTTON" : "Search",
+      "ACTION_BUTTON": "Search",
       "RESULTS": {
+        "SECTION_TITLE": {
+          "GLOBAL_INFORMATION": "General information",
+          "AUTHOR": "Authors",
+          "RAW_DATA": "Raw data"
+        },
+        "ISBN": "<strong>ISBN: </strong>{{value}}",
+        "ARK_ID": "<strong>ARK Id: </strong>{{value}}",
+        "TITLE": "<strong>Title: </strong>{{value}}",
+        "SERIES": "<strong>Series: </strong>{{value}}",
+        "TOME": "<strong>Tome: </strong>{{value}}",
+        "YEAR": "<strong>Year: </strong>{{value}}",
+        "EDITOR": "<strong>Editor: </strong>{{value}}",
+        "COLLECTION": "<strong>Collection: </strong>{{value}}",
+        "AUTHOR": {
+          "NAME": "<strong>Name: </strong>{{value}}",
+          "ROLES": "<strong>Role(s): </strong>{{value}}"
+        }
       }
     }
   }

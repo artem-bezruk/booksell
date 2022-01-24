@@ -38,10 +38,29 @@
     "SEARCH": {
       "ERRORS": {
         "ISBN_FOMART": "L'ISBN est une chaine numérique de 10 ou 13 chiffres",
-        "ISBN_REQUIRED": "L'ISBN est <strong>obligatoire</strong>"
+        "ISBN_REQUIRED": "L'ISBN est <strong>obligatoire</strong>",
+        "NO_RESULT_ISBN": "L'ISBN {{isbn}} ene correspond a aucun.",
+        "NOT_AUTHORIZED": "Tu n'a pas le droit de rechercher des livres par ISBN, connecte toi."
       },
-      "ACTION_BUTTON" : "Rechercher",
+      "ACTION_BUTTON": "Rechercher",
       "RESULTS": {
+        "SECTION_TITLE": {
+          "GLOBAL_INFORMATION": "Informations générale",
+          "AUTHOR": "Auteurs",
+          "RAW_DATA": "Données brutes"
+        },
+        "ISBN": "<strong>ISBN: </strong>{{value}}",
+        "ARK_ID": "<strong>ARK Id: </strong>{{value}}",
+        "TITLE": "<strong>Titre: </strong>{{value}}",
+        "SERIES": "<strong>Séries: </strong>{{value}}",
+        "TOME": "<strong>Tome: </strong>{{value}}",
+        "YEAR": "<strong>Année: </strong>{{value}}",
+        "EDITOR": "<strong>Editeur: </strong>{{value}}",
+        "COLLECTION": "<strong>Collection: </strong>{{value}}",
+        "AUTHOR": {
+          "NAME": "<strong>Nom: </strong>{{value}}",
+          "ROLES": "<strong>Rôle(s): </strong>{{value}}"
+        }
       }
     }
   }
