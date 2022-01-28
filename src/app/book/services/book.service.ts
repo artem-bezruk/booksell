@@ -27,4 +27,7 @@ export class BookService {
       () => this._isLoading.next(false));
     return o;
   }
+  clearResults() {
+    this._searchResult.next(null);
+  }
 }
