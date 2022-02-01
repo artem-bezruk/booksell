@@ -1,13 +1,13 @@
 <mat-toolbar color="default" [fxLayout]="'row'" [fxLayoutAlign]="'space-between center'">
   <div>
-    <span *ngIf="!userConnected() else adminTitle">{{'HEADER.APP_TITLE' | translate}}</span>
+    <span *ngIf="!(userConnected()|async) else adminTitle">{{'HEADER.APP_TITLE' | translate}}</span>
     <ng-template #adminTitle>
       <span>{{'HEADER.APP_TITLE_ADMIN' | translate}}</span>
     </ng-template>
     <button [fxFlexOffset]="'20px'" routerLink="/" mat-button>{{'HEADER.BOOK.LIST' | translate}}</button>
   </div>
   <div>
-    <div *ngIf="userConnected()">
+    <div *ngIf="userConnected()|async">
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
         <mat-icon>settings</mat-icon>
       </button>

@@ -2,16 +2,21 @@ import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {shareReplay} from 'rxjs/operators';
 import {ConfigService} from '../../core/services/config.service';
 import {OAuthConfig} from '../../core/model/appConfig';
+import {SubjectSubscriber} from 'rxjs/internal/Subject';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private static AUTH_TOKEN_COOKIE_NAME = 'access_token';
   private oauthConfig: OAuthConfig;
+  private _isAuthenticated = new BehaviorSubject(false);
+  get isAuthenticated(): Observable<boolean> {
+    return this._isAuthenticated.asObservable();
+  }
   constructor(private router: Router,
               private http: HttpClient,
               private cookieService: CookieService,
@@ -37,9 +42,9 @@ export class AuthService {
     return observable;
   }
   saveToken(token) {
-    console.log(token);
     const expireDate = new Date().getTime() + (1000 * token.expires_in);
     this.cookieService.set(AuthService.AUTH_TOKEN_COOKIE_NAME, token.access_token, expireDate);
+    this.updateAuthenticatedSatus();
     this.router.navigate(['/']);
   }
   getToken(): any {
@@ -47,9 +52,10 @@ export class AuthService {
   }
   logout() {
     this.cookieService.delete(AuthService.AUTH_TOKEN_COOKIE_NAME);
+    this.updateAuthenticatedSatus();
     this.router.navigate(['/']);
   }
-  isAuthenticated() {
-    return this.cookieService.check(AuthService.AUTH_TOKEN_COOKIE_NAME);
+  private updateAuthenticatedSatus() {
+    return this._isAuthenticated.next(this.cookieService.check(AuthService.AUTH_TOKEN_COOKIE_NAME));
   }
 }
