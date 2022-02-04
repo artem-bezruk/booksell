@@ -13,7 +13,7 @@ import {SubjectSubscriber} from 'rxjs/internal/Subject';
 export class AuthService {
   private static AUTH_TOKEN_COOKIE_NAME = 'access_token';
   private oauthConfig: OAuthConfig;
-  private _isAuthenticated = new BehaviorSubject(false);
+  private _isAuthenticated = new BehaviorSubject(null);
   get isAuthenticated(): Observable<boolean> {
     return this._isAuthenticated.asObservable();
   }
@@ -21,10 +21,8 @@ export class AuthService {
               private http: HttpClient,
               private cookieService: CookieService,
               private configService: ConfigService) {
-    this.configService.appConfig
-      .subscribe(appConfig => {
-        this.oauthConfig = appConfig ? appConfig.oauth : null;
-      });
+    this.configService.appConfig.subscribe(appConfig => this.oauthConfig = appConfig ? appConfig.oauth : null);
+    this.updateAuthenticatedSatus();
   }
   obtainAccessToken(username, password): Observable<any> {
     const oauthAuth = `${this.oauthConfig.client_id}:${this.oauthConfig.client_secret}`;
