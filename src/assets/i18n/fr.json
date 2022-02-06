@@ -62,6 +62,9 @@
           "ROLES": "<strong>Rôle(s): </strong>{{value}}"
         }
       }
+    },
+    "ADD": {
+      "SUCCESS":"Vous avez ajouté le livre {{isbn}}"
     }
   }
 }

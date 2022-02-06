@@ -1,6 +1,7 @@
 {
   "HEADER": {
-    "APP_TITLE": "Bookshelf",
+    "APP_TITLE": "Library",
+    "APP_TITLE_ADMIN": "Library administration",
     "HOME": "Home",
     "BOOK": {
       "LIST": "LIST",
@@ -56,6 +57,9 @@
           "ROLES": "<strong>Role(s): </strong>{{value}}"
         }
       }
+    },
+    "ADD": {
+      "SUCCESS":"You've added the book {{isbn}}"
     }
   }
 }
