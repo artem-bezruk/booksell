@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {CoreModule} from './core/core.module';
-import {BookModule} from './book/book.module';
+import {AdministrationModule} from './administration/administration.module';
 import {APP_BASE_HREF} from '@angular/common';
 import {HTTP_INTERCEPTORS, HttpClient} from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
@@ -45,7 +45,7 @@ export function load(http: HttpClient, config: ConfigService): (() => Promise<bo
   imports: [
     BrowserModule,
     CoreModule,
-    BookModule,
+    AdministrationModule,
     AuthModule
   ],
   providers: [

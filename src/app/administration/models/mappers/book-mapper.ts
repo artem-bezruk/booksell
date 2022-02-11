@@ -1,5 +1,5 @@
 import {BookSearch} from '../book-search';
-import {Book} from '../book';
+import {Book} from '../../../core/model/book';
 export class BookMapper {
   static mapBook(bookSearch: BookSearch): Book {
     return {

@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import {BookSearch} from '../../models/book-search';
-import {BookService} from '../../services/book.service';
+import {BookSearch} from '../../../models/book-search';
+import {BookService} from '../../../services/book.service';
 import {TranslateService} from '@ngx-translate/core';
 import {MatSnackBar} from '@angular/material';
 @Component({

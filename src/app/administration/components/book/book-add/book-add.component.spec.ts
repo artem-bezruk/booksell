@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BookAddComponent } from './book-add.component';
-import {SharedModule} from '../../../shared/shared.module';
+import {SharedModule} from '../../../../shared/shared.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 describe('BookAddComponent', () => {
   let component: BookAddComponent;
