@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {BookSearch} from '../../../models/book-search';
-import {BookService} from '../../../services/book.service';
+import {BookAdministrationService} from '../../../services/book-administration.service';
 import {TranslateService} from '@ngx-translate/core';
 import {MatSnackBar} from '@angular/material';
 @Component({
@@ -11,7 +11,7 @@ import {MatSnackBar} from '@angular/material';
 })
 export class SearchResultComponent implements OnInit, OnDestroy {
   searchResult: BookSearch;
-  constructor(private bookService: BookService, private translateService: TranslateService,  private snackBar: MatSnackBar) {
+  constructor(private bookService: BookAdministrationService, private translateService: TranslateService, private snackBar: MatSnackBar) {
   }
   ngOnInit() {
      this.bookService.searchResult.subscribe(next => this.searchResult = next);

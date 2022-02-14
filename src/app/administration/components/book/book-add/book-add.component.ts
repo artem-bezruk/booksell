@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {BookService} from '../../../services/book.service';
+import {BookAdministrationService} from '../../../services/book-administration.service';
 import {Observable} from 'rxjs';
 @Component({
   selector: 'app-book-add',
@@ -9,7 +9,7 @@ import {Observable} from 'rxjs';
 export class BookAddComponent implements OnInit {
   hasResult: boolean;
   isLoading: Observable<boolean>;
-  constructor(private bookService: BookService) { }
+  constructor(private bookService: BookAdministrationService) { }
   ngOnInit() {
     this.bookService.searchResult.subscribe(next => this.hasResult = next !== null);
     this.isLoading = this.bookService.isLoading;
