@@ -5,6 +5,7 @@ import {FooterComponent} from '../components/footer/footer.component';
 const appRoutes: Routes = [
   {path: '', component: HeaderComponent, outlet: 'header'},
   {path: '', component: FooterComponent, outlet: 'footer'},
+  {path: '', redirectTo: '/book', pathMatch: 'full'},
   {path: 'administration', redirectTo: '/administration', pathMatch: 'full'},
 ];
 @NgModule({
