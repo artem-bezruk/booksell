@@ -1,27 +1,17 @@
 <mat-progress-bar *ngIf="isLoading | async" [color]="'primary'" [mode]="'indeterminate'"></mat-progress-bar>
-<div style="padding-top: 10px;">
+<div style="padding-top: 10px;" fxLayout="row">
     <div fxFlex="10" fxFlexOffset="5">
-        <h2>Filters</h2>
+        <app-list-filter></app-list-filter>
     </div>
-    <div fxFlex="25" fxFlexOffset="5">
-        <div style="padding-bottom: 20px;" *ngFor="let res of (searchResult | async) | keyvalue">
-            <h2>{{res.key}}</h2>
-            <mat-accordion>
-                <mat-expansion-panel *ngFor="let seriesContainer of res.value | keyvalue">
-                    <mat-expansion-panel-header> {{seriesContainer.key}} </mat-expansion-panel-header>
-                    <mat-list dense>
-                        <mat-list-item *ngFor="let book of seriesContainer.value">
-                            <fa-icon *ngIf="book.status === 'UNREAD'" [icon]="['fas', 'book']" style="padding-right: 10px"></fa-icon>
-                            <fa-icon *ngIf="book.status === 'READING'" [icon]="['fas', 'book-reader']" style="padding-right: 10px"></fa-icon>
-                            <fa-icon *ngIf="book.status === 'READ'" [icon]="['fas', 'book-open']" style="padding-right: 10px"></fa-icon>
-                            <span *ngIf="book.tome !== ''">{{book.tome}} - </span> {{book.title}}
-                        </mat-list-item>
-                    </mat-list>
-                </mat-expansion-panel>
-            </mat-accordion>
-        </div>
+    <div fxFlex="25" fxLayout="column" fxFlexOffset="5">
+        <app-editor-display style="padding-bottom: 20px;"
+                            *ngFor="let res of (searchResult | async) | keyvalue"
+                            [series]="res.value"
+                            [editor]="res.key">
+        </app-editor-display>
     </div>
-    <div fxFlex fxFlexOffset="5">
-        <h2>Book Details : [title] </h2>
+    <div fxFlex fxFlexOffset="5" style="padding-bottom: 20px;">
+        <app-book-details>
+        </app-book-details>
     </div>
 </div>

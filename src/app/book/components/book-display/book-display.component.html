@@ -1,0 +1,6 @@
+<mat-list-item >
+  <fa-icon *ngIf="book.status === 'UNREAD'" [icon]="['fas', 'book']" style="padding-right: 10px"></fa-icon>
+  <fa-icon *ngIf="book.status === 'READING'" [icon]="['fas', 'book-reader']" style="padding-right: 10px"></fa-icon>
+  <fa-icon *ngIf="book.status === 'READ'" [icon]="['fas', 'book-open']" style="padding-right: 10px"></fa-icon>
+  <span *ngIf="book.tome !== ''">{{book.tome}} - </span> {{book.title}}
+</mat-list-item>
