@@ -1,6 +1,6 @@
 <div fxLayout="column">
   <h2>{{editor}}</h2>
-    <mat-accordion>
+    <mat-accordion multi>
         <app-series-display *ngFor="let seriesContainer of series | keyvalue"
                             [series]="seriesContainer.key"
                             [books]="seriesContainer.value">
