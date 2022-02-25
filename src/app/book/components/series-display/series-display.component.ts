@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {BookBySeriesContainer} from '../../../core/model/seriesByEditorContainer';
 import {Book} from '../../../core/model/book';
 @Component({
   selector: 'app-series-display',
@@ -11,7 +10,11 @@ export class SeriesDisplayComponent implements OnInit {
   series: string;
   @Input()
   books: Book[];
-  constructor() { }
+  constructor() {
+  }
   ngOnInit() {
+  }
+  getUnreadedBooksCount(): number {
+    return this.books.filter(b => b.status === 'UNREAD').length;
   }
 }

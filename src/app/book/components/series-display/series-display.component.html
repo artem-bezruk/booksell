@@ -1,5 +1,12 @@
 <mat-expansion-panel>
-  <mat-expansion-panel-header> {{series}} </mat-expansion-panel-header>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{series}}
+    </mat-panel-title>
+    <mat-panel-description>
+      {{books.length}} books ({{getUnreadedBooksCount()}} Unreaded)
+    </mat-panel-description>
+  </mat-expansion-panel-header>
   <mat-list dense>
     <app-book-display *ngFor="let book of books" [book]="book"></app-book-display>
   </mat-list>
