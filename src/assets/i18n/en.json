@@ -60,6 +60,9 @@
     },
     "ADD": {
       "SUCCESS":"You've added the book {{isbn}}"
+    },
+    "LIST": {
+      "SERIES_HEADER": "{{nbBooks}} books ({{nbUnreadBooks}} Unreaded)"
     }
   }
 }

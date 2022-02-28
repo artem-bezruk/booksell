@@ -65,6 +65,9 @@
     },
     "ADD": {
       "SUCCESS":"Vous avez ajouté le livre {{isbn}}"
+    },
+    "LIST": {
+      "SERIES_HEADER": "{{nbBooks}} livres ({{nbUnreadBooks}} non lus)"
     }
   }
 }
