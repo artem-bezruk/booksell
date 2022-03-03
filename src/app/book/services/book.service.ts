@@ -4,7 +4,6 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {shareReplay} from 'rxjs/operators';
 import {Book} from '../../core/model/book';
 import {SeriesByEditorContainer} from '../../core/model/seriesByEditorContainer';
-import * as _ from 'lodash';
 @Injectable({
   providedIn: 'root'
 })

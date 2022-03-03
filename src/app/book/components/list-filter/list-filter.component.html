@@ -1,1 +1,27 @@
-<h2>Filters</h2>
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <h2>Filters</h2>
+    <h4>Editors</h4>
+    <mat-form-field>
+        <mat-label>Editors</mat-label>
+        <mat-select formControlName="editorsCtrl" multiple>
+            <mat-option *ngFor="let d of data | keyvalue" [value]="d.key">{{d.key}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <h4>Series</h4>
+    <mat-form-field>
+        <mat-label>Series</mat-label>
+        <mat-select formControlName="seriesCtrl" multiple>
+            <ng-container *ngFor="let d of data | keyvalue">
+                <mat-optgroup *ngIf="displayGroup(d.key)" [label]="d.key">
+                    <mat-option *ngFor="let v of d.value | keyvalue" [value]="v.key">
+                        {{v.key}}
+                    </mat-option>
+                </mat-optgroup>
+            </ng-container>
+        </mat-select>
+    </mat-form-field>
+    <div>
+        <button mat-flat-button color="primary">filter</button>
+        <button mat-flat-button color="warn" (click)="clearFilters()">clear</button>
+    </div>
+</form>

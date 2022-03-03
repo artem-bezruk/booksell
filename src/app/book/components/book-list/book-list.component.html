@@ -1,17 +1,22 @@
 <mat-progress-bar *ngIf="isLoading | async" [color]="'primary'" [mode]="'indeterminate'"></mat-progress-bar>
-<div style="padding-top: 10px;" fxLayout="row">
-    <div fxFlex="10" fxFlexOffset="5">
-        <app-list-filter></app-list-filter>
-    </div>
-    <div fxFlex="25" fxLayout="column" fxFlexOffset="5">
-        <app-editor-display style="padding-bottom: 20px;"
-                            *ngFor="let res of (searchResult | async) | keyvalue"
-                            [series]="res.value"
-                            [editor]="res.key">
-        </app-editor-display>
-    </div>
-    <div fxFlex fxFlexOffset="5" style="padding-bottom: 20px;">
-        <app-book-details>
-        </app-book-details>
-    </div>
-</div>
+<mat-sidenav-container style="padding-top: 20px; min-height: 50%">
+    <mat-sidenav #filter mode="side">
+        <app-list-filter fxFlex="30" style="padding: 20px" [data]="searchResult"
+                         (filter)="onFilter($event)"></app-list-filter>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div fxFlex="80" fxFlexOffset="10">
+            <button mat-button (click)="filter.toggle()">
+                <fa-icon [icon]="['fas', 'filter']"></fa-icon>
+            </button>
+            <app-editor-display style="padding: 20px"
+                                *ngFor="let res of filteredData | async | keyvalue"
+                                [series]="res.value"
+                                [editor]="res.key">
+            </app-editor-display>
+        </div>
+    </mat-sidenav-content>
+    <mat-sidenav mode="over" position="end">
+        <app-book-details></app-book-details>
+    </mat-sidenav>
+</mat-sidenav-container>
