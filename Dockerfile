@@ -8,9 +8,9 @@ FROM nginx:1.14.1-alpine
 ENV CLIENT_ID="dummy-client-id"
 ENV CLIENT_SECRET="dummy-client-secret"
 COPY docker/nginx/default.conf /etc/nginx/conf.d/
-COPY docker/setup.sh /setup.sh
-RUN chmod +x /setup.sh
 RUN rm -rf /usr/share/nginx/html/*
 COPY --from=builder /ng-app/dist /usr/share/nginx/html
 COPY docker/assets/config/config.json /usr/share/nginx/html/assets/config/config.json
-CMD ["setup.sh", "&&", "nginx", "-g", "daemon off;"]
+COPY docker/setup.sh /setup.sh
+RUN chmod +x /setup.sh
+CMD ["sh","-c","./setup.sh && nginx -g \"daemon off;\""]
