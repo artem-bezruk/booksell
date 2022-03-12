@@ -1,7 +1,8 @@
 <mat-progress-bar *ngIf="isLoading | async" [color]="'primary'" [mode]="'indeterminate'"></mat-progress-bar>
 <mat-sidenav-container style="padding-top: 20px; min-height: 50%">
     <mat-sidenav #filter mode="side">
-        <app-list-filter fxFlex="30" style="padding: 20px" [data]="searchResult"
+        <app-list-filter fxFlex style="padding: 20px" [data]="searchResult"
+                         [editors]="editors | async"
                          (filter)="onFilter($event)"></app-list-filter>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -10,9 +11,9 @@
                 <fa-icon [icon]="['fas', 'filter']"></fa-icon>
             </button>
             <app-editor-display style="padding: 20px"
-                                *ngFor="let res of filteredData | async | keyvalue"
-                                [series]="res.value"
-                                [editor]="res.key">
+                                *ngFor="let editor of filteredEditors | async"
+                                [seriesContainer]="(filteredBooks|async)[editor]"
+                                [editor]="editor">
             </app-editor-display>
         </div>
     </mat-sidenav-content>

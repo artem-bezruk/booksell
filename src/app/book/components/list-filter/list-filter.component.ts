@@ -11,12 +11,15 @@ export class ListFilterComponent implements OnInit {
   form: FormGroup;
   @Input()
   data: SeriesByEditorContainer;
+  @Input()
+  editors: string[];
   @Output()
   filter: EventEmitter<BookFilter> = new EventEmitter();
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
-      editorsCtrl:  this.fb.control([]),
-      seriesCtrl:  this.fb.control([])
+      globalTextCtrl: this.fb.control(''),
+      editorsCtrl: this.fb.control([]),
+      seriesCtrl: this.fb.control([])
     });
   }
   ngOnInit() {
