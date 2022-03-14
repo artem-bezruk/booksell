@@ -3,8 +3,8 @@ import {BookService} from '../../services/book.service';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {SeriesByEditorContainer} from '../../../core/model/seriesByEditorContainer';
 import {BookFilter} from '../../../core/model/book-filter';
-import {consoleTestResultHandler} from 'tslint/lib/test';
 import {Utils} from '../../../shared/utils';
+import {SortOrder} from '../../../core/model/sort-order.enum';
 @Component({
   selector: 'app-book-list',
   templateUrl: './book-list.component.html',
@@ -13,6 +13,7 @@ import {Utils} from '../../../shared/utils';
 export class BookListComponent implements OnInit {
   searchResult: SeriesByEditorContainer;
   isLoading: Observable<boolean>;
+  private orderEditor: SortOrder = SortOrder.DESC;
   constructor(private bookService: BookService) {
   }
   private _editors: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
@@ -33,7 +34,7 @@ export class BookListComponent implements OnInit {
       this.searchResult = res;
       this.updateFilteredBooks(res);
       if (res !== null) {
-        this._editors.next(Utils.orderStringList(Object.keys(res)));
+        this._editors.next(Utils.orderStringList(Object.keys(res), this.orderEditor));
       }
     });
     this.isLoading = this.bookService.isLoading;
@@ -63,7 +64,12 @@ export class BookListComponent implements OnInit {
   private updateFilteredBooks(seriesByEditorContainer: SeriesByEditorContainer) {
     if (seriesByEditorContainer !== null) {
       this._filteredBooks.next(seriesByEditorContainer);
-      this._filteredEditors.next(Utils.orderStringList(Object.keys(seriesByEditorContainer)));
+      this._filteredEditors.next(Utils.orderStringList(Object.keys(seriesByEditorContainer), this.orderEditor));
     }
   }
+  changeSortOrder() {
+    this.orderEditor = this.orderEditor === SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC;
+    this._filteredEditors.next(Utils.orderStringList(Object.keys(this._filteredBooks.value), this.orderEditor));
+  }
+  isSortOrderAsc = (): boolean => this.orderEditor === SortOrder.ASC;
 }

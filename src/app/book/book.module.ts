@@ -16,7 +16,7 @@ import {BookLayoutComponent} from './layout/administration-layout/book-layout.co
 import {BookRoutingModule} from './book-routing.module';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {library} from '@fortawesome/fontawesome-svg-core';
-import {faBook, faBookOpen, faBookReader, faFilter} from '@fortawesome/free-solid-svg-icons';
+import {faBook, faBookOpen, faBookReader, faFilter, faSortAlphaDown, faSortAlphaUp} from '@fortawesome/free-solid-svg-icons';
 import {BookDisplayComponent} from './components/book-display/book-display.component';
 import {SeriesDisplayComponent} from './components/series-display/series-display.component';
 import {EditorDisplayComponent} from './components/editor-display/editor-display.component';
@@ -45,5 +45,7 @@ export class BookModule {
     library.add(faBookReader);
     library.add(faBook);
     library.add(faFilter);
+    library.add(faSortAlphaUp);
+    library.add(faSortAlphaDown);
   }
 }

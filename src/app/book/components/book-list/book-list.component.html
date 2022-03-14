@@ -1,23 +1,33 @@
 <mat-progress-bar *ngIf="isLoading | async" [color]="'primary'" [mode]="'indeterminate'"></mat-progress-bar>
 <mat-sidenav-container style="padding-top: 20px; min-height: 50%">
-    <mat-sidenav #filter mode="side">
-        <app-list-filter fxFlex style="padding: 20px" [data]="searchResult"
-                         [editors]="editors | async"
-                         (filter)="onFilter($event)"></app-list-filter>
-    </mat-sidenav>
-    <mat-sidenav-content>
-        <div fxFlex="80" fxFlexOffset="10">
-            <button mat-button (click)="filter.toggle()">
-                <fa-icon [icon]="['fas', 'filter']"></fa-icon>
-            </button>
-            <app-editor-display style="padding: 20px"
-                                *ngFor="let editor of filteredEditors | async"
-                                [seriesContainer]="(filteredBooks|async)[editor]"
-                                [editor]="editor">
-            </app-editor-display>
-        </div>
-    </mat-sidenav-content>
-    <mat-sidenav mode="over" position="end">
-        <app-book-details></app-book-details>
-    </mat-sidenav>
+  <mat-sidenav #filter mode="side">
+    <app-list-filter fxFlex style="padding: 20px" [data]="searchResult"
+                     [editors]="editors | async"
+                     (filter)="onFilter($event)"></app-list-filter>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div fxFlex="80" fxFlexOffset="10">
+      <button mat-button (click)="filter.toggle()">
+        Filters
+        <fa-icon [icon]="['fas', 'filter']"></fa-icon>
+      </button>
+      <button mat-button (click)="changeSortOrder()">
+        Order
+        <ng-container *ngIf="isSortOrderAsc(); else descIcon">
+          <fa-icon [icon]="['fas', 'sort-alpha-up']"></fa-icon>
+        </ng-container>
+        <ng-template #descIcon>
+          <fa-icon [icon]="['fas', 'sort-alpha-down']"></fa-icon>
+        </ng-template>
+      </button>
+      <app-editor-display style="padding: 20px"
+                          *ngFor="let editor of filteredEditors | async"
+                          [seriesContainer]="(filteredBooks|async)[editor]"
+                          [editor]="editor">
+      </app-editor-display>
+    </div>
+  </mat-sidenav-content>
+  <mat-sidenav mode="over" position="end">
+    <app-book-details></app-book-details>
+  </mat-sidenav>
 </mat-sidenav-container>
