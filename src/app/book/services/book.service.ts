@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {shareReplay} from 'rxjs/operators';
 import {Book} from '../../core/model/book';
-import {SeriesByEditorContainer} from '../../core/model/seriesByEditorContainer';
+import {SeriesByEditorContainer} from '../../core/model/series-by-editor-container';
 @Injectable({
   providedIn: 'root'
 })

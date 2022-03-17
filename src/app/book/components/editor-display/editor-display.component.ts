@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {BookBySeriesContainer} from '../../../core/model/seriesByEditorContainer';
+import {BookBySeriesContainer} from '../../../core/model/series-by-editor-container';
 import {Utils} from '../../../shared/utils';
 import {BehaviorSubject, Observable} from 'rxjs';
 @Component({

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BookService} from '../../services/book.service';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {SeriesByEditorContainer} from '../../../core/model/seriesByEditorContainer';
+import {SeriesByEditorContainer} from '../../../core/model/series-by-editor-container';
 import {BookFilter} from '../../../core/model/book-filter';
 import {Utils} from '../../../shared/utils';
 import {SortOrder} from '../../../core/model/sort-order.enum';

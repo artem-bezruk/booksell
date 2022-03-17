@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {BookFilter} from '../../../core/model/book-filter';
-import {SeriesByEditorContainer} from '../../../core/model/seriesByEditorContainer';
+import {SeriesByEditorContainer} from '../../../core/model/series-by-editor-container';
 @Component({
   selector: 'app-list-filter',
   templateUrl: './list-filter.component.html',
