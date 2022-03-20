@@ -8,11 +8,11 @@
   <mat-sidenav-content>
     <div fxFlex="80" fxFlexOffset="10">
       <button mat-button (click)="filter.toggle()">
-        Filters
+        {{"BOOK.LIST.ACTION_BAR.BUTTON_FILTER" | translate}}
         <fa-icon [icon]="['fas', 'filter']"></fa-icon>
       </button>
       <button mat-button (click)="changeSortOrder()">
-        Order
+        {{"BOOK.LIST.ACTION_BAR.BUTTON_ORDER" | translate}}
         <ng-container *ngIf="isSortOrderAsc(); else descIcon">
           <fa-icon [icon]="['fas', 'sort-alpha-up']"></fa-icon>
         </ng-container>

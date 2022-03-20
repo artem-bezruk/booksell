@@ -67,6 +67,10 @@
       "SUCCESS":"Vous avez ajouté le livre {{isbn}}"
     },
     "LIST": {
+      "ACTION_BAR": {
+        "BUTTON_FILTER": "Filtres",
+        "BUTTON_ORDER": "Inverser le tri"
+      },
       "SERIES_HEADER": "{{nbBooks}} livres ({{nbUnreadBooks}} non lus)"
     }
   }
