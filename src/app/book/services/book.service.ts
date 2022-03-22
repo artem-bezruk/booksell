@@ -25,15 +25,18 @@ export class BookService {
     return accumulator;
   }
   private static testSeries(accumulator: SeriesByEditorContainer, b: Book) {
-    if (!accumulator[b.editor.name][b.series]) {
-      accumulator[b.editor.name][b.series] = [];
+    if (!accumulator[b.editor.name][b.series.name]) {
+      accumulator[b.editor.name][b.series.name] = {
+        seriesBookCount: b.series.seriesBookCount,
+        books: []
+      };
     }
     return accumulator;
   }
   private static addBook(accumulator: SeriesByEditorContainer, b: Book) {
     accumulator = BookService.testEditor(accumulator, b);
     accumulator = BookService.testSeries(accumulator, b);
-    accumulator[b.editor.name][b.series].push(b);
+    accumulator[b.editor.name][b.series.name].books.push(b);
     return accumulator;
   }
   getAllBook() {

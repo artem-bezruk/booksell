@@ -1,5 +1,6 @@
 import {Author} from './author';
 import {Editor} from './editor';
+import {Series} from './series';
 export interface Book {
   arkId?: string;
   authors?: Array<Author>;
@@ -8,7 +9,7 @@ export interface Book {
   editor: Editor;
   id?: number;
   isbn?: string;
-  series?: string;
+  series?: Series;
   status?: Book.StatusEnum;
   title: string;
   tome?: string;

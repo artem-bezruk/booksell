@@ -10,7 +10,7 @@ export class BookMapper {
       editor: {name: bookSearch.editor},
       isbn: bookSearch.isbn,
       title: bookSearch.title,
-      series: bookSearch.series,
+      series: {name: bookSearch.series},
       tome: bookSearch.tome,
       year: bookSearch.year,
       status: 'UNREAD',

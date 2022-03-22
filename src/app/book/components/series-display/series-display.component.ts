@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Book} from '../../../core/model/book';
+import {SeriesInfo} from '../../../core/model/series-by-editor-container';
 @Component({
   selector: 'app-series-display',
   templateUrl: './series-display.component.html',
@@ -9,12 +9,17 @@ export class SeriesDisplayComponent implements OnInit {
   @Input()
   series: string;
   @Input()
-  books: Book[];
+  seriesData: SeriesInfo;
   constructor() {
   }
   ngOnInit() {
   }
-  getUnreadedBooksCount(): number {
-    return this.books.filter(b => b.status === 'UNREAD').length;
+  getReadedBooksCount() {
+    return this.seriesData.books.filter(b => b.status === 'READ').length;
+  }
+  getProgressValue(): number {
+    const nbReadedBook = this.seriesData.books.filter(b => b.status === 'READ').length;
+    console.log((nbReadedBook * 100) / this.seriesData.seriesBookCount);
+    return (nbReadedBook * 100) / this.seriesData.seriesBookCount;
   }
 }

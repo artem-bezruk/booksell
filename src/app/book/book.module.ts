@@ -12,7 +12,7 @@ import {
 } from '@angular/material';
 import {CoreModule} from '../core/core.module';
 import {BookListComponent} from './components/book-list/book-list.component';
-import {BookLayoutComponent} from './layout/administration-layout/book-layout.component';
+import {BookLayoutComponent} from './layout/book-layout/book-layout.component';
 import {BookRoutingModule} from './book-routing.module';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {library} from '@fortawesome/fontawesome-svg-core';

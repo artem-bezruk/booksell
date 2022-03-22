@@ -3,7 +3,7 @@
     <mat-accordion multi>
         <app-series-display *ngFor="let series of (orderedSeries|async)"
                             [series]="series"
-                            [books]="(bookBySeries|async)[series]">
+                            [seriesData]="(bookBySeries|async)[series]">
         </app-series-display>
     </mat-accordion>
 </div>
