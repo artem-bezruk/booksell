@@ -21,13 +21,14 @@
         </ng-template>
       </button>
       <app-editor-display style="padding: 20px"
+                          (showBookDetails)="showDetails($event)"
                           *ngFor="let editor of filteredEditors | async"
                           [seriesContainer]="(filteredBooks|async)[editor]"
                           [editor]="editor">
       </app-editor-display>
     </div>
   </mat-sidenav-content>
-  <mat-sidenav mode="over" position="end">
-    <app-book-details></app-book-details>
+  <mat-sidenav mode="over" (closedStart)="clearBookToDisplay()" [opened]="bookToDisplay !== null" position="end">
+    <app-book-details [book]="bookToDisplay" fxFlex="100"></app-book-details>
   </mat-sidenav>
 </mat-sidenav-container>

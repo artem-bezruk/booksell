@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Book} from 'src/app/core/model/book';
 @Component({
   selector: 'app-book-display',
@@ -8,7 +8,13 @@ import {Book} from 'src/app/core/model/book';
 export class BookDisplayComponent implements OnInit {
   @Input()
   book: Book;
+  @Output()
+  showBookDetails: EventEmitter<Book> = new EventEmitter<Book>();
   constructor() { }
   ngOnInit() {
+  }
+  openDetails(book: Book) {
+    console.log('tset');
+    this.showBookDetails.emit(book);
   }
 }

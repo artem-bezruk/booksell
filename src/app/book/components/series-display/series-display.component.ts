@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {SeriesInfo} from '../../../core/model/series-by-editor-container';
+import {Book} from '../../../core/model/book';
 @Component({
   selector: 'app-series-display',
   templateUrl: './series-display.component.html',
@@ -10,6 +11,8 @@ export class SeriesDisplayComponent implements OnInit {
   series: string;
   @Input()
   seriesData: SeriesInfo;
+  @Output()
+  showBookDetails: EventEmitter<Book> = new EventEmitter<Book>();
   constructor() {
   }
   ngOnInit() {
@@ -21,5 +24,9 @@ export class SeriesDisplayComponent implements OnInit {
     const nbReadedBook = this.seriesData.books.filter(b => b.status === 'READ').length;
     console.log((nbReadedBook * 100) / this.seriesData.seriesBookCount);
     return (nbReadedBook * 100) / this.seriesData.seriesBookCount;
+  }
+  showDetails(book: Book) {
+    console.log('tset2');
+    this.showBookDetails.emit(book);
   }
 }

@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BookBySeriesContainer} from '../../../core/model/series-by-editor-container';
 import {Utils} from '../../../shared/utils';
 import {BehaviorSubject, Observable} from 'rxjs';
+import {Book} from '../../../core/model/book';
 @Component({
   selector: 'app-editor-display',
   templateUrl: './editor-display.component.html',
@@ -10,6 +11,8 @@ import {BehaviorSubject, Observable} from 'rxjs';
 export class EditorDisplayComponent implements OnInit {
   @Input()
   editor: string;
+  @Output()
+  showBookDetails: EventEmitter<Book> = new EventEmitter<Book>();
   constructor() {
   }
   private _orderedSeries: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
@@ -28,5 +31,9 @@ export class EditorDisplayComponent implements OnInit {
     }
   }
   ngOnInit() {
+  }
+  showDetails(book: Book) {
+    console.log('test');
+    this.showBookDetails.emit(book);
   }
 }

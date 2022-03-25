@@ -5,6 +5,7 @@ import {SeriesByEditorContainer} from '../../../core/model/series-by-editor-cont
 import {BookFilter} from '../../../core/model/book-filter';
 import {Utils} from '../../../shared/utils';
 import {SortOrder} from '../../../core/model/sort-order.enum';
+import {Book} from '../../../core/model/book';
 @Component({
   selector: 'app-book-list',
   templateUrl: './book-list.component.html',
@@ -13,6 +14,7 @@ import {SortOrder} from '../../../core/model/sort-order.enum';
 export class BookListComponent implements OnInit {
   searchResult: SeriesByEditorContainer;
   isLoading: Observable<boolean>;
+  bookToDisplay: Book = null;
   private orderEditor: SortOrder = SortOrder.DESC;
   constructor(private bookService: BookService) {
   }
@@ -72,4 +74,10 @@ export class BookListComponent implements OnInit {
     this._filteredEditors.next(Utils.orderStringList(Object.keys(this._filteredBooks.value), this.orderEditor));
   }
   isSortOrderAsc = (): boolean => this.orderEditor === SortOrder.ASC;
+  showDetails(book: Book) {
+    this.bookToDisplay = book;
+  }
+  clearBookToDisplay() {
+    this.bookToDisplay = null;
+  }
 }

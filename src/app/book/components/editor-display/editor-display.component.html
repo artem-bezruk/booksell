@@ -2,6 +2,7 @@
     <h2>{{editor}}</h2>
     <mat-accordion multi>
         <app-series-display *ngFor="let series of (orderedSeries|async)"
+                            (showBookDetails)="showDetails($event)"
                             [series]="series"
                             [seriesData]="(bookBySeries|async)[series]">
         </app-series-display>
