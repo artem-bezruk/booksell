@@ -4,7 +4,7 @@ import {MatDialog} from '@angular/material';
 import {AuthService} from '../../../auth/services/auth.service';
 @Component({
   selector: 'app-footer',
-  templateUrl: './footer.component.html',
+  templateUrl: './footer.component.html'
 })
 export class FooterComponent implements OnInit {
   constructor(public dialog: MatDialog, private authService: AuthService) {

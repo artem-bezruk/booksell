@@ -21,12 +21,9 @@ export class SeriesDisplayComponent implements OnInit {
     return this.seriesData.books.filter(b => b.status === 'READ').length;
   }
   getProgressValue(): number {
-    const nbReadedBook = this.seriesData.books.filter(b => b.status === 'READ').length;
-    console.log((nbReadedBook * 100) / this.seriesData.seriesBookCount);
-    return (nbReadedBook * 100) / this.seriesData.seriesBookCount;
+    return (this.seriesData.books.filter(b => b.status === 'READ').length * 100) / this.seriesData.seriesBookCount;
   }
   showDetails(book: Book) {
-    console.log('tset2');
     this.showBookDetails.emit(book);
   }
 }

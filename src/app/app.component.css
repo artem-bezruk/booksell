@@ -1,0 +1,11 @@
+.content {
+  margin-top: 64px;
+  min-height: 100%;
+  margin-bottom: -128px;
+}
+.footer {
+  position: relative;
+  height: 128px;
+  z-index: 1000;
+  width: 100%;
+}

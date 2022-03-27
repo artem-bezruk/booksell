@@ -1,4 +1,4 @@
-<mat-toolbar color="default" [fxLayout]="'row'" [fxLayoutAlign]="'space-between center'">
+<mat-toolbar class="app-toolbar" color="default" [fxLayout]="'row'" [fxLayoutAlign]="'space-between center'">
   <div>
     <span *ngIf="!(userConnected()|async) else adminTitle">{{'HEADER.APP_TITLE' | translate}}</span>
     <ng-template #adminTitle>

@@ -30,6 +30,7 @@ import {SeriesDisplayComponent} from './components/series-display/series-display
 import {EditorDisplayComponent} from './components/editor-display/editor-display.component';
 import {BookDetailsComponent} from './components/book-details/book-details.component';
 import {ListFilterComponent} from './components/list-filter/list-filter.component';
+import { BookListActionBarComponent } from './components/book-list-action-bar/book-list-action-bar.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -45,7 +46,7 @@ import {ListFilterComponent} from './components/list-filter/list-filter.componen
     MatSelectModule,
     MatSidenavModule
   ],
-  declarations: [BookLayoutComponent, BookListComponent, BookDisplayComponent, SeriesDisplayComponent, EditorDisplayComponent, BookDetailsComponent, ListFilterComponent]
+  declarations: [BookLayoutComponent, BookListComponent, BookDisplayComponent, SeriesDisplayComponent, EditorDisplayComponent, BookDetailsComponent, ListFilterComponent, BookListActionBarComponent]
 })
 export class BookModule {
   constructor() {

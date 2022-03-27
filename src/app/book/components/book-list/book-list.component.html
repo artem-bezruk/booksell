@@ -1,34 +1,23 @@
-<mat-progress-bar *ngIf="isLoading | async" [color]="'primary'" [mode]="'indeterminate'"></mat-progress-bar>
-<mat-sidenav-container style="padding-top: 20px; min-height: 50%">
-  <mat-sidenav #filter mode="side">
+<mat-sidenav-container class="book-list-container" fxFlex>
+  <mat-progress-bar *ngIf="isLoading | async" [color]="'primary'" [mode]="'indeterminate'"></mat-progress-bar>
+  <mat-sidenav #filter mode="side"  style="position: fixed; padding-top: 64px"  >
     <app-list-filter fxFlex style="padding: 20px" [data]="searchResult"
                      [editors]="editors | async"
                      (filter)="onFilter($event)"></app-list-filter>
   </mat-sidenav>
   <mat-sidenav-content>
     <div fxFlex="80" fxFlexOffset="10">
-      <button mat-button (click)="filter.toggle()">
-        {{"BOOK.LIST.ACTION_BAR.BUTTON_FILTER" | translate}}
-        <fa-icon [icon]="['fas', 'filter']"></fa-icon>
-      </button>
-      <button mat-button (click)="changeSortOrder()">
-        {{"BOOK.LIST.ACTION_BAR.BUTTON_ORDER" | translate}}
-        <ng-container *ngIf="isSortOrderAsc(); else descIcon">
-          <fa-icon [icon]="['fas', 'sort-alpha-up']"></fa-icon>
-        </ng-container>
-        <ng-template #descIcon>
-          <fa-icon [icon]="['fas', 'sort-alpha-down']"></fa-icon>
-        </ng-template>
-      </button>
-      <app-editor-display style="padding: 20px"
-                          (showBookDetails)="showDetails($event)"
+      <app-book-list-action-bar (filter)="filter.toggle()"
+                                (changeSortOrder)="changeSortOrder()"
+                                [isSortOrderAsc]="isSortOrderAsc()"></app-book-list-action-bar>
+      <app-editor-display (showBookDetails)="showDetails($event)"
                           *ngFor="let editor of filteredEditors | async"
                           [seriesContainer]="(filteredBooks|async)[editor]"
                           [editor]="editor">
       </app-editor-display>
     </div>
   </mat-sidenav-content>
-  <mat-sidenav mode="over" (closedStart)="clearBookToDisplay()" [opened]="bookToDisplay !== null" position="end">
+  <mat-sidenav mode="over" style="position: fixed; padding-top: 64px" (closedStart)="clearBookToDisplay()" [opened]="bookToDisplay !== null" position="end">
     <app-book-details [book]="bookToDisplay" fxFlex="100"></app-book-details>
   </mat-sidenav>
 </mat-sidenav-container>

@@ -14,7 +14,6 @@ export class BookDisplayComponent implements OnInit {
   ngOnInit() {
   }
   openDetails(book: Book) {
-    console.log('tset');
     this.showBookDetails.emit(book);
   }
 }

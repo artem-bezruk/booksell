@@ -33,7 +33,6 @@ export class EditorDisplayComponent implements OnInit {
   ngOnInit() {
   }
   showDetails(book: Book) {
-    console.log('test');
     this.showBookDetails.emit(book);
   }
 }

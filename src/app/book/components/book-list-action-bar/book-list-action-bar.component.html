@@ -1,0 +1,15 @@
+<div fxFlex fxLayoutAlign="start center">
+  <button mat-button (click)="filterAction()">
+    {{"BOOK.LIST.ACTION_BAR.BUTTON_FILTER" | translate}}
+    <fa-icon [icon]="['fas', 'filter']"></fa-icon>
+  </button>
+  <button mat-button (click)="changeSortOrderAction()">
+    {{"BOOK.LIST.ACTION_BAR.BUTTON_ORDER" | translate}}
+    <ng-container *ngIf="isSortOrderAsc; else descIcon">
+      <fa-icon [icon]="['fas', 'sort-alpha-up']"></fa-icon>
+    </ng-container>
+    <ng-template #descIcon>
+      <fa-icon [icon]="['fas', 'sort-alpha-down']"></fa-icon>
+    </ng-template>
+  </button>
+</div>
