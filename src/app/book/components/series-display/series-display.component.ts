@@ -1,10 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {SeriesInfo} from '../../../core/model/series-by-editor-container';
 import {Book} from '../../../core/model/book';
 @Component({
   selector: 'app-series-display',
   templateUrl: './series-display.component.html',
-  styleUrls: ['./series-display.component.css']
+  styleUrls: ['./series-display.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class SeriesDisplayComponent implements OnInit {
   @Input()
