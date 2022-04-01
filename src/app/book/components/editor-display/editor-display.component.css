@@ -1,4 +1,7 @@
 .editor-wrapper h2{
+  margin: 0;
+}
+.editor-wrapper .editor-title{
   margin-top: 15px;
   margin-bottom: 5px;
 }

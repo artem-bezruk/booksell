@@ -1,14 +1,18 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewChildren} from '@angular/core';
 import {BookBySeriesContainer} from '../../../core/model/series-by-editor-container';
 import {Utils} from '../../../shared/utils';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Book} from '../../../core/model/book';
+import {MatAccordion} from '@angular/material';
+import {SeriesDisplayComponent} from '../series-display/series-display.component';
 @Component({
   selector: 'app-editor-display',
   templateUrl: './editor-display.component.html',
   styleUrls: ['./editor-display.component.css']
 })
 export class EditorDisplayComponent implements OnInit {
+  @ViewChild(MatAccordion, {static: false}) accordion: MatAccordion;
+  @ViewChildren(SeriesDisplayComponent) series: SeriesDisplayComponent[] = [];
   @Input()
   editor: string;
   @Output()
@@ -34,5 +38,12 @@ export class EditorDisplayComponent implements OnInit {
   }
   showDetails(book: Book) {
     this.showBookDetails.emit(book);
+  }
+  isAllPanelOpened() {
+    let state = true;
+    this.series.forEach(panel => {
+      state = state && panel.getPanelState();
+    });
+    return state;
   }
 }

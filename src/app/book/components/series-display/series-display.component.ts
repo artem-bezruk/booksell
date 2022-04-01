@@ -1,6 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
 import {SeriesInfo} from '../../../core/model/series-by-editor-container';
 import {Book} from '../../../core/model/book';
+import {MatAccordion, MatExpansionPanel} from '@angular/material';
 @Component({
   selector: 'app-series-display',
   templateUrl: './series-display.component.html',
@@ -8,6 +9,7 @@ import {Book} from '../../../core/model/book';
   encapsulation: ViewEncapsulation.None
 })
 export class SeriesDisplayComponent implements OnInit {
+  @ViewChild(MatExpansionPanel, {static: false}) matExpansionPanel: MatExpansionPanel;
   @Input()
   series: string;
   @Input()
@@ -26,5 +28,8 @@ export class SeriesDisplayComponent implements OnInit {
   }
   showDetails(book: Book) {
     this.showBookDetails.emit(book);
+  }
+  getPanelState(): boolean {
+    return this.matExpansionPanel.expanded;
   }
 }
