@@ -1,7 +1,7 @@
-<div fxLayout="column" class="editor-wrapper">
-  <div fxLayout="row" fxLayoutAlign="space-between" class="editor-title">
-    <h2>{{editor}}</h2>
-    <div>
+<div fxLayout="row" class="editor-wrapper" fxLayoutAlign="space-between">
+  <div fxFlex="15" fxLayout="column" fxLayoutAlign="start" class="editor-title">
+    <h2 fxLayoutAlign="end" style="20px">{{editor}}</h2>
+    <div fxLayoutAlign="end">
       <button mat-button *ngIf="!isAllPanelOpened()" (click)="accordion.openAll()">
         Expand all
         <fa-icon [icon]="['fas', 'caret-down']"></fa-icon>
@@ -12,11 +12,13 @@
       </button>
     </div>
   </div>
-  <mat-accordion multi>
-        <app-series-display *ngFor="let series of (orderedSeries|async)"
-                            (showBookDetails)="showDetails($event)"
-                            [series]="series"
-                            [seriesData]="(bookBySeries|async)[series]">
-        </app-series-display>
+  <div fxFlex="80">
+    <mat-accordion multi>
+      <app-series-display *ngFor="let series of (orderedSeries|async)"
+                          (showBookDetails)="showDetails($event)"
+                          [series]="series"
+                          [seriesData]="(bookBySeries|async)[series]">
+      </app-series-display>
     </mat-accordion>
+  </div>
 </div>
