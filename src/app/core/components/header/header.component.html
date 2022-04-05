@@ -13,7 +13,7 @@
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item [routerLink]="'/administration/book/add'">
-          <mat-icon>add-circle</mat-icon>
+          <fa-icon [icon]="['fas', 'plus']" style="padding-right: 10px"></fa-icon>
           <span>{{'HEADER.BOOK.ADD' | translate}}</span>
         </button>
       </mat-menu>

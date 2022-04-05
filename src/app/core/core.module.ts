@@ -3,12 +3,15 @@ import {CommonModule} from '@angular/common';
 import {SharedModule} from '../shared/shared.module';
 import {RoutingModule} from './routing/routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatBadgeModule, MatMenuModule, MatToolbarModule} from '@angular/material';
+import {MatMenuModule, MatToolbarModule} from '@angular/material';
 import {HttpClient} from '@angular/common/http';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {library} from '@fortawesome/fontawesome-svg-core';
+import {faPlus} from '@fortawesome/free-solid-svg-icons';
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -27,6 +30,7 @@ export function createTranslateLoader(http: HttpClient) {
     }),
     MatToolbarModule,
     MatMenuModule,
+    FontAwesomeModule
   ],
   declarations: [
     HeaderComponent,
@@ -39,4 +43,7 @@ export function createTranslateLoader(http: HttpClient) {
   ]
 })
 export class CoreModule {
+  constructor() {
+    library.add(faPlus);
+  }
 }
