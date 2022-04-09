@@ -24,7 +24,9 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   }
   addBook(bookSearch: BookSearch) {
     this.bookService.addBook(bookSearch).subscribe(res => {
-      this.snackBar.open(this.translateService.instant('BOOK.ADD.SUCCESS', {isbn: res.isbn}));
+      this.snackBar.open(
+        this.translateService.instant('BOOK.ADD.SUCCESS', {isbn: res.isbn}),
+        this.translateService.instant('SNACKBAR.ACTION.CLOSE'));
       this.bookService.clearResults();
     });
   }

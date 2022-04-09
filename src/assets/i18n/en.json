@@ -68,5 +68,10 @@
       },
       "SERIES_HEADER": "{{nbBooks}} books ({{nbUnreadBooks}} Unreaded)"
     }
+  },
+  "SNACKBAR": {
+    "ACTION": {
+      "CLOSE": "Close"
+    }
   }
 }

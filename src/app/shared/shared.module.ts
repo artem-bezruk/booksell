@@ -12,6 +12,7 @@ import {
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {HttpClientModule} from '@angular/common/http';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 @NgModule({
   imports: [
     CommonModule,
@@ -38,6 +39,9 @@ import {HttpClientModule} from '@angular/common/http';
     MatDialogModule,
     MatSnackBarModule,
     MatBadgeModule
+  ],
+  providers: [
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
   ]
 })
 export class SharedModule { }
