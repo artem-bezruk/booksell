@@ -4,7 +4,7 @@ RUN npm i && mkdir /ng-app && mv ./node_modules ./ng-app
 WORKDIR /ng-app
 COPY . .
 RUN npm run build-ci
-FROM nginx:1.14.1-alpine
+FROM nginx:1.17.1-alpine
 ENV CLIENT_ID="dummy-client-id"
 ENV CLIENT_SECRET="dummy-client-secret"
 COPY docker/nginx/default.conf /etc/nginx/conf.d/
