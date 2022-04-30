@@ -21,7 +21,7 @@
   "ERROR": {
     "EMAIL": {
       "REQUIRED": "L'email est <strong>obligatoire</strong>",
-      "VALID": "Veuillez entrez une addresse email valide"
+      "VALID": "Veuillez entrez une addresse email <strong>valide</strong>"
     },
     "PWD": {
       "REQUIRED": "Le mot de passe est <strong>obligatoire</strong>"

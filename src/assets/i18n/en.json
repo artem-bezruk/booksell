@@ -15,11 +15,11 @@
   },
   "ERROR": {
     "EMAIL": {
-      "REQUIRED": "",
-      "VALID": ""
+      "REQUIRED": "The email <strong>required</strong>",
+      "VALID": "The email format is not <strong>valid</strong>"
     },
     "PWD": {
-      "REQUIRED": ""
+      "REQUIRED": "The password is <strong>required</strong>"
     }
   },
   "SIGN_IN": {

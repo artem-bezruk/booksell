@@ -7,17 +7,14 @@
     <div [fxLayout]="'column'">
       <mat-form-field>
         <input matInput [formControlName]="'email'" placeholder="{{'SIGN_IN.EMAIL_PLACEHOLDER' | translate}}" autofocus>
-        <mat-error *ngIf="form.controls['email'].hasError('email') && !form.controls['email'].hasError('required')">
-          {{'ERROR.EMAIL_VALID' | translate}}
-        </mat-error>
-        <mat-error *ngIf="form.controls['email'].hasError('required')"
-                   [innerHTML]="'ERROR.EMAIL_REQUIRED' | translate"></mat-error>
+        <mat-error *ngIf="this.hasFormatError('email')" [innerHTML]="'ERROR.EMAIL.VALID' | translate"></mat-error>
+        <mat-error *ngIf="this.hasRequiredError('email')" [innerHTML]="'ERROR.EMAIL.REQUIRED' | translate"></mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput type="password" [formControlName]="'password'"
                placeholder="{{'SIGN_IN.PWD_PLACEHOLDER' | translate}}">
-        <mat-error *ngIf="form.controls['password'].hasError('required')"
-                   [innerHTML]="'ERROR.PWD_REQUIRED' | translate"></mat-error>
+        <mat-error *ngIf="this.hasRequiredError('password')"
+                   [innerHTML]="'ERROR.PWD.REQUIRED' | translate"></mat-error>
       </mat-form-field>
     </div>
   </mat-dialog-content>

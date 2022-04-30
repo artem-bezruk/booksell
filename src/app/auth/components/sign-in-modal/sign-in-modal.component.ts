@@ -35,4 +35,10 @@ export class SignInModalComponent implements OnInit {
   cancel() {
     this.dialogRef.close(false);
   }
+  hasFormatError(control: string) {
+    return this.form.controls[control].hasError('email') && !this.hasRequiredError(control);
+  }
+  hasRequiredError(control: string) {
+    return this.form.controls[control].hasError('required');
+  }
 }
