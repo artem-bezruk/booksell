@@ -25,7 +25,10 @@ export class BookAdministrationService {
     const o = this.http.get<BookSearch>('/api/search/books/findByISBN', {params}).pipe(shareReplay());
     o.subscribe(
       res => this._searchResult.next(res),
-      err => console.error('an error occured!', err),
+      err => {
+        console.error('an error occured!', err);
+        this._isLoading.next(false);
+      },
       () => this._isLoading.next(false));
     return o;
   }

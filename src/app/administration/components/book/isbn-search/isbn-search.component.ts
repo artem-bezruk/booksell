@@ -10,34 +10,39 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class IsbnSearchComponent implements OnInit {
   public formAddBook: FormGroup;
-  public isbnCtrl: FormControl;
   constructor(private fb: FormBuilder,
               private snackBar: MatSnackBar,
               private bookService: BookAdministrationService,
               private translateService: TranslateService) {
   }
   ngOnInit() {
-    this.isbnCtrl = this.fb.control('9791026813712', [
-      Validators.required,
-      Validators.pattern(/^(?:[\d]{10}|[\d]{13})$/)]);
     this.formAddBook = this.fb.group({
-      isbnCtrl: this.isbnCtrl
+      isbnCtrl: this.fb.control('', [
+        Validators.required,
+        Validators.pattern(/^(?:[\d]{10}|[\d]{13})$/)])
     });
   }
   onSubmit() {
-    this.bookService.searchBooks(this.isbnCtrl.value).subscribe(
+    const isbn = this.formAddBook.value.isbnCtrl;
+    this.bookService.searchBooks(this.formAddBook.value.isbnCtrl).subscribe(
       () => {
       },
       err => {
         if (err.status === 404) {
           this.snackBar.open(
-            this.translateService.instant('BOOK.SEARCH.ERRORS.NO_RESULT_ISBN', {isbn: this.isbnCtrl.value}),
+            this.translateService.instant('BOOK.SEARCH.ERRORS.NO_RESULT_ISBN', {isbn}),
             this.translateService.instant('SNACKBAR.ACTION.CLOSE'));
         } else if (err.status === 401) {
           this.snackBar.open(
-            this.translateService.instant('BOOK.SEARCH.ERRORS.NOT_AUTHORIZED', {isbn: this.isbnCtrl.value}),
+            this.translateService.instant('BOOK.SEARCH.ERRORS.NOT_AUTHORIZED', {isbn}),
             this.translateService.instant('SNACKBAR.ACTION.CLOSE'));
         }
       });
+  }
+  hasFormatError(control: string) {
+    return this.formAddBook.controls[control].hasError('pattern') && !this.hasRequiredError(control);
+  }
+  hasRequiredError(control: string) {
+    return this.formAddBook.controls[control].hasError('required');
   }
 }

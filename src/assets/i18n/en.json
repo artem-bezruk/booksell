@@ -37,7 +37,9 @@
         "NO_RESULT_ISBN": "The ISBN {{isbn}} doesn't correspond to any book.",
         "NOT_AUTHORIZED": "You're not authorized to search book with ISBN, please log in."
       },
-      "ACTION_BUTTON": "Search",
+      "TITLE": "Add books",
+      "BUTTON_SEARCH": "Search",
+      "BUTTON_CLEAR": "Clear",
       "RESULTS": {
         "SECTION_TITLE": {
           "GLOBAL_INFORMATION": "General information",

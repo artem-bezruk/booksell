@@ -1,25 +1,24 @@
 <form fxLayout="row" fxLayoutAlign="space-evenly" [formGroup]="formAddBook"
       (ngSubmit)="onSubmit()">
   <mat-form-field fxFlex="40">
-    <input matInput formControlName="isbnCtrl" required title="book's isbn" placeholder="ISBN">
-    <mat-hint align="end" *ngIf="isbnCtrl.value.length <= 10">{{isbnCtrl.value.length}} / 10</mat-hint>
-    <mat-hint align="end" *ngIf="isbnCtrl.value.length > 10">{{isbnCtrl.value.length}} / 13</mat-hint>
-    <button mat-button *ngIf="!isbnCtrl.pristine" matSuffix mat-icon-button aria-label="Clear"
-            (click)="isbnCtrl.setValue(''); isbnCtrl.markAsPristine({onlySelf: true})">
-      <mat-icon>close</mat-icon>
-    </button>
+    <input matInput formControlName="isbnCtrl" #isbn required title="book's isbn" placeholder="ISBN">
+    <mat-hint align="end" *ngIf="isbn.value.length <= 10">{{isbn.value.length}} / 10</mat-hint>
+    <mat-hint align="end" *ngIf="isbn.value.length > 10">{{isbn.value.length}} / 13</mat-hint>
     <mat-icon matSuffix>import_contacts</mat-icon>
-    <mat-error *ngIf="isbnCtrl.hasError('pattern') && !isbnCtrl.hasError('required')"
-               [innerHTML]="'BOOK.SEARCH.ERRORS.ISBN_FOMART' | translate">
+    <mat-error *ngIf="hasFormatError('isbnCtrl')" [innerHTML]="'BOOK.SEARCH.ERRORS.ISBN_FOMART' | translate">
     </mat-error>
-    <mat-error *ngIf="isbnCtrl.hasError('required')"
-               [innerHTML]="'BOOK.SEARCH.ERRORS.ISBN_REQUIRED' | translate">
+    <mat-error *ngIf="hasRequiredError('isbnCtrl')" [innerHTML]="'BOOK.SEARCH.ERRORS.ISBN_REQUIRED' | translate">
     </mat-error>
   </mat-form-field>
-  <div fxFlex="25" fxFlexAlign="center">
-    <button type="submit" mat-raised-button [fxFlex]="'100'" color="primary"
+  <div fxFlex="40" fxLayoutAlign="space-around">
+    <button type="submit" mat-raised-button fxFlex="40" color="primary"
             [disabled]="formAddBook.pristine || formAddBook.invalid">
-      {{'BOOK.SEARCH.ACTION_BUTTON' | translate}}
+      {{'BOOK.SEARCH.BUTTON_SEARCH' | translate}}
+    </button>
+    <button type="button" mat-raised-button fxFlex="40" color="warn"
+            [disabled]="formAddBook.pristine && isbn.value === ''"
+            (click)="formAddBook.reset({isbnCtrl: ''})" >
+      {{'BOOK.SEARCH.BUTTON_CLEAR' | translate}}
     </button>
   </div>
 </form>
