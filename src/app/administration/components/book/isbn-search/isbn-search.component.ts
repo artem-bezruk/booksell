@@ -36,6 +36,10 @@ export class IsbnSearchComponent implements OnInit {
           this.snackBar.open(
             this.translateService.instant('BOOK.SEARCH.ERRORS.NOT_AUTHORIZED', {isbn}),
             this.translateService.instant('SNACKBAR.ACTION.CLOSE'));
+        } else {
+          this.snackBar.open(
+            this.translateService.instant('BOOK.SEARCH.ERRORS.GENERIC'),
+            this.translateService.instant('SNACKBAR.ACTION.CLOSE'));
         }
       });
   }
