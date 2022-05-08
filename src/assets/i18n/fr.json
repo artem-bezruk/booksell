@@ -40,8 +40,7 @@
         "ISBN_FOMART": "L'ISBN est une chaine numérique de 10 ou 13 chiffres",
         "ISBN_REQUIRED": "L'ISBN est <strong>obligatoire</strong>",
         "NO_RESULT_ISBN": "L'ISBN {{isbn}} ne correspond à aucun livre.",
-        "NOT_AUTHORIZED": "Tu n'a pas le droit de rechercher des livres par ISBN, connecte toi.",
-        "GENERIC": "Une erreur est survenue"
+        "NOT_AUTHORIZED": "Tu n'a pas le droit de rechercher des livres par ISBN, connecte toi."
       },
       "TITLE": "Ajouter des livres",
       "BUTTON_SEARCH": "Rechercher",
@@ -81,5 +80,8 @@
     "ACTION": {
       "CLOSE": "Fermer"
     }
+  },
+  "ERRORS": {
+    "GENERIC": "Une erreur est survenue!"
   }
 }

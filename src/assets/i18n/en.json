@@ -35,8 +35,7 @@
         "ISBN_FOMART": "The ISBN is a string of 10 or 13 number",
         "ISBN_REQUIRED": "ISBN is <strong>required</strong>",
         "NO_RESULT_ISBN": "The ISBN {{isbn}} doesn't correspond to any book.",
-        "NOT_AUTHORIZED": "You're not authorized to search book with ISBN, please log in.",
-        "GENERIC": "An error occured"
+        "NOT_AUTHORIZED": "You're not authorized to search book with ISBN, please log in."
       },
       "TITLE": "Add books",
       "BUTTON_SEARCH": "Search",
@@ -76,5 +75,7 @@
     "ACTION": {
       "CLOSE": "Close"
     }
+  },
+    "GENERIC": "An error occured!"
   }
 }

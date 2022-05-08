@@ -28,19 +28,18 @@ export class IsbnSearchComponent implements OnInit {
       () => {
       },
       err => {
-        if (err.status === 404) {
-          this.snackBar.open(
-            this.translateService.instant('BOOK.SEARCH.ERRORS.NO_RESULT_ISBN', {isbn}),
-            this.translateService.instant('SNACKBAR.ACTION.CLOSE'));
-        } else if (err.status === 401) {
-          this.snackBar.open(
-            this.translateService.instant('BOOK.SEARCH.ERRORS.NOT_AUTHORIZED', {isbn}),
-            this.translateService.instant('SNACKBAR.ACTION.CLOSE'));
-        } else {
-          this.snackBar.open(
-            this.translateService.instant('BOOK.SEARCH.ERRORS.GENERIC'),
-            this.translateService.instant('SNACKBAR.ACTION.CLOSE'));
+        let message;
+        switch (err.status) {
+          case 404:
+            message = this.translateService.instant('BOOK.SEARCH.ERRORS.NO_RESULT_ISBN', {isbn});
+            break;
+          case 401:
+            message = this.translateService.instant('BOOK.SEARCH.ERRORS.NOT_AUTHORIZED');
+            break;
+          default:
+            message = this.translateService.instant('ERRORS.GENERIC');
         }
+        this.openSnackbar(message);
       });
   }
   hasFormatError(control: string) {
@@ -48,5 +47,8 @@ export class IsbnSearchComponent implements OnInit {
   }
   hasRequiredError(control: string) {
     return this.formAddBook.controls[control].hasError('required');
+  }
+  openSnackbar(message: string): void {
+    this.snackBar.open(message, this.translateService.instant('SNACKBAR.ACTION.CLOSE'));
   }
 }
