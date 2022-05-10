@@ -32,7 +32,10 @@
     "EMAIL_PLACEHOLDER": "Email",
     "PWD_PLACEHOLDER": "Mot de passe",
     "CANCEL": "Annuler",
-    "VALIDATE": "Connexion"
+    "VALIDATE": "Connexion",
+    "ERRORS": {
+      "BAD_REQUEST": "Your email and password are not correct"
+    }
   },
   "BOOK": {
     "SEARCH": {

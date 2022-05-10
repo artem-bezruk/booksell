@@ -25,9 +25,12 @@
   "SIGN_IN": {
     "TITLE": "Login",
     "EMAIL_PLACEHOLDER": "Email",
-    "PWD_PLACEHOLDER": "password",
+    "PWD_PLACEHOLDER": "Password",
     "CANCEL": "Cancel",
-    "VALIDATE": "login"
+    "VALIDATE": "login",
+    "ERRORS": {
+      "BAD_REQUEST": "Your email and password are not correct"
+    }
   },
   "BOOK": {
     "SEARCH": {
