@@ -7,9 +7,6 @@
       "LIST": "Livres",
       "ADD": "Ajout de livres"
     },
-    "SIGN_IN": {
-      "LABEL": "Administration"
-    },
     "MY_PROFILE": "Mon Profil",
     "SIGN_OUT": "Déconnexion"
   },

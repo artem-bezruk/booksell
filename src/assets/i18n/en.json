@@ -7,11 +7,13 @@
       "LIST": "LIST",
       "ADD": "ADD"
     },
-    "SIGN_IN": {
-      "LABEL": "login"
-    },
     "MY_PROFILE": "My Profil",
     "SIGN_OUT": "logout"
+  },
+  "FOOTER": {
+    "SIGN_IN": {
+      "LABEL": "Administration"
+    }
   },
   "ERROR": {
     "EMAIL": {
@@ -79,6 +81,7 @@
       "CLOSE": "Close"
     }
   },
+  "ERRORS": {
     "GENERIC": "An error occured!"
   }
 }
