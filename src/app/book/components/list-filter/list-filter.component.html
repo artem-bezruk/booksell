@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="submit()" fxFlex fxLayout="column">
+<form [formGroup]="form" fxFlex fxLayout="column">
   <div>
     <h2>Filters</h2>
   </div>
@@ -26,7 +26,6 @@
     </mat-form-field>
   </div>
   <div fxLayout="row" fxLayoutAlign="space-between">
-    <button fxFlex="45" mat-flat-button color="primary">filter</button>
-    <button fxFlex="45" mat-flat-button color="warn" (click)="clearFilters()">clear</button>
+    <button fxFlex mat-flat-button color="warn" (click)="clearFilters()">clear</button>
   </div>
 </form>
