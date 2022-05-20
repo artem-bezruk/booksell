@@ -12,4 +12,10 @@
       <fa-icon [icon]="['fas', 'sort-alpha-down']"></fa-icon>
     </ng-template>
   </button>
+    <mat-slide-toggle
+            color="primary"
+            [checked]="groupByEditors"
+            (change)="changeDisplayAction($event)">
+      Group by editors
+    </mat-slide-toggle>
 </div>

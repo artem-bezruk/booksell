@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BookService} from '../../services/book.service';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {SeriesByEditorContainer} from '../../../core/model/series-by-editor-container';
+import {SeriesByGroupContainer} from '../../../core/model/series-by-group-container';
 import {BookFilter} from '../../../core/model/book-filter';
 import {Utils} from '../../../shared/utils';
 import {SortOrder} from '../../../core/model/sort-order.enum';
@@ -12,72 +12,81 @@ import {Book} from '../../../core/model/book';
   styleUrls: ['./book-list.component.css']
 })
 export class BookListComponent implements OnInit {
-  searchResult: SeriesByEditorContainer;
+  searchResult: SeriesByGroupContainer;
   isLoading: Observable<boolean>;
   bookToDisplay: Book = null;
-  private orderEditor: SortOrder = SortOrder.DESC;
+  groupByEditors = true;
+  private order: SortOrder = SortOrder.DESC;
   constructor(private bookService: BookService) {
   }
-  private _editors: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
-  get editors(): Observable<string[]> {
-    return this._editors.asObservable();
+  private _group: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  get group(): Observable<string[]> {
+    return this._group.asObservable();
   }
-  private _filteredBooks: BehaviorSubject<SeriesByEditorContainer> = new BehaviorSubject<SeriesByEditorContainer>({});
-  get filteredBooks(): Observable<SeriesByEditorContainer> {
+  private _filteredBooks: BehaviorSubject<SeriesByGroupContainer> = new BehaviorSubject<SeriesByGroupContainer>({});
+  get filteredBooks(): Observable<SeriesByGroupContainer> {
     return this._filteredBooks.asObservable();
   }
-  private _filteredEditors: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
-  get filteredEditors(): Observable<string[]> {
-    return this._filteredEditors.asObservable();
+  private _filteredBookList: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  get filteredBookList(): Observable<string[]> {
+    return this._filteredBookList.asObservable();
   }
   ngOnInit() {
     this.bookService.getAllBook();
     this.bookService.searchResult.subscribe(res => {
-      this.searchResult = res;
-      this.updateFilteredBooks(res);
-      if (res !== null) {
-        this._editors.next(Utils.orderStringList(Object.keys(res), this.orderEditor));
+      this.searchResult = this.bookService.groupBy(this.groupByEditors);
+      this.updateFilteredBooks(this.searchResult);
+      if (this.searchResult !== null) {
+        this._group.next(Utils.orderStringList(Object.keys(this.searchResult), this.order));
       }
     });
     this.isLoading = this.bookService.isLoading;
   }
   onFilter(filters: BookFilter) {
-    const tmpEditor = Object.assign({}, this.searchResult);
-    if (filters.editors.length > 0) {
+    const tmpGroup = Object.assign({}, this.searchResult);
+    if (filters.group.length > 0) {
       Object.keys(this.searchResult)
-        .filter(editor => !filters.editors.includes(editor))
-        .forEach(editor => delete tmpEditor[editor]);
+        .filter(group => !filters.group.includes(group))
+        .forEach(group => delete tmpGroup[group]);
     }
     if (filters.series.length > 0) {
-      Object.keys(tmpEditor).forEach(editor => {
-        const tmpSeries = Object.assign({}, tmpEditor[editor]);
+      Object.keys(tmpGroup).forEach(group => {
+        const tmpSeries = Object.assign({}, tmpGroup[group]);
         Object.keys(tmpSeries)
           .filter(series => !filters.series.includes(series))
           .forEach(series => delete tmpSeries[series]);
         if (Object.keys(tmpSeries).length === 0) {
-          delete tmpEditor[editor];
+          delete tmpGroup[group];
         } else {
-          tmpEditor[editor] = tmpSeries;
+          tmpGroup[group] = tmpSeries;
         }
       });
     }
-    this.updateFilteredBooks(tmpEditor);
+    this.updateFilteredBooks(tmpGroup);
   }
-  private updateFilteredBooks(seriesByEditorContainer: SeriesByEditorContainer) {
+  private updateFilteredBooks(seriesByEditorContainer: SeriesByGroupContainer) {
     if (seriesByEditorContainer !== null) {
       this._filteredBooks.next(seriesByEditorContainer);
-      this._filteredEditors.next(Utils.orderStringList(Object.keys(seriesByEditorContainer), this.orderEditor));
+      this._filteredBookList.next(Utils.orderStringList(Object.keys(seriesByEditorContainer), this.order));
     }
   }
   changeSortOrder() {
-    this.orderEditor = this.orderEditor === SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC;
-    this._filteredEditors.next(Utils.orderStringList(Object.keys(this._filteredBooks.value), this.orderEditor));
+    this.order = this.order === SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC;
+    this._filteredBookList.next(Utils.orderStringList(Object.keys(this._filteredBooks.value), this.order));
   }
-  isSortOrderAsc = (): boolean => this.orderEditor === SortOrder.ASC;
+  isSortOrderAsc = (): boolean => this.order === SortOrder.ASC;
   showDetails(book: Book) {
     this.bookToDisplay = book;
   }
   clearBookToDisplay() {
     this.bookToDisplay = null;
+  }
+  changeDisplay($event: boolean) {
+    this.groupByEditors = $event;
+    this.searchResult = this.bookService.groupBy(this.groupByEditors);
+    this.updateFilteredBooks(this.searchResult);
+    if (this.searchResult !== null) {
+      this._group.next(Utils.orderStringList(Object.keys(this.searchResult), this.order));
+    }
   }
 }

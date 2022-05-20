@@ -1,16 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { EditorDisplayComponent } from './editor-display.component';
-describe('EditorDisplayComponent', () => {
-  let component: EditorDisplayComponent;
-  let fixture: ComponentFixture<EditorDisplayComponent>;
+import { GroupDisplayComponent } from './group-display.component';
+describe('GroupDisplayComponent', () => {
+  let component: GroupDisplayComponent;
+  let fixture: ComponentFixture<GroupDisplayComponent>;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditorDisplayComponent ]
+      declarations: [ GroupDisplayComponent ]
     })
     .compileComponents();
   }));
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditorDisplayComponent);
+    fixture = TestBed.createComponent(GroupDisplayComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

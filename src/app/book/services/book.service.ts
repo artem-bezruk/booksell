@@ -3,12 +3,12 @@ import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {shareReplay} from 'rxjs/operators';
 import {Book} from '../../core/model/book';
-import {SeriesByEditorContainer} from '../../core/model/series-by-editor-container';
+import {SeriesByGroupContainer} from '../../core/model/series-by-group-container';
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
-  get searchResult(): Observable<SeriesByEditorContainer> {
+  get searchResult(): Observable<Book[]> {
     return this._searchResult.asObservable();
   }
   get isLoading(): Observable<boolean> {
@@ -16,34 +16,38 @@ export class BookService {
   }
   constructor(private http: HttpClient) {
   }
-  private _searchResult: BehaviorSubject<SeriesByEditorContainer> = new BehaviorSubject(null);
+  private _searchResult: BehaviorSubject<Book[]> = new BehaviorSubject([]);
   private _isLoading = new BehaviorSubject<boolean>(false);
-  private static testEditor(accumulator: SeriesByEditorContainer, b: Book) {
-    if (!accumulator[b.editor.name]) {
-      accumulator[b.editor.name] = [];
+  private static createGroups(accumulator: SeriesByGroupContainer, group: string) {
+    if (!accumulator[group]) {
+      accumulator[group] = [];
     }
     return accumulator;
   }
-  private static testSeries(accumulator: SeriesByEditorContainer, b: Book) {
-    if (!accumulator[b.editor.name][b.series.name]) {
-      accumulator[b.editor.name][b.series.name] = {
+  private static classSeriesByGroup(accumulator: SeriesByGroupContainer, b: Book, group: string) {
+    if (!accumulator[group][b.series.name]) {
+      accumulator[group][b.series.name] = {
         seriesBookCount: b.series.seriesBookCount,
         books: []
       };
     }
     return accumulator;
   }
-  private static addBook(accumulator: SeriesByEditorContainer, b: Book) {
-    accumulator = BookService.testEditor(accumulator, b);
-    accumulator = BookService.testSeries(accumulator, b);
-    accumulator[b.editor.name][b.series.name].books.push(b);
+  private static addBook(accumulator: SeriesByGroupContainer, b: Book, groupByEditor: boolean = false) {
+    const group = groupByEditor ? b.editor.name : b.series.name.charAt(0).toLocaleUpperCase();
+    accumulator = BookService.createGroups(accumulator, group);
+    accumulator = BookService.classSeriesByGroup(accumulator, b, group);
+    accumulator[group][b.series.name].books.push(b);
     return accumulator;
+  }
+  public groupBy(groupByEditor: boolean = false): SeriesByGroupContainer {
+    return this._searchResult.value.reduce((accumulator, book) => BookService.addBook(accumulator, book, groupByEditor), {});
   }
   getAllBook() {
     this._isLoading.next(true);
     const o = this.http.get<Book[]>('/api/books/').pipe(shareReplay());
     o.subscribe(
-      res => this._searchResult.next(res.reduce((accumulator, book) => BookService.addBook(accumulator, book), {})),
+      res => this._searchResult.next(res),
       err => console.error('an error occured!', err),
       () => this._isLoading.next(false));
     return o;

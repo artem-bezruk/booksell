@@ -1,16 +1,16 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewChildren} from '@angular/core';
-import {BookBySeriesContainer} from '../../../core/model/series-by-editor-container';
+import {BookBySeriesContainer} from '../../../core/model/series-by-group-container';
 import {Utils} from '../../../shared/utils';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Book} from '../../../core/model/book';
 import {MatAccordion} from '@angular/material';
 import {SeriesDisplayComponent} from '../series-display/series-display.component';
 @Component({
-  selector: 'app-editor-display',
-  templateUrl: './editor-display.component.html',
-  styleUrls: ['./editor-display.component.css']
+  selector: 'app-group-display',
+  templateUrl: './group-display.component.html',
+  styleUrls: ['./group-display.component.css']
 })
-export class EditorDisplayComponent implements OnInit {
+export class GroupDisplayComponent implements OnInit {
   @ViewChild(MatAccordion, {static: false}) accordion: MatAccordion;
   @ViewChildren(SeriesDisplayComponent) series: SeriesDisplayComponent[] = [];
   @Input()

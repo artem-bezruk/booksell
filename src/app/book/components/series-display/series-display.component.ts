@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
-import {SeriesInfo} from '../../../core/model/series-by-editor-container';
+import {SeriesInfo} from '../../../core/model/series-by-group-container';
 import {Book} from '../../../core/model/book';
 import {MatAccordion, MatExpansionPanel} from '@angular/material';
 @Component({

@@ -8,7 +8,7 @@ import {
   MatListModule,
   MatProgressBarModule,
   MatSelectModule,
-  MatSidenavModule
+  MatSidenavModule, MatSlideToggleModule
 } from '@angular/material';
 import {CoreModule} from '../core/core.module';
 import {BookListComponent} from './components/book-list/book-list.component';
@@ -27,10 +27,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {BookDisplayComponent} from './components/book-display/book-display.component';
 import {SeriesDisplayComponent} from './components/series-display/series-display.component';
-import {EditorDisplayComponent} from './components/editor-display/editor-display.component';
+import {GroupDisplayComponent} from './components/group-display/group-display.component';
 import {BookDetailsComponent} from './components/book-details/book-details.component';
 import {ListFilterComponent} from './components/list-filter/list-filter.component';
 import { BookListActionBarComponent } from './components/book-list-action-bar/book-list-action-bar.component';
+import { AlphabeticalSeriesDisplayComponent } from './components/alphabetical-series-display/alphabetical-series-display.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -44,9 +45,10 @@ import { BookListActionBarComponent } from './components/book-list-action-bar/bo
     MatChipsModule,
     FontAwesomeModule,
     MatSelectModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatSlideToggleModule
   ],
-  declarations: [BookLayoutComponent, BookListComponent, BookDisplayComponent, SeriesDisplayComponent, EditorDisplayComponent, BookDetailsComponent, ListFilterComponent, BookListActionBarComponent]
+  declarations: [BookLayoutComponent, BookListComponent, BookDisplayComponent, SeriesDisplayComponent, GroupDisplayComponent, BookDetailsComponent, ListFilterComponent, BookListActionBarComponent, AlphabeticalSeriesDisplayComponent]
 })
 export class BookModule {
   constructor() {

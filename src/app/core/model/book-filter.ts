@@ -1,4 +1,4 @@
 export class BookFilter {
-  editors?: string[];
+  group?: string[];
   series?: string[];
 }

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {BookFilter} from '../../../core/model/book-filter';
-import {SeriesByEditorContainer} from '../../../core/model/series-by-editor-container';
+import {SeriesByGroupContainer} from '../../../core/model/series-by-group-container';
 @Component({
   selector: 'app-list-filter',
   templateUrl: './list-filter.component.html',
@@ -10,34 +10,36 @@ import {SeriesByEditorContainer} from '../../../core/model/series-by-editor-cont
 export class ListFilterComponent implements OnInit, OnChanges {
   form: FormGroup;
   @Input()
-  data: SeriesByEditorContainer;
+  data: SeriesByGroupContainer;
   @Input()
-  editors: string[];
+  groups: string[] = [];
+  @Input()
+  groupByEditors: boolean;
   @Output()
   filter: EventEmitter<BookFilter> = new EventEmitter();
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       globalTextCtrl: this.fb.control(''),
-      editorsCtrl: this.fb.control([]),
+      groupsCtrl: this.fb.control([]),
       seriesCtrl: this.fb.control([])
     });
   }
   ngOnInit() {
   }
-  displayGroup(editor: string) {
-    const editorsSelected: string[] = this.form.get('editorsCtrl').value;
-    return editorsSelected.length === 0 || editorsSelected.includes(editor);
+  displayGroup(group: string) {
+    const groupSelected: string[] = this.form.get('groupsCtrl').value;
+    return groupSelected.length === 0 || groupSelected.includes(group);
   }
   clearFilters() {
     this.form.reset({
-      editorsCtrl: [],
+      groupsCtrl: [],
       seriesCtrl: []
     });
   }
   ngOnChanges(): void {
     this.form.valueChanges.subscribe(val =>
       this.filter.emit({
-        editors: this.form.get('editorsCtrl').value,
+        group: this.form.get('groupsCtrl').value,
         series: this.form.get('seriesCtrl').value
       })
     );

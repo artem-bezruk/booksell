@@ -6,6 +6,6 @@ export interface SeriesInfo {
 export interface BookBySeriesContainer {
   [series: string]: SeriesInfo;
 }
-export interface SeriesByEditorContainer {
-  [editor: string]: BookBySeriesContainer[];
+export interface SeriesByGroupContainer {
+  [group: string]: BookBySeriesContainer[];
 }
