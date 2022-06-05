@@ -13,8 +13,11 @@
       "^/auth": ""
     }
   },
-  "/covers": {
+  "/files": {
     "target": "http://localhost:8080/",
-    "secure": false
+    "secure": false,
+    "pathRewrite": {
+      "^/files": ""
+    }
   }
 }

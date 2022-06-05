@@ -9,6 +9,7 @@ ENV CLIENT_ID="dummy-client-id" \
     CLIENT_SECRET="dummy-client-secret" \
     AUTH_SERVER="locahost:8080" \
     API_SERVER="locahost:8080" \
+    FILE_SERVER="locahost:8080" \
     BUILD_DEPS="gettext" \
     RUNTIME_DEPS="libintl"
 RUN set -x && \

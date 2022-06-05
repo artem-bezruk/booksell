@@ -29,4 +29,8 @@ server {
         proxy_pass http://$AUTH_SERVER/;
     }
 
+    location /files/ {
+        proxy_pass http://$FILE_SERVER/;
+    }
+
 }
