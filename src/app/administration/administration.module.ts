@@ -9,6 +9,7 @@ import { SearchResultComponent } from './components/book/search-result/search-re
 import { FormsModule } from '@angular/forms';
 import {MatExpansionModule, MatListModule, MatProgressBarModule} from '@angular/material';
 import {CoreModule} from '../core/core.module';
+import { SeriesEditionComponent } from './components/series/series-edition/series-edition.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -20,7 +21,7 @@ import {CoreModule} from '../core/core.module';
     MatExpansionModule,
     MatProgressBarModule
   ],
-  declarations: [AdministrationLayoutComponent, BookAddComponent, IsbnSearchComponent, SearchResultComponent]
+  declarations: [AdministrationLayoutComponent, BookAddComponent, IsbnSearchComponent, SearchResultComponent, SeriesEditionComponent]
 })
 export class AdministrationModule {
 }

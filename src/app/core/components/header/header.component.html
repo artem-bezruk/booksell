@@ -16,6 +16,10 @@
           <fa-icon [icon]="['fas', 'plus']" style="padding-right: 10px"></fa-icon>
           <span>{{'HEADER.BOOK.ADD' | translate}}</span>
         </button>
+        <button mat-menu-item [routerLink]="'/administration/series/edition'">
+          <fa-icon [icon]="['fas', 'pencil-alt']" style="padding-right: 10px"></fa-icon>
+          <span>{{'HEADER.SERIES.EDITION' | translate}}</span>
+        </button>
       </mat-menu>
       <button [fxFlexOffset]="'20px'" (click)="signOut()" mat-flat-button
               color="warn">{{'HEADER.SIGN_OUT' | translate}}</button>

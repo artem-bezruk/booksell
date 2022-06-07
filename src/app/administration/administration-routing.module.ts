@@ -3,10 +3,12 @@ import {RouterModule, Routes} from '@angular/router';
 import {AdministrationLayoutComponent} from './layout/administration-layout/administration-layout.component';
 import {BookAddComponent} from './components/book/book-add/book-add.component';
 import {AuthGuard} from '../auth/guards/auth.guard';
+import {SeriesEditionComponent} from './components/series/series-edition/series-edition.component';
 const booksRoutes: Routes = [
   {
     path: 'administration', canActivate: [AuthGuard], component: AdministrationLayoutComponent, children: [
-      {path: 'book/add', component: BookAddComponent}
+      {path: 'book/add', component: BookAddComponent},
+      {path: 'series/edition', component: SeriesEditionComponent}
     ]
   },
 ];
