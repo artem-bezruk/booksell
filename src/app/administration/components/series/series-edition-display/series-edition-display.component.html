@@ -1,0 +1,16 @@
+<mat-list-item role="listitem" style="padding: 10px">
+  <form (ngSubmit)="submit()" [formGroup]="form">
+    <mat-form-field>
+      <label>
+        <input matInput placeholder="Series name" formControlName="name">
+      </label>
+    </mat-form-field>
+    <mat-form-field>
+      <label>
+        <input type="number" matInput placeholder="Number of books" formControlName="seriesBookCount">
+      </label>
+    </mat-form-field>
+    <button type="submit" mat-button color="primary" [disabled]="!isUpdatable()">update</button>
+    <button type="button" mat-button (click)="resetSeries()">reset</button>
+  </form>
+</mat-list-item>

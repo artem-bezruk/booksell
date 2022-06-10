@@ -10,6 +10,9 @@ import { FormsModule } from '@angular/forms';
 import {MatExpansionModule, MatListModule, MatProgressBarModule} from '@angular/material';
 import {CoreModule} from '../core/core.module';
 import { SeriesEditionComponent } from './components/series/series-edition/series-edition.component';
+import { SeriesListFilterComponent } from './components/series/series-list-filter/series-list-filter.component';
+import { SeriesListComponent } from './components/series/series-list/series-list.component';
+import { SeriesEditionDisplayComponent } from './components/series/series-edition-display/series-edition-display.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -21,7 +24,7 @@ import { SeriesEditionComponent } from './components/series/series-edition/serie
     MatExpansionModule,
     MatProgressBarModule
   ],
-  declarations: [AdministrationLayoutComponent, BookAddComponent, IsbnSearchComponent, SearchResultComponent, SeriesEditionComponent]
+  declarations: [AdministrationLayoutComponent, BookAddComponent, IsbnSearchComponent, SearchResultComponent, SeriesEditionComponent, SeriesListFilterComponent, SeriesListComponent, SeriesEditionDisplayComponent]
 })
 export class AdministrationModule {
 }
