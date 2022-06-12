@@ -1,4 +1,4 @@
-<mat-list fxFlex="75">
+<mat-list fxLayout="column" fxFlex>
   <app-series-edition-display
     *ngFor="let series of (seriesList | async)"
     (updateSeries)="onSeriesUpdate($event)"

@@ -1,9 +1,11 @@
 <mat-progress-bar *ngIf="isLoading | async" [color]="'primary'" [mode]="'indeterminate'">
 </mat-progress-bar>
-<div fxLayout="column" fxLayoutAlign="space-between">
-  <div fxLayout="row"  fxLayoutAlign="center" >
-    <h1 style="text-align: center">{{'SERIES.EDITION.TITLE' | translate}}</h1>
+<div fxLayoutAlign="center">
+  <div fxFlex="75" fxLayout="column">
+    <div>
+      <h1 style="text-align: center">{{'SERIES.EDITION.TITLE' | translate}}</h1>
+    </div>
+    <app-series-list-filter (filter)="onFilter($event)"></app-series-list-filter>
+    <app-series-list style="padding-top: 20px" fxLayout="row" *ngIf="hasResult"></app-series-list>
   </div>
-  <app-series-list-filter (filter)="onFilter($event)"></app-series-list-filter>
-  <app-series-list style="padding-top: 20px" fxLayout="row" *ngIf="hasResult"></app-series-list>
 </div>

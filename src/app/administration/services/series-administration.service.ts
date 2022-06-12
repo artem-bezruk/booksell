@@ -46,7 +46,7 @@ export class SeriesAdministrationService {
   filter(filterStr: string) {
     this.filterStr = filterStr;
     if (filterStr && filterStr !== '') {
-      this._seriesListFiltered.next(this._seriesList.value.filter(series => series.name.includes(filterStr)));
+      this._seriesListFiltered.next(this._seriesList.value.filter(series => series.name.toLocaleLowerCase().includes(filterStr.toLocaleLowerCase())));
     } else {
       this._seriesListFiltered.next(this._seriesList.value);
     }

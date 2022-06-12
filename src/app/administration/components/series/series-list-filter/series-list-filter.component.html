@@ -1,3 +1,9 @@
-<p>
-  series-list-filter works!
-</p>
+<form [formGroup]="form" fxFlex fxLayout="column">
+  <div fxLayoutAlign="center">
+    <mat-form-field fxFlex="100">
+      <label>
+        <input (ngModelChange)="updateFilter($event)" matInput placeholder="Filter" formControlName="filter">
+      </label>
+    </mat-form-field>
+  </div>
+</form>
