@@ -36,7 +36,7 @@ export class SeriesAdministrationService {
     const o = this.http.get<Series[]>('/api/series/').pipe(shareReplay());
     o.subscribe(
       res => {
-        this._seriesList.next(res);
+        this._seriesList.next(res.sort((one, two) => (one.name.toLocaleLowerCase() < two.name.toLocaleLowerCase() ? -1 : 1)));
         this.filter(this.filterStr);
       },
       err => console.error('an error occured!', err),
