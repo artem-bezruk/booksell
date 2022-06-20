@@ -41,7 +41,15 @@ export class BookService {
     return accumulator;
   }
   public groupBy(groupByEditor: boolean = false): SeriesByGroupContainer {
-    return this._searchResult.value.reduce((accumulator, book) => BookService.addBook(accumulator, book, groupByEditor), {});
+    const seriesByGroupContainer: SeriesByGroupContainer =
+      this._searchResult.value.reduce((accumulator, book) => BookService.addBook(accumulator, book, groupByEditor), {});
+    Object.keys(seriesByGroupContainer).forEach(group => {
+      Object.keys(seriesByGroupContainer[group]).forEach(series =>
+        seriesByGroupContainer[group][series].books =
+          seriesByGroupContainer[group][series].books.sort((one, two) => (one.tome < two.tome ? -1 : 1))
+      );
+    });
+    return seriesByGroupContainer;
   }
   getAllBook() {
     this._isLoading.next(true);
