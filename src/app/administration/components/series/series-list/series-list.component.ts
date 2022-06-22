@@ -8,7 +8,7 @@ import {Series} from '../../../../core/model/series';
   styleUrls: ['./series-list.component.css']
 })
 export class SeriesListComponent implements OnInit {
-  private seriesList: Observable<Series[]>;
+  seriesList: Observable<Series[]>;
   constructor(private seriesService: SeriesAdministrationService) {
   }
   ngOnInit() {
