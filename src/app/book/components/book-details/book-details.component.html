@@ -1,3 +1,63 @@
-<div style="padding: 20px">
-  <h2>Book Details : {{book?.title}} </h2>
+<div fxLayout="column" class="book-details-container" style="padding: 20px">
+  <div>
+    <h2 *ngIf="book.tome === null; else titleWithSeries"> {{book?.title}}</h2>
+    <ng-template #titleWithSeries>
+      <h2> {{book.series.name}} (T{{book.tome}}) {{book?.title}} </h2>
+    </ng-template>
+    <p *ngIf="book.status === 'UNREAD'">
+      <fa-icon [icon]="['fas', 'book']" style="padding-right: 10px"></fa-icon>
+      {{'BOOK.LIST.DETAILS.STATE.UNREAD' | translate}}
+    </p>
+    <p *ngIf="book.status === 'READING'">
+      <fa-icon [icon]="['fas', 'book-reader']" style="padding-right: 10px"></fa-icon>
+      {{'BOOK.LIST.DETAILS.STATE.READING' | translate}}
+    </p>
+    <p *ngIf="book.status === 'READ'">
+      <fa-icon [icon]="['fas', 'book-open']" style="padding-right: 10px"></fa-icon>
+      {{'BOOK.LIST.DETAILS.STATE.READ' | translate}}
+    </p>
+  </div>
+  <div fxFlex fxLayoutAlign="space-between">
+    <div fxFlex fxLayoutAlign="center center">
+      <img class="mat-elevation-z2" [src]="'/covers/' + book.cover" [alt]="book.cover">
+    </div>
+    <div fxFlex>
+      <mat-list>
+        <h1 mat-subheader>{{'BOOK.LIST.DETAILS.SECTION_TITLE.GLOBAL_INFORMATION' | translate}}</h1>
+        <mat-list-item>
+          <span [innerHTML]="'BOOK.LIST.DETAILS.TITLE' | translate:{value: book.title}"></span>
+        </mat-list-item>
+        <mat-list-item>
+          <h4 mat-line
+              [innerHTML]="'BOOK.LIST.DETAILS.SERIES' | translate:{value: book.series.name}">
+          </h4>
+          <p mat-line *ngIf="book.tome !== null"
+             [innerHTML]="'BOOK.LIST.DETAILS.TOME' | translate:{value: book.tome}">
+          </p>
+        </mat-list-item>
+        <mat-list-item>
+          <span [innerHTML]="'BOOK.LIST.DETAILS.YEAR' | translate:{value: book.year}"></span>
+        </mat-list-item>
+        <mat-list-item>
+          <h4 mat-line
+              [innerHTML]="'BOOK.LIST.DETAILS.EDITOR' | translate:{value: book.editor.name}">
+          </h4>
+          <p mat-line *ngIf="book.collection !== null && book.collection !== ''"
+             [innerHTML]="'BOOK.LIST.DETAILS.COLLECTION' | translate:{value: book.collection}">
+          </p>
+        </mat-list-item>
+      </mat-list>
+      <mat-list fxFlex="50">
+        <h1 mat-subheader>{{'BOOK.LIST.DETAILS.SECTION_TITLE.AUTHOR' | translate}}</h1>
+        <mat-list-item *ngFor="let author of book.authors">
+          <h4 mat-line
+              [innerHTML]="'BOOK.LIST.DETAILS.AUTHOR.NAME' | translate:{value: author.name}">
+          </h4>
+          <p mat-line *ngIf="author.role.length > 0"
+             [innerHTML]="'BOOK.LIST.DETAILS.AUTHOR.ROLES' | translate:{value: (author.role.join(', '))}">
+          </p>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
 </div>

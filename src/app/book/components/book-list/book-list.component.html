@@ -21,7 +21,7 @@
             </app-group-display>
         </div>
     </mat-sidenav-content>
-    <mat-sidenav mode="over" style="position: fixed; padding-top: 64px" (closedStart)="clearBookToDisplay()"
+    <mat-sidenav mode="over" class="right-side-nav" (closedStart)="clearBookToDisplay()"
                  [opened]="bookToDisplay !== null" position="end">
         <app-book-details [book]="bookToDisplay" fxFlex="100"></app-book-details>
     </mat-sidenav>

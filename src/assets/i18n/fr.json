@@ -76,7 +76,27 @@
         "BUTTON_FILTER": "Filtres",
         "BUTTON_ORDER": "Inverser le tri"
       },
-      "SERIES_HEADER": "{{nbBooks}} livres ({{nbUnreadBooks}} non lus)"
+      "DETAILS": {
+        "SECTION_TITLE": {
+          "GLOBAL_INFORMATION": "Informations générale",
+          "AUTHOR": "Auteurs"
+        },
+        "STATE": {
+          "UNREAD": "Non lus",
+          "READ": "Lus",
+          "READING": "Lecture en cours"
+        },
+        "TITLE": "<strong>Titre: </strong>{{value}}",
+        "SERIES": "<strong>Séries: </strong>{{value}}",
+        "TOME": "<strong>Tome: </strong>{{value}}",
+        "YEAR": "<strong>Année: </strong>{{value}}",
+        "EDITOR": "<strong>Editeur: </strong>{{value}}",
+        "COLLECTION": "<strong>Collection: </strong>{{value}}",
+        "AUTHOR": {
+          "NAME": "<strong>Nom: </strong>{{value}}",
+          "ROLES": "<strong>Rôle(s): </strong>{{value}}"
+        }
+      }
     }
   },
   "SNACKBAR": {
