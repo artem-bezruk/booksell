@@ -5,6 +5,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {Book} from '../../../core/model/book';
 import {MatAccordion} from '@angular/material';
 import {SeriesDisplayComponent} from '../series-display/series-display.component';
+import {BookDetailsEvent} from '../../models/book-details-event';
 @Component({
   selector: 'app-group-display',
   templateUrl: './group-display.component.html',
@@ -16,7 +17,7 @@ export class GroupDisplayComponent implements OnInit {
   @Input()
   editor: string;
   @Output()
-  showBookDetails: EventEmitter<Book> = new EventEmitter<Book>();
+  showBookDetails: EventEmitter<BookDetailsEvent> = new EventEmitter<BookDetailsEvent>();
   constructor() {
   }
   private _orderedSeries: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
@@ -36,8 +37,9 @@ export class GroupDisplayComponent implements OnInit {
   }
   ngOnInit() {
   }
-  showDetails(book: Book) {
-    this.showBookDetails.emit(book);
+  showDetails(bookDetailsEvent: BookDetailsEvent, series: string) {
+    bookDetailsEvent.series = series;
+    this.showBookDetails.emit(bookDetailsEvent);
   }
   isAllPanelOpened() {
     let state = true;

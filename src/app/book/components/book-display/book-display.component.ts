@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Book} from 'src/app/core/model/book';
+import {BookDetailsEvent} from '../../models/book-details-event';
 @Component({
   selector: 'app-book-display',
   templateUrl: './book-display.component.html',
@@ -9,11 +10,11 @@ export class BookDisplayComponent implements OnInit {
   @Input()
   book: Book;
   @Output()
-  showBookDetails: EventEmitter<Book> = new EventEmitter<Book>();
+  showBookDetails: EventEmitter<void> = new EventEmitter<void>();
   constructor() { }
   ngOnInit() {
   }
-  openDetails(book: Book) {
-    this.showBookDetails.emit(book);
+  openDetails() {
+    this.showBookDetails.emit();
   }
 }

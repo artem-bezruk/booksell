@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsula
 import {SeriesInfo} from '../../../core/model/series-by-group-container';
 import {Book} from '../../../core/model/book';
 import {MatAccordion, MatExpansionPanel} from '@angular/material';
+import {BookDetailsEvent} from '../../models/book-details-event';
 @Component({
   selector: 'app-series-display',
   templateUrl: './series-display.component.html',
@@ -15,7 +16,7 @@ export class SeriesDisplayComponent implements OnInit {
   @Input()
   seriesData: SeriesInfo;
   @Output()
-  showBookDetails: EventEmitter<Book> = new EventEmitter<Book>();
+  showBookDetails: EventEmitter<BookDetailsEvent> = new EventEmitter<BookDetailsEvent>();
   constructor() {
   }
   ngOnInit() {
@@ -26,8 +27,8 @@ export class SeriesDisplayComponent implements OnInit {
   getProgressValue(): number {
     return (this.seriesData.books.filter(b => b.status === 'READ').length * 100) / this.seriesData.seriesBookCount;
   }
-  showDetails(book: Book) {
-    this.showBookDetails.emit(book);
+  showDetails(bookIndex: number) {
+    this.showBookDetails.emit({bookIndex});
   }
   getPanelState(): boolean {
     return this.matExpansionPanel.expanded;

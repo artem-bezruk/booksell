@@ -1,55 +1,61 @@
-<div fxLayout="column" class="book-details-container" style="padding: 20px">
-  <div>
-    <h2 *ngIf="book.tome === null; else titleWithSeries"> {{book?.title}}</h2>
-    <ng-template #titleWithSeries>
-      <h2> {{book.series.name}} (T{{book.tome}}) {{book?.title}} </h2>
-    </ng-template>
-    <p *ngIf="book.status === 'UNREAD'">
-      <fa-icon [icon]="['fas', 'book']" style="padding-right: 10px"></fa-icon>
-      {{'BOOK.LIST.DETAILS.STATE.UNREAD' | translate}}
-    </p>
-    <p *ngIf="book.status === 'READING'">
-      <fa-icon [icon]="['fas', 'book-reader']" style="padding-right: 10px"></fa-icon>
-      {{'BOOK.LIST.DETAILS.STATE.READING' | translate}}
-    </p>
-    <p *ngIf="book.status === 'READ'">
-      <fa-icon [icon]="['fas', 'book-open']" style="padding-right: 10px"></fa-icon>
-      {{'BOOK.LIST.DETAILS.STATE.READ' | translate}}
-    </p>
+<div fxLayout="column" *ngIf="bookEvent && bookEvent.book !== null" class="book-details-container" style="padding: 20px">
+  <div fxFlex fxLayoutAlign="space-between">
+    <div>
+      <h2 *ngIf="bookEvent.book.tome === null; else titleWithSeries"> {{bookEvent.book?.title}}</h2>
+      <ng-template #titleWithSeries>
+        <h2> {{bookEvent.book.series.name}} (T{{bookEvent.book.tome}}) {{bookEvent.book?.title}} </h2>
+      </ng-template>
+      <p *ngIf="bookEvent.book.status === 'UNREAD'">
+        <fa-icon [icon]="['fas', 'book']" style="padding-right: 10px"></fa-icon>
+        {{'BOOK.LIST.DETAILS.STATE.UNREAD' | translate}}
+      </p>
+      <p *ngIf="bookEvent.book.status === 'READING'">
+        <fa-icon [icon]="['fas', 'book-reader']" style="padding-right: 10px"></fa-icon>
+        {{'BOOK.LIST.DETAILS.STATE.READING' | translate}}
+      </p>
+      <p *ngIf="bookEvent.book.status === 'READ'">
+        <fa-icon [icon]="['fas', 'book-open']" style="padding-right: 10px"></fa-icon>
+        {{'BOOK.LIST.DETAILS.STATE.READ' | translate}}
+      </p>
+    </div>
+    <div>
+      <button type="button" mat-flat-button [disabled]="bookEvent.asPrevious === null" (click)="changeBook(bookEvent.asPrevious)"> <fa-icon [icon]="['fas', 'chevron-left']"  style="padding-right: 10px"></fa-icon> previous</button>
+      <button type="button" mat-flat-button [disabled]="bookEvent.asNext === null" (click)="changeBook(bookEvent.asNext)"> next <fa-icon [icon]="['fas', 'chevron-right']"  style="padding-left: 10px"></fa-icon></button>
+    </div>
   </div>
   <div fxFlex fxLayoutAlign="space-between">
     <div fxFlex fxLayoutAlign="center center">
-      <img class="mat-elevation-z2" [src]="'/covers/' + book.cover" [alt]="book.cover">
+      <img class="mat-elevation-z2" [src]="'/covers/' + bookEvent.book.cover" [alt]="bookEvent.book.cover">
     </div>
     <div fxFlex>
       <mat-list>
         <h1 mat-subheader>{{'BOOK.LIST.DETAILS.SECTION_TITLE.GLOBAL_INFORMATION' | translate}}</h1>
         <mat-list-item>
-          <span [innerHTML]="'BOOK.LIST.DETAILS.TITLE' | translate:{value: book.title}"></span>
+          <span [innerHTML]="'BOOK.LIST.DETAILS.TITLE' | translate:{value: bookEvent.book.title}"></span>
         </mat-list-item>
         <mat-list-item>
           <h4 mat-line
-              [innerHTML]="'BOOK.LIST.DETAILS.SERIES' | translate:{value: book.series.name}">
+              [innerHTML]="'BOOK.LIST.DETAILS.SERIES' | translate:{value: bookEvent.book.series.name}">
           </h4>
-          <p mat-line *ngIf="book.tome !== null"
-             [innerHTML]="'BOOK.LIST.DETAILS.TOME' | translate:{value: book.tome}">
+          <p mat-line *ngIf="bookEvent.book.tome !== null"
+             [innerHTML]="'BOOK.LIST.DETAILS.TOME' | translate:{value: bookEvent.book.tome}">
           </p>
         </mat-list-item>
         <mat-list-item>
-          <span [innerHTML]="'BOOK.LIST.DETAILS.YEAR' | translate:{value: book.year}"></span>
+          <span [innerHTML]="'BOOK.LIST.DETAILS.YEAR' | translate:{value: bookEvent.book.year}"></span>
         </mat-list-item>
         <mat-list-item>
           <h4 mat-line
-              [innerHTML]="'BOOK.LIST.DETAILS.EDITOR' | translate:{value: book.editor.name}">
+              [innerHTML]="'BOOK.LIST.DETAILS.EDITOR' | translate:{value: bookEvent.book.editor.name}">
           </h4>
-          <p mat-line *ngIf="book.collection !== null && book.collection !== ''"
-             [innerHTML]="'BOOK.LIST.DETAILS.COLLECTION' | translate:{value: book.collection}">
+          <p mat-line *ngIf="bookEvent.book.collection !== null && bookEvent.book.collection !== ''"
+             [innerHTML]="'BOOK.LIST.DETAILS.COLLECTION' | translate:{value: bookEvent.book.collection}">
           </p>
         </mat-list-item>
       </mat-list>
       <mat-list fxFlex="50">
         <h1 mat-subheader>{{'BOOK.LIST.DETAILS.SECTION_TITLE.AUTHOR' | translate}}</h1>
-        <mat-list-item *ngFor="let author of book.authors">
+        <mat-list-item *ngFor="let author of bookEvent.book.authors">
           <h4 mat-line
               [innerHTML]="'BOOK.LIST.DETAILS.AUTHOR.NAME' | translate:{value: author.name}">
           </h4>

@@ -5,7 +5,9 @@ import {SeriesByGroupContainer} from '../../../core/model/series-by-group-contai
 import {BookFilter} from '../../../core/model/book-filter';
 import {Utils} from '../../../shared/utils';
 import {SortOrder} from '../../../core/model/sort-order.enum';
+import {BookDetailsEvent} from '../../models/book-details-event';
 import {Book} from '../../../core/model/book';
+import {compareNumbers} from '@angular/compiler-cli/src/diagnostics/typescript_version';
 @Component({
   selector: 'app-book-list',
   templateUrl: './book-list.component.html',
@@ -14,7 +16,7 @@ import {Book} from '../../../core/model/book';
 export class BookListComponent implements OnInit {
   searchResult: SeriesByGroupContainer;
   isLoading: Observable<boolean>;
-  bookToDisplay: Book = null;
+  bookToDisplay: { book: Book, asNext: BookDetailsEvent, asPrevious: BookDetailsEvent } = null;
   groupByEditors = true;
   private order: SortOrder = SortOrder.DESC;
   constructor(private bookService: BookService) {
@@ -27,9 +29,13 @@ export class BookListComponent implements OnInit {
   get filteredBooks(): Observable<SeriesByGroupContainer> {
     return this._filteredBooks.asObservable();
   }
-  private _filteredBookList: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
-  get filteredBookList(): Observable<string[]> {
-    return this._filteredBookList.asObservable();
+  private _bookDisplayEvent: BehaviorSubject<BookDetailsEvent> = new BehaviorSubject<BookDetailsEvent>(null);
+  get bookDisplayEvent(): Observable<BookDetailsEvent> {
+    return this._bookDisplayEvent.asObservable();
+  }
+  private _filteredGroupList: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  get filteredGroupList(): Observable<string[]> {
+    return this._filteredGroupList.asObservable();
   }
   ngOnInit() {
     this.bookService.getAllBook();
@@ -40,6 +46,7 @@ export class BookListComponent implements OnInit {
         this._group.next(Utils.orderStringList(Object.keys(this.searchResult), this.order));
       }
     });
+    this.bookDisplayEvent.subscribe(event => this.getBooksToDisplay(event));
     this.isLoading = this.bookService.isLoading;
   }
   onFilter(filters: BookFilter) {
@@ -64,19 +71,76 @@ export class BookListComponent implements OnInit {
     }
     this.updateFilteredBooks(tmpGroup);
   }
-  private updateFilteredBooks(seriesByEditorContainer: SeriesByGroupContainer) {
-    if (seriesByEditorContainer !== null) {
-      this._filteredBooks.next(seriesByEditorContainer);
-      this._filteredBookList.next(Utils.orderStringList(Object.keys(seriesByEditorContainer), this.order));
-    }
-  }
   changeSortOrder() {
     this.order = this.order === SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC;
-    this._filteredBookList.next(Utils.orderStringList(Object.keys(this._filteredBooks.value), this.order));
+    this._filteredGroupList.next(Utils.orderStringList(Object.keys(this._filteredBooks.value), this.order));
+  }
+  showDetails(bookDetailsEvent: BookDetailsEvent, group: string = null) {
+    if (group !== null) {
+      bookDetailsEvent.group = group;
+    }
+    this._bookDisplayEvent.next(bookDetailsEvent);
   }
   isSortOrderAsc = (): boolean => this.order === SortOrder.ASC;
-  showDetails(book: Book) {
-    this.bookToDisplay = book;
+  private getNextBook(event: BookDetailsEvent) {
+    const booksIndexComparaison =
+      compareNumbers([event.bookIndex], [this._filteredBooks.value[event.group][event.series].books.length - 1]);
+    if (booksIndexComparaison === -1) {
+      event.bookIndex++;
+      return event;
+    } else if (booksIndexComparaison === 0) {
+      const seriesList = Object.keys(this._filteredBooks.value[event.group]);
+      seriesList.sort((one, two) => (one.toLocaleLowerCase() < two.toLocaleLowerCase() ? -1 : 1));
+      const seriesIndex = seriesList.indexOf(event.series);
+      const seriesIndexComparaison = compareNumbers([seriesIndex], [seriesList.length - 1]);
+      if (seriesIndexComparaison === -1) {
+        event.bookIndex = 0;
+        console.log();
+        event.series = seriesList[seriesIndex + 1];
+        return event;
+      } else if (seriesIndexComparaison === 0) {
+        const groupIndex = this._filteredGroupList.value.indexOf(event.group);
+        if (compareNumbers([groupIndex], [this._filteredGroupList.value.length - 1]) === -1) {
+          event.group = this._filteredGroupList.value[groupIndex + 1];
+          const newSeriesList = Object.keys(this._filteredBooks.value[event.group]);
+          newSeriesList.sort((one, two) => (one.toLocaleLowerCase() < two.toLocaleLowerCase() ? -1 : 1));
+          event.series = newSeriesList[0];
+          event.bookIndex = 0;
+          return event;
+        } else if (compareNumbers([seriesIndex], [this._filteredGroupList.value.length - 1]) === 0) {
+          return null;
+        }
+      }
+    }
+    return null;
+  }
+  private getPreviousBook(event: BookDetailsEvent) {
+    if (event.bookIndex > 0) {
+      event.bookIndex--;
+      return event;
+    } else if (event.bookIndex === 0) {
+      const seriesList = Object.keys(this._filteredBooks.value[event.group]);
+      seriesList.sort((one, two) => (one.toLocaleLowerCase() < two.toLocaleLowerCase() ? -1 : 1));
+      const seriesIndex = seriesList.indexOf(event.series);
+      if (seriesIndex > 0) {
+        event.series = seriesList[seriesIndex - 1];
+        event.bookIndex = this._filteredBooks.value[event.group][event.series].books.length - 1;
+        return event;
+      } else if (seriesIndex === 0) {
+        const groupIndex = this._filteredGroupList.value.indexOf(event.group);
+        if (groupIndex > 0) {
+          event.group = this._filteredGroupList.value[groupIndex - 1];
+          const newSeriesList = Object.keys(this._filteredBooks.value[event.group])
+            .sort((one, two) => (one.toLocaleLowerCase() < two.toLocaleLowerCase() ? -1 : 1));
+          event.series = newSeriesList[newSeriesList.length - 1];
+          event.bookIndex = this._filteredBooks.value[event.group][event.series].books.length - 1;
+          return event;
+        } else if (groupIndex === 0) {
+          return null;
+        }
+      }
+    }
+    return null;
   }
   clearBookToDisplay() {
     this.bookToDisplay = null;
@@ -87,6 +151,19 @@ export class BookListComponent implements OnInit {
     this.updateFilteredBooks(this.searchResult);
     if (this.searchResult !== null) {
       this._group.next(Utils.orderStringList(Object.keys(this.searchResult), this.order));
+    }
+  }
+  private getBooksToDisplay(event) {
+    const book = event ? this._filteredBooks.value[event.group][event.series].books[event.bookIndex] : null;
+    const asNext = event ? this.getNextBook(Object.assign({}, event)) : null;
+    const asPrevious = event ? this.getPreviousBook(Object.assign({}, event)) : null;
+    this.bookToDisplay = {book, asNext, asPrevious};
+    console.log(this.bookToDisplay);
+  }
+  private updateFilteredBooks(seriesByEditorContainer: SeriesByGroupContainer) {
+    if (seriesByEditorContainer !== null) {
+      this._filteredBooks.next(seriesByEditorContainer);
+      this._filteredGroupList.next(Utils.orderStringList(Object.keys(seriesByEditorContainer), this.order));
     }
   }
 }

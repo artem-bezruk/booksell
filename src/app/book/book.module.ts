@@ -19,7 +19,7 @@ import {library} from '@fortawesome/fontawesome-svg-core';
 import {
   faBook,
   faBookOpen,
-  faBookReader, faCaretDown, faCaretUp,
+  faBookReader, faCaretDown, faCaretUp, faChevronLeft,
   faChevronRight,
   faFilter,
   faSortAlphaDown,
@@ -59,6 +59,7 @@ export class BookModule {
     library.add(faSortAlphaUp);
     library.add(faSortAlphaDown);
     library.add(faChevronRight);
+    library.add(faChevronLeft);
     library.add(faCaretUp);
     library.add(faCaretDown);
   }

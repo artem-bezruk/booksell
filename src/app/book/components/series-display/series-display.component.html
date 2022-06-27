@@ -16,6 +16,6 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
     <mat-list dense class="series-books">
-        <app-book-display (showBookDetails)="showDetails($event)"  *ngFor="let book of seriesData.books" [book]="book"></app-book-display>
+        <app-book-display (showBookDetails)="showDetails(i)"  *ngFor="let book of seriesData.books; let i = index" [book]="book"></app-book-display>
     </mat-list>
 </mat-expansion-panel>

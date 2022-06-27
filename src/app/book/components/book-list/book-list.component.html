@@ -14,15 +14,15 @@
                                       [groupByEditors]="groupByEditors"
                                       [isSortOrderAsc]="isSortOrderAsc()">
             </app-book-list-action-bar>
-            <app-group-display (showBookDetails)="showDetails($event)"
-                               *ngFor="let group of filteredBookList | async"
+            <app-group-display (showBookDetails)="showDetails($event, group)"
+                               *ngFor="let group of filteredGroupList | async"
                                [seriesContainer]="(filteredBooks|async)[group]"
                                [editor]="group">
             </app-group-display>
         </div>
     </mat-sidenav-content>
     <mat-sidenav mode="over" class="right-side-nav" (closedStart)="clearBookToDisplay()"
-                 [opened]="bookToDisplay !== null" position="end">
-        <app-book-details [book]="bookToDisplay" fxFlex="100"></app-book-details>
+                 [opened]="bookToDisplay && bookToDisplay.book !== null" position="end">
+        <app-book-details [bookEvent]="bookToDisplay" (updateBookDetails)="showDetails($event)" fxFlex></app-book-details>
     </mat-sidenav>
 </mat-sidenav-container>

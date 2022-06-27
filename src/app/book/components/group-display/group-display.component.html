@@ -15,7 +15,7 @@
   <div fxFlex="80">
     <mat-accordion multi>
       <app-series-display *ngFor="let series of (orderedSeries|async)"
-                          (showBookDetails)="showDetails($event)"
+                          (showBookDetails)="showDetails($event, series)"
                           [series]="series"
                           [seriesData]="(bookBySeries|async)[series]">
       </app-series-display>

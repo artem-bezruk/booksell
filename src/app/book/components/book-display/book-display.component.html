@@ -1,4 +1,4 @@
-<mat-list-item class="book-item" style="cursor: pointer" (click)="openDetails(book)">
+<mat-list-item class="book-item" style="cursor: pointer" (click)="openDetails()">
   <div fxFlex="100" fxLayoutAlign="space-between">
     <div>
       <fa-icon *ngIf="book.status === 'UNREAD'" [icon]="['fas', 'book']" style="padding-right: 10px"></fa-icon>
