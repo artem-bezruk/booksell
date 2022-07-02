@@ -8,6 +8,7 @@ import {SortOrder} from '../../../core/model/sort-order.enum';
 import {BookDetailsEvent} from '../../models/book-details-event';
 import {Book} from '../../../core/model/book';
 import {compareNumbers} from '@angular/compiler-cli/src/diagnostics/typescript_version';
+import has = Reflect.has;
 @Component({
   selector: 'app-book-list',
   templateUrl: './book-list.component.html',
@@ -40,8 +41,15 @@ export class BookListComponent implements OnInit {
   private static updateEventSeries(event: BookDetailsEvent, series: string = null) {
     event.series = series ? series : event.series;
   }
-  private static getSeries(seriesList: string[], seriesIndex: number = null) {
-    return seriesList[seriesIndex !== null ? seriesIndex - 1 : seriesList.length - 1];
+  private static getSeries(seriesList: string[], seriesIndex: number = null, next: boolean = false) {
+    let index = null;
+    if (next) {
+      index = seriesIndex !== null ? seriesIndex + 1 : 0;
+    } else {
+      index = seriesIndex !== null ? seriesIndex - 1 : seriesList.length - 1;
+    }
+    console.log(index);
+    return seriesList[index];
   }
   ngOnInit() {
     this.bookService.getAllBook();
@@ -89,36 +97,35 @@ export class BookListComponent implements OnInit {
   }
   isSortOrderAsc = (): boolean => this.order === SortOrder.ASC;
   private getNextBook(event: BookDetailsEvent) {
-    const booksIndexComparaison =
-      compareNumbers([event.bookIndex], [this._filteredBooks.value[event.group][event.series].books.length - 1]);
+    let hasPrevious = true;
+    const booksIndexComparaison = compareNumbers([event.bookIndex], [this.getBookIndex(event)]);
     if (booksIndexComparaison === -1) {
       event.bookIndex++;
-      return event;
-    } else if (booksIndexComparaison === 0) {
-      const seriesList = Object.keys(this._filteredBooks.value[event.group]);
-      seriesList.sort((one, two) => (one.toLocaleLowerCase() < two.toLocaleLowerCase() ? -1 : 1));
-      const seriesIndex = seriesList.indexOf(event.series);
-      const seriesIndexComparaison = compareNumbers([seriesIndex], [seriesList.length - 1]);
-      if (seriesIndexComparaison === -1) {
-        event.bookIndex = 0;
-        console.log();
-        event.series = seriesList[seriesIndex + 1];
-        return event;
-      } else if (seriesIndexComparaison === 0) {
-        const groupIndex = this._filteredGroupList.value.indexOf(event.group);
-        if (compareNumbers([groupIndex], [this._filteredGroupList.value.length - 1]) === -1) {
-          event.group = this._filteredGroupList.value[groupIndex + 1];
-          const newSeriesList = Object.keys(this._filteredBooks.value[event.group]);
-          newSeriesList.sort((one, two) => (one.toLocaleLowerCase() < two.toLocaleLowerCase() ? -1 : 1));
-          event.series = newSeriesList[0];
-          event.bookIndex = 0;
-          return event;
-        } else if (compareNumbers([seriesIndex], [this._filteredGroupList.value.length - 1]) === 0) {
-          return null;
-        }
-      }
+    } else {
+      hasPrevious = (booksIndexComparaison === 0 ? this.getNextSeries(event) : false);
     }
-    return null;
+    return hasPrevious ? event : null;
+  }
+  private getNextSeries(event: BookDetailsEvent): boolean {
+    const seriesList = this.getSeriesListForGroup(event.group);
+    const seriesIndex = seriesList.indexOf(event.series);
+    const seriesIndexComparaison = compareNumbers([seriesIndex], [seriesList.length - 1]);
+    if (seriesIndexComparaison === -1) {
+      event.bookIndex = 0;
+      BookListComponent.updateEventSeries(event, BookListComponent.getSeries(seriesList, seriesIndex, true));
+      return true;
+    }
+    return seriesIndexComparaison === 0 ? this.getNextGroup(event) : false;
+  }
+  private getNextGroup(event): boolean {
+    const groupIndex = this._filteredGroupList.value.indexOf(event.group);
+    if (compareNumbers([groupIndex], [this._filteredGroupList.value.length - 1]) === -1) {
+      event.bookIndex = 0;
+      event.group = this._filteredGroupList.value[groupIndex + 1];
+      BookListComponent.updateEventSeries(event, BookListComponent.getSeries(this.getSeriesListForGroup(event.group), null, true));
+      return true;
+    }
+    return false;
   }
   private getPreviousBook(event: BookDetailsEvent) {
     let hasPrevious = true;
@@ -136,9 +143,8 @@ export class BookListComponent implements OnInit {
       BookListComponent.updateEventSeries(event, BookListComponent.getSeries(seriesList, seriesIndex));
       event.bookIndex = this.getBookIndex(event);
       return true;
-    } else {
-      return seriesIndex === 0 ? this.getPreviousGroup(event) : false;
     }
+    return seriesIndex === 0 ? this.getPreviousGroup(event) : false;
   }
   private getPreviousGroup(event): boolean {
     const groupIndex = this._filteredGroupList.value.indexOf(event.group);
@@ -147,9 +153,8 @@ export class BookListComponent implements OnInit {
       BookListComponent.updateEventSeries(event, BookListComponent.getSeries(this.getSeriesListForGroup(event.group)));
       event.bookIndex = this.getBookIndex(event);
       return true;
-    } else {
-      return false;
     }
+    return false;
   }
   private getSeriesListForGroup(group: string): string[] {
     return Object.keys(this._filteredBooks.value[group])
