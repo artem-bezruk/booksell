@@ -1,20 +1,19 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Book} from '../../../core/model/book';
 import {BookDetailsEvent} from '../../models/book-details-event';
+import {BookDetailsService} from '../../services/book-details.service';
 @Component({
   selector: 'app-book-details',
   templateUrl: './book-details.component.html',
   styleUrls: ['./book-details.component.css']
 })
 export class BookDetailsComponent implements OnInit {
-  @Input()
   bookEvent: { book: Book, asNext: BookDetailsEvent, asPrevious: BookDetailsEvent };
-  @Output()
-  private updateBookDetails: EventEmitter<BookDetailsEvent> = new EventEmitter<BookDetailsEvent>();
-  constructor() { }
+  constructor(private bookDetailsService: BookDetailsService) { }
   ngOnInit() {
+    this.bookDetailsService.bookToDisplay.subscribe(next => this.bookEvent = next);
   }
   changeBook(bookDetailsEvent: BookDetailsEvent) {
-    this.updateBookDetails.emit(bookDetailsEvent);
+    this.bookDetailsService.showDetails(bookDetailsEvent);
   }
 }

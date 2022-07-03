@@ -14,7 +14,7 @@
   </button>
     <mat-slide-toggle
             color="primary"
-            [checked]="groupByEditors"
+            [checked]="isGroupedByEditors()"
             (change)="changeDisplayAction($event)">
       Group by editors
     </mat-slide-toggle>

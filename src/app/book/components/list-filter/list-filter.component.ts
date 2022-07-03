@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {BookFilter} from '../../../core/model/book-filter';
 import {SeriesByGroupContainer} from '../../../core/model/series-by-group-container';
+import {BookListService} from '../../services/book-list.service';
+import {Utils} from '../../../shared/utils';
 @Component({
   selector: 'app-list-filter',
   templateUrl: './list-filter.component.html',
@@ -9,15 +10,11 @@ import {SeriesByGroupContainer} from '../../../core/model/series-by-group-contai
 })
 export class ListFilterComponent implements OnInit, OnChanges {
   form: FormGroup;
-  @Input()
   data: SeriesByGroupContainer;
-  @Input()
-  groups: string[] = [];
+  groups: string[];
   @Input()
   groupByEditors: boolean;
-  @Output()
-  filter: EventEmitter<BookFilter> = new EventEmitter();
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private bookListService: BookListService) {
     this.form = this.fb.group({
       globalTextCtrl: this.fb.control(''),
       groupsCtrl: this.fb.control([]),
@@ -25,6 +22,10 @@ export class ListFilterComponent implements OnInit, OnChanges {
     });
   }
   ngOnInit() {
+    this.bookListService.searchResult.subscribe(data => {
+      this.data = data;
+      this.groups = Utils.orderStringList(Object.keys(data), this.bookListService.order);
+    });
   }
   displayGroup(group: string) {
     const groupSelected: string[] = this.form.get('groupsCtrl').value;
@@ -37,8 +38,8 @@ export class ListFilterComponent implements OnInit, OnChanges {
     });
   }
   ngOnChanges(): void {
-    this.form.valueChanges.subscribe(val =>
-      this.filter.emit({
+    this.form.valueChanges.subscribe(() =>
+      this.bookListService.filter({
         group: this.form.get('groupsCtrl').value,
         series: this.form.get('seriesCtrl').value
       })
