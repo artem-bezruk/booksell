@@ -33,6 +33,7 @@ export class BookDetailsService {
     return seriesList[index];
   }
   clearBookToDisplay() {
+    this._bookToDisplay.next(null);
     console.log('clearBookToDisplay');
   }
   showDetails(bookDetailsEvent: BookDetailsEvent) {
