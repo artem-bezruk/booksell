@@ -1,6 +1,6 @@
 <div fxLayout="column" *ngIf="bookEvent && bookEvent.book !== null" class="book-details-container" style="padding: 20px">
-  <div fxFlex fxLayoutAlign="space-between">
-    <div>
+  <div fxFlex fxLayoutAlign="space-between center">
+    <div fxFlex="70">
       <h2 *ngIf="bookEvent.book.tome === null; else titleWithSeries"> {{bookEvent.book?.title}}</h2>
       <ng-template #titleWithSeries>
         <h2> {{bookEvent.book.series.name}} (T{{bookEvent.book.tome}}) {{bookEvent.book?.title}} </h2>
@@ -18,10 +18,22 @@
         {{'BOOK.LIST.DETAILS.STATE.READ' | translate}}
       </p>
     </div>
-    <div>
-      <button type="button" mat-flat-button [disabled]="bookEvent.asPrevious === null" (click)="changeBook(bookEvent.asPrevious)"> <fa-icon [icon]="['fas', 'chevron-left']"  style="padding-right: 10px"></fa-icon> previous</button>
-      <button type="button" mat-flat-button [disabled]="bookEvent.asNext === null" (click)="changeBook(bookEvent.asNext)"> next <fa-icon [icon]="['fas', 'chevron-right']"  style="padding-left: 10px"></fa-icon></button>
+    <div fxFlex fxLayoutAlign="center center">
+      <div fxFlex>
+        <button type="button" mat-flat-button [disabled]="bookEvent.asPrevious === null"
+                (click)="changeBook(bookEvent.asPrevious)">
+          <fa-icon [icon]="['fas', 'chevron-left']" style="padding-right: 10px"></fa-icon>
+          previous
+        </button>
+      </div>
+      <div fxFlex>
+        <button type="button" mat-flat-button [disabled]="bookEvent.asNext === null"
+                (click)="changeBook(bookEvent.asNext)">
+          next
+          <fa-icon [icon]="['fas', 'chevron-right']" style="padding-left: 10px"></fa-icon>
+        </button>
     </div>
+  </div>
   </div>
   <div fxFlex fxLayoutAlign="space-between">
     <div fxFlex fxLayoutAlign="center center">
