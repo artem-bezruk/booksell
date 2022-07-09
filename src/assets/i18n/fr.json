@@ -86,6 +86,10 @@
           "READ": "Lus",
           "READING": "Lecture en cours"
         },
+        "BUTTON": {
+          "PREVIOUS": "Précédent",
+          "NEXT": "Suivant"
+        },
         "TITLE": "<strong>Titre: </strong>{{value}}",
         "SERIES": "<strong>Séries: </strong>{{value}}",
         "TOME": "<strong>Tome: </strong>{{value}}",

@@ -23,13 +23,13 @@
         <button type="button" mat-flat-button [disabled]="bookEvent.asPrevious === null"
                 (click)="changeBook(bookEvent.asPrevious)">
           <fa-icon [icon]="['fas', 'chevron-left']" style="padding-right: 10px"></fa-icon>
-          previous
+          {{'BOOK.LIST.DETAILS.BUTTON.PREVIOUS' | translate}}
         </button>
       </div>
       <div fxFlex>
         <button type="button" mat-flat-button [disabled]="bookEvent.asNext === null"
                 (click)="changeBook(bookEvent.asNext)">
-          next
+          {{'BOOK.LIST.DETAILS.BUTTON.NEXT' | translate}}
           <fa-icon [icon]="['fas', 'chevron-right']" style="padding-left: 10px"></fa-icon>
         </button>
     </div>

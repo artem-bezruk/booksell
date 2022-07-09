@@ -86,6 +86,10 @@
           "READ": "Read",
           "READING": "Reading"
         },
+        "BUTTON": {
+          "PREVIOUS": "Previous",
+          "NEXT": "Next"
+        },
         "TITLE": "<strong>Title: </strong>{{value}}",
         "SERIES": "<strong>Series: </strong>{{value}}",
         "TOME": "<strong>Tome: </strong>{{value}}",
