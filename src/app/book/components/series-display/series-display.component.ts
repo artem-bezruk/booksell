@@ -3,6 +3,7 @@ import {SeriesInfo} from '../../../core/model/series-by-group-container';
 import {Book} from '../../../core/model/book';
 import {MatAccordion, MatExpansionPanel} from '@angular/material';
 import {BookDetailsEvent} from '../../models/book-details-event';
+import {AuthService} from '../../../auth/services/auth.service';
 @Component({
   selector: 'app-series-display',
   templateUrl: './series-display.component.html',
@@ -17,8 +18,7 @@ export class SeriesDisplayComponent implements OnInit {
   seriesData: SeriesInfo;
   @Output()
   showBookDetails: EventEmitter<BookDetailsEvent> = new EventEmitter<BookDetailsEvent>();
-  constructor() {
-  }
+  constructor(private authService: AuthService) { }
   ngOnInit() {
   }
   getReadedBooksCount() {
@@ -32,5 +32,8 @@ export class SeriesDisplayComponent implements OnInit {
   }
   getPanelState(): boolean {
     return this.matExpansionPanel.expanded;
+  }
+  userConnected() {
+    return this.authService.isAuthenticated;
   }
 }

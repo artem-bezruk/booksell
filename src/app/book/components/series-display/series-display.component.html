@@ -15,7 +15,31 @@
                           [value]="getProgressValue()"></mat-progress-bar>
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <mat-list dense class="series-books">
-        <app-book-display (showBookDetails)="showDetails(i)"  *ngFor="let book of seriesData.books; let i = index" [book]="book"></app-book-display>
-    </mat-list>
+  <mat-action-row *ngIf="(userConnected()|async)">
+    <div fxFlex fxLayoutAlign="end" fxLayoutGap="10px">
+      <button mat-stroked-button> Select all </button>
+      <button mat-stroked-button> Unselect all </button>
+      <button mat-stroked-button [matMenuTriggerFor]="menu"> Mark as </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <fa-icon [icon]="['fas', 'book-open']" style="padding-right: 10px"></fa-icon>
+          <span>Read</span>
+        </button>
+        <button mat-menu-item>
+          <fa-icon [icon]="['fas', 'book']" style="padding-right: 10px"></fa-icon>
+          <span>Unread</span>
+        </button>
+        <button mat-menu-item>
+          <fa-icon [icon]="['fas', 'book-reader']" style="padding-right: 10px"></fa-icon>
+          <span>Reading</span>
+        </button>
+      </mat-menu>
+    </div>
+  </mat-action-row>
+  <mat-selection-list dense class="series-books">
+    <app-book-display (showBookDetails)="showDetails(i)"
+                      *ngFor="let book of seriesData.books; let i = index"
+                      [book]="book">
+    </app-book-display>
+  </mat-selection-list>
 </mat-expansion-panel>

@@ -1,0 +1,5 @@
+mat-list-option.hide-checkbox {
+  ::ng-deep.mat-pseudo-checkbox {
+    display: none !important;
+  }
+}

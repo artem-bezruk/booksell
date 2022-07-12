@@ -5,7 +5,7 @@ import {FormsModule} from '@angular/forms';
 import {
   MatChipsModule,
   MatExpansionModule,
-  MatListModule,
+  MatListModule, MatMenuModule,
   MatProgressBarModule,
   MatSelectModule,
   MatSidenavModule, MatSlideToggleModule
@@ -46,7 +46,8 @@ import { AlphabeticalSeriesDisplayComponent } from './components/alphabetical-se
     FontAwesomeModule,
     MatSelectModule,
     MatSidenavModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatMenuModule
   ],
   declarations: [BookLayoutComponent, BookListComponent, BookDisplayComponent, SeriesDisplayComponent, GroupDisplayComponent, BookDetailsComponent, ListFilterComponent, BookListActionBarComponent, AlphabeticalSeriesDisplayComponent]
 })

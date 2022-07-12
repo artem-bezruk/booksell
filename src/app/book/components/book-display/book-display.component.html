@@ -1,4 +1,4 @@
-<mat-list-item class="book-item" style="cursor: pointer" (click)="openDetails()">
+<mat-list-option [ngClass]="{'hide-checkbox': !(userConnected()|async)}" style="cursor: pointer"  checkboxPosition="before">
   <div fxFlex="100" fxLayoutAlign="space-between">
     <div>
       <fa-icon *ngIf="book.status === 'UNREAD'" [icon]="['fas', 'book']" style="padding-right: 10px"></fa-icon>
@@ -6,8 +6,9 @@
       <fa-icon *ngIf="book.status === 'READ'" [icon]="['fas', 'book-open']" style="padding-right: 10px"></fa-icon>
       <span *ngIf="book.tome !== null">{{book.tome}} - </span> {{book.title}}
     </div>
-    <div>
-      <fa-icon [icon]="['fas', 'chevron-right']"  style="padding-right: 10px"></fa-icon>
+    <div (click)="openDetails()">
+      <span style="padding-right: 10px;">Details</span>
+      <fa-icon [icon]="['fas', 'chevron-right']" style="padding-right: 10px"></fa-icon>
     </div>
   </div>
-</mat-list-item>
+</mat-list-option>
