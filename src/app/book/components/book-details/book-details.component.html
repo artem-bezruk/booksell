@@ -18,22 +18,18 @@
         {{'BOOK.LIST.DETAILS.STATE.READ' | translate}}
       </p>
     </div>
-    <div fxFlex fxLayoutAlign="center center">
-      <div fxFlex>
+    <div fxFlex fxLayoutAlign="center center" fxLayoutGap="10px">
         <button type="button" mat-flat-button [disabled]="bookEvent.asPrevious === null"
                 (click)="changeBook(bookEvent.asPrevious)">
           <fa-icon [icon]="['fas', 'chevron-left']" style="padding-right: 10px"></fa-icon>
           {{'BOOK.LIST.DETAILS.BUTTON.PREVIOUS' | translate}}
         </button>
-      </div>
-      <div fxFlex>
         <button type="button" mat-flat-button [disabled]="bookEvent.asNext === null"
                 (click)="changeBook(bookEvent.asNext)">
           {{'BOOK.LIST.DETAILS.BUTTON.NEXT' | translate}}
           <fa-icon [icon]="['fas', 'chevron-right']" style="padding-left: 10px"></fa-icon>
         </button>
     </div>
-  </div>
   </div>
   <div fxFlex fxLayoutAlign="space-between">
     <div fxFlex fxLayoutAlign="center center">
