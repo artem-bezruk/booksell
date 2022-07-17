@@ -17,29 +17,39 @@
     </mat-expansion-panel-header>
   <mat-action-row *ngIf="(userConnected()|async)">
     <div fxFlex fxLayoutAlign="end" fxLayoutGap="10px">
-      <button mat-stroked-button> Select all </button>
-      <button mat-stroked-button> Unselect all </button>
-      <button mat-stroked-button [matMenuTriggerFor]="menu"> Mark as </button>
+      <button mat-stroked-button [disabled]="list.selectedOptions.selected.length >= seriesData.books.length" (click)="list.selectAll()"> Select all </button>
+      <button mat-stroked-button [disabled]="list.selectedOptions.selected.length === 0" (click)="list.deselectAll()"> Unselect all </button>
+      <button mat-stroked-button [disabled]="list.selectedOptions.selected.length === 0" [matMenuTriggerFor]="menu"> Mark as </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>
+        <button mat-menu-item (click)="changeBookState(list.selectedOptions.selected, 'READ')">
           <fa-icon [icon]="['fas', 'book-open']" style="padding-right: 10px"></fa-icon>
           <span>Read</span>
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item (click)="changeBookState(list.selectedOptions.selected, 'UNREAD')">
           <fa-icon [icon]="['fas', 'book']" style="padding-right: 10px"></fa-icon>
           <span>Unread</span>
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item (click)="changeBookState(list.selectedOptions.selected, 'READING')">
           <fa-icon [icon]="['fas', 'book-reader']" style="padding-right: 10px"></fa-icon>
           <span>Reading</span>
         </button>
       </mat-menu>
     </div>
   </mat-action-row>
-  <mat-selection-list dense class="series-books">
-    <app-book-display (showBookDetails)="showDetails(i)"
-                      *ngFor="let book of seriesData.books; let i = index"
-                      [book]="book">
-    </app-book-display>
+  <mat-selection-list dense class="series-books" #list>
+    <mat-list-option *ngFor="let book of seriesData.books; let i = index" [ngClass]="{'hide-checkbox': !(userConnected()|async)}" checkboxPosition="before" [value]="book">
+      <div fxFlex="100" fxLayoutAlign="space-between">
+        <div>
+          <fa-icon *ngIf="book.status === 'UNREAD'" [icon]="['fas', 'book']" style="padding-right: 10px"></fa-icon>
+          <fa-icon *ngIf="book.status === 'READING'" [icon]="['fas', 'book-reader']" style="padding-right: 10px"></fa-icon>
+          <fa-icon *ngIf="book.status === 'READ'" [icon]="['fas', 'book-open']" style="padding-right: 10px"></fa-icon>
+          <span *ngIf="book.tome !== null">{{book.tome}} - </span> {{book.title}}
+        </div>
+        <div (click)="showDetails(i)">
+          <span style="padding-right: 10px;">Details</span>
+          <fa-icon [icon]="['fas', 'chevron-right']" style="padding-right: 10px"></fa-icon>
+        </div>
+      </div>
+    </mat-list-option>
   </mat-selection-list>
 </mat-expansion-panel>

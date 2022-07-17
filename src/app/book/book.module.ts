@@ -25,7 +25,6 @@ import {
   faSortAlphaDown,
   faSortAlphaUp
 } from '@fortawesome/free-solid-svg-icons';
-import {BookDisplayComponent} from './components/book-display/book-display.component';
 import {SeriesDisplayComponent} from './components/series-display/series-display.component';
 import {GroupDisplayComponent} from './components/group-display/group-display.component';
 import {BookDetailsComponent} from './components/book-details/book-details.component';
@@ -49,7 +48,15 @@ import { AlphabeticalSeriesDisplayComponent } from './components/alphabetical-se
     MatSlideToggleModule,
     MatMenuModule
   ],
-  declarations: [BookLayoutComponent, BookListComponent, BookDisplayComponent, SeriesDisplayComponent, GroupDisplayComponent, BookDetailsComponent, ListFilterComponent, BookListActionBarComponent, AlphabeticalSeriesDisplayComponent]
+  declarations: [
+    BookLayoutComponent,
+    BookListComponent,
+    SeriesDisplayComponent,
+    GroupDisplayComponent,
+    BookDetailsComponent,
+    ListFilterComponent,
+    BookListActionBarComponent,
+    AlphabeticalSeriesDisplayComponent]
 })
 export class BookModule {
   constructor() {

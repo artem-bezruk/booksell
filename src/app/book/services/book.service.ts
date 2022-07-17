@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, forkJoin, Observable} from 'rxjs';
 import {shareReplay} from 'rxjs/operators';
 import {Book} from '../../core/model/book';
 import {SeriesByGroupContainer} from '../../core/model/series-by-group-container';
@@ -56,6 +56,15 @@ export class BookService {
     const o = this.http.get<Book[]>('/api/books/').pipe(shareReplay());
     o.subscribe(
       res => this._searchResult.next(res),
+      err => console.error('an error occured!', err),
+      () => this._isLoading.next(false));
+    return o;
+  }
+  updateBook(book: Book) {
+    this._isLoading.next(true);
+    const o = this.http.put<Book>('/api/books/' + book.id, book).pipe(shareReplay());
+    o.subscribe(
+      () => this.getAllBook(),
       err => console.error('an error occured!', err),
       () => this._isLoading.next(false));
     return o;
