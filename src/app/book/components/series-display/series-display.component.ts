@@ -38,11 +38,11 @@ export class SeriesDisplayComponent implements OnInit {
     return this.authService.isAuthenticated;
   }
   changeBookState(selected: MatListOption[], newState: 'UNREAD' | 'READING' | 'READ') {
-    console.log(selected, newState);
-    selected.forEach( matOption => {
+    const books: Book[] = selected.map( matOption => {
       const book: Book = Object.assign({}, matOption.value);
       book.status = newState;
-      this.bookService.updateBook(book);
+      return book;
     });
+    this.bookService.bulkUpdateUpdate(books);
   }
 }

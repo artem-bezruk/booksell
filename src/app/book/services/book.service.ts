@@ -60,9 +60,9 @@ export class BookService {
       () => this._isLoading.next(false));
     return o;
   }
-  updateBook(book: Book) {
+  bulkUpdateUpdate(books: Book[]) {
     this._isLoading.next(true);
-    const o = this.http.put<Book>('/api/books/' + book.id, book).pipe(shareReplay());
+    const o = forkJoin(books.map(book => this.http.put<Book>('/api/books/' + book.id, book))).pipe(shareReplay());
     o.subscribe(
       () => this.getAllBook(),
       err => console.error('an error occured!', err),
