@@ -38,6 +38,11 @@
     }
   },
   "BOOK": {
+    "STATE": {
+      "UNREAD": "Non lus",
+      "READ": "Lus",
+      "READING": "En cours de lecture"
+    },
     "SEARCH": {
       "ERRORS": {
         "ISBN_FOMART": "L'ISBN est une chaine numérique de 10 ou 13 chiffres",
@@ -76,15 +81,17 @@
         "BUTTON_FILTER": "Filtres",
         "BUTTON_ORDER": "Inverser le tri"
       },
+      "SERIES": {
+        "ACTION_ROW": {
+          "ALL_SELECT": "Tout séléctionnez",
+          "ALL_DESELECT": "Tout désélectionnez",
+          "MARK_AS": "Marquez comme"
+        }
+      },
       "DETAILS": {
         "SECTION_TITLE": {
           "GLOBAL_INFORMATION": "Informations générale",
           "AUTHOR": "Auteurs"
-        },
-        "STATE": {
-          "UNREAD": "Non lus",
-          "READ": "Lus",
-          "READING": "Lecture en cours"
         },
         "BUTTON": {
           "PREVIOUS": "Précédent",

@@ -7,15 +7,15 @@
       </ng-template>
       <p *ngIf="bookEvent.book.status === 'UNREAD'">
         <fa-icon [icon]="['fas', 'book']" style="padding-right: 10px"></fa-icon>
-        {{'BOOK.LIST.DETAILS.STATE.UNREAD' | translate}}
+        {{'BOOK.STATE.UNREAD' | translate}}
       </p>
       <p *ngIf="bookEvent.book.status === 'READING'">
         <fa-icon [icon]="['fas', 'book-reader']" style="padding-right: 10px"></fa-icon>
-        {{'BOOK.LIST.DETAILS.STATE.READING' | translate}}
+        {{'BOOK.STATE.READING' | translate}}
       </p>
       <p *ngIf="bookEvent.book.status === 'READ'">
         <fa-icon [icon]="['fas', 'book-open']" style="padding-right: 10px"></fa-icon>
-        {{'BOOK.LIST.DETAILS.STATE.READ' | translate}}
+        {{'BOOK.STATE.READ' | translate}}
       </p>
     </div>
     <div fxFlex fxLayoutAlign="center center" fxLayoutGap="10px">

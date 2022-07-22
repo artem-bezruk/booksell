@@ -38,6 +38,11 @@
     }
   },
   "BOOK": {
+    "STATE": {
+      "UNREAD": "Unread",
+      "READ": "Read",
+      "READING": "Reading"
+    },
     "SEARCH": {
       "ERRORS": {
         "ISBN_FOMART": "The ISBN is a string of 10 or 13 number",
@@ -76,15 +81,17 @@
         "BUTTON_FILTER": "Filters",
         "BUTTON_ORDER": "Revert order"
       },
+      "SERIES": {
+        "ACTION_ROW": {
+          "ALL_SELECT": "Select all",
+          "ALL_DESELECT": "Deselect all",
+          "MARK_AS": "Mark as"
+        }
+      },
       "DETAILS": {
         "SECTION_TITLE": {
           "GLOBAL_INFORMATION": "General information",
           "AUTHOR": "Authors"
-        },
-        "STATE": {
-          "UNREAD": "Unread",
-          "READ": "Read",
-          "READING": "Reading"
         },
         "BUTTON": {
           "PREVIOUS": "Previous",
