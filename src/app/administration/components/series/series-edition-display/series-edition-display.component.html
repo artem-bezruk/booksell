@@ -1,8 +1,8 @@
-<mat-list-item role="listitem" style="padding-top: 10px" >
+ <mat-list-item role="listitem" style="padding-top: 10px" >
   <form (ngSubmit)="submit()" [formGroup]="form" fxLayout="row" fxFlex="100" fxLayoutAlign="space-between center">
     <mat-form-field fxFlex="45">
-      <span matPrefix>{{series.editor}} &nbsp;</span>
       <input matInput placeholder="{{'SERIES.EDITION.SERIES_NAME_PLACEHOLDER' | translate}}" formControlName="name">
+      <mat-hint align="end">{{series.editor}}</mat-hint>
     </mat-form-field>
     <mat-form-field fxFlex="15">
       <input type="number" matInput placeholder="{{'SERIES.EDITION.NUMBER_BOOK_PLACEHOLDER' | translate}}"
