@@ -10,7 +10,7 @@ div.mat-expansion-panel-body {
   padding: 0;
 }
 mat-list-option.hide-checkbox {
-  ::ng-deep.mat-pseudo-checkbox {
+  .mat-pseudo-checkbox {
     display: none !important;
   }
 }
