@@ -43,19 +43,21 @@
     </div>
   </mat-action-row>
   <mat-selection-list dense class="series-books" #list>
-    <mat-list-option *ngFor="let book of seriesData.books; let i = index" [ngClass]="{'hide-checkbox': !(userConnected()|async)}" checkboxPosition="before" [value]="book">
-      <div fxFlex="100" fxLayoutAlign="space-between">
-        <div>
+    <div *ngFor="let book of seriesData.books; let i = index" fxLayoutAlign="space-between center">
+      <mat-list-option  style="margin-right: -140px;" [ngClass]="{'hide-checkbox': !(userConnected()|async)}" checkboxPosition="before" [value]="book">
+        <div fxFlex="100">
           <fa-icon *ngIf="book.status === 'UNREAD'" [icon]="['fas', 'book']" style="padding-right: 10px"></fa-icon>
           <fa-icon *ngIf="book.status === 'READING'" [icon]="['fas', 'book-reader']" style="padding-right: 10px"></fa-icon>
           <fa-icon *ngIf="book.status === 'READ'" [icon]="['fas', 'book-open']" style="padding-right: 10px"></fa-icon>
           <span *ngIf="book.tome !== null">{{book.tome}} - </span> {{book.title}}
         </div>
-        <div (click)="showDetails(i)">
-          <span style="padding-right: 10px;">Details</span>
-          <fa-icon [icon]="['fas', 'chevron-right']" style="padding-right: 10px"></fa-icon>
-        </div>
+      </mat-list-option>
+      <div style="padding-right: 15px;">
+        <button (click)="showDetails(i)" mat-stroked-button>
+          Details
+          <fa-icon [icon]="['fas', 'chevron-right']" style="padding-left: 10px"></fa-icon>
+        </button>
       </div>
-    </mat-list-option>
+    </div>
   </mat-selection-list>
 </mat-expansion-panel>
