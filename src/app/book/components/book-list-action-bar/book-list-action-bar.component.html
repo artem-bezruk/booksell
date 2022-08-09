@@ -5,7 +5,7 @@
   </button>
   <button mat-button (click)="changeSortOrderAction()">
     {{"BOOK.LIST.ACTION_BAR.BUTTON_ORDER" | translate}}
-    <ng-container *ngIf="isSortOrderAsc; else descIcon">
+    <ng-container *ngIf="isSortOrderAsc(); else descIcon">
       <fa-icon [icon]="['fas', 'sort-alpha-up']"></fa-icon>
     </ng-container>
     <ng-template #descIcon>
