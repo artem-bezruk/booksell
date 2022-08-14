@@ -1,20 +1,28 @@
 <form [formGroup]="form" fxFlex fxLayout="column">
   <div>
-    <h2>Filters</h2>
+    <h2>
+      {{"BOOK.LIST.FILTER.TITLE" | translate}}
+    </h2>
   </div>
   <div fxLayout="column">
     <mat-form-field>
-      <input matInput formControlName="globalTextCtrl" placeholder="Filter">
+      <input matInput formControlName="globalTextCtrl" placeholder="{{'BOOK.LIST.FILTER.FILTER' | translate}}">
     </mat-form-field>
     <mat-form-field>
-      <mat-label *ngIf="groupByEditors">Editors</mat-label>
-      <mat-label *ngIf="!groupByEditors">Initiale</mat-label>
+      <mat-label *ngIf="groupByEditors">
+        {{"BOOK.LIST.FILTER.EDITOR" | translate}}
+      </mat-label>
+      <mat-label *ngIf="!groupByEditors">
+        {{"BOOK.LIST.FILTER.INITIAL" | translate}}
+      </mat-label>
       <mat-select formControlName="groupsCtrl" multiple>
         <mat-option *ngFor="let group of groups" [value]="group">{{group}}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Series</mat-label>
+      <mat-label>
+        {{"BOOK.LIST.FILTER.SERIES" | translate}}
+      </mat-label>
       <mat-select formControlName="seriesCtrl" multiple>
         <ng-container *ngFor="let group of groups">
           <mat-optgroup *ngIf="displayGroup(group)" [label]="group">
@@ -27,6 +35,8 @@
     </mat-form-field>
   </div>
   <div fxLayout="row" fxLayoutAlign="space-between">
-    <button fxFlex mat-flat-button color="warn" (click)="clearFilters()">clear</button>
+    <button fxFlex mat-flat-button color="warn" (click)="clearFilters()">
+      {{"BOOK.LIST.FILTER.CLEAR" | translate}}
+    </button>
   </div>
 </form>

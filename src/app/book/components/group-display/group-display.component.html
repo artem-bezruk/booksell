@@ -3,11 +3,11 @@
     <h2 fxLayoutAlign="end">{{editor}}</h2>
     <div fxLayoutAlign="end">
       <button mat-button *ngIf="!isAllPanelOpened()" (click)="accordion.openAll()">
-        Expand all
+        {{"BOOK.LIST.GROUP.EXPAND_ALL" | translate}}
         <fa-icon [icon]="['fas', 'caret-down']"></fa-icon>
       </button>
       <button mat-button *ngIf="isAllPanelOpened()" (click)="accordion.closeAll()">
-        Collapse all
+        {{"BOOK.LIST.GROUP.COLLAPSE_ALL" | translate}}
         <fa-icon [icon]="['fas', 'caret-up']"></fa-icon>
       </button>
     </div>

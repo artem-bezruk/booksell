@@ -79,7 +79,20 @@
     "LIST": {
       "ACTION_BAR": {
         "BUTTON_FILTER": "Filters",
-        "BUTTON_ORDER": "Revert order"
+        "BUTTON_ORDER": "Revert order",
+        "GROUP_BY": "Group By editor"
+      },
+      "FILTER": {
+        "TITLE": "Filters",
+        "FILTER": "Filter",
+        "SERIES": "Series",
+        "EDITOR": "Editor",
+        "INITIAL": "Initial",
+        "CLEAR": "Clear"
+      },
+      "GROUP": {
+        "COLLAPSE_ALL": "Collapse all",
+        "EXPAND_ALL": "Expand all"
       },
       "SERIES": {
         "ACTION_ROW": {

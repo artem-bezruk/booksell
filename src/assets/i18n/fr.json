@@ -79,7 +79,20 @@
     "LIST": {
       "ACTION_BAR": {
         "BUTTON_FILTER": "Filtres",
-        "BUTTON_ORDER": "Inverser le tri"
+        "BUTTON_ORDER": "Inverser le tri",
+        "GROUP_BY": "Grouper par éditeur"
+      },
+      "FILTER": {
+        "TITLE": "Filtres",
+        "FILTER": "Filtre",
+        "SERIES": "Séries",
+        "EDITOR": "Editeur",
+        "INITIAL": "Initiale",
+        "CLEAR": "Reset"
+      },
+      "GROUP": {
+        "COLLAPSE_ALL": "Tout replier",
+        "EXPAND_ALL": "Tout développer"
       },
       "SERIES": {
         "ACTION_ROW": {
