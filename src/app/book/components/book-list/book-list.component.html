@@ -6,7 +6,7 @@
     </mat-sidenav>
     <mat-sidenav-content>
         <div fxFlex="80" fxFlexOffset="10">
-            <app-book-list-action-bar (filter)="filter.toggle()"></app-book-list-action-bar>
+            <app-book-list-action-bar style="overflow-y: hidden;" (filter)="filter.toggle()"></app-book-list-action-bar>
             <app-group-display (showBookDetails)="showDetails($event, group)"
                                *ngFor="let group of filteredGroupList | async"
                                [seriesContainer]="(filteredBooks|async)[group]"
