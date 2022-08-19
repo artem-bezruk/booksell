@@ -3,28 +3,29 @@ import {Router} from '@angular/router';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {shareReplay} from 'rxjs/operators';
+import {shareReplay, tap} from 'rxjs/operators';
 import {ConfigService} from '../../core/services/config.service';
 import {OAuthConfig} from '../../core/model/appConfig';
 import {SubjectSubscriber} from 'rxjs/internal/Subject';
+import {User} from '../../shared/models/user';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private static AUTH_TOKEN_COOKIE_NAME = 'access_token';
+  private static USER_LOCAL_STORAGE_NAME = 'current_user';
   private oauthConfig: OAuthConfig;
-  private _isAuthenticated = new BehaviorSubject(null);
-  get isAuthenticated(): Observable<boolean> {
-    return this._isAuthenticated.asObservable();
-  }
   constructor(private router: Router,
               private http: HttpClient,
               private cookieService: CookieService,
               private configService: ConfigService) {
     this.configService.appConfig.subscribe(appConfig => this.oauthConfig = appConfig ? appConfig.oauth : null);
-    this.updateAuthenticatedSatus();
+    this._currentUser = new BehaviorSubject<User>(JSON.parse(localStorage.getItem(AuthService.USER_LOCAL_STORAGE_NAME)));
   }
-  obtainAccessToken(username, password): Observable<any> {
+  private _currentUser = new BehaviorSubject(null);
+  get currentUser(): Observable<boolean> {
+    return this._currentUser.asObservable();
+  }
+  login(username, password): Observable<any> {
     const oauthAuth = `${this.oauthConfig.client_id}:${this.oauthConfig.client_secret}`;
     const params = new HttpParams()
       .set('username', username)
@@ -35,25 +36,29 @@ export class AuthService {
       .set('Authorization', `Basic ${window.btoa(oauthAuth)}`);
     const observable = this.http.post('/auth/oauth/token', params, {headers}).pipe(shareReplay());
     observable.subscribe(
-      data => this.saveToken(data),
+      (data: any) => this.saveToken({email: username, tokens: { access: data.access_token, refresh: data.refresh_token}}),
       err => console.error('Invalid Credentials: ', err));
     return observable;
   }
-  saveToken(token) {
-    const expireDate = new Date().getTime() + (1000 * token.expires_in);
-    this.cookieService.set(AuthService.AUTH_TOKEN_COOKIE_NAME, token.access_token, expireDate);
-    this.updateAuthenticatedSatus();
+  saveToken(user: User) {
+    localStorage.setItem(AuthService.USER_LOCAL_STORAGE_NAME, JSON.stringify(user));
+    this._currentUser.next(user);
     this.router.navigate(['/']);
   }
-  getToken(): any {
-    return this.cookieService.get(AuthService.AUTH_TOKEN_COOKIE_NAME);
+  getCurrentUser(): User {
+    return this._currentUser.value;
   }
   logout() {
-    this.cookieService.delete(AuthService.AUTH_TOKEN_COOKIE_NAME);
-    this.updateAuthenticatedSatus();
+    localStorage.removeItem(AuthService.USER_LOCAL_STORAGE_NAME);
+    this._currentUser.next(null);
     this.router.navigate(['/']);
   }
-  private updateAuthenticatedSatus() {
-    return this._isAuthenticated.next(this.cookieService.check(AuthService.AUTH_TOKEN_COOKIE_NAME));
+  refreshToken() {
+    const email = this._currentUser.value.email;
+    return this.http.post('/auth/oauth/token/refresh', {
+      refreshToken: this._currentUser.value.refreshToken
+    }).pipe(tap((tokens: any) => {
+      this._currentUser.next({email, tokens: { access: tokens.access_token, refresh: tokens.refresh_token}});
+    }));
   }
 }

@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
   userConnected() {
-    return this.authService.isAuthenticated;
+    return this.authService.currentUser;
   }
   signOut() {
     this.authService.logout();

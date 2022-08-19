@@ -29,9 +29,8 @@ export class SignInModalComponent implements OnInit {
   signIn() {
     const email = this.form.controls.email.value;
     const password = this.form.controls.password.value;
-    this.authService.obtainAccessToken(email, password).subscribe(
+    this.authService.login(email, password).subscribe(
       () => {
-        this.dialogRef.close(true);
       }, err => {
         let message;
         if (err.status === 400) {
@@ -40,7 +39,9 @@ export class SignInModalComponent implements OnInit {
           message = this.translateService.instant('ERRORS.GENERIC');
         }
         this.openSnackbar(message);
-      });
+      }, () =>
+        this.dialogRef.close(true)
+    );
   }
   cancel() {
     this.dialogRef.close(false);

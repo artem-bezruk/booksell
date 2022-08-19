@@ -13,6 +13,7 @@ import {Observable, ObservableInput, of} from 'rxjs';
 import {AppConfig} from './core/model/appConfig';
 import {JwtInterceptorService} from './auth/services/jwt-interceptor.service';
 import {BookModule} from './book/book.module';
+import {ErrorInterceptor} from './core/services/error-interceptor.service';
 export function load(http: HttpClient, config: ConfigService): (() => Promise<boolean>) {
   return (): Promise<boolean> => {
     return new Promise<boolean>((resolve: (a: boolean) => void): void => {
@@ -51,6 +52,7 @@ export function load(http: HttpClient, config: ConfigService): (() => Promise<bo
     AuthModule
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },
     {
       provide: APP_INITIALIZER,

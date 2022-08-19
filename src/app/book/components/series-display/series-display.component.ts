@@ -35,7 +35,7 @@ export class SeriesDisplayComponent implements OnInit {
     return this.matExpansionPanel.expanded;
   }
   userConnected() {
-    return this.authService.isAuthenticated;
+    return this.authService.currentUser;
   }
   changeBookState(selected: MatListOption[], newState: 'UNREAD' | 'READING' | 'READ') {
     const books: Book[] = selected.map( matOption => {
