@@ -5,7 +5,7 @@
       <mat-hint align="end">{{series.editor}}</mat-hint>
     </mat-form-field>
     <mat-form-field fxFlex="15">
-      <input type="number" matInput placeholder="{{'SERIES.EDITION.NUMBER_BOOK_PLACEHOLDER' | translate}}"
+      <input type="number" min="0" matInput placeholder="{{'SERIES.EDITION.NUMBER_BOOK_PLACEHOLDER' | translate}}"
              formControlName="seriesBookCount">
     </mat-form-field>
     <div fxFlex="15">
