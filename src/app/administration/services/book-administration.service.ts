@@ -5,6 +5,7 @@ import {BookSearch} from '../models/book-search';
 import {shareReplay} from 'rxjs/operators';
 import {Book} from '../../core/model/book';
 import {BookMapper} from '../models/mappers/book-mapper';
+import {CoreService} from '../../core/services/core.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,35 +14,31 @@ export class BookAdministrationService {
   get searchResult(): Observable<BookSearch> {
     return this._searchResult.asObservable();
   }
-  private _isLoading = new BehaviorSubject<boolean>(false);
-  get isLoading(): Observable<boolean> {
-    return this._isLoading.asObservable();
-  }
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private coreService: CoreService) {
   }
   searchBooks(isbn): Observable<BookSearch> {
-    this._isLoading.next(true);
+    this.coreService.updateLoadingState(true);
     const params = new HttpParams().append('isbn', isbn);
     const o = this.http.get<BookSearch>('/api/search/books/findByISBN', {params}).pipe(shareReplay());
     o.subscribe(
       res => this._searchResult.next(res),
       err => {
         console.error('an error occured!', err);
-        this._isLoading.next(false);
+        this.coreService.updateLoadingState(false);
       },
-      () => this._isLoading.next(false));
+      () => this.coreService.updateLoadingState(false));
     return o;
   }
   clearResults() {
     this._searchResult.next(null);
   }
   addBook(bookSearch: BookSearch) {
-    this._isLoading.next(true);
+    this.coreService.updateLoadingState(true);
     const o = this.http.post<Book>('/api/books/', BookMapper.mapBook(bookSearch)).pipe(shareReplay());
     o.subscribe(
       res => console.log('Books added', res),
       err => console.error('an error occured!', err),
-      () => this._isLoading.next(false));
+      () => this.coreService.updateLoadingState(false));
     return o;
   }
 }

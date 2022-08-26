@@ -1,19 +1,26 @@
 import {Injectable} from '@angular/core';
-import {HttpRequest, HttpHandler, HttpEvent, HttpInterceptor} from '@angular/common/http';
+import {HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {catchError, filter, switchMap, take} from 'rxjs/operators';
 import {AuthService} from '../../auth/services/auth.service';
+import {CoreService} from './core.service';
+import {MatSnackBar} from '@angular/material';
+import {TranslateService} from '@ngx-translate/core';
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
   private isRefreshing = false;
   private _refreshToken: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  constructor(private authService: AuthService) {
+  constructor(public snackBar: MatSnackBar, private authService: AuthService, private coreService: CoreService,
+              private translateService: TranslateService) {
   }
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(catchError(err => {
       if (err.status === 401) {
         this.handle401Error(request, next);
         location.reload(true);
+      } else {
+        this.coreService.updateLoadingState(false);
+        this.snackBar.open( this.translateService.instant('ERRORS.GENERIC'), this.translateService.instant('SNACKBAR.ACTION.CLOSE'));
       }
       const error = err.error.message || err.statusText;
       return throwError(error);

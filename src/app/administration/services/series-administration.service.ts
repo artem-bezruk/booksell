@@ -3,6 +3,7 @@ import {Series} from '../../core/model/series';
 import {shareReplay} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
+import {CoreService} from '../../core/services/core.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,23 +17,19 @@ export class SeriesAdministrationService {
   get seriesListFiltered(): Observable<Series[]> {
     return this._seriesListFiltered.asObservable();
   }
-  private _isLoading = new BehaviorSubject<boolean>(false);
-  get isLoading(): Observable<boolean> {
-    return this._isLoading.asObservable();
-  }
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private coreService: CoreService) {
   }
   updateSeries(series: Series) {
-    this._isLoading.next(true);
+    this.coreService.updateLoadingState(true);
     const o = this.http.put<Series>('/api/series/', series).pipe(shareReplay());
     o.subscribe(
       res => this.getAllSeries(),
       err => console.error('an error occured!', err),
-      () => this._isLoading.next(false));
+      () => this.coreService.updateLoadingState(false));
     return o;
   }
   getAllSeries() {
-    this._isLoading.next(true);
+    this.coreService.updateLoadingState(true);
     const o = this.http.get<Series[]>('/api/series/').pipe(shareReplay());
     o.subscribe(
       res => {
@@ -40,7 +37,7 @@ export class SeriesAdministrationService {
         this.filter(this.filterStr);
       },
       err => console.error('an error occured!', err),
-      () => this._isLoading.next(false));
+      () => this.coreService.updateLoadingState(false));
     return o;
   }
   filter(filterStr: string) {

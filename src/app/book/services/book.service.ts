@@ -4,6 +4,7 @@ import {BehaviorSubject, forkJoin, Observable} from 'rxjs';
 import {shareReplay} from 'rxjs/operators';
 import {Book} from '../../core/model/book';
 import {SeriesByGroupContainer} from '../../core/model/series-by-group-container';
+import {CoreService} from '../../core/services/core.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,13 +12,9 @@ export class BookService {
   get searchResult(): Observable<Book[]> {
     return this._searchResult.asObservable();
   }
-  get isLoading(): Observable<boolean> {
-    return this._isLoading.asObservable();
-  }
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private coreService: CoreService) {
   }
   private _searchResult: BehaviorSubject<Book[]> = new BehaviorSubject([]);
-  private _isLoading = new BehaviorSubject<boolean>(false);
   private static createGroups(accumulator: SeriesByGroupContainer, group: string) {
     if (!accumulator[group]) {
       accumulator[group] = [];
@@ -52,21 +49,21 @@ export class BookService {
     return seriesByGroupContainer;
   }
   getAllBook() {
-    this._isLoading.next(true);
+    this.coreService.updateLoadingState(true);
     const o = this.http.get<Book[]>('/api/books/').pipe(shareReplay());
     o.subscribe(
       res => this._searchResult.next(res),
       err => console.error('an error occured!', err),
-      () => this._isLoading.next(false));
+      () => this.coreService.updateLoadingState(false));
     return o;
   }
   bulkUpdateUpdate(books: Book[]) {
-    this._isLoading.next(true);
+    this.coreService.updateLoadingState(true);
     const o = forkJoin(books.map(book => this.http.put<Book>('/api/books/' + book.id, book))).pipe(shareReplay());
     o.subscribe(
       () => this.getAllBook(),
       err => console.error('an error occured!', err),
-      () => this._isLoading.next(false));
+      () => this.coreService.updateLoadingState(false));
     return o;
   }
 }

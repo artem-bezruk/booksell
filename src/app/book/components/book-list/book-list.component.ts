@@ -5,6 +5,8 @@ import {SeriesByGroupContainer} from '../../../core/model/series-by-group-contai
 import {BookListService} from '../../services/book-list.service';
 import {BookDetailsService} from '../../services/book-details.service';
 import {BookDetailsEvent} from '../../models/book-details-event';
+import {SeriesAdministrationService} from '../../../administration/services/series-administration.service';
+import {CoreService} from '../../../core/services/core.service';
 @Component({
   selector: 'app-book-list',
   templateUrl: './book-list.component.html',
@@ -16,10 +18,11 @@ export class BookListComponent implements OnInit {
   filteredBooks: Observable<SeriesByGroupContainer>;
   filteredGroupList: Observable<string[]>;
   displayDetails = false;
-  constructor(private bookService: BookService, private bookListService: BookListService, private bookDetailsService: BookDetailsService) {
+  constructor(private bookService: BookService, private bookListService: BookListService, private bookDetailsService: BookDetailsService,
+              private coreService: CoreService) {
   }
   ngOnInit() {
-    this.isLoading = this.bookService.isLoading;
+    this.isLoading = this.coreService.isLoading;
     this.filteredGroupList = this.bookListService.filteredGroupList;
     this.filteredBooks = this.bookListService.filteredBooks;
     this.bookDetailsService.bookToDisplay.subscribe(res => this.displayDetails = res !== null);
