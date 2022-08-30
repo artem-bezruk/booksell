@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Series} from '../../../../core/model/series';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 @Component({
   selector: 'app-series-edition-display',
   templateUrl: './series-edition-display.component.html',
@@ -17,7 +17,7 @@ export class SeriesEditionDisplayComponent implements OnInit {
   ngOnInit() {
     this.form = this.fb.group({
       name: this.fb.control(''),
-      seriesBookCount: this.fb.control(''),
+      seriesBookCount: this.fb.control('', Validators.min(1)),
     });
     this.initForm();
   }
