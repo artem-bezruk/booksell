@@ -1,4 +1,5 @@
-<div fxLayout="column" *ngIf="bookEvent && bookEvent.book !== null" class="book-details-container" style="padding: 20px">
+<div fxLayout="column" *ngIf="bookEvent && bookEvent.book !== null" class="book-details-container"
+     style="padding: 20px">
   <div fxFlex fxLayoutAlign="space-between center">
     <div fxFlex="70">
       <h2 *ngIf="bookEvent.book.tome === null; else titleWithSeries"> {{bookEvent.book?.title}}</h2>
@@ -19,21 +20,22 @@
       </p>
     </div>
     <div fxFlex fxLayoutAlign="center center" fxLayoutGap="10px">
-        <button type="button" mat-flat-button [disabled]="bookEvent.asPrevious === null"
-                (click)="changeBook(bookEvent.asPrevious)">
-          <fa-icon [icon]="['fas', 'chevron-left']" style="padding-right: 10px"></fa-icon>
-          {{'BOOK.LIST.DETAILS.BUTTON.PREVIOUS' | translate}}
-        </button>
-        <button type="button" mat-flat-button [disabled]="bookEvent.asNext === null"
-                (click)="changeBook(bookEvent.asNext)">
-          {{'BOOK.LIST.DETAILS.BUTTON.NEXT' | translate}}
-          <fa-icon [icon]="['fas', 'chevron-right']" style="padding-left: 10px"></fa-icon>
-        </button>
+      <button type="button" mat-flat-button [disabled]="bookEvent.asPrevious === null"
+              (click)="changeBook(bookEvent.asPrevious)">
+        <fa-icon [icon]="['fas', 'chevron-left']" style="padding-right: 10px"></fa-icon>
+        {{'BOOK.LIST.DETAILS.BUTTON.PREVIOUS' | translate}}
+      </button>
+      <button type="button" mat-flat-button [disabled]="bookEvent.asNext === null"
+              (click)="changeBook(bookEvent.asNext)">
+        {{'BOOK.LIST.DETAILS.BUTTON.NEXT' | translate}}
+        <fa-icon [icon]="['fas', 'chevron-right']" style="padding-left: 10px"></fa-icon>
+      </button>
     </div>
   </div>
   <div fxFlex fxLayoutAlign="space-between">
     <div fxFlex fxLayoutAlign="center center">
-      <img class="mat-elevation-z2" [src]="'/files/covers/' + bookEvent.book.cover" [alt]="bookEvent.book.cover">
+      <app-loader-img [imgContainerClass]="'mat-elevation-z2'" *ngIf="displayImg && bookEvent.book.cover !== null"
+                      [img]="{src: '/files/covers/' + bookEvent.book.cover, alt: bookEvent.book.cover}"></app-loader-img>
     </div>
     <div fxFlex>
       <mat-list>

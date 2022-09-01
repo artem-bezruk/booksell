@@ -9,11 +9,16 @@ import {BookDetailsService} from '../../services/book-details.service';
 })
 export class BookDetailsComponent implements OnInit {
   bookEvent: { book: Book, asNext: BookDetailsEvent, asPrevious: BookDetailsEvent };
+  public displayImg = false;
   constructor(private bookDetailsService: BookDetailsService) { }
   ngOnInit() {
-    this.bookDetailsService.bookToDisplay.subscribe(next => this.bookEvent = next);
+    this.bookDetailsService.bookToDisplay.subscribe(next => {
+      this.displayImg = true;
+      this.bookEvent = next;
+    });
   }
   changeBook(bookDetailsEvent: BookDetailsEvent) {
+    this.displayImg = false;
     this.bookDetailsService.showDetails(bookDetailsEvent);
   }
 }
