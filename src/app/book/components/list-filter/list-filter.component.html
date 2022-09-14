@@ -6,7 +6,9 @@
   </div>
   <div fxLayout="column">
     <mat-form-field>
-      <input matInput formControlName="globalTextCtrl" placeholder="{{'BOOK.LIST.FILTER.FILTER' | translate}}">
+      <label>
+        <input matInput formControlName="globalTextCtrl" placeholder="{{'BOOK.LIST.FILTER.FILTER' | translate}}">
+      </label>
     </mat-form-field>
     <mat-form-field>
       <mat-label *ngIf="groupByEditors">

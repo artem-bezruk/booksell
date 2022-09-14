@@ -16,7 +16,7 @@ export class ListFilterComponent implements OnInit, OnChanges {
   groupByEditors: boolean;
   constructor(private fb: FormBuilder, private bookListService: BookListService) {
     this.form = this.fb.group({
-      globalTextCtrl: this.fb.control(''),
+      globalTextCtrl: this.fb.control({value: '', disabled: true}),
       groupsCtrl: this.fb.control([]),
       seriesCtrl: this.fb.control([])
     });
