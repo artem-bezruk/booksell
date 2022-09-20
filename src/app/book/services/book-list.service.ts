@@ -12,11 +12,14 @@ export class BookListService {
   groupByEditors = false;
   order: SortOrder.DESC | SortOrder.ASC;
   constructor(private bookService: BookService) {
-    this.bookService.getAllBook();
+    this.updateBookList();
     this.bookService.searchResult.subscribe(res => {
       this._searchResult.next(this.bookService.groupBy(this.groupByEditors));
       this.updateFilteredBooks(this._searchResult.value);
     });
+  }
+  public updateBookList() {
+    this.bookService.getAllBook();
   }
   private _searchResult: BehaviorSubject<SeriesByGroupContainer> = new BehaviorSubject<SeriesByGroupContainer>(null);
   get searchResult(): Observable<SeriesByGroupContainer> {

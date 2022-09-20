@@ -1,11 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BookService} from '../../services/book.service';
 import {Observable} from 'rxjs';
 import {SeriesByGroupContainer} from '../../../core/model/series-by-group-container';
 import {BookListService} from '../../services/book-list.service';
 import {BookDetailsService} from '../../services/book-details.service';
 import {BookDetailsEvent} from '../../models/book-details-event';
-import {SeriesAdministrationService} from '../../../administration/services/series-administration.service';
 import {CoreService} from '../../../core/services/core.service';
 @Component({
   selector: 'app-book-list',
@@ -22,6 +21,7 @@ export class BookListComponent implements OnInit {
               private coreService: CoreService) {
   }
   ngOnInit() {
+    this.bookListService.updateBookList();
     this.isLoading = this.coreService.isLoading;
     this.filteredGroupList = this.bookListService.filteredGroupList;
     this.filteredBooks = this.bookListService.filteredBooks;
