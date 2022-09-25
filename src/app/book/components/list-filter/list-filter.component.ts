@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {SeriesByGroupContainer} from '../../../core/model/series-by-group-container';
 import {BookListService} from '../../services/book-list.service';
 import {Utils} from '../../../shared/utils';
+import {Observable} from 'rxjs';
 @Component({
   selector: 'app-list-filter',
   templateUrl: './list-filter.component.html',
@@ -12,9 +13,9 @@ export class ListFilterComponent implements OnInit, OnChanges {
   form: FormGroup;
   data: SeriesByGroupContainer;
   groups: string[];
-  @Input()
-  groupByEditors: boolean;
+  groupByEditors: Observable<boolean>;
   constructor(private fb: FormBuilder, private bookListService: BookListService) {
+    this.groupByEditors = this.bookListService.groupByEditors;
     this.form = this.fb.group({
       globalTextCtrl: this.fb.control({value: '', disabled: true}),
       groupsCtrl: this.fb.control([]),

@@ -11,10 +11,10 @@
       </label>
     </mat-form-field>
     <mat-form-field>
-      <mat-label *ngIf="groupByEditors">
+      <mat-label *ngIf="groupByEditors | async">
         {{"BOOK.LIST.FILTER.EDITOR" | translate}}
       </mat-label>
-      <mat-label *ngIf="!groupByEditors">
+      <mat-label *ngIf="!(groupByEditors | async)">
         {{"BOOK.LIST.FILTER.INITIAL" | translate}}
       </mat-label>
       <mat-select formControlName="groupsCtrl" multiple>

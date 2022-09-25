@@ -9,29 +9,32 @@ import {BookFilter} from '../../core/model/book-filter';
   providedIn: 'root'
 })
 export class BookListService {
-  groupByEditors = false;
-  order: SortOrder.DESC | SortOrder.ASC;
   constructor(private bookService: BookService) {
     this.updateBookList();
     this.bookService.searchResult.subscribe(res => {
-      this._searchResult.next(this.bookService.groupBy(this.groupByEditors));
+      this._searchResult.next(this.bookService.groupBy(this._groupByEditors.value));
       this.updateFilteredBooks(this._searchResult.value);
     });
   }
-  public updateBookList() {
-    this.bookService.getAllBook();
-  }
-  private _searchResult: BehaviorSubject<SeriesByGroupContainer> = new BehaviorSubject<SeriesByGroupContainer>(null);
   get searchResult(): Observable<SeriesByGroupContainer> {
     return this._searchResult.asObservable();
   }
-  private _filteredBooks: BehaviorSubject<SeriesByGroupContainer> = new BehaviorSubject<SeriesByGroupContainer>({});
   get filteredBooks(): Observable<SeriesByGroupContainer> {
     return this._filteredBooks.asObservable();
   }
-  private _filteredGroupList: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
   get filteredGroupList(): Observable<string[]> {
     return this._filteredGroupList.asObservable();
+  }
+  get groupByEditors(): Observable<boolean> {
+    return this._groupByEditors.asObservable();
+  }
+  order: SortOrder.DESC | SortOrder.ASC;
+  private _groupByEditors: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private _searchResult: BehaviorSubject<SeriesByGroupContainer> = new BehaviorSubject<SeriesByGroupContainer>(null);
+  private _filteredBooks: BehaviorSubject<SeriesByGroupContainer> = new BehaviorSubject<SeriesByGroupContainer>({});
+  private _filteredGroupList: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  public updateBookList() {
+    this.bookService.getAllBook();
   }
   changeSortOrder() {
     this.order = this.order === SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC;
@@ -39,8 +42,8 @@ export class BookListService {
   }
   isSortOrderAsc = (): boolean => this.order === SortOrder.ASC;
   changeDisplay($event: boolean) {
-    this.groupByEditors = $event;
-    this._searchResult.next(this.bookService.groupBy(this.groupByEditors));
+    this._groupByEditors.next($event);
+    this._searchResult.next(this.bookService.groupBy(this._groupByEditors.value));
     this.updateFilteredBooks(this._searchResult.value);
   }
   filter(filters: BookFilter) {

@@ -14,7 +14,7 @@
   </button>
     <mat-slide-toggle
             color="primary"
-            [checked]="isGroupedByEditors()"
+            [checked]="isGroupedByEditors | async"
             (change)="changeDisplayAction($event)">
       {{"BOOK.LIST.ACTION_BAR.GROUP_BY" | translate}}
     </mat-slide-toggle>

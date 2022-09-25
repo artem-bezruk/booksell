@@ -12,7 +12,6 @@ import {CoreService} from '../../../core/services/core.service';
   styleUrls: ['./book-list.component.scss']
 })
 export class BookListComponent implements OnInit {
-  groupByEditors: boolean;
   isLoading: Observable<boolean>;
   filteredBooks: Observable<SeriesByGroupContainer>;
   filteredGroupList: Observable<string[]>;

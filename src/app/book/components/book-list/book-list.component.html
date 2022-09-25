@@ -1,8 +1,7 @@
 <mat-progress-bar *ngIf="isLoading | async" [color]="'primary'" [mode]="'indeterminate'"></mat-progress-bar>
 <mat-sidenav-container class="book-list-container" fxFlex>
     <mat-sidenav #filter mode="side" style="position: fixed; padding-top: 68px">
-        <app-list-filter fxFlex style="padding: 20px"
-                         [groupByEditors]="groupByEditors"></app-list-filter>
+        <app-list-filter fxFlex style="padding: 20px"></app-list-filter>
     </mat-sidenav>
     <mat-sidenav-content>
         <div fxFlex="80" fxFlexOffset="10">
