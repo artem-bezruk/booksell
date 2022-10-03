@@ -1,6 +1,6 @@
 {
   "name": "bookshelf-ui",
-  "version": "1.0.0-beta.1",
+  "version": "1.1.0-SNAPSHOT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.config.json --poll=1000",
