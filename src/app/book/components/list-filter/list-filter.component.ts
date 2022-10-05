@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {SeriesByGroupContainer} from '../../../core/model/series-by-group-container';
 import {BookListService} from '../../services/book-list.service';
@@ -9,7 +9,7 @@ import {Observable} from 'rxjs';
   templateUrl: './list-filter.component.html',
   styleUrls: ['./list-filter.component.css']
 })
-export class ListFilterComponent implements OnInit, OnChanges {
+export class ListFilterComponent implements OnInit {
   form: FormGroup;
   data: SeriesByGroupContainer;
   groups: string[];
@@ -27,6 +27,12 @@ export class ListFilterComponent implements OnInit, OnChanges {
       this.data = data;
       this.groups = Utils.orderStringList(Object.keys(data), this.bookListService.order);
     });
+    this.form.valueChanges.subscribe(() =>
+      this.bookListService.filter({
+        group: this.form.get('groupsCtrl').value,
+        series: this.form.get('seriesCtrl').value
+      })
+    );
   }
   displayGroup(group: string) {
     const groupSelected: string[] = this.form.get('groupsCtrl').value;
@@ -37,13 +43,5 @@ export class ListFilterComponent implements OnInit, OnChanges {
       groupsCtrl: [],
       seriesCtrl: []
     });
-  }
-  ngOnChanges(): void {
-    this.form.valueChanges.subscribe(() =>
-      this.bookListService.filter({
-        group: this.form.get('groupsCtrl').value,
-        series: this.form.get('seriesCtrl').value
-      })
-    );
   }
 }
