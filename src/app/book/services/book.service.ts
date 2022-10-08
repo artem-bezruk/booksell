@@ -5,6 +5,7 @@ import {shareReplay} from 'rxjs/operators';
 import {Book} from '../../core/model/book';
 import {SeriesByGroupContainer} from '../../core/model/series-by-group-container';
 import {CoreService} from '../../core/services/core.service';
+import {MatListOption} from '@angular/material';
 @Injectable({
   providedIn: 'root'
 })
@@ -57,9 +58,18 @@ export class BookService {
       () => this.coreService.updateLoadingState(false));
     return o;
   }
-  bulkUpdateUpdate(books: Book[]) {
+  bulkUpdate(books: Book[]) {
     this.coreService.updateLoadingState(true);
     const o = forkJoin(books.map(book => this.http.put<Book>('/api/books/' + book.id, book))).pipe(shareReplay());
+    o.subscribe(
+      () => this.getAllBook(),
+      err => console.error('an error occured!', err),
+      () => this.coreService.updateLoadingState(false));
+    return o;
+  }
+  bulkDelete(books: Book[]) {
+    this.coreService.updateLoadingState(true);
+    const o = forkJoin(books.map(book => this.http.delete('/api/books/' + book.id))).pipe(shareReplay());
     o.subscribe(
       () => this.getAllBook(),
       err => console.error('an error occured!', err),

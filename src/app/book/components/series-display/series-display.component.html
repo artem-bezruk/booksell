@@ -40,6 +40,9 @@
           <span>{{'BOOK.STATE.READING' | translate}}</span>
         </button>
       </mat-menu>
+      <button mat-stroked-button color="warn" [disabled]="list.selectedOptions.selected.length === 0" (click)="deleteSelectedBooks(list.selectedOptions.selected)">
+        <span>{{'BOOK.LIST.SERIES.ACTION_ROW.DELETE' | translate}}</span>
+      </button>
     </div>
   </mat-action-row>
   <mat-selection-list dense class="series-books" #list>

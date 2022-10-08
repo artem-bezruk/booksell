@@ -38,11 +38,13 @@ export class SeriesDisplayComponent implements OnInit {
     return this.authService.currentUser;
   }
   changeBookState(selected: MatListOption[], newState: 'UNREAD' | 'READING' | 'READ') {
-    const books: Book[] = selected.map( matOption => {
+    this.bookService.bulkUpdate(selected.map( matOption => {
       const book: Book = Object.assign({}, matOption.value);
       book.status = newState;
       return book;
-    });
-    this.bookService.bulkUpdateUpdate(books);
+    }));
+  }
+  deleteSelectedBooks(selected: MatListOption[]) {
+    this.bookService.bulkDelete(selected.map( matOption => matOption.value));
   }
 }

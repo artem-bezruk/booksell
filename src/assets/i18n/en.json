@@ -80,7 +80,8 @@
       "ACTION_BAR": {
         "BUTTON_FILTER": "Filters",
         "BUTTON_ORDER": "Revert order",
-        "GROUP_BY": "Group By editor"
+        "GROUP_BY": "Group By editor",
+        "DELETE": "Delete"
       },
       "FILTER": {
         "TITLE": "Filters",
