@@ -80,7 +80,8 @@
       "ACTION_BAR": {
         "BUTTON_FILTER": "Filtres",
         "BUTTON_ORDER": "Inverser le tri",
-        "GROUP_BY": "Grouper par éditeur"
+        "GROUP_BY": "Grouper par éditeur",
+        "DELETE": "Supprimer"
       },
       "FILTER": {
         "TITLE": "Filtres",
@@ -98,8 +99,7 @@
         "ACTION_ROW": {
           "ALL_SELECT": "Tout séléctionnez",
           "ALL_DESELECT": "Tout désélectionnez",
-          "MARK_AS": "Marquez comme",
-          "DELETE": "Supprimer"
+          "MARK_AS": "Marquez comme"
         }
       },
       "DETAILS": {
