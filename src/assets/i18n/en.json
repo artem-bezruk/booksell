@@ -80,8 +80,7 @@
       "ACTION_BAR": {
         "BUTTON_FILTER": "Filters",
         "BUTTON_ORDER": "Revert order",
-        "GROUP_BY": "Group By editor",
-        "DELETE": "Delete"
+        "GROUP_BY": "Group By editor"
       },
       "FILTER": {
         "TITLE": "Filters",
@@ -99,7 +98,8 @@
         "ACTION_ROW": {
           "ALL_SELECT": "Select all",
           "ALL_DESELECT": "Deselect all",
-          "MARK_AS": "Mark as"
+          "MARK_AS": "Mark as",
+          "DELETE": "Delete"
         }
       },
       "DETAILS": {
