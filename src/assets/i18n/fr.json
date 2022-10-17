@@ -70,6 +70,9 @@
         "AUTHOR": {
           "NAME": "<strong>Nom: </strong>{{value}}",
           "ROLES": "<strong>Rôle(s): </strong>{{value}}"
+        },
+        "ACTION_ROW": {
+          "ADD": "Ajouter"
         }
       }
     },

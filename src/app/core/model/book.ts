@@ -14,6 +14,7 @@ export interface Book {
   title: string;
   tome?: string;
   year?: string;
+  bookType?: string;
 }
 export namespace Book {
   export type StatusEnum = 'UNREAD' | 'READ' | 'READING';

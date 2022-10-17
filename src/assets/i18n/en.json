@@ -49,7 +49,7 @@
         "ISBN_REQUIRED": "ISBN is <strong>required</strong>",
         "NO_RESULT_ISBN": "The ISBN {{isbn}} doesn't correspond to any book.",
         "NOT_AUTHORIZED": "You're not authorized to search book with ISBN, please log in."
-      },
+      },    b
       "TITLE": "Add books",
       "BUTTON_SEARCH": "Search",
       "BUTTON_CLEAR": "Clear",
@@ -70,6 +70,9 @@
         "AUTHOR": {
           "NAME": "<strong>Name: </strong>{{value}}",
           "ROLES": "<strong>Role(s): </strong>{{value}}"
+        },
+        "ACTION_ROW": {
+          "ADD": "Add"
         }
       }
     },

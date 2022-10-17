@@ -34,7 +34,6 @@ export class BookDetailsService {
   }
   clearBookToDisplay() {
     this._bookToDisplay.next(null);
-    console.log('clearBookToDisplay');
   }
   showDetails(bookDetailsEvent: BookDetailsEvent) {
     this.getBooksToDisplay(bookDetailsEvent);

@@ -19,7 +19,8 @@ export class ListFilterComponent implements OnInit {
     this.form = this.fb.group({
       globalTextCtrl: this.fb.control({value: '', disabled: true}),
       groupsCtrl: this.fb.control([]),
-      seriesCtrl: this.fb.control([])
+      seriesCtrl: this.fb.control([]),
+      tagsCtrl: this.fb.control([])
     });
   }
   ngOnInit() {
@@ -41,7 +42,8 @@ export class ListFilterComponent implements OnInit {
   clearFilters() {
     this.form.reset({
       groupsCtrl: [],
-      seriesCtrl: []
+      seriesCtrl: [],
+      tagsCtrl: []
     });
   }
 }

@@ -5,10 +5,12 @@ import {SortOrder} from '../../core/model/sort-order.enum';
 import {Utils} from '../../shared/utils';
 import {BookService} from './book.service';
 import {BookFilter} from '../../core/model/book-filter';
+import {Book} from '../../core/model/book';
 @Injectable({
   providedIn: 'root'
 })
 export class BookListService {
+  order: SortOrder.DESC | SortOrder.ASC;
   constructor(private bookService: BookService) {
     this.updateBookList();
     this.bookService.searchResult.subscribe(res => {
@@ -16,23 +18,22 @@ export class BookListService {
       this.updateFilteredBooks(this._searchResult.value);
     });
   }
-  get searchResult(): Observable<SeriesByGroupContainer> {
-    return this._searchResult.asObservable();
-  }
-  get filteredBooks(): Observable<SeriesByGroupContainer> {
-    return this._filteredBooks.asObservable();
-  }
-  get filteredGroupList(): Observable<string[]> {
-    return this._filteredGroupList.asObservable();
-  }
+  private _groupByEditors: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   get groupByEditors(): Observable<boolean> {
     return this._groupByEditors.asObservable();
   }
-  order: SortOrder.DESC | SortOrder.ASC;
-  private _groupByEditors: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private _searchResult: BehaviorSubject<SeriesByGroupContainer> = new BehaviorSubject<SeriesByGroupContainer>(null);
+  get searchResult(): Observable<SeriesByGroupContainer> {
+    return this._searchResult.asObservable();
+  }
   private _filteredBooks: BehaviorSubject<SeriesByGroupContainer> = new BehaviorSubject<SeriesByGroupContainer>({});
+  get filteredBooks(): Observable<SeriesByGroupContainer> {
+    return this._filteredBooks.asObservable();
+  }
   private _filteredGroupList: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  get filteredGroupList(): Observable<string[]> {
+    return this._filteredGroupList.asObservable();
+  }
   public updateBookList() {
     this.bookService.getAllBook();
   }

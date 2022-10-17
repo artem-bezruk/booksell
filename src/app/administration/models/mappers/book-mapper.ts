@@ -1,7 +1,7 @@
 import {BookSearch} from '../book-search';
 import {Book} from '../../../core/model/book';
 export class BookMapper {
-  static mapBook(bookSearch: BookSearch): Book {
+  static mapBook(bookSearch: BookSearch, bookType: string): Book {
     return {
       arkId: bookSearch.arkId,
       authors: bookSearch.authors,
@@ -14,6 +14,7 @@ export class BookMapper {
       tome: bookSearch.tome,
       year: bookSearch.year,
       status: 'UNREAD',
+      bookType
     };
   }
 }

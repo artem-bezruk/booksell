@@ -32,9 +32,9 @@ export class BookAdministrationService {
   clearResults() {
     this._searchResult.next(null);
   }
-  addBook(bookSearch: BookSearch) {
+  addBook(bookSearch: BookSearch, bookType: string) {
     this.coreService.updateLoadingState(true);
-    const o = this.http.post<Book>('/api/books/', BookMapper.mapBook(bookSearch)).pipe(shareReplay());
+    const o = this.http.post<Book>('/api/books/', BookMapper.mapBook(bookSearch, bookType)).pipe(shareReplay());
     o.subscribe(
       res => console.log('Books added', res),
       err => console.error('an error occured!', err),

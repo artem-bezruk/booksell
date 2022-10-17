@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {SharedModule} from '../shared/shared.module';
 import {FormsModule} from '@angular/forms';
 import {
+  MatCheckboxModule,
   MatChipsModule,
   MatExpansionModule,
   MatListModule, MatMenuModule,
@@ -29,8 +30,8 @@ import {SeriesDisplayComponent} from './components/series-display/series-display
 import {GroupDisplayComponent} from './components/group-display/group-display.component';
 import {BookDetailsComponent} from './components/book-details/book-details.component';
 import {ListFilterComponent} from './components/list-filter/list-filter.component';
-import { BookListActionBarComponent } from './components/book-list-action-bar/book-list-action-bar.component';
-import { AlphabeticalSeriesDisplayComponent } from './components/alphabetical-series-display/alphabetical-series-display.component';
+import {BookListActionBarComponent} from './components/book-list-action-bar/book-list-action-bar.component';
+import {AlphabeticalSeriesDisplayComponent} from './components/alphabetical-series-display/alphabetical-series-display.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -46,7 +47,8 @@ import { AlphabeticalSeriesDisplayComponent } from './components/alphabetical-se
     MatSelectModule,
     MatSidenavModule,
     MatSlideToggleModule,
-    MatMenuModule
+    MatMenuModule,
+    MatCheckboxModule
   ],
   declarations: [
     BookLayoutComponent,

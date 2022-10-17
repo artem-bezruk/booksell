@@ -5,17 +5,16 @@ import {shareReplay} from 'rxjs/operators';
 import {Book} from '../../core/model/book';
 import {SeriesByGroupContainer} from '../../core/model/series-by-group-container';
 import {CoreService} from '../../core/services/core.service';
-import {MatListOption} from '@angular/material';
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
-  get searchResult(): Observable<Book[]> {
-    return this._searchResult.asObservable();
-  }
   constructor(private http: HttpClient, private coreService: CoreService) {
   }
   private _searchResult: BehaviorSubject<Book[]> = new BehaviorSubject([]);
+  get searchResult(): Observable<Book[]> {
+    return this._searchResult.asObservable();
+  }
   private static createGroups(accumulator: SeriesByGroupContainer, group: string) {
     if (!accumulator[group]) {
       accumulator[group] = [];
@@ -32,10 +31,18 @@ export class BookService {
     return accumulator;
   }
   private static addBook(accumulator: SeriesByGroupContainer, b: Book, groupByEditor: boolean = false) {
-    const group = groupByEditor ? b.editor.name : b.series.name.charAt(0).toLocaleUpperCase();
-    accumulator = BookService.createGroups(accumulator, group);
-    accumulator = BookService.classSeriesByGroup(accumulator, b, group);
-    accumulator[group][b.series.name].books.push(b);
+    if (b.editor || b.series) {
+      const group = groupByEditor ? b.editor.name : b.series.name.charAt(0).toLocaleUpperCase();
+      accumulator = BookService.createGroups(accumulator, group);
+      accumulator = BookService.classSeriesByGroup(accumulator, b, group);
+      accumulator[group][b.series.name].books.push(b);
+    } else {
+      if (!b.editor) {
+        console.error('Error on book data [missing editor]', b);
+      } else if (!b.series) {
+        console.error('Error on book data [missing series]', b);
+      }
+    }
     return accumulator;
   }
   public groupBy(groupByEditor: boolean = false): SeriesByGroupContainer {

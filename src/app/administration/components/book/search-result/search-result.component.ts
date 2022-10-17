@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
 import {BookSearch} from '../../../models/book-search';
 import {BookAdministrationService} from '../../../services/book-administration.service';
 import {TranslateService} from '@ngx-translate/core';
@@ -23,7 +22,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     return bookSearch.series === null || bookSearch.series === '';
   }
   addBook(bookSearch: BookSearch) {
-    this.bookService.addBook(bookSearch).subscribe(res => {
+    this.bookService.addBook(bookSearch, 'Test').subscribe(res => {
       this.snackBar.open(
         this.translateService.instant('BOOK.ADD.SUCCESS', {isbn: res.isbn}),
         this.translateService.instant('SNACKBAR.ACTION.CLOSE'));
