@@ -14,7 +14,7 @@
       <mat-label *ngIf="groupByEditors | async">
         {{"BOOK.LIST.FILTER.EDITOR" | translate}}
       </mat-label>
-      <mat-label *ngIf="!(groupByEditors | async)">
+      <mat-label *ngIf="(groupByEditors | async) === false">
         {{"BOOK.LIST.FILTER.INITIAL" | translate}}
       </mat-label>
       <mat-select formControlName="groupsCtrl" multiple>

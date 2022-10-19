@@ -1,5 +1,5 @@
 <div style="padding-left: 1rem; padding-top: 1rem">
   <p>
-  Made by <a style="text-decoration: none; color: yellow" href="mailto:gestin.gweltaz@gmail.com">Lautre 🦇 </a> & Grim -- powered by Angular 8+ <a *ngIf="!(userConnected()|async)" style="cursor: pointer" (click)="openSignInModal()">[{{'FOOTER.SIGN_IN.LABEL' | translate}}]</a>
+  Made by <a style="text-decoration: none; color: yellow" href="mailto:gestin.gweltaz@gmail.com">Lautre 🦇 </a> & Grim -- powered by Angular 8+ <a *ngIf="(userConnected()|async) === false" style="cursor: pointer" (click)="openSignInModal()">[{{'FOOTER.SIGN_IN.LABEL' | translate}}]</a>
   </p>
 </div>

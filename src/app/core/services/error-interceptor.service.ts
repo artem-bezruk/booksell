@@ -17,7 +17,6 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(catchError(err => {
       if (err.status === 401) {
         this.handle401Error(request, next);
-        location.reload(true);
       } else {
         this.coreService.updateLoadingState(false);
         this.snackBar.open( this.translateService.instant('ERRORS.GENERIC'), this.translateService.instant('SNACKBAR.ACTION.CLOSE'));

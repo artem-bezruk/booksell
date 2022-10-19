@@ -9,5 +9,5 @@ export class Utils {
         strings.sort((one, two) => (one.toLocaleLowerCase() > two.toLocaleLowerCase() ? -1 : 1));
     }
     return strings;
-  };
+  }
 }
