@@ -15,6 +15,7 @@ export class BookService {
   get searchResult(): Observable<Book[]> {
     return this._searchResult.asObservable();
   }
+  private currentBookType: string;
   private static createGroups(accumulator: SeriesByGroupContainer, group: string) {
     if (!accumulator[group]) {
       accumulator[group] = [];
@@ -56,9 +57,13 @@ export class BookService {
     });
     return seriesByGroupContainer;
   }
-  getAllBook() {
+  getBookByType(bookType?: string) {
     this.coreService.updateLoadingState(true);
-    const o = this.http.get<Book[]>('/api/books/').pipe(shareReplay());
+    console.log(bookType);
+    if (bookType) {
+      this.currentBookType = bookType;
+    }
+    const o = this.http.get<Book[]>(`/api/books/type/${this.currentBookType}`).pipe(shareReplay());
     o.subscribe(
       res => this._searchResult.next(res),
       err => console.error('an error occured!', err),
@@ -69,7 +74,7 @@ export class BookService {
     this.coreService.updateLoadingState(true);
     const o = forkJoin(books.map(book => this.http.put<Book>('/api/books/' + book.id, book))).pipe(shareReplay());
     o.subscribe(
-      () => this.getAllBook(),
+      () => this.getBookByType(),
       err => console.error('an error occured!', err),
       () => this.coreService.updateLoadingState(false));
     return o;
@@ -78,7 +83,7 @@ export class BookService {
     this.coreService.updateLoadingState(true);
     const o = forkJoin(books.map(book => this.http.delete('/api/books/' + book.id))).pipe(shareReplay());
     o.subscribe(
-      () => this.getAllBook(),
+      () => this.getBookByType(),
       err => console.error('an error occured!', err),
       () => this.coreService.updateLoadingState(false));
     return o;

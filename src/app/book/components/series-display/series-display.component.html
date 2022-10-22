@@ -47,7 +47,7 @@
   </mat-action-row>
   <mat-selection-list dense class="series-books" #list>
     <div *ngFor="let book of seriesData.books; let i = index" fxLayoutAlign="space-between center">
-      <mat-list-option  style="margin-right: -140px;" [ngClass]="{'hide-checkbox': (userConnected()|async) === false}" checkboxPosition="before" [value]="book">
+      <mat-list-option  style="margin-right: -140px;" [ngClass]="{'hide-checkbox': (userConnected()|async) === null}" checkboxPosition="before" [value]="book">
         <div fxFlex="100">
           <fa-icon *ngIf="book.status === 'UNREAD'" [icon]="['fas', 'book']" style="padding-right: 10px"></fa-icon>
           <fa-icon *ngIf="book.status === 'READING'" [icon]="['fas', 'book-reader']" style="padding-right: 10px"></fa-icon>

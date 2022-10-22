@@ -5,7 +5,7 @@ import {BookListComponent} from './components/book-list/book-list.component';
 const booksRoutes: Routes = [
   {
     path: 'book', component: BookLayoutComponent, children: [
-      {path: '', component: BookListComponent}
+      {path: ':bookType', component: BookListComponent}
     ]
   },
 ];

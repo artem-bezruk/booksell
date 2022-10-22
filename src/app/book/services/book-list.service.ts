@@ -5,17 +5,22 @@ import {SortOrder} from '../../core/model/sort-order.enum';
 import {Utils} from '../../shared/utils';
 import {BookService} from './book.service';
 import {BookFilter} from '../../core/model/book-filter';
-import {Book} from '../../core/model/book';
+import {BookTypeService} from '../../core/services/book-type.service';
 @Injectable({
   providedIn: 'root'
 })
 export class BookListService {
   order: SortOrder.DESC | SortOrder.ASC;
-  constructor(private bookService: BookService) {
-    this.updateBookList();
-    this.bookService.searchResult.subscribe(res => {
-      this._searchResult.next(this.bookService.groupBy(this._groupByEditors.value));
-      this.updateFilteredBooks(this._searchResult.value);
+  constructor(private bookService: BookService, private bookTypeService: BookTypeService) {
+    this.bookTypeService.getAllBookType();
+    this.bookTypeService.bookTypes.subscribe(types => {
+      if (types.length > 0) {
+        this.updateBookList(types[0].name);
+        this.bookService.searchResult.subscribe(res => {
+          this._searchResult.next(this.bookService.groupBy(this._groupByEditors.value));
+          this.updateFilteredBooks(this._searchResult.value);
+        });
+      }
     });
   }
   private _groupByEditors: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -34,8 +39,9 @@ export class BookListService {
   get filteredGroupList(): Observable<string[]> {
     return this._filteredGroupList.asObservable();
   }
-  public updateBookList() {
-    this.bookService.getAllBook();
+  public updateBookList(bookType?: string) {
+    console.log(bookType)
+    this.bookService.getBookByType(bookType);
   }
   changeSortOrder() {
     this.order = this.order === SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC;

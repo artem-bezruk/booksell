@@ -6,6 +6,9 @@ import {shareReplay} from 'rxjs/operators';
 import {Book} from '../../core/model/book';
 import {BookMapper} from '../models/mappers/book-mapper';
 import {CoreService} from '../../core/services/core.service';
+import {BookService} from '../../book/services/book.service';
+import {BookType} from '../../core/model/bookType';
+import {BookTypeService} from '../../core/services/book-type.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +17,7 @@ export class BookAdministrationService {
   get searchResult(): Observable<BookSearch> {
     return this._searchResult.asObservable();
   }
-  constructor(private http: HttpClient, private coreService: CoreService) {
+  constructor(private http: HttpClient, private coreService: CoreService, private bookTypeService: BookTypeService) {
   }
   searchBooks(isbn): Observable<BookSearch> {
     this.coreService.updateLoadingState(true);
@@ -38,7 +41,10 @@ export class BookAdministrationService {
     o.subscribe(
       res => console.log('Books added', res),
       err => console.error('an error occured!', err),
-      () => this.coreService.updateLoadingState(false));
+      () => {
+        this.bookTypeService.getAllBookType();
+        this.coreService.updateLoadingState(false);
+      });
     return o;
   }
 }

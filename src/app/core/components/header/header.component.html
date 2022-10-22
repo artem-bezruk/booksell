@@ -1,10 +1,15 @@
 <mat-toolbar class="app-toolbar" color="default" [fxLayout]="'row'" [fxLayoutAlign]="'space-between center'">
   <div>
-    <span *ngIf="(userConnected()|async) === false else adminTitle">{{'HEADER.APP_TITLE' | translate}}</span>
+    <span *ngIf="(userConnected()|async) === null else adminTitle">{{'HEADER.APP_TITLE' | translate}}</span>
     <ng-template #adminTitle>
       <span>{{'HEADER.APP_TITLE_ADMIN' | translate}}</span>
     </ng-template>
-    <button [fxFlexOffset]="'20px'" routerLink="/" mat-button>{{'HEADER.BOOK.LIST' | translate}}</button>
+    <button [disabled]="(bookTypes|async).length <= 0" mat-button [fxFlexOffset]="'20px'" [matMenuTriggerFor]="menu">{{'HEADER.BOOK.LIST' | translate}}</button>
+    <mat-menu #menu="matMenu">
+      <button [routerLink]="['/', 'book', bookType.name]" *ngFor="let bookType of (bookTypes | async)" mat-menu-item>
+        {{bookType.name}} ({{bookType.nbBooks}})
+      </button>
+    </mat-menu>
   </div>
   <div>
     <div *ngIf="userConnected()|async">
