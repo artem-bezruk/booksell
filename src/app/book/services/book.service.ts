@@ -5,11 +5,12 @@ import {shareReplay} from 'rxjs/operators';
 import {Book} from '../../core/model/book';
 import {SeriesByGroupContainer} from '../../core/model/series-by-group-container';
 import {CoreService} from '../../core/services/core.service';
+import {Router} from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
-  constructor(private http: HttpClient, private coreService: CoreService) {
+  constructor(private http: HttpClient, private coreService: CoreService, private router: Router) {
   }
   private _searchResult: BehaviorSubject<Book[]> = new BehaviorSubject([]);
   get searchResult(): Observable<Book[]> {

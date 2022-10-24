@@ -4,8 +4,11 @@
     "APP_TITLE_ADMIN": "Library administration",
     "HOME": "Home",
     "BOOK": {
-      "LIST": "LIST",
-      "ADD": "ADD"
+      "LIST": {
+        "TITLE": "Book" ,
+        "HOME": "Home"
+      },
+      "ADD": "Add"
     },
     "SERIES": {
       "EDITION": "Series edition"

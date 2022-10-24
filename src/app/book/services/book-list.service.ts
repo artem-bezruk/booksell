@@ -11,16 +11,10 @@ import {BookTypeService} from '../../core/services/book-type.service';
 })
 export class BookListService {
   order: SortOrder.DESC | SortOrder.ASC;
-  constructor(private bookService: BookService, private bookTypeService: BookTypeService) {
-    this.bookTypeService.getAllBookType();
-    this.bookTypeService.bookTypes.subscribe(types => {
-      if (types.length > 0) {
-        this.updateBookList(types[0].name);
-        this.bookService.searchResult.subscribe(res => {
-          this._searchResult.next(this.bookService.groupBy(this._groupByEditors.value));
-          this.updateFilteredBooks(this._searchResult.value);
-        });
-      }
+  constructor(private bookService: BookService) {
+    this.bookService.searchResult.subscribe(res => {
+      this._searchResult.next(this.bookService.groupBy(this._groupByEditors.value));
+      this.updateFilteredBooks(this._searchResult.value);
     });
   }
   private _groupByEditors: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -40,7 +34,6 @@ export class BookListService {
     return this._filteredGroupList.asObservable();
   }
   public updateBookList(bookType?: string) {
-    console.log(bookType)
     this.bookService.getBookByType(bookType);
   }
   changeSortOrder() {

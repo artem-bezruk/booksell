@@ -4,7 +4,10 @@
     "APP_TITLE_ADMIN": "Administration de la Bibliothèque",
     "HOME": "Accueil",
     "BOOK": {
-      "LIST": "Livres",
+      "LIST": {
+        "TITLE": "Livres" ,
+        "HOME": "Accueil"
+      },
       "ADD": "Ajout de livres"
     },
     "SERIES": {

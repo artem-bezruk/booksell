@@ -32,6 +32,7 @@ import {BookDetailsComponent} from './components/book-details/book-details.compo
 import {ListFilterComponent} from './components/list-filter/list-filter.component';
 import {BookListActionBarComponent} from './components/book-list-action-bar/book-list-action-bar.component';
 import {AlphabeticalSeriesDisplayComponent} from './components/alphabetical-series-display/alphabetical-series-display.component';
+import { BookDashboardComponent } from './components/book-dashboard/book-dashboard.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -58,7 +59,8 @@ import {AlphabeticalSeriesDisplayComponent} from './components/alphabetical-seri
     BookDetailsComponent,
     ListFilterComponent,
     BookListActionBarComponent,
-    AlphabeticalSeriesDisplayComponent]
+    AlphabeticalSeriesDisplayComponent,
+    BookDashboardComponent]
 })
 export class BookModule {
   constructor() {

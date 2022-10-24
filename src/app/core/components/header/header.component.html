@@ -4,9 +4,12 @@
     <ng-template #adminTitle>
       <span>{{'HEADER.APP_TITLE_ADMIN' | translate}}</span>
     </ng-template>
-    <button [disabled]="(bookTypes|async).length <= 0" mat-button [fxFlexOffset]="'20px'" [matMenuTriggerFor]="menu">{{'HEADER.BOOK.LIST' | translate}}</button>
+    <button mat-button [fxFlexOffset]="'20px'" [matMenuTriggerFor]="menu">{{'HEADER.BOOK.LIST.TITLE' | translate}}</button>
     <mat-menu #menu="matMenu">
-      <button [routerLink]="['/', 'book', bookType.name]" *ngFor="let bookType of (bookTypes | async)" mat-menu-item>
+      <button [routerLink]="['/', 'book']" mat-menu-item>
+        <span>{{'HEADER.BOOK.LIST.HOME' | translate}}</span>
+      </button>
+      <button [routerLink]="['/', 'book', bookType.name]" [disabled]="bookType.nbBooks <= 0" *ngFor="let bookType of (bookTypes | async)" mat-menu-item>
         {{bookType.name}} ({{bookType.nbBooks}})
       </button>
     </mat-menu>

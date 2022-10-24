@@ -21,13 +21,13 @@ export class BookListComponent implements OnInit {
               private coreService: CoreService,
               private route: ActivatedRoute,
               private router: Router) {
-  }
-  ngOnInit() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.bookListService.updateBookList(this.route.snapshot.paramMap.get('bookType'));
       }
     });
+  }
+  ngOnInit() {
     this.isLoading = this.coreService.isLoading;
     this.filteredGroupList = this.bookListService.filteredGroupList;
     this.filteredBooks = this.bookListService.filteredBooks;
