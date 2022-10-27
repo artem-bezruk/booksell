@@ -60,7 +60,6 @@ export class BookService {
   }
   getBookByType(bookType?: string) {
     this.coreService.updateLoadingState(true);
-    console.log(bookType);
     if (bookType) {
       this.currentBookType = bookType;
     }
