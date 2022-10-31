@@ -9,11 +9,18 @@ import {MatSnackBar} from '@angular/material';
   styleUrls: ['./search-result.component.css']
 })
 export class SearchResultComponent implements OnInit, OnDestroy {
-  searchResult: BookSearch;
+  searchResult: BookSearch = {
+    editor: 'N/A',
+    title: 'N/A'
+  };
   constructor(private bookService: BookAdministrationService, private translateService: TranslateService, private snackBar: MatSnackBar) {
   }
   ngOnInit() {
-     this.bookService.searchResult.subscribe(next => this.searchResult = next);
+    this.bookService.searchResult.subscribe(next => {
+      if (next !== null) {
+        this.searchResult = next;
+      }
+    });
   }
   ngOnDestroy(): void {
     this.bookService.clearResults();

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
 import {SeriesInfo} from '../../../core/model/series-by-group-container';
 import {Book} from '../../../core/model/book';
-import {MatAccordion, MatExpansionPanel, MatListOption, MatSelectionListChange} from '@angular/material';
+import {MatExpansionPanel, MatListOption} from '@angular/material';
 import {BookDetailsEvent} from '../../models/book-details-event';
 import {AuthService} from '../../../auth/services/auth.service';
 import {BookService} from '../../services/book.service';
@@ -19,7 +19,8 @@ export class SeriesDisplayComponent implements OnInit {
   seriesData: SeriesInfo;
   @Output()
   showBookDetails: EventEmitter<BookDetailsEvent> = new EventEmitter<BookDetailsEvent>();
-  constructor(private authService: AuthService, private bookService: BookService) { }
+  constructor(private authService: AuthService, private bookService: BookService) {
+  }
   ngOnInit() {
   }
   getReadedBooksCount() {
@@ -38,13 +39,13 @@ export class SeriesDisplayComponent implements OnInit {
     return this.authService.currentUser;
   }
   changeBookState(selected: MatListOption[], newState: 'UNREAD' | 'READING' | 'READ') {
-    this.bookService.bulkUpdate(selected.map( matOption => {
+    this.bookService.bulkUpdate(selected.map(matOption => {
       const book: Book = Object.assign({}, matOption.value);
       book.status = newState;
       return book;
     }));
   }
   deleteSelectedBooks(selected: MatListOption[]) {
-    this.bookService.bulkDelete(selected.map( matOption => matOption.value));
+    this.bookService.bulkDelete(selected.map(matOption => matOption.value));
   }
 }

@@ -5,12 +5,11 @@ import {SortOrder} from '../../core/model/sort-order.enum';
 import {Utils} from '../../shared/utils';
 import {BookService} from './book.service';
 import {BookFilter} from '../../core/model/book-filter';
-import {BookTypeService} from '../../core/services/book-type.service';
 @Injectable({
   providedIn: 'root'
 })
 export class BookListService {
-  order: SortOrder.DESC | SortOrder.ASC;
+  order: SortOrder.DESC | SortOrder.ASC = SortOrder.ASC;
   constructor(private bookService: BookService) {
     this.bookService.searchResult.subscribe(res => {
       this._searchResult.next(this.bookService.groupBy(this._groupByEditors.value));
@@ -21,8 +20,8 @@ export class BookListService {
   get groupByEditors(): Observable<boolean> {
     return this._groupByEditors.asObservable();
   }
-  private _searchResult: BehaviorSubject<SeriesByGroupContainer> = new BehaviorSubject<SeriesByGroupContainer>(null);
-  get searchResult(): Observable<SeriesByGroupContainer> {
+  private _searchResult: BehaviorSubject<SeriesByGroupContainer | null> = new BehaviorSubject<SeriesByGroupContainer | null>(null);
+  get searchResult(): Observable<SeriesByGroupContainer | null> {
     return this._searchResult.asObservable();
   }
   private _filteredBooks: BehaviorSubject<SeriesByGroupContainer> = new BehaviorSubject<SeriesByGroupContainer>({});
@@ -33,8 +32,10 @@ export class BookListService {
   get filteredGroupList(): Observable<string[]> {
     return this._filteredGroupList.asObservable();
   }
-  public updateBookList(bookType?: string) {
-    this.bookService.getBookByType(bookType);
+  public updateBookList(bookType?: string | null) {
+    if (bookType !== null) {
+      this.bookService.getBookByType(bookType);
+    }
   }
   changeSortOrder() {
     this.order = this.order === SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC;
@@ -48,14 +49,18 @@ export class BookListService {
   }
   filter(filters: BookFilter) {
     const tmpGroup = Object.assign({}, this._searchResult.value);
-    if (filters.group.length > 0) {
+    if (filters.group && filters.group.length > 0) {
       this.removeKey(tmpGroup, filters.group);
     }
-    if (filters.series.length > 0) {
+    if (filters.series && filters.series.length > 0) {
       Object.keys(tmpGroup).forEach(group => {
         const tmpSeries = Object.assign({}, tmpGroup[group]);
         Object.keys(tmpSeries)
-          .filter(series => !filters.series.includes(series))
+          .filter(series => {
+            if (filters.series) {
+              return !filters.series.includes(series);
+            }
+          })
           .forEach(series => delete tmpSeries[series]);
         if (Object.keys(tmpSeries).length === 0) {
           delete tmpGroup[group];
@@ -66,7 +71,7 @@ export class BookListService {
     }
     this.updateFilteredBooks(tmpGroup);
   }
-  private updateFilteredBooks(seriesByEditorContainer: SeriesByGroupContainer) {
+  private updateFilteredBooks(seriesByEditorContainer: SeriesByGroupContainer | null) {
     if (seriesByEditorContainer !== null) {
       this._filteredBooks.next(seriesByEditorContainer);
       this._filteredGroupList.next(Utils.orderStringList(Object.keys(seriesByEditorContainer), this.order));

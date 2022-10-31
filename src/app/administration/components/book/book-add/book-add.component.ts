@@ -8,11 +8,10 @@ import {CoreService} from '../../../../core/services/core.service';
   styleUrls: ['./book-add.component.css']
 })
 export class BookAddComponent implements OnInit {
-  hasResult: boolean;
-  isLoading: Observable<boolean>;
+  hasResult = false;
+  isLoading: Observable<boolean> = this.coreService.isLoading;
   constructor(private bookService: BookAdministrationService, private coreService: CoreService) { }
   ngOnInit() {
     this.bookService.searchResult.subscribe(next => this.hasResult = next !== null);
-    this.isLoading = this.coreService.isLoading;
   }
 }

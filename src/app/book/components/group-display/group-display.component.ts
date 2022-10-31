@@ -15,7 +15,7 @@ export class GroupDisplayComponent implements OnInit {
   @ViewChild(MatAccordion, {static: false}) accordion: MatAccordion;
   @ViewChildren(SeriesDisplayComponent) series: SeriesDisplayComponent[] = [];
   @Input()
-  editor: string;
+  editor: string | null = null;
   @Output()
   showBookDetails: EventEmitter<BookDetailsEvent> = new EventEmitter<BookDetailsEvent>();
   constructor() {

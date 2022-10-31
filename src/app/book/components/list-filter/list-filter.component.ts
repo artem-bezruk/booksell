@@ -10,23 +10,24 @@ import {Observable} from 'rxjs';
   styleUrls: ['./list-filter.component.css']
 })
 export class ListFilterComponent implements OnInit {
-  form: FormGroup;
-  data: SeriesByGroupContainer;
-  groups: string[];
+  form: FormGroup = this.fb.group({
+    globalTextCtrl: this.fb.control({value: '', disabled: true}),
+    groupsCtrl: this.fb.control([]),
+    seriesCtrl: this.fb.control([]),
+    tagsCtrl: this.fb.control([])
+  });
+  data: SeriesByGroupContainer = {};
+  groups: string[] = [];
   groupByEditors: Observable<boolean>;
   constructor(private fb: FormBuilder, private bookListService: BookListService) {
     this.groupByEditors = this.bookListService.groupByEditors;
-    this.form = this.fb.group({
-      globalTextCtrl: this.fb.control({value: '', disabled: true}),
-      groupsCtrl: this.fb.control([]),
-      seriesCtrl: this.fb.control([]),
-      tagsCtrl: this.fb.control([])
-    });
   }
   ngOnInit() {
     this.bookListService.searchResult.subscribe(data => {
-      this.data = data;
-      this.groups = Utils.orderStringList(Object.keys(data), this.bookListService.order);
+      if (data !== null) {
+        this.data = data;
+        this.groups = Utils.orderStringList(Object.keys(data), this.bookListService.order);
+      }
     });
     this.form.valueChanges.subscribe(() =>
       this.bookListService.filter({

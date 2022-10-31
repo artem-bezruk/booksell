@@ -8,7 +8,7 @@ import {BookType} from '../model/bookType';
   providedIn: 'root'
 })
 export class BookTypeService {
-  private _bookTypes: BehaviorSubject<BookType[]> = new BehaviorSubject([]);
+  private _bookTypes: BehaviorSubject<BookType[]> = new BehaviorSubject<BookType[]>([]);
   get bookTypes(): Observable<BookType[]> {
     return this._bookTypes.asObservable();
   }

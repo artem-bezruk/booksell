@@ -10,11 +10,10 @@ import {Observable} from 'rxjs';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  bookTypes: Observable<BookType[]>;
+  bookTypes: Observable<BookType[]> = this.bookTypeService.bookTypes;
   constructor(private authService: AuthService, private router: Router, private bookTypeService: BookTypeService) {
   }
   ngOnInit(): void {
-    this.bookTypes = this.bookTypeService.bookTypes;
     this.bookTypeService.getAllBookType();
   }
   userConnected() {

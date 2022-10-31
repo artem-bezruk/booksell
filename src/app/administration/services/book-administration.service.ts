@@ -6,20 +6,18 @@ import {shareReplay} from 'rxjs/operators';
 import {Book} from '../../core/model/book';
 import {BookMapper} from '../models/mappers/book-mapper';
 import {CoreService} from '../../core/services/core.service';
-import {BookService} from '../../book/services/book.service';
-import {BookType} from '../../core/model/bookType';
 import {BookTypeService} from '../../core/services/book-type.service';
 @Injectable({
   providedIn: 'root'
 })
 export class BookAdministrationService {
-  private _searchResult: BehaviorSubject<BookSearch> = new BehaviorSubject(null);
-  get searchResult(): Observable<BookSearch> {
+  private _searchResult: BehaviorSubject<BookSearch | null> = new BehaviorSubject<BookSearch | null>(null);
+  get searchResult(): Observable<BookSearch | null> {
     return this._searchResult.asObservable();
   }
   constructor(private http: HttpClient, private coreService: CoreService, private bookTypeService: BookTypeService) {
   }
-  searchBooks(isbn): Observable<BookSearch> {
+  searchBooks(isbn: string): Observable<BookSearch> {
     this.coreService.updateLoadingState(true);
     const params = new HttpParams().append('isbn', isbn);
     const o = this.http.get<BookSearch>('/api/search/books/findByISBN', {params}).pipe(shareReplay());

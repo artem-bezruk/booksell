@@ -5,8 +5,8 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./loader-img.component.css']
 })
 export class LoaderImgComponent implements OnInit {
-  @Input() img: {src: string, alt: string};
-  @Input() imgContainerClass: string;
+  @Input() img: {src: string, alt: string} | null = null;
+  @Input() imgContainerClass: string | null = null;
   public loading = true;
   onLoad() {
     this.loading = false;

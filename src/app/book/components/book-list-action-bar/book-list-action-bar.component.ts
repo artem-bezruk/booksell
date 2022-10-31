@@ -10,11 +10,10 @@ import {Observable} from 'rxjs';
 export class BookListActionBarComponent implements OnInit {
   @Output()
   private filter: EventEmitter<void> = new EventEmitter();
-  public isGroupedByEditors: Observable<boolean>;
+  public isGroupedByEditors: Observable<boolean> = this.bookListService.groupByEditors;
   constructor(private bookListService: BookListService) {
   }
   ngOnInit() {
-    this.isGroupedByEditors = this.bookListService.groupByEditors;
   }
   filterAction() {
     this.filter.emit();

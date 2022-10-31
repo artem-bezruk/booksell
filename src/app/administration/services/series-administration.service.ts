@@ -8,12 +8,12 @@ import {CoreService} from '../../core/services/core.service';
   providedIn: 'root'
 })
 export class SeriesAdministrationService {
-  private _seriesList: BehaviorSubject<Series[]> = new BehaviorSubject(null);
-  private filterStr: string = null;
+  private _seriesList: BehaviorSubject<Series[]> = new BehaviorSubject<Series[]>([]);
+  private filterStr: string | null = null;
   get seriesList(): Observable<Series[]> {
     return this._seriesList.asObservable();
   }
-  private _seriesListFiltered: BehaviorSubject<Series[]> = new BehaviorSubject(null);
+  private _seriesListFiltered: BehaviorSubject<Series[]> = new BehaviorSubject<Series[]>([]);
   get seriesListFiltered(): Observable<Series[]> {
     return this._seriesListFiltered.asObservable();
   }
@@ -33,8 +33,15 @@ export class SeriesAdministrationService {
     const o = this.http.get<Series[]>('/api/series/').pipe(shareReplay());
     o.subscribe(
       res => {
-        this._seriesList.next(res.sort((one, two) => (one.name.toLocaleLowerCase() < two.name.toLocaleLowerCase() ? -1 : 1)));
-        this.filter(this.filterStr);
+        this._seriesList.next(res.sort((one: Series, two: Series) => {
+          if (one && one.name && two && two.name) {
+            return (one.name.toLocaleLowerCase() < two.name.toLocaleLowerCase() ? -1 : 1);
+          }
+          return 0;
+        }));
+        if (this.filterStr !== null) {
+          this.filter(this.filterStr);
+        }
       },
       err => console.error('an error occured!', err),
       () => this.coreService.updateLoadingState(false));
@@ -44,7 +51,13 @@ export class SeriesAdministrationService {
     this.filterStr = filterStr;
     if (filterStr && filterStr !== '') {
       this._seriesListFiltered.next(this._seriesList.value
-        .filter(series => series.name.toLocaleLowerCase().includes(filterStr.toLocaleLowerCase())));
+        .filter((series: Series) => {
+            if (series.name) {
+              return series.name.toLocaleLowerCase().includes(filterStr.toLocaleLowerCase());
+            }
+            return false;
+          }
+        ));
     } else {
       this._seriesListFiltered.next(this._seriesList.value);
     }

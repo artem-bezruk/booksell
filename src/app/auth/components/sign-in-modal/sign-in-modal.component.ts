@@ -8,8 +8,11 @@ import {TranslateService} from '@ngx-translate/core';
   templateUrl: './sign-in-modal.component.html',
 })
 export class SignInModalComponent implements OnInit {
-  form: FormGroup;
-  error: string;
+  form: FormGroup = this.fb.group({
+    email: this.fb.control('', [Validators.required, Validators.email]),
+    password: this.fb.control('', Validators.required)
+  });
+  error: string | null = null;
   constructor(public snackBar: MatSnackBar,
               private fb: FormBuilder,
               private authService: AuthService,
@@ -17,10 +20,6 @@ export class SignInModalComponent implements OnInit {
               private translateService: TranslateService) {
   }
   ngOnInit(): void {
-    this.form = this.fb.group({
-      email: this.fb.control('', [Validators.required, Validators.email]),
-      password: this.fb.control('', Validators.required)
-    });
   }
   @HostListener('keydown.esc')
   public onEsc(): void {
@@ -34,7 +33,7 @@ export class SignInModalComponent implements OnInit {
       }, err => {
         let message;
         if (err.status === 400) {
-          message = this.translateService.instant('SIGN_IN.ERRORS.BAD_REQUEST'  );
+          message = this.translateService.instant('SIGN_IN.ERRORS.BAD_REQUEST');
         } else {
           message = this.translateService.instant('ERRORS.GENERIC');
         }

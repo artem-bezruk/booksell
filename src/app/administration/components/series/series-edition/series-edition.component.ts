@@ -10,15 +10,14 @@ import {CoreService} from '../../../../core/services/core.service';
   styleUrls: ['./series-edition.component.css']
 })
 export class SeriesEditionComponent implements OnInit {
-  hasResult: boolean;
-  isLoading: Observable<boolean>;
+  hasResult = false;
+  isLoading: Observable<boolean> = this.coreService.isLoading;
   constructor(private seriesService: SeriesAdministrationService, private coreService: CoreService) { }
   ngOnInit() {
     this.seriesService.seriesList.subscribe(next => this.hasResult = next !== null);
     this.seriesService.getAllSeries();
-    this.isLoading = this.coreService.isLoading;
   }
-  onFilter($event) {
+  onFilter($event: string) {
     this.seriesService.filter($event);
   }
 }

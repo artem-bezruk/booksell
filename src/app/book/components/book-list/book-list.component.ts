@@ -13,9 +13,9 @@ import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
   styleUrls: ['./book-list.component.scss']
 })
 export class BookListComponent implements OnInit {
-  isLoading: Observable<boolean>;
-  filteredBooks: Observable<SeriesByGroupContainer>;
-  filteredGroupList: Observable<string[]>;
+  isLoading: Observable<boolean> = this.coreService.isLoading;;
+  filteredBooks: Observable<SeriesByGroupContainer> = this.bookListService.filteredBooks;
+  filteredGroupList: Observable<string[]> = this.bookListService.filteredGroupList;
   displayDetails = false;
   constructor(private bookService: BookService, private bookListService: BookListService, private bookDetailsService: BookDetailsService,
               private coreService: CoreService,
@@ -28,12 +28,9 @@ export class BookListComponent implements OnInit {
     });
   }
   ngOnInit() {
-    this.isLoading = this.coreService.isLoading;
-    this.filteredGroupList = this.bookListService.filteredGroupList;
-    this.filteredBooks = this.bookListService.filteredBooks;
     this.bookDetailsService.bookToDisplay.subscribe(res => this.displayDetails = res !== null);
   }
-  showDetails(bookDetailsEvent: BookDetailsEvent, group: string = null) {
+  showDetails(bookDetailsEvent: BookDetailsEvent, group: string | null = null) {
     if (group !== null) {
       bookDetailsEvent.group = group;
     }

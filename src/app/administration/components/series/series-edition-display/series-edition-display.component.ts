@@ -8,17 +8,16 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class SeriesEditionDisplayComponent implements OnInit {
   @Input()
-  series: Series;
+  series: Series = {};
   @Output()
   updateSeries: EventEmitter<Series> = new EventEmitter<Series>();
-  form: FormGroup;
+  form: FormGroup = this.fb.group({
+    name: this.fb.control(''),
+    seriesBookCount: this.fb.control('', Validators.min(1)),
+  });
   constructor(private fb: FormBuilder) {
   }
   ngOnInit() {
-    this.form = this.fb.group({
-      name: this.fb.control(''),
-      seriesBookCount: this.fb.control('', Validators.min(1)),
-    });
     this.initForm();
   }
   submit(): void {

@@ -8,15 +8,14 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 export class SeriesListFilterComponent implements OnInit {
   @Output()
   private filter: EventEmitter<string> = new EventEmitter<string>();
-  form: FormGroup;
+  form: FormGroup = this.fb.group({
+    filter: this.fb.control('')
+  });
   constructor(private fb: FormBuilder) {
   }
   ngOnInit() {
-    this.form = this.fb.group({
-      filter: this.fb.control('')
-    });
   }
-  updateFilter($event): void {
+  updateFilter($event: string): void {
     this.filter.emit($event);
   }
 }

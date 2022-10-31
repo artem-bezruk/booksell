@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BookAdministrationService} from '../../../services/book-administration.service';
 import {MatSnackBar} from '@angular/material';
 import {TranslateService} from '@ngx-translate/core';
@@ -9,18 +9,17 @@ import {TranslateService} from '@ngx-translate/core';
   styleUrls: ['./isbn-search.component.css']
 })
 export class IsbnSearchComponent implements OnInit {
-  public formAddBook: FormGroup;
+  public formAddBook: FormGroup = this.fb.group({
+    isbnCtrl: this.fb.control('', [
+      Validators.required,
+      Validators.pattern(/^(?:[\d]{10}|[\d]{13})$/)])
+  });
   constructor(private fb: FormBuilder,
               private snackBar: MatSnackBar,
               private bookService: BookAdministrationService,
               private translateService: TranslateService) {
   }
   ngOnInit() {
-    this.formAddBook = this.fb.group({
-      isbnCtrl: this.fb.control('', [
-        Validators.required,
-        Validators.pattern(/^(?:[\d]{10}|[\d]{13})$/)])
-    });
   }
   onSubmit() {
     const isbn = this.formAddBook.value.isbnCtrl;

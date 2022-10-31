@@ -1,5 +1,5 @@
-export class BookDetailsEvent {
+export interface BookDetailsEvent {
   bookIndex: number;
-  series?: string = null;
-  group?: string = null;
+  series?: string;
+  group?: string;
 }

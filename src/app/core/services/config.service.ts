@@ -5,7 +5,7 @@ import {BehaviorSubject} from 'rxjs';
   providedIn: 'root'
 })
 export class ConfigService {
-  private _appConfig = new BehaviorSubject<AppConfig>(null);
+  private _appConfig = new BehaviorSubject<AppConfig | null>(null);
   get appConfig() {
     return this._appConfig.asObservable();
   }
