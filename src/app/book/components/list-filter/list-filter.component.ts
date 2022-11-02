@@ -29,16 +29,24 @@ export class ListFilterComponent implements OnInit {
         this.groups = Utils.orderStringList(Object.keys(data), this.bookListService.order);
       }
     });
-    this.form.valueChanges.subscribe(() =>
-      this.bookListService.filter({
-        group: this.form.get('groupsCtrl').value,
-        series: this.form.get('seriesCtrl').value
-      })
-    );
+    this.form.valueChanges.subscribe(() => {
+      const groupsCtrl = this.form.get('groupsCtrl');
+      const seriesCtrl = this.form.get('seriesCtrl');
+      if (groupsCtrl && seriesCtrl) {
+        this.bookListService.filter({
+          group: groupsCtrl.value,
+          series: seriesCtrl.value
+        });
+      }
+    });
   }
-  displayGroup(group: string) {
-    const groupSelected: string[] = this.form.get('groupsCtrl').value;
-    return groupSelected.length === 0 || groupSelected.includes(group);
+  displayGroup(group: string): boolean {
+    const groupsCtrl = this.form.get('groupsCtrl');
+    if (groupsCtrl) {
+      const groupSelected: string[] = groupsCtrl.value;
+      return groupSelected.length === 0 || groupSelected.includes(group);
+    }
+    return false;
   }
   clearFilters() {
     this.form.reset({

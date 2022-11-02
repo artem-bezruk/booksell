@@ -12,7 +12,7 @@ import {BookDetailsEvent} from '../../models/book-details-event';
   styleUrls: ['./group-display.component.css']
 })
 export class GroupDisplayComponent implements OnInit {
-  @ViewChild(MatAccordion, {static: false}) accordion: MatAccordion;
+  @ViewChild(MatAccordion, {static: false}) accordion!: MatAccordion;
   @ViewChildren(SeriesDisplayComponent) series: SeriesDisplayComponent[] = [];
   @Input()
   editor: string | null = null;

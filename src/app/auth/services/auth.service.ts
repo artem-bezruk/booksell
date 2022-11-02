@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import {shareReplay, tap} from 'rxjs/operators';
 import {ConfigService} from '../../core/services/config.service';
 import {AppConfig, OAuthConfig} from '../../core/model/appConfig';
@@ -17,7 +17,7 @@ export class AuthService {
               private http: HttpClient,
               private cookieService: CookieService,
               private configService: ConfigService) {
-    this.configService.appConfig.subscribe((appConfig: AppConfig) => this.oauthConfig = appConfig ? appConfig.oauth : null);
+    this.configService.appConfig.subscribe((appConfig: AppConfig | null) => this.oauthConfig = appConfig ? appConfig.oauth : null);
     this._currentUser = new BehaviorSubject<User | null>(JSON.parse(localStorage.getItem(AuthService.USER_LOCAL_STORAGE_NAME) || ''));
   }
   private _currentUser: BehaviorSubject<User | null>;
@@ -55,7 +55,7 @@ export class AuthService {
     this._currentUser.next(null);
     this.router.navigate(['/']);
   }
-  refreshToken() {
+  refreshToken(): Observable<any> {
     if (this._currentUser.value !== null && this._currentUser.value.tokens) {
       const email = this._currentUser.value.email;
       return this.http.post('/auth/oauth/token/refresh', {
@@ -64,5 +64,6 @@ export class AuthService {
         this._currentUser.next({email, tokens: {access: tokens.access_token, refresh: tokens.refresh_token}});
       }));
     }
+    return of({});
   }
 }

@@ -8,7 +8,7 @@ import {BookDetailsService} from '../../services/book-details.service';
   styleUrls: ['./book-details.component.css']
 })
 export class BookDetailsComponent implements OnInit {
-  bookEvent: { book: Book, asNext: BookDetailsEvent, asPrevious: BookDetailsEvent } | null = null;
+  bookEvent: { book: Book | null, asNext: BookDetailsEvent | null, asPrevious: BookDetailsEvent | null } | null = null;
   public displayImg = false;
   constructor(private bookDetailsService: BookDetailsService) { }
   ngOnInit() {

@@ -24,7 +24,7 @@ export class BookService {
   }
   private static classSeriesByGroup(accumulator: SeriesByGroupContainer, b: Book, group: string) {
     if (b.series && b.series.name && !accumulator[group][b.series.name]) {
-      accumulator[group][b.series.name] = {
+      (accumulator[group][b.series.name] as SeriesInfo) = {
         seriesBookCount: b.series.seriesBookCount,
         books: []
       };

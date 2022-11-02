@@ -1,6 +1,6 @@
 import {Book} from './book';
 export interface SeriesInfo {
-    seriesBookCount: number;
+    seriesBookCount?: number;
     books: Book[];
 }
 export interface BookBySeriesContainer {

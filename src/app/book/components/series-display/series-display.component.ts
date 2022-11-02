@@ -12,11 +12,11 @@ import {BookService} from '../../services/book.service';
   encapsulation: ViewEncapsulation.None
 })
 export class SeriesDisplayComponent implements OnInit {
-  @ViewChild(MatExpansionPanel, {static: false}) matExpansionPanel: MatExpansionPanel;
+  @ViewChild(MatExpansionPanel, {static: false}) matExpansionPanel!: MatExpansionPanel;
   @Input()
-  series: string;
+  series: string| null = null;
   @Input()
-  seriesData: SeriesInfo;
+  seriesData: SeriesInfo = {books: []};
   @Output()
   showBookDetails: EventEmitter<BookDetailsEvent> = new EventEmitter<BookDetailsEvent>();
   constructor(private authService: AuthService, private bookService: BookService) {
@@ -27,7 +27,10 @@ export class SeriesDisplayComponent implements OnInit {
     return this.seriesData.books.filter(b => b.status === 'READ').length;
   }
   getProgressValue(): number {
-    return (this.seriesData.books.filter(b => b.status === 'READ').length * 100) / this.seriesData.seriesBookCount;
+    if (this.seriesData.seriesBookCount) {
+      return (this.seriesData.books.filter(b => b.status === 'READ').length * 100) / this.seriesData.seriesBookCount;
+    }
+    return 0;
   }
   showDetails(bookIndex: number) {
     this.showBookDetails.emit({bookIndex});

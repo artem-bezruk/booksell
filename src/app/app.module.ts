@@ -17,7 +17,7 @@ import {ErrorInterceptor} from './core/services/error-interceptor.service';
 export function load(http: HttpClient, config: ConfigService): (() => Promise<boolean>) {
   return (): Promise<boolean> => {
     return new Promise<boolean>((resolve: (a: boolean) => void): void => {
-      http.get('./assets/config/config.json')
+      http.get<AppConfig>('./assets/config/config.json')
         .pipe(
           map((x: AppConfig) => {
             config.setAppConfig(x);

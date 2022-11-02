@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {BookDetailsEvent} from '../models/book-details-event';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {compareNumbers} from '@angular/compiler-cli/src/diagnostics/typescript_version';
-import {SeriesByGroupContainer} from '../../core/model/series-by-group-container';
+import {SeriesByGroupContainer, SeriesInfo} from '../../core/model/series-by-group-container';
 import {BookListService} from './book-list.service';
 import {Book} from '../../core/model/book';
 @Injectable({
@@ -115,7 +115,7 @@ export class BookDetailsService {
   }
   private getBookIndex(event: BookDetailsEvent): number {
     if (event.group && event.series) {
-      return this.filteredBooks[event.group][event.series].books.length - 1;
+      return (this.filteredBooks[event.group][event.series]).books.length - 1;
     }
     return 0;
   }
