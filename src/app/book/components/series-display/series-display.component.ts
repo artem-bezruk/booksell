@@ -5,6 +5,7 @@ import {MatExpansionPanel, MatListOption} from '@angular/material';
 import {BookDetailsEvent} from '../../models/book-details-event';
 import {AuthService} from '../../../auth/services/auth.service';
 import {BookService} from '../../services/book.service';
+import {group} from '@angular/animations';
 @Component({
   selector: 'app-series-display',
   templateUrl: './series-display.component.html',
@@ -33,7 +34,7 @@ export class SeriesDisplayComponent implements OnInit {
     return 0;
   }
   showDetails(bookIndex: number) {
-    this.showBookDetails.emit({bookIndex});
+    this.showBookDetails.emit({bookIndex, series: '', group: ''});
   }
   getPanelState(): boolean {
     return this.matExpansionPanel.expanded;

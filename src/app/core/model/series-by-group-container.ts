@@ -3,9 +3,5 @@ export interface SeriesInfo {
     seriesBookCount?: number;
     books: Book[];
 }
-export interface BookBySeriesContainer {
-  [series: string]: SeriesInfo;
-}
-export interface SeriesByGroupContainer {
-  [group: string]: BookBySeriesContainer[];
-}
+export type SeriesByGroupContainer = Map<string, BookBySeriesContainer>;
+export type BookBySeriesContainer = Map<string, SeriesInfo>;

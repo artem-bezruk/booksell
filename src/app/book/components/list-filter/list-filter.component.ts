@@ -16,7 +16,7 @@ export class ListFilterComponent implements OnInit {
     seriesCtrl: this.fb.control([]),
     tagsCtrl: this.fb.control([])
   });
-  data: SeriesByGroupContainer = {};
+  data: SeriesByGroupContainer = new Map();
   groups: string[] = [];
   groupByEditors: Observable<boolean>;
   constructor(private fb: FormBuilder, private bookListService: BookListService) {

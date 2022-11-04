@@ -3,8 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, forkJoin, Observable} from 'rxjs';
 import {shareReplay} from 'rxjs/operators';
 import {Book} from '../../core/model/book';
-import {SeriesByGroupContainer, SeriesInfo} from '../../core/model/series-by-group-container';
 import {CoreService} from '../../core/services/core.service';
+import {BookBySeriesContainer, SeriesByGroupContainer, SeriesInfo} from '../../core/model/series-by-group-container';
 @Injectable({
   providedIn: 'root'
 })
@@ -17,17 +17,18 @@ export class BookService {
   }
   private currentBookType: string | null = null;
   private static createGroups(accumulator: SeriesByGroupContainer, group: string) {
-    if (!accumulator[group]) {
-      accumulator[group] = [];
+    if (!accumulator.get(group)) {
+      accumulator.set(group, new  Map<string, SeriesInfo>());
     }
     return accumulator;
   }
   private static classSeriesByGroup(accumulator: SeriesByGroupContainer, b: Book, group: string) {
-    if (b.series && b.series.name && !accumulator[group][b.series.name]) {
-      (accumulator[group][b.series.name] as SeriesInfo) = {
+    const series = accumulator.get(group);
+    if (b.series && b.series.name && series && series.get(b.series.name)) {
+      series.set(b.series.name, {
         seriesBookCount: b.series.seriesBookCount,
         books: []
-      };
+      });
     }
     return accumulator;
   }
@@ -36,8 +37,11 @@ export class BookService {
       const group = groupByEditor ? b.editor.name : b.series.name.charAt(0).toLocaleUpperCase();
       accumulator = BookService.createGroups(accumulator, group);
       accumulator = BookService.classSeriesByGroup(accumulator, b, group);
-      const seriesInfo: SeriesInfo = accumulator[group][b.series.name] as SeriesInfo;
-      seriesInfo.books.push(b);
+      const series = accumulator.get(group);
+      if (series != null) {
+        const seriesInfo: SeriesInfo = series.get(b.series.name) as SeriesInfo;
+        seriesInfo.books.push(b);
+      }
     } else {
       if (!b.editor) {
         console.error('Error on book data [missing editor]', b);
@@ -50,16 +54,15 @@ export class BookService {
   public groupBy(groupByEditor: boolean = false): SeriesByGroupContainer {
     const seriesByGroupContainer: SeriesByGroupContainer =
       this._searchResult.value.reduce((accumulator: SeriesByGroupContainer, book: Book) =>
-        BookService.addBook(accumulator, book, groupByEditor), {});
-    Object.keys(seriesByGroupContainer).forEach(group => {
-      Object.keys(seriesByGroupContainer[group]).forEach((series: string) =>
-        seriesByGroupContainer[group][series].books =
-          seriesByGroupContainer[group][series].books.sort((one: Book, two: Book) => {
-            if (one.tome && two.tome) {
-              return (one.tome < two.tome ? -1 : 1);
-            }
-            return 0;
-          })
+        BookService.addBook(accumulator, book, groupByEditor), new Map<string, BookBySeriesContainer>());
+    seriesByGroupContainer.forEach((series: Map<string, SeriesInfo>) => {
+      series.forEach((seriesInfo: SeriesInfo) =>
+        seriesInfo.books = seriesInfo.books.sort((one: Book, two: Book) => {
+          if (one.tome && two.tome) {
+            return (one.tome < two.tome ? -1 : 1);
+          }
+          return 0;
+        })
       );
     });
     return seriesByGroupContainer;

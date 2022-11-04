@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {SeriesByGroupContainer} from '../../core/model/series-by-group-container';
+import {BookBySeriesContainer, SeriesByGroupContainer, SeriesInfo} from '../../core/model/series-by-group-container';
 import {SortOrder} from '../../core/model/sort-order.enum';
 import {Utils} from '../../shared/utils';
 import {BookService} from './book.service';
@@ -20,11 +20,11 @@ export class BookListService {
   get groupByEditors(): Observable<boolean> {
     return this._groupByEditors.asObservable();
   }
-  private _searchResult: BehaviorSubject<SeriesByGroupContainer | null> = new BehaviorSubject<SeriesByGroupContainer | null>(null);
-  get searchResult(): Observable<SeriesByGroupContainer | null> {
+  private _searchResult: BehaviorSubject<SeriesByGroupContainer> = new BehaviorSubject<SeriesByGroupContainer>(new Map());
+  get searchResult(): Observable<SeriesByGroupContainer> {
     return this._searchResult.asObservable();
   }
-  private _filteredBooks: BehaviorSubject<SeriesByGroupContainer> = new BehaviorSubject<SeriesByGroupContainer>({});
+  private _filteredBooks: BehaviorSubject<SeriesByGroupContainer> = new BehaviorSubject<SeriesByGroupContainer>(new Map());
   get filteredBooks(): Observable<SeriesByGroupContainer> {
     return this._filteredBooks.asObservable();
   }
@@ -48,38 +48,42 @@ export class BookListService {
     this.updateFilteredBooks(this._searchResult.value);
   }
   filter(filters: BookFilter) {
-    const tmpGroup = Object.assign({}, this._searchResult.value);
-    if (filters.group && filters.group.length > 0) {
-      this.removeKey(tmpGroup, filters.group);
-    }
-    if (filters.series && filters.series.length > 0) {
-      Object.keys(tmpGroup).forEach(group => {
-        const tmpSeries = Object.assign({}, tmpGroup[group]);
-        Object.keys(tmpSeries)
-          .filter(series => {
+    const filteredData = new Map<string, BookBySeriesContainer>();
+    if (this._searchResult.value) {
+      const unfilteredData: SeriesByGroupContainer = Object.assign(new Map(), this._searchResult.value);
+      if (filters.group) {
+        filters.group.forEach(groupName => {
+          const series = unfilteredData.get(groupName);
+          if (series) {
+            filteredData.set(groupName, series);
+          }
+        });
+      }
+      if (filters.series) {
+        unfilteredData.forEach((series: Map<string, SeriesInfo>, groupName: string) => {
+          series.forEach((seriesInfo: SeriesInfo, seriesName: string) => {
             if (filters.series) {
-              return !filters.series.includes(series);
+              const seriesIsInFilter = filters.series.includes(seriesName);
+              if (seriesIsInFilter && !filteredData.has(groupName)) {
+                filteredData.set(groupName, new Map<string, SeriesInfo>().set(seriesName, seriesInfo));
+              } else if (!seriesIsInFilter && filteredData.has(groupName)) {
+                const group = filteredData.get(groupName);
+                if (group) {
+                  group.delete(seriesName);
+                  if (group.size <= 0) {
+                    filteredData.delete(groupName);
+                  }
+                }
+              }
             }
-          })
-          .forEach(series => delete tmpSeries[series]);
-        if (Object.keys(tmpSeries).length === 0) {
-          delete tmpGroup[group];
-        } else {
-          tmpGroup[group] = tmpSeries;
-        }
-      });
+          });
+        });
+      }
     }
-    this.updateFilteredBooks(tmpGroup);
+    this.updateFilteredBooks(filteredData);
   }
-  private updateFilteredBooks(seriesByEditorContainer: SeriesByGroupContainer | null) {
-    if (seriesByEditorContainer !== null) {
-      this._filteredBooks.next(seriesByEditorContainer);
-      this._filteredGroupList.next(Utils.orderStringList(Object.keys(seriesByEditorContainer), this.order));
-    }
-  }
-  private removeKey(object: any, filters: string[]) {
-    Object.keys(object)
-      .filter(key => !filters.includes(key))
-      .forEach(key => delete object[key]);
+  private updateFilteredBooks(seriesByEditorContainer: SeriesByGroupContainer) {
+    this._filteredBooks.next(seriesByEditorContainer);
+    this._filteredGroupList.next(Utils.orderStringList(Object.keys(seriesByEditorContainer), this.order));
   }
 }
