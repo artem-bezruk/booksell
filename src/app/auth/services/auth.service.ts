@@ -18,7 +18,8 @@ export class AuthService {
               private cookieService: CookieService,
               private configService: ConfigService) {
     this.configService.appConfig.subscribe((appConfig: AppConfig | null) => this.oauthConfig = appConfig ? appConfig.oauth : null);
-    this._currentUser = new BehaviorSubject<User | null>(JSON.parse(localStorage.getItem(AuthService.USER_LOCAL_STORAGE_NAME) || ''));
+    const localstorage = localStorage.getItem(AuthService.USER_LOCAL_STORAGE_NAME);
+    this._currentUser = new BehaviorSubject<User | null>(localstorage ? JSON.parse(localstorage) : null);
   }
   private _currentUser: BehaviorSubject<User | null>;
   get currentUser(): Observable<User | null> {
