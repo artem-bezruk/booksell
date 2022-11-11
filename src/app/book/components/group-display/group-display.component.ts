@@ -24,14 +24,14 @@ export class GroupDisplayComponent implements OnInit {
   get orderedSeries(): Observable<string[]> {
     return this._orderedSeries.asObservable();
   }
-  private _bookBySeries: BehaviorSubject<BookBySeriesContainer[]> = new BehaviorSubject<BookBySeriesContainer[]>([]);
-  get bookBySeries(): Observable<BookBySeriesContainer[]> {
+  private _bookBySeries: BehaviorSubject<BookBySeriesContainer> = new BehaviorSubject<BookBySeriesContainer>(new Map());
+  get bookBySeries(): Observable<BookBySeriesContainer> {
     return this._bookBySeries.asObservable();
   }
   @Input()
-  set seriesContainer(series: BookBySeriesContainer[]) {
+  set seriesContainer(series: BookBySeriesContainer) {
     if (series !== null) {
-      this._orderedSeries.next(Utils.orderStringList(Object.keys(series)));
+      this._orderedSeries.next(Utils.orderStringList(Array.from(series.keys())));
       this._bookBySeries.next(series);
     }
   }

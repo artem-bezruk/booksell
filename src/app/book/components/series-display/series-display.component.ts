@@ -5,7 +5,6 @@ import {MatExpansionPanel, MatListOption} from '@angular/material';
 import {BookDetailsEvent} from '../../models/book-details-event';
 import {AuthService} from '../../../auth/services/auth.service';
 import {BookService} from '../../services/book.service';
-import {group} from '@angular/animations';
 @Component({
   selector: 'app-series-display',
   templateUrl: './series-display.component.html',

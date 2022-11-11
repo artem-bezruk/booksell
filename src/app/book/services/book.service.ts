@@ -9,26 +9,23 @@ import {BookBySeriesContainer, SeriesByGroupContainer, SeriesInfo} from '../../c
   providedIn: 'root'
 })
 export class BookService {
+  private currentBookType: string | null = null;
   constructor(private http: HttpClient, private coreService: CoreService) {
   }
   private _searchResult: BehaviorSubject<Book[]> = new BehaviorSubject<Book[]>([]);
   get searchResult(): Observable<Book[]> {
     return this._searchResult.asObservable();
   }
-  private currentBookType: string | null = null;
   private static createGroups(accumulator: SeriesByGroupContainer, group: string) {
     if (!accumulator.get(group)) {
-      accumulator.set(group, new  Map<string, SeriesInfo>());
+      accumulator.set(group, new Map<string, SeriesInfo>());
     }
     return accumulator;
   }
-  private static classSeriesByGroup(accumulator: SeriesByGroupContainer, b: Book, group: string) {
-    const series = accumulator.get(group);
-    if (b.series && b.series.name && series && series.get(b.series.name)) {
-      series.set(b.series.name, {
-        seriesBookCount: b.series.seriesBookCount,
-        books: []
-      });
+  private static classSeriesByGroup(accumulator: SeriesByGroupContainer, b: Book, groupName: string) {
+    const group = accumulator.get(groupName);
+    if (b.series && b.series.name && group && !group.has(b.series.name)) {
+      group.set(b.series.name, {seriesBookCount: b.series.seriesBookCount, books: []});
     }
     return accumulator;
   }
@@ -40,7 +37,9 @@ export class BookService {
       const series = accumulator.get(group);
       if (series != null) {
         const seriesInfo: SeriesInfo = series.get(b.series.name) as SeriesInfo;
-        seriesInfo.books.push(b);
+        if (seriesInfo) {
+          seriesInfo.books.push(b);
+        }
       }
     } else {
       if (!b.editor) {

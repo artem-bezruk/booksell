@@ -13,7 +13,7 @@ import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
   styleUrls: ['./book-list.component.scss']
 })
 export class BookListComponent implements OnInit {
-  isLoading: Observable<boolean> = this.coreService.isLoading;;
+  isLoading: Observable<boolean> = this.coreService.isLoading;
   filteredBooks: Observable<SeriesByGroupContainer> = this.bookListService.filteredBooks;
   filteredGroupList: Observable<string[]> = this.bookListService.filteredGroupList;
   displayDetails = false;

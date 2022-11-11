@@ -39,7 +39,7 @@ export class BookListService {
   }
   changeSortOrder() {
     this.order = this.order === SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC;
-    this._filteredGroupList.next(Utils.orderStringList(Object.keys(this._filteredBooks.value), this.order));
+    this._filteredGroupList.next(Utils.orderStringList(Array.from(this._filteredBooks.value.keys()), this.order));
   }
   isSortOrderAsc = (): boolean => this.order === SortOrder.ASC;
   changeDisplay($event: boolean) {
@@ -84,6 +84,6 @@ export class BookListService {
   }
   private updateFilteredBooks(seriesByEditorContainer: SeriesByGroupContainer) {
     this._filteredBooks.next(seriesByEditorContainer);
-    this._filteredGroupList.next(Utils.orderStringList(Object.keys(seriesByEditorContainer), this.order));
+    this._filteredGroupList.next(Utils.orderStringList(Array.from(seriesByEditorContainer.keys()), this.order));
   }
 }
