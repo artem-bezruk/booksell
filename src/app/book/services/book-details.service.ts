@@ -62,7 +62,7 @@ export class BookDetailsService {
     }
     return false;
   }
-  private hasNextParentElement = (event: BookDetailsEvent, indexComparison: 0 | 1 | -1, parent: 'series' | 'group'): boolean => {
+  private hasNextParentElement(event: BookDetailsEvent, indexComparison: 0 | 1 | -1, parent: 'series' | 'group'): boolean {
     if (indexComparison === 0) {
       switch (parent) {
         case 'series':
@@ -72,8 +72,8 @@ export class BookDetailsService {
       }
     }
     return false;
-  };
-  private hasPreviousParentElement = (event: BookDetailsEvent, index: number, parent: 'series' | 'group'): boolean => {
+  }
+  private hasPreviousParentElement(event: BookDetailsEvent, index: number, parent: 'series' | 'group'): boolean {
     if (index === 0) {
       switch (parent) {
         case 'series':
@@ -83,7 +83,7 @@ export class BookDetailsService {
       }
     }
     return false;
-  };
+  }
   private hasNextGroup(event: BookDetailsEvent): boolean {
     if (event.group) {
       const groupIndex = this.filteredGroupList.indexOf(event.group);
