@@ -1,4 +1,4 @@
-export class BookFilter {
-  group?: string[];
-  series?: string[];
+export interface BookFilter {
+  group: string[];
+  series: string[];
 }

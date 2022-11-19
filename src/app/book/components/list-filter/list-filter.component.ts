@@ -13,8 +13,7 @@ export class ListFilterComponent implements OnInit {
   form: FormGroup = this.fb.group({
     globalTextCtrl: this.fb.control({value: '', disabled: true}),
     groupsCtrl: this.fb.control([]),
-    seriesCtrl: this.fb.control([]),
-    tagsCtrl: this.fb.control([])
+    seriesCtrl: this.fb.control([])
   });
   data: SeriesByGroupContainer = new Map();
   groups: string[] = [];
@@ -26,7 +25,7 @@ export class ListFilterComponent implements OnInit {
     this.bookListService.searchResult.subscribe(data => {
       if (data !== null) {
         this.data = data;
-        this.groups = Utils.orderStringList(Object.keys(data), this.bookListService.order);
+        this.groups = Utils.orderStringList(Utils.getMapKeysAsArray(data), this.bookListService.order);
       }
     });
     this.form.valueChanges.subscribe(() => {
@@ -51,8 +50,11 @@ export class ListFilterComponent implements OnInit {
   clearFilters() {
     this.form.reset({
       groupsCtrl: [],
-      seriesCtrl: [],
-      tagsCtrl: []
+      seriesCtrl: []
     });
+  }
+  getSeries(data: SeriesByGroupContainer, groupName: string): string[] {
+    const group = data.get(groupName);
+    return group ? Utils.getMapKeysAsArray(group) : [];
   }
 }

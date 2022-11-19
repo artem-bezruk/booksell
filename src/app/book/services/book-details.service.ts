@@ -5,6 +5,7 @@ import {compareNumbers} from '@angular/compiler-cli/src/diagnostics/typescript_v
 import {BookBySeriesContainer, SeriesByGroupContainer, SeriesInfo} from '../../core/model/series-by-group-container';
 import {BookListService} from './book-list.service';
 import {Book} from '../../core/model/book';
+import {Utils} from '../../shared/utils';
 @Injectable({
   providedIn: 'root'
 })
@@ -129,8 +130,7 @@ export class BookDetailsService {
     return false;
   }
   private getSeriesListForGroup(group: string): string[] {
-    const it = this.filteredBooks.get(group) || new Map<string, SeriesInfo>();
-    return Array.from(it.keys()).sort(this.compareString);
+    return Utils.getMapKeysAsArray(this.filteredBooks.get(group) || new Map<string, SeriesInfo>()).sort(this.compareString);
   }
   private getBookIndex(event: BookDetailsEvent): number {
     const series = this.getSeriesSanitizedFromEvent(event);

@@ -28,8 +28,8 @@
       <mat-select formControlName="seriesCtrl" multiple>
         <ng-container *ngFor="let group of groups">
           <mat-optgroup *ngIf="displayGroup(group)" [label]="group">
-            <mat-option *ngFor="let v of data[group] | keyvalue" [value]="v.key">
-              {{v.key}}
+            <mat-option *ngFor="let seriesName of getSeries(data, group)" [value]="seriesName">
+              {{seriesName}}
             </mat-option>
           </mat-optgroup>
         </ng-container>

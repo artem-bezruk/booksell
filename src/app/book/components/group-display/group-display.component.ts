@@ -31,7 +31,7 @@ export class GroupDisplayComponent implements OnInit {
   @Input()
   set seriesContainer(series: BookBySeriesContainer) {
     if (series !== null) {
-      this._orderedSeries.next(Utils.orderStringList(Array.from(series.keys())));
+      this._orderedSeries.next(Utils.orderStringList(Utils.getMapKeysAsArray(series)));
       this._bookBySeries.next(series);
     }
   }

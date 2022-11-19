@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {BookBySeriesContainer, SeriesByGroupContainer, SeriesInfo} from '../../core/model/series-by-group-container';
+import {BookBySeriesContainer, SeriesByGroupContainer} from '../../core/model/series-by-group-container';
 import {SortOrder} from '../../core/model/sort-order.enum';
 import {Utils} from '../../shared/utils';
 import {BookService} from './book.service';
@@ -39,7 +39,7 @@ export class BookListService {
   }
   changeSortOrder() {
     this.order = this.order === SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC;
-    this._filteredGroupList.next(Utils.orderStringList(Array.from(this._filteredBooks.value.keys()), this.order));
+    this._filteredGroupList.next(Utils.orderStringList(Utils.getMapKeysAsArray(this._filteredBooks.value), this.order));
   }
   isSortOrderAsc = (): boolean => this.order === SortOrder.ASC;
   changeDisplay($event: boolean) {
@@ -49,41 +49,27 @@ export class BookListService {
   }
   filter(filters: BookFilter) {
     const filteredData = new Map<string, BookBySeriesContainer>();
+    if (filters.group.length <= 0) {
+      filters.group = Utils.getMapKeysAsArray(this._searchResult.value);
+    }
     if (this._searchResult.value) {
-      const unfilteredData: SeriesByGroupContainer = Object.assign(new Map(), this._searchResult.value);
-      if (filters.group) {
-        filters.group.forEach(groupName => {
-          const series = unfilteredData.get(groupName);
-          if (series) {
-            filteredData.set(groupName, series);
+      filters.group.forEach(groupName => {
+        const group = this._searchResult.value.get(groupName);
+        if (group) {
+          const filteredGroup = new Map();
+          Utils.getMapKeysAsArray(group)
+            .filter(seriesName => filters.series.length <= 0 || (group.has(seriesName) && filters.series.includes(seriesName)))
+            .forEach(seriesName => filteredGroup.set(seriesName, Object.assign({}, group.get(seriesName))));
+          if (Utils.getMapKeysAsArray(filteredGroup).length > 0) {
+            filteredData.set(groupName, filteredGroup);
           }
-        });
-      }
-      if (filters.series) {
-        unfilteredData.forEach((series: Map<string, SeriesInfo>, groupName: string) => {
-          series.forEach((seriesInfo: SeriesInfo, seriesName: string) => {
-            if (filters.series) {
-              const seriesIsInFilter = filters.series.includes(seriesName);
-              if (seriesIsInFilter && !filteredData.has(groupName)) {
-                filteredData.set(groupName, new Map<string, SeriesInfo>().set(seriesName, seriesInfo));
-              } else if (!seriesIsInFilter && filteredData.has(groupName)) {
-                const group = filteredData.get(groupName);
-                if (group) {
-                  group.delete(seriesName);
-                  if (group.size <= 0) {
-                    filteredData.delete(groupName);
-                  }
-                }
-              }
-            }
-          });
-        });
-      }
+        }
+      });
     }
     this.updateFilteredBooks(filteredData);
   }
   private updateFilteredBooks(seriesByEditorContainer: SeriesByGroupContainer) {
     this._filteredBooks.next(seriesByEditorContainer);
-    this._filteredGroupList.next(Utils.orderStringList(Array.from(seriesByEditorContainer.keys()), this.order));
+    this._filteredGroupList.next(Utils.orderStringList(Utils.getMapKeysAsArray(seriesByEditorContainer), this.order));
   }
 }
