@@ -1,8 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewChildren} from '@angular/core';
+import {AfterViewChecked, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewChildren} from '@angular/core';
 import {BookBySeriesContainer} from '../../../core/model/series-by-group-container';
 import {Utils} from '../../../shared/utils';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {Book} from '../../../core/model/book';
 import {MatAccordion} from '@angular/material';
 import {SeriesDisplayComponent} from '../series-display/series-display.component';
 import {BookDetailsEvent} from '../../models/book-details-event';
@@ -11,14 +10,14 @@ import {BookDetailsEvent} from '../../models/book-details-event';
   templateUrl: './group-display.component.html',
   styleUrls: ['./group-display.component.css']
 })
-export class GroupDisplayComponent implements OnInit {
+export class GroupDisplayComponent implements OnInit, AfterViewChecked {
   @ViewChild(MatAccordion, {static: false}) accordion!: MatAccordion;
   @ViewChildren(SeriesDisplayComponent) series: SeriesDisplayComponent[] = [];
   @Input()
   editor: string | null = null;
   @Output()
   showBookDetails: EventEmitter<BookDetailsEvent> = new EventEmitter<BookDetailsEvent>();
-  constructor() {
+  constructor(private cdRef: ChangeDetectorRef) {
   }
   private _orderedSeries: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
   get orderedSeries(): Observable<string[]> {
@@ -43,9 +42,10 @@ export class GroupDisplayComponent implements OnInit {
   }
   isAllPanelOpened() {
     let state = true;
-    this.series.forEach(panel => {
-      state = state && panel.getPanelState();
-    });
+    this.series.forEach(panel => state = state && panel.getPanelState());
     return state;
+  }
+  ngAfterViewChecked(): void {
+    this.cdRef.detectChanges();
   }
 }

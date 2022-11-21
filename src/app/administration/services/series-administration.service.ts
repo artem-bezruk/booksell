@@ -4,6 +4,7 @@ import {shareReplay} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {CoreService} from '../../core/services/core.service';
+import {Utils} from '../../shared/utils';
 @Injectable({
   providedIn: 'root'
 })
@@ -33,12 +34,7 @@ export class SeriesAdministrationService {
     const o = this.http.get<Series[]>('/api/series/').pipe(shareReplay());
     o.subscribe(
       res => {
-        this._seriesList.next(res.sort((one: Series, two: Series) => {
-          if (one && one.name && two && two.name) {
-            return (one.name.toLocaleLowerCase() < two.name.toLocaleLowerCase() ? -1 : 1);
-          }
-          return 0;
-        }));
+        this._seriesList.next(res.sort(Utils.compareNames));
         if (this.filterStr !== null) {
           this.filter(this.filterStr);
         }

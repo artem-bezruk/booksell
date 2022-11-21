@@ -5,17 +5,18 @@ import {shareReplay} from 'rxjs/operators';
 import {Book} from '../../core/model/book';
 import {CoreService} from '../../core/services/core.service';
 import {BookBySeriesContainer, SeriesByGroupContainer, SeriesInfo} from '../../core/model/series-by-group-container';
+import {Utils} from '../../shared/utils';
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
-  private currentBookType: string | null = null;
   constructor(private http: HttpClient, private coreService: CoreService) {
   }
-  private _searchResult: BehaviorSubject<Book[]> = new BehaviorSubject<Book[]>([]);
   get searchResult(): Observable<Book[]> {
     return this._searchResult.asObservable();
   }
+  private currentBookType: string | null = null;
+  private _searchResult: BehaviorSubject<Book[]> = new BehaviorSubject<Book[]>([]);
   private static createGroups(accumulator: SeriesByGroupContainer, group: string) {
     if (!accumulator.get(group)) {
       accumulator.set(group, new Map<string, SeriesInfo>());
@@ -55,14 +56,7 @@ export class BookService {
       this._searchResult.value.reduce((accumulator: SeriesByGroupContainer, book: Book) =>
         BookService.addBook(accumulator, book, groupByEditor), new Map<string, BookBySeriesContainer>());
     seriesByGroupContainer.forEach((series: Map<string, SeriesInfo>) => {
-      series.forEach((seriesInfo: SeriesInfo) =>
-        seriesInfo.books = seriesInfo.books.sort((one: Book, two: Book) => {
-          if (one.tome && two.tome) {
-            return (one.tome < two.tome ? -1 : 1);
-          }
-          return 0;
-        })
-      );
+      series.forEach((seriesInfo: SeriesInfo) => seriesInfo.books = seriesInfo.books.sort(Utils.compareTomes));
     });
     return seriesByGroupContainer;
   }
