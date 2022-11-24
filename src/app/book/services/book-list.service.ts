@@ -9,7 +9,7 @@ import {BookFilter} from '../../core/model/book-filter';
   providedIn: 'root'
 })
 export class BookListService {
-  order: SortOrder.DESC | SortOrder.ASC = SortOrder.ASC;
+  order: SortOrder.DESC | SortOrder.ASC = SortOrder.DESC;
   constructor(private bookService: BookService) {
     this.bookService.searchResult.subscribe(res => {
       this._searchResult.next(this.bookService.groupBy(this._groupByEditors.value));
