@@ -9,16 +9,16 @@ import {Utils} from '../../shared/utils';
   providedIn: 'root'
 })
 export class SeriesAdministrationService {
-  private _seriesList: BehaviorSubject<Series[]> = new BehaviorSubject<Series[]>([]);
   private filterStr: string | null = null;
+  constructor(private http: HttpClient, private coreService: CoreService) {
+  }
+  private _seriesList: BehaviorSubject<Series[]> = new BehaviorSubject<Series[]>([]);
   get seriesList(): Observable<Series[]> {
     return this._seriesList.asObservable();
   }
   private _seriesListFiltered: BehaviorSubject<Series[]> = new BehaviorSubject<Series[]>([]);
   get seriesListFiltered(): Observable<Series[]> {
     return this._seriesListFiltered.asObservable();
-  }
-  constructor(private http: HttpClient, private coreService: CoreService) {
   }
   updateSeries(series: Series) {
     this.coreService.updateLoadingState(true);
@@ -34,7 +34,8 @@ export class SeriesAdministrationService {
     const o = this.http.get<Series[]>('/api/series/').pipe(shareReplay());
     o.subscribe(
       res => {
-        this._seriesList.next(res.sort(Utils.compareNames));
+        res.sort(Utils.compareNames);
+        this._seriesList.next(res);
         if (this.filterStr !== null) {
           this.filter(this.filterStr);
         }

@@ -56,7 +56,7 @@ export class BookService {
       this._searchResult.value.reduce((accumulator: SeriesByGroupContainer, book: Book) =>
         BookService.addBook(accumulator, book, groupByEditor), new Map<string, BookBySeriesContainer>());
     seriesByGroupContainer.forEach((series: Map<string, SeriesInfo>) => {
-      series.forEach((seriesInfo: SeriesInfo) => seriesInfo.books = seriesInfo.books.sort(Utils.compareTomes));
+      series.forEach((seriesInfo: SeriesInfo) => seriesInfo.books.sort(Utils.compareTomes));
     });
     return seriesByGroupContainer;
   }
