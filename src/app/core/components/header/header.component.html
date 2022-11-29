@@ -4,14 +4,18 @@
     <ng-template #adminTitle>
       <span>{{'HEADER.APP_TITLE_ADMIN' | translate}}</span>
     </ng-template>
-    <button mat-button [fxFlexOffset]="'20px'" [matMenuTriggerFor]="menu">{{'HEADER.BOOK.LIST.TITLE' | translate}}</button>
+    <button mat-button [fxFlexOffset]="'20px'"
+            [matMenuTriggerFor]="menu">{{'HEADER.BOOK.LIST.TITLE' | translate}}</button>
     <mat-menu #menu="matMenu">
-      <button [routerLink]="['/', 'book']" mat-menu-item>
+      <button [routerLink]="['/', 'book']" mat-menu-item disabled>
         <span>{{'HEADER.BOOK.LIST.HOME' | translate}}</span>
       </button>
-      <button [routerLink]="['/', 'book', bookType.name]" [disabled]="bookType.nbBooks <= 0" *ngFor="let bookType of (bookTypes | async)" mat-menu-item>
-        {{bookType.name}} ({{bookType.nbBooks}})
-      </button>
+      <ng-container *ngFor="let bookType of (bookTypes | async)">
+        <button [routerLink]="['/', 'book', bookType.name]" [disabled]="bookType.nbBooks <= 0"
+                *ngIf="bookType.nbBooks > 0" mat-menu-item>
+          {{bookType.name}} ({{bookType.nbBooks}})
+        </button>
+      </ng-container>
     </mat-menu>
   </div>
   <div>
@@ -23,6 +27,10 @@
         <button mat-menu-item [routerLink]="'/administration/book/add'">
           <fa-icon [icon]="['fas', 'plus']" style="padding-right: 10px"></fa-icon>
           <span>{{'HEADER.BOOK.ADD' | translate}}</span>
+        </button>
+        <button mat-menu-item [routerLink]="'/administration/book/edition'">
+          <fa-icon [icon]="['fas', 'pencil-alt']" style="padding-right: 10px"></fa-icon>
+          <span>{{'HEADER.BOOK.EDITION' | translate}}</span>
         </button>
         <button mat-menu-item [routerLink]="'/administration/series/edition'">
           <fa-icon [icon]="['fas', 'pencil-alt']" style="padding-right: 10px"></fa-icon>

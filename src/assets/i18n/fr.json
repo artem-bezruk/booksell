@@ -5,10 +5,11 @@
     "HOME": "Accueil",
     "BOOK": {
       "LIST": {
-        "TITLE": "Livres" ,
+        "TITLE": "Livres",
         "HOME": "Accueil"
       },
-      "ADD": "Ajout de livres"
+      "ADD": "Ajout de livres",
+      "EDITION": "Edition des livres"
     },
     "SERIES": {
       "EDITION": "Edition des séries"
@@ -80,7 +81,7 @@
       }
     },
     "ADD": {
-      "SUCCESS":"Vous avez ajouté le livre {{isbn}}"
+      "SUCCESS": "Vous avez ajouté le livre {{isbn}}"
     },
     "LIST": {
       "ACTION_BAR": {
@@ -128,6 +129,13 @@
           "ROLES": "<strong>Rôle(s): </strong>{{value}}"
         }
       }
+    },
+    "EDITION": {
+      "TITLE": "Edition des livres",
+      "TITLE_PLACEHOLDER": "Titre",
+      "BOOK_TYPE_PLACEHOLDER": "Type du livre",
+      "TOME_PLACEHOLDER": "Tome",
+      "SUCCESS": "Vous avez modifié le livre {{isbn}}"
     }
   },
   "SNACKBAR": {
@@ -144,8 +152,22 @@
       "FILTER_PLACEHOLDER": "Filtre",
       "SERIES_NAME_PLACEHOLDER": "Nom de la série",
       "NUMBER_BOOK_PLACEHOLDER": "Nombre de tome sortis",
-      "BUTTON_UPDATE": "mettre à jour",
-      "BUTTON_RESET": "annuler"
+      "SUCCESS": "Vous avez modifié la série {{name}}"
+    }
+  },
+  "EDITION": {
+    "BUTTON_UPDATE": "mettre à jour",
+    "BUTTON_RESET": "annuler",
+    "BUTTON_DELETE": "supprimer"
+  },
+  "BOOK_TYPE": {
+    "CREATION_MODAL": {
+      "TITLE": "Créer un nouveau type",
+      "NAME_PLACEHOLDER": "Nom",
+      "BUTTON": {
+        "CANCEL": "Annuler",
+        "VALIDATE": "Valider"
+      }
     }
   }
 }

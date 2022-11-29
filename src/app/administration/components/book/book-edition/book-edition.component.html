@@ -1,0 +1,11 @@
+<mat-progress-bar *ngIf="isLoading|async" [color]="'primary'" style="margin-top: -20px; margin-bottom: 20px"
+                  [mode]="'indeterminate'">
+</mat-progress-bar>
+<div fxLayoutAlign="center">
+  <div fxFlex="75" fxLayout="column">
+    <div>
+      <h1 style="text-align: center">{{'BOOK.EDITION.TITLE' | translate}}</h1>
+    </div>
+    <app-book-edition-list style="padding-top: 20px" fxLayout="row" *ngIf="hasResult"></app-book-edition-list>
+  </div>
+</div>

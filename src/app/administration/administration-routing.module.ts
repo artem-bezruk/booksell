@@ -4,10 +4,12 @@ import {AdministrationLayoutComponent} from './layout/administration-layout/admi
 import {BookAddComponent} from './components/book/book-add/book-add.component';
 import {AuthGuard} from '../auth/guards/auth.guard';
 import {SeriesEditionComponent} from './components/series/series-edition/series-edition.component';
+import {BookEditionComponent} from './components/book/book-edition/book-edition.component';
 const booksRoutes: Routes = [
   {
     path: 'administration', canActivate: [AuthGuard], component: AdministrationLayoutComponent, children: [
       {path: 'book/add', component: BookAddComponent},
+      {path: 'book/edition', component: BookEditionComponent},
       {path: 'series/edition', component: SeriesEditionComponent}
     ]
   },

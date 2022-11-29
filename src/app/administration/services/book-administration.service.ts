@@ -7,15 +7,20 @@ import {Book} from '../../core/model/book';
 import {BookMapper} from '../models/mappers/book-mapper';
 import {CoreService} from '../../core/services/core.service';
 import {BookTypeService} from '../../core/services/book-type.service';
+import {Series} from '../../core/model/series';
 @Injectable({
   providedIn: 'root'
 })
 export class BookAdministrationService {
+  constructor(private http: HttpClient, private coreService: CoreService, private bookTypeService: BookTypeService) {
+  }
   private _searchResult: BehaviorSubject<BookSearch | null> = new BehaviorSubject<BookSearch | null>(null);
   get searchResult(): Observable<BookSearch | null> {
     return this._searchResult.asObservable();
   }
-  constructor(private http: HttpClient, private coreService: CoreService, private bookTypeService: BookTypeService) {
+  private _bookList: BehaviorSubject<Book[]> = new BehaviorSubject<Book[]>([]);
+  get bookList(): Observable<Book[]> {
+    return this._bookList.asObservable();
   }
   searchBooks(isbn: string): Observable<BookSearch> {
     this.coreService.updateLoadingState(true);
@@ -43,6 +48,33 @@ export class BookAdministrationService {
         this.bookTypeService.getAllBookType();
         this.coreService.updateLoadingState(false);
       });
+    return o;
+  }
+  getAllBooks() {
+    this.coreService.updateLoadingState(true);
+    const o = this.http.get<Book[]>(`/api/books`).pipe(shareReplay());
+    o.subscribe(
+      res => this._bookList.next(res),
+      err => console.error('an error occured!', err),
+      () => this.coreService.updateLoadingState(false));
+    return o;
+  }
+  updateBooks(book: Book) {
+    this.coreService.updateLoadingState(true);
+    const o = this.http.put<Book>(`/api/books/${book.id}`, book).pipe(shareReplay());
+    o.subscribe(
+      res => this.getAllBooks(),
+      err => console.error('an error occured!', err),
+      () => this.coreService.updateLoadingState(false));
+    return o;
+  }
+  deleteBooks(book: Book) {
+    this.coreService.updateLoadingState(true);
+    const o = this.http.delete<Book>(`/api/books/${book.id}`, ).pipe(shareReplay());
+    o.subscribe(
+      res => this.getAllBooks(),
+      err => console.error('an error occured!', err),
+      () => this.coreService.updateLoadingState(false));
     return o;
   }
 }

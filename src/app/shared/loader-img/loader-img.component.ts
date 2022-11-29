@@ -1,8 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 @Component({
   selector: 'app-loader-img',
-  templateUrl: './loader-img.component.html',
-  styleUrls: ['./loader-img.component.css']
+  templateUrl: './loader-img.component.html'
 })
 export class LoaderImgComponent implements OnInit {
   @Input() img: {src: string, alt: string} | null = null;

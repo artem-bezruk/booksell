@@ -5,8 +5,7 @@ import {MatSnackBar} from '@angular/material';
 import {TranslateService} from '@ngx-translate/core';
 @Component({
   selector: 'app-isbn-search',
-  templateUrl: './isbn-search.component.html',
-  styleUrls: ['./isbn-search.component.css']
+  templateUrl: './isbn-search.component.html'
 })
 export class IsbnSearchComponent implements OnInit {
   public formAddBook: FormGroup = this.fb.group({

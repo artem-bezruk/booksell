@@ -3,8 +3,7 @@ import {Series} from '../../../../core/model/series';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 @Component({
   selector: 'app-series-edition-display',
-  templateUrl: './series-edition-display.component.html',
-  styleUrls: ['./series-edition-display.component.css']
+  templateUrl: './series-edition-display.component.html'
 })
 export class SeriesEditionDisplayComponent implements OnInit {
   @Input()

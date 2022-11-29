@@ -2,8 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 @Component({
   selector: 'app-series-list-filter',
-  templateUrl: './series-list-filter.component.html',
-  styleUrls: ['./series-list-filter.component.css']
+  templateUrl: './series-list-filter.component.html'
 })
 export class SeriesListFilterComponent implements OnInit {
   @Output()

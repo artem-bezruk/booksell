@@ -6,8 +6,7 @@ import {HttpClient} from '@angular/common/http';
 import {CoreService} from '../../../../core/services/core.service';
 @Component({
   selector: 'app-series-edition',
-  templateUrl: './series-edition.component.html',
-  styleUrls: ['./series-edition.component.css']
+  templateUrl: './series-edition.component.html'
 })
 export class SeriesEditionComponent implements OnInit {
   hasResult = false;

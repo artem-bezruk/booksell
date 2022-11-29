@@ -4,8 +4,7 @@ import {Observable} from 'rxjs';
 import {Series} from '../../../../core/model/series';
 @Component({
   selector: 'app-series-list',
-  templateUrl: './series-list.component.html',
-  styleUrls: ['./series-list.component.css']
+  templateUrl: './series-list.component.html'
 })
 export class SeriesListComponent implements OnInit {
   seriesList: Observable<Series[]> = this.seriesService.seriesListFiltered;

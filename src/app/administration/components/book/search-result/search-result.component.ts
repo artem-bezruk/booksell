@@ -2,38 +2,64 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BookSearch} from '../../../models/book-search';
 import {BookAdministrationService} from '../../../services/book-administration.service';
 import {TranslateService} from '@ngx-translate/core';
-import {MatSnackBar} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
+import {Observable} from 'rxjs';
+import {BookType} from '../../../../core/model/bookType';
+import {BookTypeService} from '../../../../core/services/book-type.service';
+import {NewBookTypeModalComponent} from '../new-book-type-modal/new-book-type-modal.component';
 @Component({
   selector: 'app-search-result',
-  templateUrl: './search-result.component.html',
-  styleUrls: ['./search-result.component.css']
+  templateUrl: './search-result.component.html'
 })
 export class SearchResultComponent implements OnInit, OnDestroy {
+  readonly newBookType = 'new Book type';
   searchResult: BookSearch = {
     editor: 'N/A',
     title: 'N/A'
   };
-  constructor(private bookService: BookAdministrationService, private translateService: TranslateService, private snackBar: MatSnackBar) {
+  bookTypes: Observable<BookType[]> = this.bookTypeService.bookTypes;
+  constructor(private bookAdministrationService: BookAdministrationService,
+              private translateService: TranslateService,
+              private bookTypeService: BookTypeService,
+              private snackBar: MatSnackBar,
+              private dialog: MatDialog) {
   }
   ngOnInit() {
-    this.bookService.searchResult.subscribe(next => {
+    this.bookAdministrationService.searchResult.subscribe(next => {
       if (next !== null) {
         this.searchResult = next;
       }
     });
   }
   ngOnDestroy(): void {
-    this.bookService.clearResults();
+    this.bookAdministrationService.clearResults();
   }
   isBookOneShot(bookSearch: BookSearch): boolean {
     return bookSearch.series === null || bookSearch.series === '';
   }
-  addBook(bookSearch: BookSearch) {
-    this.bookService.addBook(bookSearch, 'Sans type').subscribe(res => {
+  addBook(bookSearch: BookSearch, bookType: string) {
+    if (bookType === this.newBookType) {
+      this.createNewBookType()
+        .subscribe((result: string) => {
+          if (result) {
+            this.createBook(bookSearch, result);
+          }
+        });
+    } else {
+      this.createBook(bookSearch, bookType);
+    }
+  }
+  createBook(bookSearch: BookSearch, bookType: string) {
+    this.bookAdministrationService.addBook(bookSearch, bookType).subscribe(res => {
       this.snackBar.open(
         this.translateService.instant('BOOK.ADD.SUCCESS', {isbn: res.isbn}),
         this.translateService.instant('SNACKBAR.ACTION.CLOSE'));
-      this.bookService.clearResults();
+      this.bookAdministrationService.clearResults();
     });
+  }
+  createNewBookType(): Observable<string> {
+    return this.dialog
+      .open<NewBookTypeModalComponent, string>(NewBookTypeModalComponent, {width: '400px'})
+      .afterClosed();
   }
 }

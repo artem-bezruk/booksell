@@ -11,7 +11,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {library} from '@fortawesome/fontawesome-svg-core';
-import {faPencilAlt, faPlus} from '@fortawesome/free-solid-svg-icons';
+import {faBan, faPencilAlt, faPlus, faSave, faTrash} from '@fortawesome/free-solid-svg-icons';
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -46,5 +46,8 @@ export class CoreModule {
   constructor() {
     library.add(faPlus);
     library.add(faPencilAlt);
+    library.add(faTrash);
+    library.add(faSave);
+    library.add(faBan);
   }
 }

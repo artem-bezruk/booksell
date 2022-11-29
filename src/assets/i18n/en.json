@@ -5,10 +5,11 @@
     "HOME": "Home",
     "BOOK": {
       "LIST": {
-        "TITLE": "Book" ,
+        "TITLE": "Book",
         "HOME": "Home"
       },
-      "ADD": "Add"
+      "ADD": "Add",
+      "EDITION": "Book edition"
     },
     "SERIES": {
       "EDITION": "Series edition"
@@ -52,7 +53,7 @@
         "ISBN_REQUIRED": "ISBN is <strong>required</strong>",
         "NO_RESULT_ISBN": "The ISBN {{isbn}} doesn't correspond to any book.",
         "NOT_AUTHORIZED": "You're not authorized to search book with ISBN, please log in."
-      },    b
+      },
       "TITLE": "Add books",
       "BUTTON_SEARCH": "Search",
       "BUTTON_CLEAR": "Clear",
@@ -80,7 +81,7 @@
       }
     },
     "ADD": {
-      "SUCCESS":"You've added the book {{isbn}}"
+      "SUCCESS": "You've added the book {{isbn}}"
     },
     "LIST": {
       "ACTION_BAR": {
@@ -128,6 +129,13 @@
           "ROLES": "<strong>Role(s): </strong>{{value}}"
         }
       }
+    },
+    "EDITION": {
+      "TITLE": "Book edition",
+      "TITLE_PLACEHOLDER": "Title",
+      "BOOK_TYPE_PLACEHOLDER": "Book type",
+      "TOME_PLACEHOLDER": "Tome",
+      "SUCCESS": "You've edited the book {{isbn}}"
     }
   },
   "SNACKBAR": {
@@ -144,8 +152,22 @@
       "FILTER_PLACEHOLDER": "Filter",
       "SERIES_NAME_PLACEHOLDER": "Series name",
       "NUMBER_BOOK_PLACEHOLDER": "Number of books released",
-      "BUTTON_UPDATE": "update",
-      "BUTTON_RESET": "reset"
+      "SUCCESS": "You've edited the series {{name}}"
+    }
+  },
+  "EDITION": {
+    "BUTTON_UPDATE": "update",
+    "BUTTON_RESET": "reset",
+    "BUTTON_DELETE": "delete"
+  },
+  "BOOK_TYPE": {
+    "CREATION_MODAL": {
+      "TITLE": "Create a book type",
+      "NAME_PLACEHOLDER": "Name",
+      "BUTTON": {
+        "CANCEL": "Cancel",
+        "VALIDATE": "Validate"
+      }
     }
   }
 }

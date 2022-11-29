@@ -4,8 +4,7 @@ import {Observable} from 'rxjs';
 import {CoreService} from '../../../../core/services/core.service';
 @Component({
   selector: 'app-book-add',
-  templateUrl: './book-add.component.html',
-  styleUrls: ['./book-add.component.css']
+  templateUrl: './book-add.component.html'
 })
 export class BookAddComponent implements OnInit {
   hasResult = false;
