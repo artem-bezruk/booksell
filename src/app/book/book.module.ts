@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {SharedModule} from '../shared/shared.module';
 import {FormsModule} from '@angular/forms';
 import {
+  MatCardModule,
   MatCheckboxModule,
   MatChipsModule,
   MatExpansionModule,
@@ -49,7 +50,8 @@ import { BookDashboardComponent } from './components/book-dashboard/book-dashboa
     MatSidenavModule,
     MatSlideToggleModule,
     MatMenuModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatCardModule
   ],
   declarations: [
     BookLayoutComponent,

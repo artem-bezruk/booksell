@@ -7,7 +7,7 @@
     <button mat-button [fxFlexOffset]="'20px'"
             [matMenuTriggerFor]="menu">{{'HEADER.BOOK.LIST.TITLE' | translate}}</button>
     <mat-menu #menu="matMenu">
-      <button [routerLink]="['/', 'book']" mat-menu-item disabled>
+      <button [routerLink]="['/', 'book']" mat-menu-item>
         <span>{{'HEADER.BOOK.LIST.HOME' | translate}}</span>
       </button>
       <ng-container *ngFor="let bookType of (bookTypes | async)">

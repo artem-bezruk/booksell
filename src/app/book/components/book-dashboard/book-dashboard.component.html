@@ -1,3 +1,68 @@
-<p>
-  book-dashboard works!
-</p>
+<div fxFlex="column" style="margin: 1rem">
+  <mat-list fxFlex="10">
+    <h3 mat-subheader>{{(statistics|async)?.books.totalCount}} Books</h3>
+    <mat-list-item><span [matBadge]="(statistics|async)?.books?.unreadCount" matBadgeOverlap="false"> unread </span>
+    </mat-list-item>
+    <mat-list-item><span [matBadge]="(statistics|async)?.books?.readCount" matBadgeOverlap="false"> read </span>
+    </mat-list-item>
+    <mat-list-item><span [matBadge]="(statistics|async)?.books?.readingCount" matBadgeOverlap="false"> reading </span>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <h3 mat-subheader>{{(statistics|async).series?.totalCount}} Series</h3>
+    <mat-divider></mat-divider>
+    <h3 mat-subheader>{{(statistics|async).bookTypes?.totalCount}} Book types</h3>
+  </mat-list>
+  <div fxLayout="column" fxFlex="60">
+    <mat-card fxFlex="100" style="margin: 1rem">
+      <mat-card-header>
+        <mat-card-title>Editors</mat-card-title>
+      </mat-card-header>
+      <mat-card-content style="margin-top: 1rem">
+        <mat-chip-list>
+          <div *ngFor="let editor  of (statistics|async)?.editors?.editors | keyvalue" [matBadge]="editor.value">
+            <mat-chip> {{editor.key}} </mat-chip>
+          </div>
+        </mat-chip-list>
+      </mat-card-content>
+    </mat-card>
+    <mat-card fxFlex="100" style="margin: 1rem">
+      <mat-card-header>
+        <mat-card-title>Series</mat-card-title>
+      </mat-card-header>
+      <mat-card-content style="margin-top: 1rem">
+        <mat-chip-list>
+          <div *ngFor="let series  of (statistics|async)?.series?.series | keyvalue" [matBadge]="series.value">
+            <mat-chip> {{series.key}} </mat-chip>
+          </div>
+        </mat-chip-list>
+      </mat-card-content>
+    </mat-card>
+    <mat-card fxFlex="100" style="margin: 1rem">
+      <mat-card-header>
+        <mat-card-title>Book type</mat-card-title>
+      </mat-card-header>
+      <mat-card-content style="margin-top: 1rem">
+        <mat-chip-list>
+          <div *ngFor="let bookType  of (statistics|async)?.bookTypes?.bookTypes | keyvalue"
+               [matBadge]="bookType.value">
+            <mat-chip> {{bookType.key}} </mat-chip>
+          </div>
+        </mat-chip-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <mat-card fxFlex="30" style="margin: 1rem">
+    <mat-card-header>
+      <mat-card-title>Newly added books</mat-card-title>
+    </mat-card-header>
+    <mat-card-content style="margin-top: 1rem">
+      <mat-list>
+        <mat-list-item>Book 1</mat-list-item>
+        <mat-list-item>Book 2</mat-list-item>
+        <mat-list-item>Book 3</mat-list-item>
+        <mat-list-item>Book 4</mat-list-item>
+        <mat-list-item>Book 5</mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</div>
