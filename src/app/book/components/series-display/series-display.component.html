@@ -4,11 +4,11 @@
             {{series}}
         </mat-panel-title>
       <mat-panel-description>
-        <div fxFlex="20" fxLayoutAlign="space-between" *ngIf="seriesData.seriesBookCount">
+        <div fxFlex="20" fxLayoutAlign="space-between" *ngIf="seriesData.seriesBookCount > 0">
           <span *ngIf="getProgressValue() === 100"> Completed </span>
           <span *ngIf="getProgressValue() < 100"> {{getReadedBooksCount()}} / {{seriesData.seriesBookCount}} </span>
         </div>
-        <mat-progress-bar *ngIf="seriesData.seriesBookCount !== null"
+        <mat-progress-bar *ngIf="seriesData.seriesBookCount > 0"
                           fxFlex="80"
                           mode="determinate"
                           [bufferValue]="seriesData.seriesBookCount"

@@ -1,7 +1,7 @@
 <mat-list-item role="listitem" style="padding-top: 10px">
   <form (ngSubmit)="submit()" [formGroup]="form" fxLayout="row" fxFlex="100" fxLayoutAlign="space-between center">
     <mat-form-field>
-      <input matInput placeholder="{{'BOOK.EDITION.TITLE_PLACEHOLDER' | translate}}" formControlName="name">
+      <input matInput placeholder="{{'BOOK.EDITION.TITLE_PLACEHOLDER' | translate}}" formControlName="title">
       <mat-hint align="end">{{book.editor.name}}</mat-hint>
     </mat-form-field>
     <mat-form-field fxFlex="5">

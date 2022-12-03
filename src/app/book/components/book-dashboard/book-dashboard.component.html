@@ -1,6 +1,6 @@
 <div fxFlex="column" style="margin: 1rem">
   <mat-list fxFlex="10">
-    <h3 mat-subheader>{{(statistics|async)?.books.totalCount}} Books</h3>
+    <h3 mat-subheader>{{(statistics|async)?.books?.totalCount}} Books</h3>
     <mat-list-item><span [matBadge]="(statistics|async)?.books?.unreadCount" matBadgeOverlap="false"> unread </span>
     </mat-list-item>
     <mat-list-item><span [matBadge]="(statistics|async)?.books?.readCount" matBadgeOverlap="false"> read </span>

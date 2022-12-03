@@ -21,7 +21,7 @@ export class SeriesEditionDisplayComponent implements OnInit {
   }
   submit(): void {
     const series = this.form.value;
-    series.id = this.series.id;
+    series.editor = this.series.editor;
     this.updateSeries.emit(series);
   }
   initForm(): void {

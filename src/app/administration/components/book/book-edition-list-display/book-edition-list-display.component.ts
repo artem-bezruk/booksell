@@ -17,7 +17,7 @@ export class BookEditionListDisplayComponent implements OnInit {
   @Output()
   removeBook: EventEmitter<Book> = new EventEmitter<Book>();
   form: FormGroup = this.fb.group({
-    name: this.fb.control(''),
+    title: this.fb.control(''),
     tome: this.fb.control('', Validators.min(0)),
     bookType: this.fb.control(''),
     status: this.fb.control(''),
@@ -34,7 +34,7 @@ export class BookEditionListDisplayComponent implements OnInit {
   }
   initForm(): void {
     this.form.setValue({
-      name: this.book.title,
+      title: this.book.title,
       tome: this.book.tome,
       bookType: this.book.bookType,
       status: this.book.status
