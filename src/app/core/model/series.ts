@@ -1,5 +1,5 @@
 export interface Series {
-  seriesBookCount?: number;
+  seriesBookCount: number;
   name?: string;
   editor?: string;
 }

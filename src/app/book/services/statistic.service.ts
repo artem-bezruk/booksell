@@ -11,7 +11,7 @@ export class StatisticService {
   get searchResult(): Observable<StatDTO> {
     return this._searchResult.asObservable();
   }
-  private _searchResult: BehaviorSubject<StatDTO> = new BehaviorSubject<StatDTO>({});
+  private _searchResult: BehaviorSubject<StatDTO> = new BehaviorSubject<StatDTO>({recentlyAdded: []});
   constructor(private http: HttpClient, private coreService: CoreService) {
   }
   getAllStats() {

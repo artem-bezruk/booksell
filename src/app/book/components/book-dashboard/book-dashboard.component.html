@@ -1,4 +1,5 @@
-<div fxFlex="column" style="margin: 1rem">
+<mat-progress-bar *ngIf="isLoading | async" [color]="'primary'" [mode]="'indeterminate'"></mat-progress-bar>
+<div fxFlex="column" style="margin: 1rem" *ngIf="statistics | async">
   <mat-list fxFlex="10">
     <h3 mat-subheader>{{(statistics|async)?.books?.totalCount}} Books</h3>
     <mat-list-item><span [matBadge]="(statistics|async)?.books?.unreadCount" matBadgeOverlap="false"> unread </span>
@@ -57,11 +58,7 @@
     </mat-card-header>
     <mat-card-content style="margin-top: 1rem">
       <mat-list>
-        <mat-list-item>Book 1</mat-list-item>
-        <mat-list-item>Book 2</mat-list-item>
-        <mat-list-item>Book 3</mat-list-item>
-        <mat-list-item>Book 4</mat-list-item>
-        <mat-list-item>Book 5</mat-list-item>
+        <mat-list-item *ngFor="let book of (statistics|async).recentlyAdded">{{book.title}}</mat-list-item>
       </mat-list>
     </mat-card-content>
   </mat-card>

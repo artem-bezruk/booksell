@@ -7,7 +7,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class SeriesEditionDisplayComponent implements OnInit {
   @Input()
-  series: Series = {};
+  series: Series = {seriesBookCount: 0};
   @Output()
   updateSeries: EventEmitter<Series> = new EventEmitter<Series>();
   form: FormGroup = this.fb.group({

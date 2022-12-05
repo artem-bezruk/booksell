@@ -11,17 +11,15 @@ import {BookService} from '../../services/book.service';
   styleUrls: ['./series-display.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class SeriesDisplayComponent implements OnInit {
+export class SeriesDisplayComponent {
   @ViewChild(MatExpansionPanel, {static: false}) matExpansionPanel!: MatExpansionPanel;
   @Input()
   series: string| null = null;
   @Input()
-  seriesData: SeriesInfo = {books: []};
+  seriesData: SeriesInfo = {seriesBookCount: 0, books: []};
   @Output()
   showBookDetails: EventEmitter<BookDetailsEvent> = new EventEmitter<BookDetailsEvent>();
   constructor(private authService: AuthService, private bookService: BookService) {
-  }
-  ngOnInit() {
   }
   getReadedBooksCount() {
     return this.seriesData.books.filter(b => b.status === 'READ').length;
