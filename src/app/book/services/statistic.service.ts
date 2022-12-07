@@ -3,20 +3,20 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {CoreService} from '../../core/services/core.service';
 import {shareReplay} from 'rxjs/operators';
-import {StatDTO} from '../../core/model/statDTO';
+import {Statistics} from '../../core/model/statistics';
 @Injectable({
   providedIn: 'root'
 })
 export class StatisticService {
-  get searchResult(): Observable<StatDTO> {
+  get searchResult(): Observable<Statistics> {
     return this._searchResult.asObservable();
   }
-  private _searchResult: BehaviorSubject<StatDTO> = new BehaviorSubject<StatDTO>({recentlyAdded: []});
+  private _searchResult: BehaviorSubject<Statistics> = new BehaviorSubject<Statistics>({recentlyAddedBooks: []});
   constructor(private http: HttpClient, private coreService: CoreService) {
   }
   getAllStats() {
     this.coreService.updateLoadingState(true);
-    const o = this.http.get<StatDTO>(`/api/stat`).pipe(shareReplay());
+    const o = this.http.get<Statistics>(`/api/stat`).pipe(shareReplay());
     o.subscribe(
       res => this._searchResult.next(res),
       err => console.error('an error occured!', err),

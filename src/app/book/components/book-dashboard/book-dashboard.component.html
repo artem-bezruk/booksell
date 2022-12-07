@@ -1,65 +1,78 @@
-<mat-progress-bar *ngIf="isLoading | async" [color]="'primary'" [mode]="'indeterminate'"></mat-progress-bar>
-<div fxFlex="column" style="margin: 1rem" *ngIf="statistics | async">
-  <mat-list fxFlex="10">
-    <h3 mat-subheader>{{(statistics|async)?.books?.totalCount}} Books</h3>
-    <mat-list-item><span [matBadge]="(statistics|async)?.books?.unreadCount" matBadgeOverlap="false"> unread </span>
-    </mat-list-item>
-    <mat-list-item><span [matBadge]="(statistics|async)?.books?.readCount" matBadgeOverlap="false"> read </span>
-    </mat-list-item>
-    <mat-list-item><span [matBadge]="(statistics|async)?.books?.readingCount" matBadgeOverlap="false"> reading </span>
-    </mat-list-item>
-    <mat-divider></mat-divider>
-    <h3 mat-subheader>{{(statistics|async).series?.totalCount}} Series</h3>
-    <mat-divider></mat-divider>
-    <h3 mat-subheader>{{(statistics|async).bookTypes?.totalCount}} Book types</h3>
-  </mat-list>
-  <div fxLayout="column" fxFlex="60">
-    <mat-card fxFlex="100" style="margin: 1rem">
-      <mat-card-header>
-        <mat-card-title>Editors</mat-card-title>
-      </mat-card-header>
-      <mat-card-content style="margin-top: 1rem">
-        <mat-chip-list>
-          <div *ngFor="let editor  of (statistics|async)?.editors?.editors | keyvalue" [matBadge]="editor.value">
-            <mat-chip> {{editor.key}} </mat-chip>
-          </div>
-        </mat-chip-list>
-      </mat-card-content>
-    </mat-card>
-    <mat-card fxFlex="100" style="margin: 1rem">
-      <mat-card-header>
-        <mat-card-title>Series</mat-card-title>
-      </mat-card-header>
-      <mat-card-content style="margin-top: 1rem">
-        <mat-chip-list>
-          <div *ngFor="let series  of (statistics|async)?.series?.series | keyvalue" [matBadge]="series.value">
-            <mat-chip> {{series.key}} </mat-chip>
-          </div>
-        </mat-chip-list>
-      </mat-card-content>
-    </mat-card>
-    <mat-card fxFlex="100" style="margin: 1rem">
-      <mat-card-header>
-        <mat-card-title>Book type</mat-card-title>
-      </mat-card-header>
-      <mat-card-content style="margin-top: 1rem">
-        <mat-chip-list>
-          <div *ngFor="let bookType  of (statistics|async)?.bookTypes?.bookTypes | keyvalue"
-               [matBadge]="bookType.value">
-            <mat-chip> {{bookType.key}} </mat-chip>
-          </div>
-        </mat-chip-list>
-      </mat-card-content>
-    </mat-card>
+<div>
+  <mat-progress-bar *ngIf="isLoading | async" [color]="'primary'" [mode]="'indeterminate'"></mat-progress-bar>
+</div>
+<div fxLayout="column" style="margin: 1rem" *ngIf="statistics | async">
+  <div fxLayout="column">
+    <h1 style="margin-top: 1rem">Recently added books</h1>
+    <div fxLayout="row">
+      <mat-card fxFlex style="margin: 1rem" *ngFor="let book of (statistics|async).recentlyAddedBooks">
+        <mat-card-header>
+          <mat-card-title>{{book.title}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content style="margin-top: 1rem">
+          {{book.isbn}}
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
-  <mat-card fxFlex="30" style="margin: 1rem">
-    <mat-card-header>
-      <mat-card-title>Newly added books</mat-card-title>
-    </mat-card-header>
-    <mat-card-content style="margin-top: 1rem">
-      <mat-list>
-        <mat-list-item *ngFor="let book of (statistics|async).recentlyAdded">{{book.title}}</mat-list-item>
-      </mat-list>
-    </mat-card-content>
-  </mat-card>
+  <div fxFlexFill
+       fxLayoutGap="10px grid"
+       fxLayout="row wrap">
+    <div fxFlex="50" style="height: 300px">
+      <div fxFlexFill fxLayoutAlign="center center">
+        <ngx-charts-pie-chart [scheme]="'cool'"
+                              [results]="(statistics|async).booksStatus"
+                              [labels]="false"
+                              [legend]="true"
+                              legendTitle=""
+                              title="Book Status">
+        </ngx-charts-pie-chart>
+      </div>
+    </div>
+    <div fxFlex="50" style="height: 300px">
+      <div fxFlexFill fxLayoutAlign="center center">
+        <ngx-charts-bar-vertical
+          [scheme]="'cool'"
+          [results]="(statistics|async).editorsStats"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legendPosition]="'below'"
+          [showXAxisLabel]="false"
+          [showYAxisLabel]="false"
+          [noBarWhenZero]="true"
+          [showDataLabel]="false"
+          [rotateXAxisTicks]="true">
+        </ngx-charts-bar-vertical>
+      </div>
+    </div>
+    <div fxFlex="50" style="height: 300px">
+      <div fxFlexFill fxLayoutAlign="center center">
+        <ngx-charts-number-card
+          class="chart-container"
+          [scheme]="'cool'"
+          cardColor="#232837"
+          emptyColor="#1e222e"
+          [results]="(statistics|async).seriesStats"
+          [animations]="true"
+          [labelFormatting]="statusLabelFormat">
+        </ngx-charts-number-card>
+      </div>
+    </div>
+    <div fxFlex="50" style="height: 300px">
+      <div fxFlexFill fxLayoutAlign="center center">
+        <ngx-charts-bar-vertical
+          [scheme]="'cool'"
+          [results]="(statistics|async).bookTypesStats"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legendPosition]="'below'"
+          [showXAxisLabel]="false"
+          [showYAxisLabel]="false"
+          [noBarWhenZero]="true"
+          [showDataLabel]="false"
+          [rotateXAxisTicks]="true">
+        </ngx-charts-bar-vertical>
+      </div>
+    </div>
+  </div>
 </div>

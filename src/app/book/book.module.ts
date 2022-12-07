@@ -34,6 +34,7 @@ import {ListFilterComponent} from './components/list-filter/list-filter.componen
 import {BookListActionBarComponent} from './components/book-list-action-bar/book-list-action-bar.component';
 import {AlphabeticalSeriesDisplayComponent} from './components/alphabetical-series-display/alphabetical-series-display.component';
 import { BookDashboardComponent } from './components/book-dashboard/book-dashboard.component';
+import {BarChartModule, NumberCardModule, PieChartModule} from '@swimlane/ngx-charts';
 @NgModule({
   imports: [
     CommonModule,
@@ -51,7 +52,10 @@ import { BookDashboardComponent } from './components/book-dashboard/book-dashboa
     MatSlideToggleModule,
     MatMenuModule,
     MatCheckboxModule,
-    MatCardModule
+    MatCardModule,
+    PieChartModule,
+    BarChartModule,
+    NumberCardModule
   ],
   declarations: [
     BookLayoutComponent,
