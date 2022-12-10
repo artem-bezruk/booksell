@@ -1,23 +1,21 @@
-<form fxLayout="row" fxLayoutAlign="space-evenly" [formGroup]="formAddBook"
-      (ngSubmit)="onSubmit()">
-  <mat-form-field fxFlex="40">
+<form fxLayout="column" fxLayoutGap="1rem" [formGroup]="formAddBook" (ngSubmit)="onSubmit()">
+  <mat-form-field fxFlex="100">
     <input matInput formControlName="isbnCtrl" #isbn required title="book's isbn" placeholder="ISBN">
-    <mat-hint align="end" *ngIf="isbn.value.length <= 10">{{isbn.value.length}} / 10</mat-hint>
-    <mat-hint align="end" *ngIf="isbn.value.length > 10">{{isbn.value.length}} / 13</mat-hint>
+    <mat-hint align="end">{{isbn.value.length}} / 13</mat-hint>
     <mat-icon matSuffix>import_contacts</mat-icon>
     <mat-error *ngIf="hasFormatError('isbnCtrl')" [innerHTML]="'BOOK.SEARCH.ERRORS.ISBN_FOMART' | translate">
     </mat-error>
     <mat-error *ngIf="hasRequiredError('isbnCtrl')" [innerHTML]="'BOOK.SEARCH.ERRORS.ISBN_REQUIRED' | translate">
     </mat-error>
   </mat-form-field>
-  <div fxFlex="40" fxLayoutAlign="space-around">
-    <button type="submit" mat-raised-button fxFlex="40" color="primary"
+  <div fxLayout="row" fxLayoutGap="1rem" >
+    <button type="submit" mat-raised-button fxFlex color="primary"
             [disabled]="formAddBook.pristine || formAddBook.invalid">
       {{'BOOK.SEARCH.BUTTON_SEARCH' | translate}}
     </button>
-    <button type="button" mat-raised-button fxFlex="40" color="warn"
+    <button type="button" mat-raised-button fxFlex color="warn"
             [disabled]="formAddBook.pristine && isbn.value === ''"
-            (click)="formAddBook.reset({isbnCtrl: ''})" >
+            (click)="formAddBook.reset({isbnCtrl: ''})">
       {{'BOOK.SEARCH.BUTTON_CLEAR' | translate}}
     </button>
   </div>

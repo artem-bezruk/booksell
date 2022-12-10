@@ -1,12 +1,12 @@
-<mat-accordion fxLayout="column" fxFlex="80" fxFlexOffset="10" fxLayoutAlign="center">
+<mat-accordion fxLayout="column" fxFlex="100" fxLayoutAlign="center">
   <mat-expansion-panel>
     <mat-expansion-panel-header>
-      <mat-panel-title
-        [innerHTML]="'BOOK.SEARCH.RESULTS.ISBN' | translate:{value: searchResult.isbn}">
+      <mat-panel-title>
+        <span *ngIf="searchResult.tome === null; else titleWithSeries"> {{searchResult.title}}</span>
+        <ng-template #titleWithSeries>
+          <span> {{searchResult.series}} (T{{searchResult.tome}}) {{searchResult.title}} </span>
+        </ng-template>
       </mat-panel-title>
-      <mat-panel-description
-        [innerHTML]="'BOOK.SEARCH.RESULTS.ARK_ID' | translate:{value: searchResult.arkId}">
-      </mat-panel-description>
     </mat-expansion-panel-header>
     <div fxLayout="row">
       <div fxFlex="50" fxLayoutAlign="center center">

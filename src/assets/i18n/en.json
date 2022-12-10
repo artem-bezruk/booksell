@@ -63,14 +63,14 @@
           "AUTHOR": "Authors",
           "RAW_DATA": "Raw data"
         },
-        "ISBN": "<strong>ISBN: </strong>{{value}}",
-        "ARK_ID": "<strong>ARK Id: </strong>{{value}}",
-        "TITLE": "<strong>Title: </strong>{{value}}",
-        "SERIES": "<strong>Series: </strong>{{value}}",
-        "TOME": "<strong>Tome: </strong>{{value}}",
-        "YEAR": "<strong>Year: </strong>{{value}}",
-        "EDITOR": "<strong>Editor: </strong>{{value}}",
-        "COLLECTION": "<strong>Collection: </strong>{{value}}",
+        "ISBN": "<strong>ISBN: </strong> {{value}}",
+        "ARK_ID": "<strong>ARK Id: </strong> {{value}}",
+        "TITLE": "<strong>Title: </strong> {{value}}",
+        "SERIES": "<strong>Series: </strong> {{value}}",
+        "TOME": "<strong>Tome: </strong> {{value}}",
+        "YEAR": "<strong>Year: </strong> {{value}}",
+        "EDITOR": "<strong>Editor: </strong> {{value}}",
+        "COLLECTION": "<strong>Collection: </strong> {{value}}",
         "AUTHOR": {
           "NAME": "<strong>Name: </strong>{{value}}",
           "ROLES": "<strong>Role(s): </strong>{{value}}"

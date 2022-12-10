@@ -3,7 +3,7 @@
 </div>
 <div fxLayout="column" style="margin: 1rem" *ngIf="statistics | async">
   <div fxLayout="column">
-    <h1 style="margin-top: 1rem">Recently added books</h1>
+    <h1>Recently added books</h1>
     <div fxLayout="row">
       <mat-card fxFlex style="margin: 1rem" *ngFor="let book of (statistics|async).recentlyAddedBooks">
         <mat-card-header>

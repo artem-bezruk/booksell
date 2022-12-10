@@ -1,9 +1,13 @@
-<div class="header">
-  <router-outlet name="header"></router-outlet>
-</div>
-<div class="content-wrapper mt-3">
-  <router-outlet></router-outlet>
-</div>
-<div class="footer-wrapper">
-  <router-outlet class="footer-wrapper" name="footer"></router-outlet>
+<div fxLayout="column" fxLayoutAlign="space-between" style="height: 100%">
+  <div fxLayout="column">
+    <div class="header">
+      <router-outlet name="header"></router-outlet>
+    </div>
+    <div class="content-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <div class="footer-wrapper">
+    <router-outlet class="footer-wrapper" name="footer"></router-outlet>
+  </div>
 </div>

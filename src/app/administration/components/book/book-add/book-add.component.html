@@ -1,9 +1,17 @@
-<mat-progress-bar *ngIf="isLoading | async" [color]="'primary'"  style="margin-top: -20px; margin-bottom: 20px" [mode]="'indeterminate'">
+<mat-progress-bar *ngIf="isLoading | async"
+                  [color]="'primary'"
+                  style="margin-top: -20px;
+                  margin-bottom: 20px"
+                  [mode]="'indeterminate'">
 </mat-progress-bar>
-<div fxLayout="column" fxLayoutAlign="space-between">
-    <div fxLayout="row"  fxLayoutAlign="center" >
-        <h1 style="text-align: center">{{'BOOK.SEARCH.TITLE' | translate}}</h1>
+<div fxLayout="column">
+  <div fxLayout="row" fxLayoutAlign="center">
+    <h1 style="text-align: center">{{'BOOK.SEARCH.TITLE' | translate}}</h1>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="space-around">
+    <app-isbn-search fxFlex="20"></app-isbn-search>
+    <div fxFlex="75">
+      <app-search-result *ngIf="hasResult"></app-search-result>
     </div>
-    <app-isbn-search></app-isbn-search>
-    <app-search-result style="padding-top: 20px" fxLayout="row" *ngIf="hasResult"></app-search-result>
+  </div>
 </div>
