@@ -1,5 +1,5 @@
 <mat-list-item role="listitem" style="padding-top: 10px">
-  <form (ngSubmit)="submit()" [formGroup]="form" fxLayout="row" fxFlex="100" fxLayoutAlign="space-between center">
+  <div [formGroup]="form" fxLayout="row" fxFlex="100" fxLayoutAlign="space-between center">
     <mat-form-field fxFlex="45">
       <input matInput placeholder="{{'SERIES.EDITION.SERIES_NAME_PLACEHOLDER' | translate}}" formControlName="name">
       <mat-hint align="end">{{series.editor}}</mat-hint>
@@ -8,13 +8,8 @@
       <input type="number" min="0" matInput placeholder="{{'SERIES.EDITION.NUMBER_BOOK_PLACEHOLDER' | translate}}"
              formControlName="seriesBookCount">
     </mat-form-field>
-    <div >
-      <button type="submit" mat-button color="primary" [disabled]="!isUpdatable()">
-        <fa-icon [icon]="['fas', 'save']"></fa-icon>
-      </button>
-      <button type="button" mat-button color="warn" [disabled]="!isUpdatable()" (click)="resetSeries()">
-        <fa-icon [icon]="['fas', 'ban']"></fa-icon>
-      </button>
-    </div>
-  </form>
+    <button type="button" mat-button color="warn" [disabled]="!isUpdatable()" (click)="resetSeries()">
+      <fa-icon [icon]="['fas', 'ban']"></fa-icon>
+    </button>
+  </div>
 </mat-list-item>
