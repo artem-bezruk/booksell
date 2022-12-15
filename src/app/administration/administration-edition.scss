@@ -1,0 +1,50 @@
+@import "src/styles";
+::ng-deep {
+  .mat-list-item:not(:hover):not(:focus-within) {
+    .mat-form-field-label-wrapper, .mat-form-field-underline {
+      opacity: 0;
+    }
+    .mat-button-toggle:not(.mat-button-toggle-checked) {
+      background-color: transparent;
+      opacity: 0.5;
+    }
+  }
+  .mat-list-item {
+    .mat-form-field-prefix {
+      position: absolute;
+      top: 0;
+      font-size: 70%;
+      color: $color-text-med;
+    }
+    .mat-form-field-label-wrapper, .mat-form-field-underline, .mat-button-toggle {
+      transition: opacity 0.2s ease-out, background 0.2s ease-out;
+    }
+  }
+  app-book-edition-list-display {
+    margin-bottom: 0.6rem;
+    padding-top: 0.5rem;
+    &:focus-within {
+      animation: 0.5s ease-in-out saved;
+    }
+  }
+  @keyframes saved {
+    0% {
+      background: transparent;
+      box-shadow: transparent;
+      border-radius: 0;
+      transform: scale(1);
+    }
+    25% {
+      background: rgba(0, 200, 0, 0.1);
+      box-shadow: 0 0 2px rgba(0, 200, 0, 0.1);
+      border-radius: 3px;
+      transform: scale(0.995);
+    }
+    100% {
+      background: transparent;
+      box-shadow: transparent;
+      border-radius: 0;
+      transform: scale(1);
+    }
+  }
+}

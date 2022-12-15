@@ -8,7 +8,8 @@ import {TranslateService} from '@ngx-translate/core';
 import {MatDialog, MatSnackBar} from '@angular/material';
 @Component({
   selector: 'app-book-edition-list',
-  templateUrl: './book-edition-list.component.html'
+  templateUrl: './book-edition-list.component.html',
+  styleUrls:  ['../../../administration-edition.scss']
 })
 export class BookEditionListComponent implements OnInit {
   bookList: Observable<Book[]> = this.bookAdministrationService.bookList;
