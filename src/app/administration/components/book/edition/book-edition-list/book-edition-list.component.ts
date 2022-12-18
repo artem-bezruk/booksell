@@ -1,18 +1,18 @@
 import {Component, OnInit} from '@angular/core';
-import {Book} from '../../../../core/model/book';
+import {Book} from '../../../../../core/model/book';
 import {Observable} from 'rxjs';
-import {BookAdministrationService} from '../../../services/book-administration.service';
-import {BookTypeService} from '../../../../core/services/book-type.service';
-import {NewBookTypeModalComponent} from '../new-book-type-modal/new-book-type-modal.component';
+import {BookAdministrationService} from '../../../../services/book-administration.service';
+import {BookTypeService} from '../../../../../core/services/book-type.service';
+import {NewBookTypeModalComponent} from '../../shared/new-book-type-modal/new-book-type-modal.component';
 import {TranslateService} from '@ngx-translate/core';
 import {MatDialog, MatSnackBar} from '@angular/material';
 @Component({
   selector: 'app-book-edition-list',
   templateUrl: './book-edition-list.component.html',
-  styleUrls:  ['../../../administration-edition.scss']
+  styleUrls:  ['../../../../administration-edition.scss']
 })
 export class BookEditionListComponent implements OnInit {
-  bookList: Observable<Book[]> = this.bookAdministrationService.bookList;
+  bookList: Observable<Book[]> = this.bookAdministrationService.bookListFiltered;
   readonly newBookType = 'new Book type';
   constructor(private bookAdministrationService: BookAdministrationService,
               private translateService: TranslateService,
@@ -23,7 +23,6 @@ export class BookEditionListComponent implements OnInit {
   ngOnInit() {
   }
   onBookUpdate(book: Book) {
-    console.log(book.bookType === this.newBookType);
     if (book.bookType === this.newBookType) {
       this.createNewBookType()
         .subscribe((result: string) => {

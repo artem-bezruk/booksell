@@ -9,7 +9,7 @@ import {Utils} from '../../shared/utils';
   providedIn: 'root'
 })
 export class SeriesAdministrationService {
-  private filterStr: string | null = null;
+  private filterStr = '';
   constructor(private http: HttpClient, private coreService: CoreService) {
   }
   private _seriesList: BehaviorSubject<Series[]> = new BehaviorSubject<Series[]>([]);
@@ -24,7 +24,7 @@ export class SeriesAdministrationService {
     this.coreService.updateLoadingState(true);
     const o = this.http.put<Series>('/api/series/', series).pipe(shareReplay());
     o.subscribe(
-      res => this.getAllSeries(),
+      () => this.getAllSeries(),
       err => console.error('an error occured!', err),
       () => this.coreService.updateLoadingState(false));
     return o;
@@ -36,9 +36,7 @@ export class SeriesAdministrationService {
       res => {
         res.sort(Utils.compareNames);
         this._seriesList.next(res);
-        if (this.filterStr !== null) {
-          this.filter(this.filterStr);
-        }
+        this.filter(this.filterStr);
       },
       err => console.error('an error occured!', err),
       () => this.coreService.updateLoadingState(false));
@@ -47,8 +45,8 @@ export class SeriesAdministrationService {
   filter(filterStr: string) {
     this.filterStr = filterStr;
     if (filterStr && filterStr !== '') {
-      this._seriesListFiltered.next(this._seriesList.value
-        .filter((series: Series) => {
+      this._seriesListFiltered.next(
+        this._seriesList.value.filter((series: Series) => {
             if (series.name) {
               return series.name.toLocaleLowerCase().includes(filterStr.toLocaleLowerCase());
             }

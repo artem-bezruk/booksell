@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Book} from '../../../../core/model/book';
+import {Book} from '../../../../../core/model/book';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
-import {BookType} from '../../../../core/model/bookType';
-import {BookTypeService} from '../../../../core/services/book-type.service';
+import {BookType} from '../../../../../core/model/bookType';
+import {BookTypeService} from '../../../../../core/services/book-type.service';
 @Component({
   selector: 'app-book-edition-list-display',
   templateUrl: './book-edition-list-display.component.html'
@@ -11,7 +11,7 @@ import {BookTypeService} from '../../../../core/services/book-type.service';
 export class BookEditionListDisplayComponent implements OnInit {
   readonly newBookType = 'new Book type';
   @Input()
-  book: Book = {title: '', editor: {}};
+  book: Book = {title: '', editor: {}, series: {seriesBookCount: 0}};
   @Output()
   updateBook: EventEmitter<Book> = new EventEmitter<Book>();
   @Output()
@@ -39,14 +39,6 @@ export class BookEditionListDisplayComponent implements OnInit {
       bookType: this.book.bookType,
       status: this.book.status
     });
-  }
-  resetBook(): void {
-    this.initForm();
-    this.form.markAsPristine();
-    this.form.markAsUntouched();
-  }
-  isUpdatable(): boolean {
-    return this.form.valid && !this.form.pristine;
   }
   deleteBook() {
     this.removeBook.emit(this.book);

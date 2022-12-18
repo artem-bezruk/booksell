@@ -1,12 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {BookSearch} from '../../../models/book-search';
-import {BookAdministrationService} from '../../../services/book-administration.service';
+import {BookSearch} from '../../../../models/book-search';
+import {BookAdministrationService} from '../../../../services/book-administration.service';
 import {TranslateService} from '@ngx-translate/core';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {Observable} from 'rxjs';
-import {BookType} from '../../../../core/model/bookType';
-import {BookTypeService} from '../../../../core/services/book-type.service';
-import {NewBookTypeModalComponent} from '../new-book-type-modal/new-book-type-modal.component';
+import {BookType} from '../../../../../core/model/bookType';
+import {BookTypeService} from '../../../../../core/services/book-type.service';
+import {NewBookTypeModalComponent} from '../../shared/new-book-type-modal/new-book-type-modal.component';
 @Component({
   selector: 'app-search-result',
   templateUrl: './search-result.component.html'

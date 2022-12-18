@@ -1,7 +1,7 @@
 <mat-list-item role="listitem" style="padding-top: 10px">
   <form (ngSubmit)="submit()" [formGroup]="form" fxLayout="row" fxFlex="100" fxLayoutAlign="space-between center">
     <mat-form-field>
-        <span matPrefix>{{book.editor.name}} - {{book.series.name}} &nbsp;</span>
+      <span matPrefix>{{book?.editor?.name}} - {{book?.series?.name}} &nbsp;</span>
       <input matInput formControlName="title">
     </mat-form-field>
     <mat-form-field fxFlex="5">
@@ -32,12 +32,6 @@
       </mat-button-toggle>
     </mat-button-toggle-group>
     <div>
-      <button type="submit" mat-button color="primary" [disabled]="!isUpdatable()">
-        <fa-icon [icon]="['fas', 'save']"></fa-icon>
-      </button>
-      <button type="button" mat-button color="warn" [disabled]="!isUpdatable()" (click)="resetBook()">
-        <fa-icon [icon]="['fas', 'ban']"></fa-icon>
-      </button>
       <button type="button" mat-button color="warn" (click)="deleteBook()">
         <fa-icon [icon]="['fas', 'trash']"></fa-icon>
       </button>

@@ -1,0 +1,12 @@
+<mat-list-item role="listitem" style="padding-top: 10px">
+  <form (ngSubmit)="submit()" [formGroup]="form" fxLayout="row" fxFlex="100" fxLayoutAlign="space-between center">
+    <mat-form-field fxFlex="45">
+      <span matPrefix>{{series.editor}}&nbsp;</span>
+      <input matInput formControlName="name">
+    </mat-form-field>
+    <mat-form-field fxFlex="15">
+      <input type="number" min="0" matInput placeholder="{{'SERIES.EDITION.NUMBER_BOOK_PLACEHOLDER' | translate}}"
+             formControlName="seriesBookCount">
+    </mat-form-field>
+  </form>
+</mat-list-item>

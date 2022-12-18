@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
-import {BookAdministrationService} from '../../../services/book-administration.service';
-import {SeriesAdministrationService} from '../../../services/series-administration.service';
-import {HttpClient} from '@angular/common/http';
-import {CoreService} from '../../../../core/services/core.service';
+import {SeriesAdministrationService} from '../../../../services/series-administration.service';
+import {CoreService} from '../../../../../core/services/core.service';
 @Component({
   selector: 'app-series-edition',
   templateUrl: './series-edition.component.html'
@@ -15,7 +13,6 @@ export class SeriesEditionComponent implements OnInit {
   ngOnInit() {
     this.seriesService.seriesList.subscribe(next => this.hasResult = next !== null);
     this.seriesService.getAllSeries();
-    this.seriesService.filter('');
   }
   onFilter($event: string) {
     this.seriesService.filter($event);

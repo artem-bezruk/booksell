@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
-import {CoreService} from '../../../../core/services/core.service';
-import {BookAdministrationService} from '../../../services/book-administration.service';
+import {CoreService} from '../../../../../core/services/core.service';
+import {BookAdministrationService} from '../../../../services/book-administration.service';
 @Component({
   selector: 'app-book-edition',
   templateUrl: './book-edition.component.html'
@@ -13,5 +13,8 @@ export class BookEditionComponent implements OnInit {
   ngOnInit() {
     this.bookAdministrationService.getAllBooks();
     this.bookAdministrationService.bookList.subscribe(next => this.hasResult = next !== null);
+  }
+  onFilter($event: string) {
+    this.bookAdministrationService.filter($event);
   }
 }

@@ -8,7 +8,7 @@
   <div fxLayout="row" fxLayoutAlign="space-around">
     <app-series-list-filter fxFlex="20" (filter)="onFilter($event)"></app-series-list-filter>
     <div fxFlex="75">
-      <app-series-list style="padding-top: 20px" fxLayout="row" *ngIf="hasResult"></app-series-list>
+      <app-series-edition-list style="padding-top: 20px" fxLayout="row" *ngIf="hasResult"></app-series-edition-list>
     </div>
   </div>
 </div>

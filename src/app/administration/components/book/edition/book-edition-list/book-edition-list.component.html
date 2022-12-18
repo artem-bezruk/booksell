@@ -1,0 +1,8 @@
+<mat-list fxLayout="column" fxFlex>
+  <app-book-edition-list-display class="edition-line"
+                                 *ngFor="let book of (bookList | async)"
+                                 (updateBook)="onBookUpdate($event)"
+                                 (removeBook)="onBookRemoval($event)"
+                                 [book]=book>
+  </app-book-edition-list-display>
+</mat-list>

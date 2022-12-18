@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {BookAdministrationService} from '../../../services/book-administration.service';
+import {BookAdministrationService} from '../../../../services/book-administration.service';
 import {Observable} from 'rxjs';
-import {CoreService} from '../../../../core/services/core.service';
+import {CoreService} from '../../../../../core/services/core.service';
 @Component({
   selector: 'app-book-add',
   templateUrl: './book-add.component.html'

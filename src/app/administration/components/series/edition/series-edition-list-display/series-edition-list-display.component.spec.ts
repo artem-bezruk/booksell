@@ -1,16 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { SeriesEditionDisplayComponent } from './series-edition-display.component';
+import { SeriesEditionListDisplayComponent } from './series-edition-list-display.component';
 describe('SeriesEditionDisplayComponent', () => {
-  let component: SeriesEditionDisplayComponent;
-  let fixture: ComponentFixture<SeriesEditionDisplayComponent>;
+  let component: SeriesEditionListDisplayComponent;
+  let fixture: ComponentFixture<SeriesEditionListDisplayComponent>;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SeriesEditionDisplayComponent ]
+      declarations: [ SeriesEditionListDisplayComponent ]
     })
     .compileComponents();
   }));
   beforeEach(() => {
-    fixture = TestBed.createComponent(SeriesEditionDisplayComponent);
+    fixture = TestBed.createComponent(SeriesEditionListDisplayComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

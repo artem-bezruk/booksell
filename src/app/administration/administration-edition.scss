@@ -20,7 +20,7 @@
       transition: opacity 0.2s ease-out, background 0.2s ease-out;
     }
   }
-  app-book-edition-list-display {
+  .edition-line {
     margin-bottom: 0.6rem;
     padding-top: 0.5rem;
     &:focus-within {

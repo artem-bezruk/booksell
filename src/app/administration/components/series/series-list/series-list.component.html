@@ -1,9 +1,0 @@
-<mat-list fxLayout="column" fxFlex>
-  <form (ngSubmit)="submit()" [formGroup]="form" >
-    <app-series-edition-display
-    *ngFor="let series of getSeriesArray().controls; let i = index"
-      [series]=(seriesList|async)[i]
-      [form]="series">
-    </app-series-edition-display>
-  </form>
-</mat-list>

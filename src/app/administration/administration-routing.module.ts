@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AdministrationLayoutComponent} from './layout/administration-layout/administration-layout.component';
-import {BookAddComponent} from './components/book/book-add/book-add.component';
+import {BookAddComponent} from './components/book/creation/book-add/book-add.component';
 import {AuthGuard} from '../auth/guards/auth.guard';
-import {SeriesEditionComponent} from './components/series/series-edition/series-edition.component';
-import {BookEditionComponent} from './components/book/book-edition/book-edition.component';
+import {SeriesEditionComponent} from './components/series/edition/series-edition/series-edition.component';
+import {BookEditionComponent} from './components/book/edition/book-edition/book-edition.component';
 const booksRoutes: Routes = [
   {
     path: 'administration', canActivate: [AuthGuard], component: AdministrationLayoutComponent, children: [
