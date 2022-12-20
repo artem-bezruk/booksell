@@ -13,7 +13,4 @@ export class SeriesEditionListComponent implements OnInit {
   }
   ngOnInit() {
   }
-  onSeriesUpdate($event: Series) {
-    this.seriesService.updateSeries($event);
-  }
 }
