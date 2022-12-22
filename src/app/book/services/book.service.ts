@@ -25,19 +25,19 @@ export class BookService {
   }
   private static classSeriesByGroup(accumulator: SeriesByGroupContainer, b: Book, groupName: string) {
     const group = accumulator.get(groupName);
-    if (b.series && b.series.name && group && !group.has(b.series.name)) {
-      group.set(b.series.name, {seriesBookCount: b.series.seriesBookCount, books: []});
+    if (b.series && b.series.displayName && group && !group.has(b.series.displayName)) {
+      group.set(b.series.displayName, {seriesBookCount: b.series.seriesBookCount, books: []});
     }
     return accumulator;
   }
   private static addBook(accumulator: SeriesByGroupContainer, b: Book, groupByEditor: boolean = false) {
-    if (b.editor.name && b.series && b.series.name) {
-      const group = groupByEditor ? b.editor.name : b.series.name.charAt(0).toLocaleUpperCase();
+    if (b.editor.name && b.series && b.series.displayName) {
+      const group = groupByEditor ? b.editor.name : b.series.displayName.charAt(0).toLocaleUpperCase();
       accumulator = BookService.createGroups(accumulator, group);
       accumulator = BookService.classSeriesByGroup(accumulator, b, group);
       const series = accumulator.get(group);
       if (series != null) {
-        const seriesInfo: SeriesInfo = series.get(b.series.name) as SeriesInfo;
+        const seriesInfo: SeriesInfo = series.get(b.series.displayName) as SeriesInfo;
         if (seriesInfo) {
           seriesInfo.books.push(b);
         }

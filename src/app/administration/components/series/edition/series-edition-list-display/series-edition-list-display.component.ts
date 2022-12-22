@@ -52,6 +52,9 @@ export class SeriesEditionListDisplayComponent implements OnInit {
     const series = this.form.value;
     series.editor = this.series.editor;
     series.name = this.series.name;
-    this.seriesService.updateSeries(series);
+    this.seriesService.updateSeries(series).subscribe( value => {
+      this.series = value;
+      this.progressBarState.display = false;
+    });
   }
 }

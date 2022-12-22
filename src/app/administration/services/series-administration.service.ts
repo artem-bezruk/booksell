@@ -24,7 +24,7 @@ export class SeriesAdministrationService {
     this.coreService.updateLoadingState(true);
     const o = this.http.put<Series>('/api/series/', series).pipe(shareReplay());
     o.subscribe(
-      () => this.getAllSeries(),
+      () => {},
       err => console.error('an error occured!', err),
       () => this.coreService.updateLoadingState(false));
     return o;
