@@ -11,7 +11,7 @@ import {BookTypeService} from '../../../../../core/services/book-type.service';
 export class BookEditionListDisplayComponent implements OnInit {
   readonly newBookType = 'new Book type';
   @Input()
-  book: Book = {title: '', editor: {}, series: {seriesBookCount: 0}};
+  book: Book = {title: '', editor: {}, series: {seriesBookCount: 0, displayName: ''}};
   @Output()
   updateBook: EventEmitter<Book> = new EventEmitter<Book>();
   @Output()
