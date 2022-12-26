@@ -1,13 +1,16 @@
 <mat-list-item role="listitem" style="padding-top: 10px">
-  <form [formGroup]="form" fxLayout="row" fxFlex="100" fxLayoutAlign="space-between center">
-    <mat-form-field fxFlex="45">
-      <span matPrefix>{{series.editor}} - {{series.name}}&nbsp;</span>
-      <input matInput formControlName="displayName">
-    </mat-form-field>
-    <mat-form-field fxFlex="15">
-      <input type="number" min="0" matInput placeholder="{{'SERIES.EDITION.NUMBER_BOOK_PLACEHOLDER' | translate}}"
-             formControlName="seriesBookCount">
-    </mat-form-field>
+  <form [formGroup]="form" fxLayout="column" fxFlex="100" >
+    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="1rem">
+      <mat-form-field >
+        <span matPrefix>{{series.editor}} - {{series.name}}&nbsp;</span>
+        <input matInput formControlName="displayName">
+      </mat-form-field>
+      <mat-form-field >
+        <input type="number" min="0" matInput placeholder="{{'SERIES.EDITION.NUMBER_BOOK_PLACEHOLDER' | translate}}"
+               formControlName="seriesBookCount">
+      </mat-form-field>
+    </div>
+  <mat-progress-bar *ngIf="progressBarState.display" [value]="getProgressBarValue(remainingSeconds|async)"
+                    [mode]="progressBarState.type"></mat-progress-bar>
   </form>
-  <mat-progress-bar *ngIf="progressBarState.display" [value]="getProgressBarValue(remainingSeconds|async)" [mode]="progressBarState.type"></mat-progress-bar>
 </mat-list-item>
