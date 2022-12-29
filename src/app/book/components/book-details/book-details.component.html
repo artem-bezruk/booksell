@@ -34,7 +34,7 @@
   </div>
   <div fxFlex fxLayoutAlign="space-between">
     <div fxFlex fxLayoutAlign="center center">
-      <app-loader-img [imgContainerClass]="'mat-elevation-z2'" *ngIf="displayImg && bookEvent.book.cover !== null"
+      <app-loader-img [imgContainerClass]="'mat-elevation-z2 cover'" *ngIf="displayImg && bookEvent.book.cover !== null"
                       [img]="{src: '/files/covers/' + bookEvent.book.cover, alt: bookEvent.book.cover}"></app-loader-img>
     </div>
     <div fxFlex>

@@ -4,8 +4,7 @@ import {BookDetailsEvent} from '../../models/book-details-event';
 import {BookDetailsService} from '../../services/book-details.service';
 @Component({
   selector: 'app-book-details',
-  templateUrl: './book-details.component.html',
-  styleUrls: ['./book-details.component.css']
+  templateUrl: './book-details.component.html'
 })
 export class BookDetailsComponent implements OnInit {
   bookEvent: { book: Book | null, asNext: BookDetailsEvent | null, asPrevious: BookDetailsEvent | null } | null = null;

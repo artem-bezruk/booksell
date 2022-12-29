@@ -9,7 +9,8 @@ import {BookTypeService} from '../../../../../core/services/book-type.service';
 import {NewBookTypeModalComponent} from '../../shared/new-book-type-modal/new-book-type-modal.component';
 @Component({
   selector: 'app-search-result',
-  templateUrl: './search-result.component.html'
+  templateUrl: './search-result.component.html',
+  styleUrls: ['./search-result.component.scss']
 })
 export class SearchResultComponent implements OnInit, OnDestroy {
   readonly newBookType = 'new Book type';
