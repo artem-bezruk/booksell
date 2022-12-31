@@ -1,13 +1,17 @@
-<mat-list-item role="listitem" style="padding-top: 10px">
+<mat-list-item role="listitem" style="padding-top: 10px" [ngClass]="{'edition-line': true, 'saved': (isSaved | async)}">
   <form [formGroup]="form" fxLayout="column" fxFlex="100" >
     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="1rem">
       <mat-form-field >
         <span matPrefix>{{series.editor}} - {{series.name}}&nbsp;</span>
-        <input matInput formControlName="displayName">
+        <label>
+          <input matInput formControlName="displayName">
+        </label>
       </mat-form-field>
       <mat-form-field >
-        <input type="number" min="0" matInput placeholder="{{'SERIES.EDITION.NUMBER_BOOK_PLACEHOLDER' | translate}}"
-               formControlName="seriesBookCount">
+        <label>
+          <input type="number" min="0" matInput placeholder="{{'SERIES.EDITION.NUMBER_BOOK_PLACEHOLDER' | translate}}"
+                 formControlName="seriesBookCount">
+        </label>
       </mat-form-field>
     </div>
   <mat-progress-bar *ngIf="progressBarState.display" [value]="getProgressBarValue(remainingSeconds|async)"

@@ -2,19 +2,21 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Series} from '../../../../../core/model/series';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {switchMap, takeWhile} from 'rxjs/operators';
-import {BehaviorSubject, of, timer} from 'rxjs';
+import {BehaviorSubject, Observable, of, timer} from 'rxjs';
 import {SeriesAdministrationService} from '../../../../services/series-administration.service';
 @Component({
   selector: 'app-series-edition-display',
   templateUrl: './series-edition-list-display.component.html',
 })
 export class SeriesEditionListDisplayComponent implements OnInit {
+  private _isSaved: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  get isSaved(): Observable<boolean> {
+    return this._isSaved;
+  }
   constructor(private fb: FormBuilder, private seriesService: SeriesAdministrationService) {
   }
   @Input()
   series: Series = {seriesBookCount: 0, displayName: '', name: ''};
-  @Output()
-  updateSeries: EventEmitter<Series> = new EventEmitter<Series>();
   form: FormGroup = this.fb.group({
     displayName: this.fb.control(''),
     seriesBookCount: this.fb.control('', Validators.min(1)),
@@ -52,7 +54,9 @@ export class SeriesEditionListDisplayComponent implements OnInit {
     const series = this.form.value;
     series.editor = this.series.editor;
     series.name = this.series.name;
-    this.seriesService.updateSeries(series).subscribe( value => {
+    this.seriesService.updateSeries(series).subscribe(value => {
+      this._isSaved.next(true);
+      setTimeout(() => this._isSaved.next(false), 3000);
       this.series = value;
       this.progressBarState.display = false;
     });

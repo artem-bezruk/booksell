@@ -1,4 +1,4 @@
 <mat-list fxLayout="column" fxFlex>
-  <app-series-edition-display class="edition-line" *ngFor="let series of (seriesList|async)" [series]=series>
+  <app-series-edition-display *ngFor="let series of (seriesList|async)" [series]=series>
   </app-series-edition-display>
 </mat-list>

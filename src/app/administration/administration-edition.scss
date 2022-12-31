@@ -23,7 +23,7 @@
   .edition-line {
     margin-bottom: 0.6rem;
     padding-top: 0.5rem;
-    &:focus-within {
+    &.saved {
       animation: 0.5s ease-in-out saved;
     }
   }

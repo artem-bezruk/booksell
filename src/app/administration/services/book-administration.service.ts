@@ -71,7 +71,7 @@ export class BookAdministrationService {
     this.coreService.updateLoadingState(true);
     const o = this.http.put<Book>(`/api/books/${book.id}`, book).pipe(shareReplay());
     o.subscribe(
-      () => this.getAllBooks(),
+      () => {},
       err => console.error('an error occured!', err),
       () => this.coreService.updateLoadingState(false));
     return o;
