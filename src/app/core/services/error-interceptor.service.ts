@@ -4,7 +4,7 @@ import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {catchError, filter, switchMap, take} from 'rxjs/operators';
 import {AuthService} from '../../auth/services/auth.service';
 import {CoreService} from './core.service';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {TranslateService} from '@ngx-translate/core';
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {

@@ -2,7 +2,7 @@ import {AfterViewChecked, ChangeDetectorRef, Component, EventEmitter, Input, OnI
 import {BookBySeriesContainer} from '../../../core/model/series-by-group-container';
 import {Utils} from '../../../shared/utils';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {MatAccordion} from '@angular/material';
+import { MatAccordion } from '@angular/material/expansion';
 import {SeriesDisplayComponent} from '../series-display/series-display.component';
 import {BookDetailsEvent} from '../../models/book-details-event';
 @Component({
@@ -11,7 +11,7 @@ import {BookDetailsEvent} from '../../models/book-details-event';
   styleUrls: ['./group-display.component.css']
 })
 export class GroupDisplayComponent implements OnInit, AfterViewChecked {
-  @ViewChild(MatAccordion, {static: false}) accordion!: MatAccordion;
+  @ViewChild(MatAccordion) accordion!: MatAccordion;
   @ViewChildren(SeriesDisplayComponent) series: SeriesDisplayComponent[] = [];
   @Input()
   editor: string | null = null;

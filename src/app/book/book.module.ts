@@ -2,16 +2,16 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {SharedModule} from '../shared/shared.module';
 import {FormsModule} from '@angular/forms';
-import {
-  MatCardModule,
-  MatCheckboxModule,
-  MatChipsModule,
-  MatExpansionModule,
-  MatListModule, MatMenuModule,
-  MatProgressBarModule,
-  MatSelectModule,
-  MatSidenavModule, MatSlideToggleModule
-} from '@angular/material';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {CoreModule} from '../core/core.module';
 import {BookListComponent} from './components/book-list/book-list.component';
 import {BookLayoutComponent} from './layout/book-layout/book-layout.component';

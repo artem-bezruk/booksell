@@ -5,7 +5,8 @@ import {BookAdministrationService} from '../../../../services/book-administratio
 import {BookTypeService} from '../../../../../core/services/book-type.service';
 import {NewBookTypeModalComponent} from '../../shared/new-book-type-modal/new-book-type-modal.component';
 import {TranslateService} from '@ngx-translate/core';
-import {MatDialog, MatSnackBar} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-book-edition-list',
   templateUrl: './book-edition-list.component.html',
