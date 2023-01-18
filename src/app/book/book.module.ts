@@ -16,8 +16,7 @@ import {CoreModule} from '../core/core.module';
 import {BookListComponent} from './components/book-list/book-list.component';
 import {BookLayoutComponent} from './layout/book-layout/book-layout.component';
 import {BookRoutingModule} from './book-routing.module';
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {library} from '@fortawesome/fontawesome-svg-core';
+import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {
   faBook,
   faBookOpen,
@@ -69,16 +68,16 @@ import {BarChartModule, NumberCardModule, PieChartModule} from '@swimlane/ngx-ch
     BookDashboardComponent]
 })
 export class BookModule {
-  constructor() {
-    library.add(faBookOpen);
-    library.add(faBookReader);
-    library.add(faBook);
-    library.add(faFilter);
-    library.add(faSortAlphaUp);
-    library.add(faSortAlphaDown);
-    library.add(faChevronRight);
-    library.add(faChevronLeft);
-    library.add(faCaretUp);
-    library.add(faCaretDown);
+  constructor(library: FaIconLibrary) {
+    library.addIcons(faBookOpen);
+    library.addIcons(faBookReader);
+    library.addIcons(faBook);
+    library.addIcons(faFilter);
+    library.addIcons(faSortAlphaUp);
+    library.addIcons(faSortAlphaDown);
+    library.addIcons(faChevronRight);
+    library.addIcons(faChevronLeft);
+    library.addIcons(faCaretUp);
+    library.addIcons(faCaretDown);
   }
 }
