@@ -56,7 +56,7 @@ export class BookEditionListDisplayComponent implements OnInit {
   submit(): void {
     this.progressBarState = {display: true, type: 'indeterminate'};
     Object.keys(this.form.value).forEach(key => this.book[key] = this.form.value[key]);
-    this.bookAdministrationService.updateBooks(this.book).subscribe(value => {
+    this.bookAdministrationService.update(this.book).subscribe(value => {
       this._isSaved.next(true);
       setTimeout(() => this._isSaved.next(false), 3000);
       this.book = value;

@@ -52,7 +52,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     }
   }
   createBook(bookSearch: BookSearch, bookType: string) {
-    this.bookAdministrationService.addBook(bookSearch, bookType).subscribe(res => {
+    this.bookAdministrationService.add(bookSearch, bookType).subscribe(res => {
       this.snackBar.open(
         this.translateService.instant('BOOK.ADD.SUCCESS', {isbn: res.isbn}),
         this.translateService.instant('SNACKBAR.ACTION.CLOSE'));

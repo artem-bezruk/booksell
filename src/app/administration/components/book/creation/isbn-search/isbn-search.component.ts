@@ -22,7 +22,7 @@ export class IsbnSearchComponent implements OnInit {
   }
   onSubmit() {
     const isbn = this.formAddBook.value.isbnCtrl;
-    this.bookService.searchBooks(this.formAddBook.value.isbnCtrl).subscribe(
+    this.bookService.search(this.formAddBook.value.isbnCtrl).subscribe(
       () => {
       },
       err => {

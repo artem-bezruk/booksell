@@ -11,8 +11,8 @@ export class BookEditionComponent implements OnInit {
   isLoading: Observable<boolean> = this.coreService.isLoading;
   constructor(private bookAdministrationService: BookAdministrationService, private coreService: CoreService) { }
   ngOnInit() {
-    this.bookAdministrationService.getAllBooks();
-    this.bookAdministrationService.bookList.subscribe(next => this.hasResult = next !== null);
+    this.bookAdministrationService.getAll();
+    this.bookAdministrationService.list.subscribe(next => this.hasResult = next !== null);
   }
   onFilter($event: string) {
     this.bookAdministrationService.filter($event);

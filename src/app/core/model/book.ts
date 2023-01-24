@@ -1,13 +1,13 @@
 import {Author} from './author';
 import {Editor} from './editor';
 import {Series} from './series';
-export interface Book {
+import {RestEntity} from './rest-entity';
+export interface Book extends RestEntity {
   arkId?: string;
   authors?: Array<Author>;
   collection?: string;
   cover?: string;
   editor: Editor;
-  id?: number;
   isbn?: string;
   series?: Series;
   status?: Book.StatusEnum;

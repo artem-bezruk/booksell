@@ -13,7 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls:  ['../../../../administration-edition.scss']
 })
 export class BookEditionListComponent implements OnInit {
-  bookList: Observable<Book[]> = this.bookAdministrationService.bookListFiltered;
+  bookList: Observable<Book[]> = this.bookAdministrationService.listFiltered;
   readonly newBookType = 'new Book type';
   constructor(private bookAdministrationService: BookAdministrationService,
               private translateService: TranslateService,
@@ -37,7 +37,7 @@ export class BookEditionListComponent implements OnInit {
     }
   }
   updateBook(book: Book) {
-    this.bookAdministrationService.updateBooks(book).subscribe(res => {
+    this.bookAdministrationService.update(book).subscribe(res => {
       this.snackBar.open(
         this.translateService.instant('BOOK.EDITION.SUCCESS', {isbn: res.isbn}),
         this.translateService.instant('SNACKBAR.ACTION.CLOSE'));
@@ -51,6 +51,6 @@ export class BookEditionListComponent implements OnInit {
       .afterClosed();
   }
   onBookRemoval(event: Book) {
-    this.bookAdministrationService.deleteBooks(event);
+    this.bookAdministrationService.delete(event);
   }
 }
