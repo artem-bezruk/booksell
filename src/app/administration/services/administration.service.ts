@@ -8,7 +8,7 @@ import {RestEntity} from '../../core/model/rest-entity';
   providedIn: 'root'
 })
 export abstract class AdministrationService<T extends RestEntity> {
-  protected apiEndpoints = 't';
+  private apiEndpoint = '';
   private filterStr = '';
   private _list: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
   get list(): Observable<T[]> {
@@ -18,11 +18,12 @@ export abstract class AdministrationService<T extends RestEntity> {
   get listFiltered(): Observable<T[]> {
     return this._listFiltered.asObservable();
   }
-  protected constructor(protected http: HttpClient, protected coreService: CoreService) {
+  protected constructor(protected http: HttpClient, protected coreService: CoreService, apiEndpoint: string) {
+    this.apiEndpoint = apiEndpoint;
   }
   getAll(): Observable<T[]> {
     this.coreService.updateLoadingState(true);
-    const o = this.http.get<T[]>(`/api/${this.apiEndpoints}`).pipe(shareReplay());
+    const o = this.http.get<T[]>(`/api/${this.apiEndpoint}`).pipe(shareReplay());
     o.subscribe(
       res => {
         this._list.next(res);
@@ -34,7 +35,8 @@ export abstract class AdministrationService<T extends RestEntity> {
   }
   update(t: T) {
     this.coreService.updateLoadingState(true);
-    const o = this.http.put<T>(`/api/${this.apiEndpoints}/${t.id}`, t).pipe(shareReplay());
+    console.log(t);
+    const o = this.http.put<T>(`/api/${this.apiEndpoint}/${t.id}`, t).pipe(shareReplay());
     o.subscribe(
       () => {
       },
@@ -44,7 +46,7 @@ export abstract class AdministrationService<T extends RestEntity> {
   }
   delete(t: T) {
     this.coreService.updateLoadingState(true);
-    const o = this.http.delete<T>(`/api/${this.apiEndpoints}/${t.id}`).pipe(shareReplay());
+    const o = this.http.delete<T>(`/api/${this.apiEndpoint}/${t.id}`).pipe(shareReplay());
     o.subscribe(
       () => this.getAll(),
       err => console.error('an error occured!', err),

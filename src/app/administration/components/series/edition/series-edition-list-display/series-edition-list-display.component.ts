@@ -54,7 +54,8 @@ export class SeriesEditionListDisplayComponent implements OnInit {
     const series = this.form.value;
     series.editor = this.series.editor;
     series.name = this.series.name;
-    this.seriesService.updateSeries(series).subscribe(value => {
+    series.id = this.series.id;
+    this.seriesService.update(series).subscribe(value => {
       this._isSaved.next(true);
       setTimeout(() => this._isSaved.next(false), 3000);
       this.series = value;

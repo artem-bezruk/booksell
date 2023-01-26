@@ -8,7 +8,7 @@ import {Series} from '../../../../../core/model/series';
   styleUrls: ['../../../../administration-edition.scss']
 })
 export class SeriesEditionListComponent implements OnInit {
-  seriesList: Observable<Series[]> = this.seriesService.seriesListFiltered;
+  seriesList: Observable<Series[]> = this.seriesService.listFiltered;
   constructor(private seriesService: SeriesAdministrationService) {
   }
   ngOnInit() {

@@ -11,8 +11,8 @@ export class SeriesEditionComponent implements OnInit {
   isLoading: Observable<boolean> = this.coreService.isLoading;
   constructor(private seriesService: SeriesAdministrationService, private coreService: CoreService) { }
   ngOnInit() {
-    this.seriesService.seriesList.subscribe(next => this.hasResult = next !== null);
-    this.seriesService.getAllSeries();
+    this.seriesService.list.subscribe(next => this.hasResult = next !== null);
+    this.seriesService.getAll();
   }
   onFilter($event: string) {
     this.seriesService.filter($event);

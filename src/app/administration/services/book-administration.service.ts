@@ -13,7 +13,7 @@ import {AdministrationService} from './administration.service';
 })
 export class BookAdministrationService extends AdministrationService<Book> {
   constructor(http: HttpClient, coreService: CoreService, private bookTypeService: BookTypeService) {
-    super(http, coreService);
+    super(http, coreService, 'books');
   }
   private _searchResult: BehaviorSubject<BookSearch | null> = new BehaviorSubject<BookSearch | null>(null);
   get searchResult(): Observable<BookSearch | null> {
