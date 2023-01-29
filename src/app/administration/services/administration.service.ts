@@ -4,9 +4,6 @@ import {CoreService} from '../../core/services/core.service';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {shareReplay} from 'rxjs/operators';
 import {RestEntity} from '../../core/model/rest-entity';
-@Injectable({
-  providedIn: 'root'
-})
 export abstract class AdministrationService<T extends RestEntity> {
   private apiEndpoint = '';
   private filterStr = '';
