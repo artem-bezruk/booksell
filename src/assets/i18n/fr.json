@@ -136,6 +136,11 @@
       "BOOK_TYPE_PLACEHOLDER": "Type du livre",
       "TOME_PLACEHOLDER": "Tome",
       "SUCCESS": "Vous avez modifié le livre {{isbn}}"
+    },
+    "DASHBOARD": {
+      "RECENT_BOOK": {
+        "TITLE": "Dernier livre ajoutés"
+      }
     }
   },
   "SNACKBAR": {
