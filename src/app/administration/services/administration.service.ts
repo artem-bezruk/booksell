@@ -1,4 +1,3 @@
-import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {CoreService} from '../../core/services/core.service';
 import {BehaviorSubject, Observable} from 'rxjs';
