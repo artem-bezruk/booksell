@@ -4,7 +4,7 @@ import {Type} from '@angular/core';
 describe('AuthService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
   it('should be created', () => {
-    const service: AuthService = TestBed.get(AuthService as Type<AuthService>);
+    const service: AuthService = TestBed.inject(AuthService as Type<AuthService>);
     expect(service).toBeTruthy();
   });
 });

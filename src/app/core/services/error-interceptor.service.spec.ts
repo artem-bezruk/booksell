@@ -4,7 +4,7 @@ import {Type} from '@angular/core';
 describe('ErrorInterceptorService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
   it('should be created', () => {
-    const service: ErrorInterceptor = TestBed.get(ErrorInterceptor as Type<ErrorInterceptor>);
+    const service: ErrorInterceptor = TestBed.inject(ErrorInterceptor as Type<ErrorInterceptor>);
     expect(service).toBeTruthy();
   });
 });

@@ -4,7 +4,7 @@ import {Type} from '@angular/core';
 describe('StatisticService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
   it('should be created', () => {
-    const service: StatisticService = TestBed.get(StatisticService  as Type<StatisticService>);
+    const service: StatisticService = TestBed.inject(StatisticService  as Type<StatisticService>);
     expect(service).toBeTruthy();
   });
 });

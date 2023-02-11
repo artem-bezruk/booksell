@@ -5,7 +5,7 @@ import {Book} from '../../core/model/book';
 describe('AdministrationService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
   it('should be created', () => {
-    const service: AdministrationService<Book> = TestBed.get(AdministrationService as Type<AdministrationService<Book>>);
+    const service: AdministrationService<Book> = TestBed.inject(AdministrationService as Type<AdministrationService<Book>>);
     expect(service).toBeTruthy();
   });
 });

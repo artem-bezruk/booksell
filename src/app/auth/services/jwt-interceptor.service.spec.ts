@@ -5,7 +5,7 @@ import {Type} from '@angular/core';
 describe('JwtInterceptorService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
   it('should be created', () => {
-    const service: JwtInterceptorService = TestBed.get(JwtInterceptorService  as Type<JwtInterceptorService>);
+    const service: JwtInterceptorService = TestBed.inject(JwtInterceptorService  as Type<JwtInterceptorService>);
     expect(service).toBeTruthy();
   });
 });

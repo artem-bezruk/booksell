@@ -4,7 +4,7 @@ import {Type} from '@angular/core';
 describe('BookListService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
   it('should be created', () => {
-    const service: BookListService = TestBed.get(BookListService as Type<BookListService>);
+    const service: BookListService = TestBed.inject(BookListService as Type<BookListService>);
     expect(service).toBeTruthy();
   });
 });

@@ -1,4 +1,4 @@
-export interface SimpleChartData { 
-    name?: string;
-    value?: number;
+export interface SimpleChartData {
+  name?: string;
+  value?: number;
 }

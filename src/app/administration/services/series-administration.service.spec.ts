@@ -4,7 +4,7 @@ import {Type} from '@angular/core';
 describe('SeriesAdministrationService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
   it('should be created', () => {
-    const service: SeriesAdministrationService = TestBed.get(SeriesAdministrationService as Type<SeriesAdministrationService>);
+    const service: SeriesAdministrationService = TestBed.inject(SeriesAdministrationService as Type<SeriesAdministrationService>);
     expect(service).toBeTruthy();
   });
 });
