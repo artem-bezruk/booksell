@@ -1,20 +1,22 @@
 <mat-progress-bar *ngIf="isLoading | async" [color]="'primary'" [mode]="'indeterminate'"></mat-progress-bar>
-<mat-sidenav-container class="book-list-container" fxFlex>
-  <mat-sidenav #filter mode="side" style="position: fixed; padding-top: 68px">
-    <app-list-filter fxFlex style="padding: 20px"></app-list-filter>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <div fxFlex="80" fxFlexOffset="10">
-      <app-book-list-action-bar style="overflow-y: hidden;" (filter)="filter.toggle()"></app-book-list-action-bar>
-      <app-group-display (showBookDetails)="showDetails($event, group)"
-                         *ngFor="let group of filteredGroupList | async"
-                         [seriesContainer]="(filteredBooks|async).get(group)"
-                         [editor]="group">
-      </app-group-display>
-    </div>
-  </mat-sidenav-content>
-  <mat-sidenav mode="over" class="right-side-nav" (closedStart)="clearBookToDisplay()"
-               [opened]="displayDetails" position="end">
-    <app-book-details fxFlex></app-book-details>
-  </mat-sidenav>
-</mat-sidenav-container>
+<div style="height: 100%">
+  <mat-sidenav-container class="book-list-container" fxFlex>
+    <mat-sidenav #filter mode="side" style="position: fixed; padding-top: 68px">
+      <app-list-filter fxFlex style="padding: 20px"></app-list-filter>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div fxFlex="80" fxFlexOffset="10">
+        <app-book-list-action-bar style="overflow-y: hidden;" (filter)="filter.toggle()"></app-book-list-action-bar>
+        <app-group-display (showBookDetails)="showDetails($event, group)"
+                           *ngFor="let group of filteredGroupList | async"
+                           [seriesContainer]="(filteredBooks|async).get(group)"
+                           [editor]="group">
+        </app-group-display>
+      </div>
+    </mat-sidenav-content>
+    <mat-sidenav mode="over" class="right-side-nav" (closedStart)="clearBookToDisplay()"
+                 [opened]="displayDetails" position="end">
+      <app-book-details fxFlex></app-book-details>
+    </mat-sidenav>
+  </mat-sidenav-container>
+</div>
