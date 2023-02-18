@@ -3,10 +3,14 @@
     <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="1rem">
       <mat-form-field>
         <span matPrefix>{{book?.editor?.name}} - {{book?.series?.name}} &nbsp;</span>
-        <input matInput formControlName="title">
+        <label>
+          <input matInput formControlName="title">
+        </label>
       </mat-form-field>
       <mat-form-field fxFlex="5">
-        <input matInput placeholder="{{'BOOK.EDITION.TOME_PLACEHOLDER' | translate}}" formControlName="tome">
+        <label>
+          <input matInput placeholder="{{'BOOK.EDITION.TOME_PLACEHOLDER' | translate}}" formControlName="tome">
+        </label>
       </mat-form-field>
       <mat-form-field style="padding-right: 1rem">
         <mat-select placeholder="{{'BOOK.EDITION.BOOK_TYPE_PLACEHOLDER' | translate}}" formControlName="bookType">
@@ -18,21 +22,21 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="status">
-        <mat-button-toggle value="UNREAD">
-          <fa-icon [icon]="['fas', 'book']" style="padding-right: 10px"></fa-icon>
-          <span>{{'BOOK.STATE.UNREAD' | translate}}</span>
-        </mat-button-toggle>
-        <mat-button-toggle value="READING">
-          <fa-icon [icon]="['fas', 'book-reader']" style="padding-right: 10px"></fa-icon>
-          <span>{{'BOOK.STATE.READING' | translate}}</span>
-        </mat-button-toggle>
-        <mat-button-toggle value="READ">
-          <fa-icon [icon]="['fas', 'book-open']" style="padding-right: 10px"></fa-icon>
-          <span>{{'BOOK.STATE.READ' | translate}}</span>
-        </mat-button-toggle>
-      </mat-button-toggle-group>
-      <div>
+      <div fxLayoutGap="1rem">
+        <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="status">
+          <mat-button-toggle value="UNREAD">
+            <fa-icon [icon]="['fas', 'book']" style="padding-right: 10px"></fa-icon>
+            <span>{{'BOOK.STATE.UNREAD' | translate}}</span>
+          </mat-button-toggle>
+          <mat-button-toggle value="READING">
+            <fa-icon [icon]="['fas', 'book-reader']" style="padding-right: 10px"></fa-icon>
+            <span>{{'BOOK.STATE.READING' | translate}}</span>
+          </mat-button-toggle>
+          <mat-button-toggle value="READ">
+            <fa-icon [icon]="['fas', 'book-open']" style="padding-right: 10px"></fa-icon>
+            <span>{{'BOOK.STATE.READ' | translate}}</span>
+          </mat-button-toggle>
+        </mat-button-toggle-group>
         <button type="button" mat-button color="warn" (click)="deleteBook()">
           <fa-icon [icon]="['fas', 'trash']"></fa-icon>
         </button>
