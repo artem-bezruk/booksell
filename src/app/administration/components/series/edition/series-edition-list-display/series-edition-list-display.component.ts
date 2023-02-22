@@ -60,6 +60,7 @@ export class SeriesEditionListDisplayComponent implements OnInit {
       setTimeout(() => this._isSaved.next(false), 3000);
       this.series = value;
       this.progressBarState.display = false;
+      this.toogle.next(false);
     });
   }
 }

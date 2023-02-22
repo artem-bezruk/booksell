@@ -31,7 +31,6 @@ export abstract class AdministrationService<T extends RestEntity> {
   }
   update(t: T) {
     this.coreService.updateLoadingState(true);
-    console.log(t);
     const o = this.http.put<T>(`/api/${this.apiEndpoint}/${t.id}`, t).pipe(shareReplay());
     o.subscribe(
       () => {
