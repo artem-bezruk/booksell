@@ -69,15 +69,15 @@
     <mat-action-row>
       <mat-form-field style="padding-right: 1rem">
         <mat-select #select [placeholder]="'Book Type'">
-          <mat-option [value]="newBookType">
-            {{newBookType}}
+          <mat-option [value]="0">
+            {{'BOOK.SEARCH.RESULTS.ACTION_ROW.NEW_BOOK_TYPE'}}
           </mat-option>
           <mat-option *ngFor="let bookType of (bookTypes|async)" [value]="bookType.name">
             {{bookType.name}}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <button mat-stroked-button mat-raised-button color="primary" [disabled]="!select.value"  (click)="addBook(searchResult, select.value)">
+      <button mat-stroked-button mat-raised-button color="primary" (click)="addBook(searchResult, select.value)">
         <mat-label>{{'BOOK.SEARCH.RESULTS.ACTION_ROW.ADD' | translate}}</mat-label>
       </button>
     </mat-action-row>

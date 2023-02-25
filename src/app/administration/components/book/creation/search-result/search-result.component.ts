@@ -14,7 +14,6 @@ import {NewBookTypeModalComponent} from '../../shared/new-book-type-modal/new-bo
   styleUrls: ['./search-result.component.scss']
 })
 export class SearchResultComponent implements OnInit, OnDestroy {
-  readonly newBookType = 'new Book type';
   searchResult: BookSearch = {
     editor: 'N/A',
     title: 'N/A'
@@ -40,7 +39,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     return bookSearch.series === null || bookSearch.series === '';
   }
   addBook(bookSearch: BookSearch, bookType: string) {
-    if (bookType === this.newBookType) {
+    if (bookType === '0') {
       this.createNewBookType()
         .subscribe((result: string) => {
           if (result) {
