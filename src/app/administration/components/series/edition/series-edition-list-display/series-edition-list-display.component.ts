@@ -22,8 +22,8 @@ export class SeriesEditionListDisplayComponent implements OnInit {
     seriesBookCount: this.fb.control('', Validators.min(1)),
   });
   private time = 3;
-  private toogle = new BehaviorSubject(false);
-  remainingSeconds = this.toogle.pipe(
+  private toggle = new BehaviorSubject(false);
+  remainingSeconds = this.toggle.pipe(
     switchMap((running: boolean) => (running ? timer(0, 1000) : of(0))),
     takeWhile(t => t <= this.time),
   );
@@ -35,7 +35,7 @@ export class SeriesEditionListDisplayComponent implements OnInit {
     this.initForm();
     this.form.valueChanges.subscribe(() => {
       this.progressBarState = {display: true, type: 'determinate'};
-      this.toogle.next(true);
+      this.toggle.next(true);
     });
     this.remainingSeconds.subscribe((t: number) => {
       if (t === this.time) {
@@ -60,7 +60,7 @@ export class SeriesEditionListDisplayComponent implements OnInit {
       setTimeout(() => this._isSaved.next(false), 3000);
       this.series = value;
       this.progressBarState.display = false;
-      this.toogle.next(false);
+      this.toggle.next(false);
     });
   }
 }
