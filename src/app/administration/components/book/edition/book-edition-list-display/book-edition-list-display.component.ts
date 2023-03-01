@@ -18,11 +18,12 @@ export class BookEditionListDisplayComponent implements OnInit {
               private bookTypeService: BookTypeService,
               private bookAdministrationService: BookAdministrationService) {
   }
+  readonly newBookType = 'new Book type';
   @Input()
   book: Book = {title: '', editor: {}, series: {seriesBookCount: 0, displayName: ''}};
   private time = 3;
-  private toggle = new BehaviorSubject(false);
-  remainingSeconds = this.toggle.pipe(
+  private toogle = new BehaviorSubject(false);
+  remainingSeconds = this.toogle.pipe(
     switchMap((running: boolean) => (running ? timer(0, 1000) : of(0))),
     takeWhile(t => t <= this.time),
   );
@@ -44,7 +45,7 @@ export class BookEditionListDisplayComponent implements OnInit {
     this.initForm();
     this.form.valueChanges.subscribe(() => {
       this.progressBarState = {display: true, type: 'determinate'};
-      this.toggle.next(true);
+      this.toogle.next(true);
     });
     this.remainingSeconds.subscribe((t: number) => {
       if (t === this.time) {
@@ -56,12 +57,11 @@ export class BookEditionListDisplayComponent implements OnInit {
     this.progressBarState = {display: true, type: 'indeterminate'};
     Object.keys(this.form.value).forEach(key => this.book[key] = this.form.value[key]);
     this.bookAdministrationService.update(this.book).subscribe(value => {
-      this.bookTypeService.getAllBookType();
       this._isSaved.next(true);
       setTimeout(() => this._isSaved.next(false), 3000);
       this.book = value;
       this.progressBarState.display = false;
-      this.toggle.next(false);
+      this.toogle.next(false);
     });
   }
   initForm(): void {

@@ -14,9 +14,6 @@
       </mat-form-field>
       <mat-form-field style="padding-right: 1rem">
         <mat-select placeholder="{{'BOOK.EDITION.BOOK_TYPE_PLACEHOLDER' | translate}}" formControlName="bookType">
-          <mat-option [value]="newBookType">
-            {{newBookType}}
-          </mat-option>
           <mat-option *ngFor="let bookType of (bookTypes|async)" [value]="bookType.name">
             {{bookType.name}}
           </mat-option>

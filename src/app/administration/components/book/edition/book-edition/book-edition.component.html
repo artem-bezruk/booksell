@@ -8,6 +8,9 @@
   <div fxLayout="row" fxLayoutAlign="space-around">
     <app-book-list-filter fxFlex="20" (filter)="onFilter($event)"></app-book-list-filter>
     <div fxFlex="75">
+      <div>
+        <button mat-button mat-flat-button (click)="createNewBookType()" >Create new book type</button>
+      </div>
       <app-book-edition-list style="padding-top: 20px" fxLayout="row" *ngIf="hasResult"></app-book-edition-list>
     </div>
   </div>
