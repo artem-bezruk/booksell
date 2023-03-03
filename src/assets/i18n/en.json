@@ -132,6 +132,9 @@
     },
     "EDITION": {
       "TITLE": "Book edition",
+      "ACTION_BAR": {
+        "CREATE_BOOK_TYPE": "Create a book type"
+      },
       "TITLE_PLACEHOLDER": "Title",
       "BOOK_TYPE_PLACEHOLDER": "Book type",
       "TOME_PLACEHOLDER": "Tome",
@@ -173,6 +176,9 @@
         "CANCEL": "Cancel",
         "VALIDATE": "Validate"
       }
+    },
+    "CREATION": {
+      "MSG": "New book type {{name}} created"
     }
   }
 }
