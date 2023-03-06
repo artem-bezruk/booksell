@@ -132,9 +132,6 @@
     },
     "EDITION": {
       "TITLE": "Edition des livres",
-      "ACTION_BAR": {
-        "CREATE_BOOK_TYPE": "Créer un type de livre"
-      },
       "TITLE_PLACEHOLDER": "Titre",
       "BOOK_TYPE_PLACEHOLDER": "Type du livre",
       "TOME_PLACEHOLDER": "Tome",
@@ -176,9 +173,6 @@
         "CANCEL": "Annuler",
         "VALIDATE": "Valider"
       }
-    },
-    "CREATION": {
-      "MSG": "Le nouveau type de livre {{name}} a été crée"
     }
   }
 }

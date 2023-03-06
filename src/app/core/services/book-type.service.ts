@@ -23,13 +23,4 @@ export class BookTypeService {
       () => this.coreService.updateLoadingState(false));
     return o;
   }
-  createBookType(name: string): Observable<BookType> {
-    this.coreService.updateLoadingState(true);
-    const o = this.http.post<BookType>('/api/bookTypes/',{name}).pipe(shareReplay());
-    o.subscribe(
-      () => this.getAllBookType(),
-      err => console.error('an error occured!', err),
-      () => this.coreService.updateLoadingState(false));
-    return o;
-  }
 }
