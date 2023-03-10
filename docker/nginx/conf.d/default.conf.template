@@ -22,7 +22,7 @@ server {
     }
 
     location /api/search/ {
-        proxy_pass http://$BNF_API_SERVER/;
+        proxy_pass http://$BNF_API_SERVER/search/;
     }
 
     location /api/ {
