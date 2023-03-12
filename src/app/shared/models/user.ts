@@ -1,5 +1,5 @@
-import {Tokens} from './tokens';
+import {AuthToken} from './authToken';
 export interface User {
   email: string;
-  tokens?: Tokens;
+  tokens: AuthToken;
 }
