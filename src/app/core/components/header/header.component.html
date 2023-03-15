@@ -1,6 +1,6 @@
 <mat-toolbar class="app-toolbar" color="default" [fxLayout]="'row'" [fxLayoutAlign]="'space-between center'">
   <div>
-    <span *ngIf="(userConnected()|async) === null else adminTitle">{{'HEADER.APP_TITLE' | translate}}</span>
+    <span *ngIf="!isAuthenticated() else adminTitle">{{'HEADER.APP_TITLE' | translate}}</span>
     <ng-template #adminTitle>
       <span>{{'HEADER.APP_TITLE_ADMIN' | translate}}</span>
     </ng-template>
@@ -19,7 +19,7 @@
     </mat-menu>
   </div>
   <div>
-    <div *ngIf="userConnected()|async">
+    <div *ngIf="isAuthenticated()">
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
         <mat-icon>settings</mat-icon>
       </button>

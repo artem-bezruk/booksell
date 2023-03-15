@@ -3,10 +3,9 @@ import {Router} from '@angular/router';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
-import {map, shareReplay} from 'rxjs/operators';
+import {shareReplay} from 'rxjs/operators';
 import {ConfigService} from '../../core/services/config.service';
 import {AppConfig, OAuthConfig} from '../../core/model/appConfig';
-import {User} from '../../shared/models/user';
 import {AuthToken} from '../../shared/models/authToken';
 @Injectable({
   providedIn: 'root'
@@ -17,15 +16,15 @@ export class AuthService {
               private cookieService: CookieService,
               private configService: ConfigService) {
     this.configService.appConfig.subscribe((appConfig: AppConfig | null) => this.oauthConfig = appConfig ? appConfig.oauth : null);
-    const localstorage = localStorage.getItem(AuthService.USER_LOCAL_STORAGE_NAME);
-    this._currentUser = new BehaviorSubject<User | null>(localstorage ? JSON.parse(localstorage) : null);
+    const localstorage = localStorage.getItem(AuthService.TOKENS_LOCAL_STORAGE_NAME);
+    this._tokens = new BehaviorSubject<AuthToken | null>(localstorage ? JSON.parse(localstorage) : null);
   }
-  get currentUser(): Observable<User | null> {
-    return this._currentUser.asObservable();
+  get tokens(): Observable<AuthToken | null> {
+    return this._tokens.asObservable();
   }
-  private static USER_LOCAL_STORAGE_NAME = 'current_user';
+  private static TOKENS_LOCAL_STORAGE_NAME = 'tokens';
   private oauthConfig: OAuthConfig | null = null;
-  private _currentUser: BehaviorSubject<User | null>;
+  private _tokens: BehaviorSubject<AuthToken | null>;
   static mapToken(token: any): AuthToken {
     return {
       creationDate: new Date(),
@@ -39,7 +38,6 @@ export class AuthService {
   login(username: string, password: string): Observable<any> {
     if (this.oauthConfig !== null) {
       const oauthAuth = `${this.oauthConfig.client_id}:${this.oauthConfig.client_secret}`;
-      console.log(window.btoa(oauthAuth));
       const params = new HttpParams()
         .set('username', username)
         .set('password', password)
@@ -49,7 +47,10 @@ export class AuthService {
         .set('Authorization', `Basic ${window.btoa(oauthAuth)}`);
       const observable = this.http.post('/auth/oauth/token', params, {headers}).pipe(shareReplay());
       observable.subscribe(
-        (token: any) => this.saveToken({email: username, tokens: AuthService.mapToken(token)}),
+        (token: any) => {
+          this.saveToken(AuthService.mapToken(token))
+          this.router.navigate(['/']);
+        },
         err => console.error('Invalid Credentials: ', err));
       return observable;
     }
@@ -57,19 +58,19 @@ export class AuthService {
   }
   refreshToken(): Observable<any> {
     if (this.oauthConfig !== null) {
-      const oauthAuth = `${this.oauthConfig.client_id}:${this.oauthConfig.client_secret}`;
-      if (this._currentUser.value && this._currentUser.value.tokens && this._currentUser.value.tokens.refresh) {
+      if (this._tokens.value && this._tokens.value.refresh) {
         const params = new HttpParams()
-          .set('refresh_token', this._currentUser.value.tokens?.refresh)
-          .set('grant_type', 'refresh_token');
+          .set('refresh_token', this._tokens.value.refresh)
+          .set('grant_type', 'refresh_token')
+          .set('client_id', `${this.oauthConfig.client_id}`)
+          .set('client_secret', `${this.oauthConfig.client_secret}`);
         const headers = new HttpHeaders()
-          .set('Content-type', 'application/x-www-form-urlencoded')
-          .set('Authorization', `Basic ${window.btoa(oauthAuth)}`);
-        const observable = this.http.post('/auth/oauth/token', params, {headers}).pipe(shareReplay());
+          .set('Content-type', 'application/x-www-form-urlencoded');
+        const observable = this.http.post('/auth/oauth/token', params, {headers, observe: 'response'}).pipe(shareReplay());
         observable.subscribe(
-          (data: any) => {
-            if (data.status === 200) {
-              this.updateToken(data);
+          (response: any) => {
+            if (response.status === 200) {
+              this.updateToken(response.body);
             }
           },
           (err) => console.error('Invalid Credentials: ', err));
@@ -79,22 +80,24 @@ export class AuthService {
     }
     return throwError('OAuth configuration missing');
   }
-  saveToken(user: User) {
-    localStorage.setItem(AuthService.USER_LOCAL_STORAGE_NAME, JSON.stringify(user));
-    this._currentUser.next(user);
-    this.router.navigate(['/']);
+  saveToken(authToken: AuthToken) {
+    localStorage.setItem(AuthService.TOKENS_LOCAL_STORAGE_NAME, JSON.stringify(authToken));
+    this._tokens.next(authToken);
   }
-  getCurrentUser(): User | null {
-    return this._currentUser.value;
+  getAuthToken(): AuthToken | null {
+    return this._tokens.value;
   }
   logout() {
-    localStorage.removeItem(AuthService.USER_LOCAL_STORAGE_NAME);
-    this._currentUser.next(null);
+    localStorage.removeItem(AuthService.TOKENS_LOCAL_STORAGE_NAME);
+    this._tokens.next(null);
     this.router.navigate(['/']);
   }
   updateToken(rawToken: any) {
-    if (this._currentUser.value) {
-      this.saveToken({...this._currentUser.value, tokens: AuthService.mapToken(rawToken)});
+    if (this._tokens.value) {
+      this.saveToken(AuthService.mapToken(rawToken));
     }
+  }
+  isAuthenticated(): boolean {
+    return this._tokens.value !== null;
   }
 }

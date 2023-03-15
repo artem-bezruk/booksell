@@ -38,7 +38,7 @@ export class SeriesDisplayComponent {
     return this.matExpansionPanel.expanded;
   }
   userConnected() {
-    return this.authService.currentUser;
+    return this.authService.tokens;
   }
   changeBookState(selected: MatListOption[], newState: 'UNREAD' | 'READING' | 'READ') {
     this.bookService.bulkUpdate(selected.map(matOption => {

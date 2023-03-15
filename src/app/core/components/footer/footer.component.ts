@@ -16,6 +16,6 @@ export class FooterComponent implements OnInit {
     dialogRef.afterClosed().subscribe();
   }
   userConnected() {
-    return this.authService.currentUser;
+    return this.authService.tokens;
   }
 }

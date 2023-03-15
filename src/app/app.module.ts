@@ -53,7 +53,6 @@ export function load(http: HttpClient, config: ConfigService): (() => Promise<bo
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     {
       provide: APP_INITIALIZER,
       useFactory: load,

@@ -16,8 +16,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.bookTypeService.getAllBookType();
   }
-  userConnected() {
-    return this.authService.currentUser;
+  isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
   }
   signOut() {
     this.authService.logout();

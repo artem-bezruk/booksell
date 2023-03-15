@@ -1,43 +1,50 @@
 import {Injectable} from '@angular/core';
-import {HttpRequest, HttpHandler, HttpInterceptor, HttpClient, HttpEvent} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
+import {HttpRequest, HttpHandler, HttpInterceptor} from '@angular/common/http';
+import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {AuthService} from './auth.service';
-import {User} from '../../shared/models/user';
-import {catchError, map} from 'rxjs/operators';
+import {catchError, filter, switchMap, take} from 'rxjs/operators';
+import {AuthToken} from '../../shared/models/authToken';
 @Injectable({
   providedIn: 'root'
 })
 export class JwtInterceptorService implements HttpInterceptor {
+  private refreshTokenInProgress = false;
+  private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(false);
   constructor(private authService: AuthService) {
   }
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (!request.url.includes('/oauth/token')) {
-      request = this.addAuthToken(request);
-      return next.handle(request).pipe(catchError((err) => {
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
+    return next.handle(this.addAuthToken(request)).pipe(catchError((err) => {
+      if (request.url.includes('/oauth/token')) {
         if (err.status === 401) {
-          if (err.error.error_description.includes('Access token expired')) {
-            this.authService.refreshToken().pipe(map((data: any) => {
-                if (data.status === 200) {
-                  return next.handle(this.addAuthToken(request)).pipe(catchError((error) => throwError(error)));
-                } else {
-                  this.authService.logout();
-                }
-              }
-            ));
-          } else {
-            this.authService.logout();
-          }
+          this.authService.logout();
+        } else {
+          return throwError(err);
         }
+      }
+      if (err.status !== 401) {
         return throwError(err);
-      }));
-    }
-    return next.handle(request);
+      }
+      if (this.refreshTokenInProgress) {
+        return this.refreshTokenSubject.pipe(
+          filter(result => !result),
+          take(1),
+          switchMap(() => next.handle(this.addAuthToken(request))));
+      } else {
+        this.refreshTokenInProgress = true;
+        this.refreshTokenSubject.next(true);
+        return this.authService.refreshToken().pipe(switchMap(() => {
+          this.refreshTokenInProgress = false;
+          this.refreshTokenSubject.next(false);
+          return next.handle(this.addAuthToken(request));
+        }));
+      }
+    }));
   }
-  private addAuthToken(request: HttpRequest<any>) {
-    const currentUser: User | null = this.authService.getCurrentUser();
+  private addAuthToken(request: HttpRequest<any>): HttpRequest<any> {
+    const currentUser: AuthToken | null = this.authService.getAuthToken();
     if (currentUser) {
       request = request.clone({
-        setHeaders: {Authorization: `Bearer ${currentUser.tokens.access}`}
+        setHeaders: {Authorization: `Bearer ${currentUser.access}`}
       });
     }
     return request;
