@@ -1,7 +1,7 @@
 <div>
   <mat-progress-bar *ngIf="isLoading | async" [color]="'primary'" [mode]="'indeterminate'"></mat-progress-bar>
 </div>
-<div fxLayout="column" style="margin: 1rem" *ngIf="statistics | async">
+<div fxLayout="column" style="margin: 1rem" *ngIf="(statistics | async).recentlyAddedBooks.length > 0; else noData">
   <div fxLayout="column">
     <h1>{{'Recently added books'| translate}}</h1>
     <div fxLayout="row">
@@ -76,3 +76,6 @@
     </div>
   </div>
 </div>
+<ng-template #noData>
+  No Data
+</ng-template>
