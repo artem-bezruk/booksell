@@ -180,5 +180,14 @@
     "CREATION": {
       "MSG": "Le nouveau type de livre {{name}} a été crée"
     }
+  },
+  "DASHBOARD": {
+    "RECENT_BOOK": {
+      "TITLE": "Dernier livre ajoutés"
+    },
+    "NO_DATA": "Aucun livre présent dans cette bibliothèque",
+    "BOOK": {
+      "ADD": "Ajouter le premier livre"
+    }
   }
 }
