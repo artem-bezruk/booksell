@@ -14,6 +14,9 @@
     "SERIES": {
       "EDITION": "Series edition"
     },
+    "BOOK_TYPE": {
+      "GESTION": "Book type management"
+    },
     "MY_PROFILE": "My Profil",
     "SIGN_OUT": "logout"
   },
@@ -169,6 +172,13 @@
     "BUTTON_DELETE": "delete"
   },
   "BOOK_TYPE": {
+    "GESTION": {
+      "TITLE": "Book type management"
+    },
+    "CREATION": {
+      "PLACEHOLDER_NAME": "New book type",
+      "MSG": "New book type {{name}} created"
+    },
     "CREATION_MODAL": {
       "TITLE": "Create a book type",
       "NAME_PLACEHOLDER": "Name",
@@ -176,9 +186,6 @@
         "CANCEL": "Cancel",
         "VALIDATE": "Validate"
       }
-    },
-    "CREATION": {
-      "MSG": "New book type {{name}} created"
     }
   },
   "DASHBOARD": {

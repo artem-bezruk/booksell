@@ -32,6 +32,10 @@
           <fa-icon [icon]="['fas', 'pencil-alt']" style="padding-right: 10px"></fa-icon>
           <span>{{'HEADER.BOOK.EDITION' | translate}}</span>
         </button>
+        <button mat-menu-item [routerLink]="'/administration/book-type/gestion'">
+          <fa-icon [icon]="['fas', 'pencil-alt']" style="padding-right: 10px"></fa-icon>
+          <span>{{'HEADER.BOOK_TYPE.GESTION' | translate}}</span>
+        </button>
         <button mat-menu-item [routerLink]="'/administration/series/edition'">
           <fa-icon [icon]="['fas', 'pencil-alt']" style="padding-right: 10px"></fa-icon>
           <span>{{'HEADER.SERIES.EDITION' | translate}}</span>
