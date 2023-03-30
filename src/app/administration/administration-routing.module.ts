@@ -5,14 +5,12 @@ import {BookAddComponent} from './components/book/creation/book-add/book-add.com
 import {AuthGuard} from '../auth/guards/auth.guard';
 import {SeriesEditionComponent} from './components/series/edition/series-edition/series-edition.component';
 import {BookEditionComponent} from './components/book/edition/book-edition/book-edition.component';
-import {BookTypeGestionComponent} from './components/bookType/gestion/book-type-gestion/book-type-gestion.component';
 const booksRoutes: Routes = [
   {
     path: 'administration', canActivate: [AuthGuard], component: AdministrationLayoutComponent, children: [
       {path: 'book/add', component: BookAddComponent},
       {path: 'book/edition', component: BookEditionComponent},
-      {path: 'series/edition', component: SeriesEditionComponent},
-      {path: 'book-type/gestion', component: BookTypeGestionComponent}
+      {path: 'series/edition', component: SeriesEditionComponent}
     ]
   },
 ];

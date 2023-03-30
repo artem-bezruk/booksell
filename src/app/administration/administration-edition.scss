@@ -1,6 +1,6 @@
 @import "src/styles";
 ::ng-deep {
-  .mat-list-item:not(:hover):not(:focus-within):not(.no-style) {
+  .mat-list-item:not(:hover):not(:focus-within) {
     .mat-form-field-label-wrapper, .mat-form-field-underline {
       opacity: 0;
     }

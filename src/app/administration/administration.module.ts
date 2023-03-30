@@ -23,10 +23,6 @@ import {BookEditionListComponent} from './components/book/edition/book-edition-l
 import {BookEditionListDisplayComponent} from './components/book/edition/book-edition-list-display/book-edition-list-display.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {BookListFilterComponent} from './components/book/book-list-filter/book-list-filter.component';
-import { BookTypeGestionComponent } from './components/bookType/gestion/book-type-gestion/book-type-gestion.component';
-import { BookTypeGestionListComponent } from './components/bookType/gestion/book-type-gestion-list/book-type-gestion-list.component';
-import { BookTypeGestionListDisplayComponent } from './components/bookType/gestion/book-type-edition-list-display/book-type-gestion-list-display.component';
-import { BookTypeCreationListDisplayComponent } from './components/bookType/gestion/book-type-creation-list-display/book-type-creation-list-display.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -55,11 +51,7 @@ import { BookTypeCreationListDisplayComponent } from './components/bookType/gest
     BookEditionComponent,
     BookEditionListComponent,
     BookEditionListDisplayComponent,
-    BookListFilterComponent,
-    BookTypeGestionComponent,
-    BookTypeGestionListComponent,
-    BookTypeGestionListDisplayComponent,
-    BookTypeCreationListDisplayComponent
+    BookListFilterComponent
   ],
   entryComponents: [NewBookTypeModalComponent]
 })

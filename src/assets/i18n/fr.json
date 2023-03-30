@@ -14,9 +14,6 @@
     "SERIES": {
       "EDITION": "Edition des séries"
     },
-    "BOOK_TYPE": {
-      "GESTION": "Gestion des types de livre"
-    },
     "MY_PROFILE": "Mon Profil",
     "SIGN_OUT": "Déconnexion"
   },
@@ -172,13 +169,6 @@
     "BUTTON_DELETE": "supprimer"
   },
   "BOOK_TYPE": {
-    "GESTION": {
-      "TITLE": "Gestion des types de livre"
-    },
-    "CREATION": {
-      "PLACEHOLDER_NAME": "Nouveau type de livre",
-      "MSG": "Le nouveau type de livre {{name}} a été crée"
-    },
     "CREATION_MODAL": {
       "TITLE": "Créer un nouveau type",
       "NAME_PLACEHOLDER": "Nom",
@@ -186,6 +176,9 @@
         "CANCEL": "Annuler",
         "VALIDATE": "Valider"
       }
+    },
+    "CREATION": {
+      "MSG": "Le nouveau type de livre {{name}} a été crée"
     }
   },
   "DASHBOARD": {

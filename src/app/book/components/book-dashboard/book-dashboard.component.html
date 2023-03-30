@@ -1,85 +1,85 @@
-<mat-progress-bar *ngIf="isLoading | async"
-                  [color]="'primary'"
-                  style="margin-top: -20px;
-                  margin-bottom: 20px"
-                  [mode]="'indeterminate'">
-</mat-progress-bar>
-<div fxLayout="column" style="margin: 1rem" *ngIf="(statistics | async).recentlyAddedBooks.length > 0; else noData">
-  <div fxLayout="column">
-    <h1>{{'DASHBOARD.RECENT_BOOK.TITLE'| translate}}</h1>
-    <div fxLayout="row">
-      <mat-card fxFlex="20" style="margin: 1rem" *ngFor="let book of (statistics|async).recentlyAddedBooks">
-        <mat-card-header>
-          <mat-card-title>{{book.title}}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content style="margin-top: 1rem">
-          {{book.isbn}}
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </div>
-  <div fxFlexFill
-       fxLayoutGap="10px grid"
-       fxLayout="row wrap">
-    <div fxFlex="50" style="height: 300px">
-      <div fxFlexFill fxLayoutAlign="center center">
-        <ngx-charts-pie-chart [scheme]="'cool'"
-                              [results]="(statistics|async).booksStatus"
-                              [labels]="false"
-                              [legend]="true"
-                              legendTitle=""
-                              title="Book Status">
-        </ngx-charts-pie-chart>
-      </div>
-    </div>
-    <div fxFlex="50" style="height: 300px">
-      <div fxFlexFill fxLayoutAlign="center center">
-        <ngx-charts-bar-vertical
-          [scheme]="'cool'"
-          [results]="(statistics|async).editorsStats"
-          [xAxis]="true"
-          [yAxis]="true"
-          [legendPosition]="'below'"
-          [showXAxisLabel]="false"
-          [showYAxisLabel]="false"
-          [noBarWhenZero]="true"
-          [showDataLabel]="false"
-          [rotateXAxisTicks]="true">
-        </ngx-charts-bar-vertical>
-      </div>
-    </div>
-    <div fxFlex="50" style="height: 300px">
-      <div fxFlexFill fxLayoutAlign="center center">
-        <ngx-charts-number-card
-          class="chart-container"
-          [scheme]="'cool'"
-          cardColor="#232837"
-          emptyColor="#1e222e"
-          [results]="(statistics|async).seriesStats"
-          [animations]="true"
-          [labelFormatting]="statusLabelFormat">
-        </ngx-charts-number-card>
-      </div>
-    </div>
-    <div fxFlex="50" style="height: 300px">
-      <div fxFlexFill fxLayoutAlign="center center">
-        <ngx-charts-bar-vertical
-          [scheme]="'cool'"
-          [results]="(statistics|async).bookTypesStats"
-          [xAxis]="true"
-          [yAxis]="true"
-          [legendPosition]="'below'"
-          [showXAxisLabel]="false"
-          [showYAxisLabel]="false"
-          [noBarWhenZero]="true"
-          [showDataLabel]="false"
-          [rotateXAxisTicks]="true">
-        </ngx-charts-bar-vertical>
-      </div>
-    </div>
-  </div>
-</div>
 <div class="container">
+  <mat-progress-bar *ngIf="isLoading | async"
+                    [color]="'primary'"
+                    style="margin-top: -20px;
+                  margin-bottom: 20px"
+                    [mode]="'indeterminate'">
+  </mat-progress-bar>
+  <div fxLayout="column" style="margin: 1rem" *ngIf="(statistics | async).recentlyAddedBooks.length > 0; else noData">
+    <div fxLayout="column">
+      <h1>{{'DASHBOARD.RECENT_BOOK.TITLE'| translate}}</h1>
+      <div fxLayout="row">
+        <mat-card fxFlex style="margin: 1rem" *ngFor="let book of (statistics|async).recentlyAddedBooks">
+          <mat-card-header>
+            <mat-card-title>{{book.title}}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content style="margin-top: 1rem">
+            {{book.isbn}}
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+    <div fxFlexFill
+         fxLayoutGap="10px grid"
+         fxLayout="row wrap">
+      <div fxFlex="50" style="height: 300px">
+        <div fxFlexFill fxLayoutAlign="center center">
+          <ngx-charts-pie-chart [scheme]="'cool'"
+                                [results]="(statistics|async).booksStatus"
+                                [labels]="false"
+                                [legend]="true"
+                                legendTitle=""
+                                title="Book Status">
+          </ngx-charts-pie-chart>
+        </div>
+      </div>
+      <div fxFlex="50" style="height: 300px">
+        <div fxFlexFill fxLayoutAlign="center center">
+          <ngx-charts-bar-vertical
+            [scheme]="'cool'"
+            [results]="(statistics|async).editorsStats"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legendPosition]="'below'"
+            [showXAxisLabel]="false"
+            [showYAxisLabel]="false"
+            [noBarWhenZero]="true"
+            [showDataLabel]="false"
+            [rotateXAxisTicks]="true">
+          </ngx-charts-bar-vertical>
+        </div>
+      </div>
+      <div fxFlex="50" style="height: 300px">
+        <div fxFlexFill fxLayoutAlign="center center">
+          <ngx-charts-number-card
+            class="chart-container"
+            [scheme]="'cool'"
+            cardColor="#232837"
+            emptyColor="#1e222e"
+            [results]="(statistics|async).seriesStats"
+            [animations]="true"
+            [labelFormatting]="statusLabelFormat">
+          </ngx-charts-number-card>
+        </div>
+      </div>
+      <div fxFlex="50" style="height: 300px">
+        <div fxFlexFill fxLayoutAlign="center center">
+          <ngx-charts-bar-vertical
+            [scheme]="'cool'"
+            [results]="(statistics|async).bookTypesStats"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legendPosition]="'below'"
+            [showXAxisLabel]="false"
+            [showYAxisLabel]="false"
+            [noBarWhenZero]="true"
+            [showDataLabel]="false"
+            [rotateXAxisTicks]="true">
+          </ngx-charts-bar-vertical>
+        </div>
+      </div>
+    </div>
+  </div>
   <ng-template #noData>
     <div fxLayout="column" fxLayoutAlign="center">
       <div fxLayout="row" fxLayoutAlign="center">
