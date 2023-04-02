@@ -1,25 +1,25 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Series} from '../../../../../core/model/series';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {switchMap, takeWhile} from 'rxjs/operators';
 import {BehaviorSubject, Observable, of, timer} from 'rxjs';
-import {SeriesAdministrationService} from '../../../../services/series-administration.service';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {BookTypeAdministrationService} from '../../../../services/book-type-administration.service';
+import {BookType} from '../../../../../core/model/bookType';
+import {switchMap, takeWhile} from 'rxjs/operators';
 @Component({
-  selector: 'app-series-edition-display',
-  templateUrl: './series-edition-list-display.component.html',
+  selector: 'app-book-type-edition-list-display',
+  templateUrl: './book-type-gestion-list-display.component.html'
 })
-export class SeriesEditionListDisplayComponent implements OnInit {
+export class BookTypeGestionListDisplayComponent implements OnInit {
   private _isSaved: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   get isSaved(): Observable<boolean> {
     return this._isSaved;
   }
-  constructor(private fb: FormBuilder, private seriesService: SeriesAdministrationService) {
+  constructor(private fb: FormBuilder,
+              private bookTypeService: BookTypeAdministrationService) {
   }
   @Input()
-  series: Series = {seriesBookCount: 0, displayName: '', name: ''};
+  bookType: BookType = {nbBooks: 0, id: 0, name: ''};
   form: FormGroup = this.fb.group({
-    displayName: this.fb.control(''),
-    seriesBookCount: this.fb.control('', Validators.min(1)),
+    name: this.fb.control(''),
   });
   private time = 3;
   private toggle = new BehaviorSubject(false);
@@ -45,22 +45,30 @@ export class SeriesEditionListDisplayComponent implements OnInit {
   }
   initForm(): void {
     this.form.setValue({
-      displayName: this.series.displayName,
-      seriesBookCount: this.series.seriesBookCount
+      name: this.bookType.name
     });
   }
   submit() {
     this.progressBarState = {display: true, type: 'indeterminate'};
-    const series = this.form.value;
-    series.editor = this.series.editor;
-    series.name = this.series.name;
-    series.id = this.series.id;
-    this.seriesService.update(series).subscribe(value => {
+    const bookType = this.form.value;
+    bookType.id = this.bookType.id;
+    this.bookTypeService.update(bookType).subscribe(value => {
       this._isSaved.next(true);
       setTimeout(() => this._isSaved.next(false), 3000);
-      this.series = value;
+      this.bookType = value;
       this.progressBarState.display = false;
       this.toggle.next(false);
+      this.bookTypeService.getAll();
     });
+  }
+  deleteBookType() {
+    this.bookTypeService.delete(this.bookType);
+    this.bookTypeService.getAll();
+  }
+  getNbBooks(): string {
+    return (this.bookType.nbBooks || 0).toString()
+  }
+  bookTypeRemovable(): boolean {
+    return this.bookType.nbBooks === 0;
   }
 }

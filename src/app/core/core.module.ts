@@ -11,7 +11,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {faBan, faPencilAlt, faPlus, faSave, faTrash} from '@fortawesome/free-solid-svg-icons';
+import {faBan, faCheck, faPencilAlt, faPlus, faSave, faTrash} from '@fortawesome/free-solid-svg-icons';
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -47,6 +47,7 @@ export class CoreModule {
     library.addIcons(faPlus);
     library.addIcons(faPencilAlt);
     library.addIcons(faTrash);
+    library.addIcons(faCheck);
     library.addIcons(faSave);
     library.addIcons(faBan);
   }
