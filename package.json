@@ -9,24 +9,24 @@
     "test": "ng test --watch=true --progress=false",
     "test-ci": "ng test --progress=false --watch=false --code-coverage",
     "publish-test-coverage": "cat ./coverage/lcov.info | codacy-coverage",
-    "compodoc": "./node_modules/.bin/compodoc -p src/tsconfig.app.json --theme=material",
+    "compodoc": "./node_modules/.bin/compodoc -p tsconfig.app.json --theme=material",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "sonar-scanner": "node_modules/sonarqube-scanner/dist/bin/sonar-scanner"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^9.0.6",
-    "@angular/cdk": "^9.1.2",
-    "@angular/common": "^9.0.6",
-    "@angular/compiler": "^9.0.6",
-    "@angular/core": "^9.0.6",
+    "@angular/animations": "^9.1.7",
+    "@angular/cdk": "^9.2.3",
+    "@angular/common": "^9.1.7",
+    "@angular/compiler": "^9.1.7",
+    "@angular/core": "^9.1.7",
     "@angular/flex-layout": "^9.0.0-beta.29",
-    "@angular/forms": "^9.0.6",
-    "@angular/material": "^9.1.2",
-    "@angular/platform-browser": "^9.0.6",
-    "@angular/platform-browser-dynamic": "^9.0.6",
-    "@angular/router": "^9.0.6",
+    "@angular/forms": "^9.1.7",
+    "@angular/material": "^9.2.3",
+    "@angular/platform-browser": "^9.1.7",
+    "@angular/platform-browser-dynamic": "^9.1.7",
+    "@angular/router": "^9.1.7",
     "@fortawesome/angular-fontawesome": "^0.6.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.27",
     "@fortawesome/free-solid-svg-icons": "^5.12.1",
@@ -40,13 +40,13 @@
     "rxjs": "^6.5.4",
     "tslib": "^1.10.0",
     "web-animations-js": "^2.3.2",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.900.6",
-    "@angular/cli": "^9.0.6",
-    "@angular/compiler-cli": "^9.0.6",
-    "@angular/language-service": "^9.0.6",
+    "@angular/cli": "^9.1.6",
+    "@angular/compiler-cli": "^9.1.7",
+    "@angular/language-service": "^9.1.7",
     "@types/hammerjs": "^2.0.36",
     "@types/jasmine": "^3.5.9",
     "@types/jasminewd2": "^2.0.8",
@@ -63,6 +63,6 @@
     "sonarqube-scanner": "^2.5.0",
     "ts-node": "~8.6.2",
     "tslint": "~6.1.0",
-    "typescript": "^3.7.5"
+    "typescript": "3.8.3"
   }
 }
