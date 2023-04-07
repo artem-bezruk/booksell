@@ -180,7 +180,7 @@
       "MSG": "New book type {{name}} created"
     },
     "CREATION_MODAL": {
-      "TITLE": "Create a book type",
+      "TITLE": "Create a new book type",
       "NAME_PLACEHOLDER": "Name",
       "BUTTON": {
         "CANCEL": "Cancel",

@@ -180,7 +180,7 @@
       "MSG": "Le nouveau type de livre {{name}} a été crée"
     },
     "CREATION_MODAL": {
-      "TITLE": "Créer un nouveau type",
+      "TITLE": "Créer un nouveau type de livre",
       "NAME_PLACEHOLDER": "Nom",
       "BUTTON": {
         "CANCEL": "Annuler",
