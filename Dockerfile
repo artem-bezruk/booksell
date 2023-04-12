@@ -1,7 +1,9 @@
 FROM node:10-alpine as builder
 COPY package.json package-lock.json ./
-RUN npm i && mkdir /ng-app && mv ./node_modules ./ng-app
+RUN npm ci && mkdir /ng-app
+RUN mv ./node_modules ./ng-app
 WORKDIR /ng-app
+RUN ./node_modules/.bin/ngcc --properties es2015
 COPY . .
 RUN npm run build-ci
 FROM nginx:1.17.1-alpine
