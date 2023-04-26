@@ -19,6 +19,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     title: 'N/A'
   };
   bookTypes: Observable<BookType[]> = this.bookTypeService.bookTypes;
+  selected = '0';
   constructor(private bookAdministrationService: BookAdministrationService,
               private translateService: TranslateService,
               private bookTypeService: BookTypeService,

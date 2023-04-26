@@ -68,9 +68,9 @@
     </div>
     <mat-action-row>
       <mat-form-field style="padding-right: 1rem">
-        <mat-select #select [placeholder]="'Book Type'">
-          <mat-option [value]="0">
-            {{'BOOK.SEARCH.RESULTS.ACTION_ROW.NEW_BOOK_TYPE'}}
+        <mat-select #select [placeholder]="'Book Type'" [(value)]="selected">
+          <mat-option [value]="'0'">
+            {{'BOOK.SEARCH.RESULTS.ACTION_ROW.NEW_BOOK_TYPE' | translate}}
           </mat-option>
           <mat-option *ngFor="let bookType of (bookTypes|async)" [value]="bookType.name">
             {{bookType.name}}
