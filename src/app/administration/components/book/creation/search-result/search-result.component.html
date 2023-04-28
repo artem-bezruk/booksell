@@ -10,7 +10,7 @@
     </mat-expansion-panel-header>
     <div fxLayout="row">
       <div fxFlex="40" fxLayoutAlign="center center">
-        <img class="cover" [src]="'/files/covers/search/' + searchResult.cover" [alt]="searchResult.cover">
+        <app-loader-img [imgContainerClass]="'mat-elevation-z2 cover'" [img]="getImg(searchResult.cover)"></app-loader-img>
       </div>
       <div fxFlex fxLayout="column">
         <div fxLayout="row">
@@ -68,9 +68,9 @@
     </div>
     <mat-action-row>
       <mat-form-field style="padding-right: 1rem">
-        <mat-select #select [placeholder]="'Book Type'" [(value)]="selected">
-          <mat-option [value]="'0'">
-            {{'BOOK.SEARCH.RESULTS.ACTION_ROW.NEW_BOOK_TYPE' | translate}}
+        <mat-select #select [placeholder]="'Book Type'">
+          <mat-option [value]="0">
+            {{'BOOK.SEARCH.RESULTS.ACTION_ROW.NEW_BOOK_TYPE'}}
           </mat-option>
           <mat-option *ngFor="let bookType of (bookTypes|async)" [value]="bookType.name">
             {{bookType.name}}

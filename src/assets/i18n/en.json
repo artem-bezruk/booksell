@@ -79,8 +79,7 @@
           "ROLES": "<strong>Role(s): </strong>{{value}}"
         },
         "ACTION_ROW": {
-          "ADD": "Add",
-          "NEW_BOOK_TYPE": "New book type"
+          "ADD": "Add"
         }
       }
     },
