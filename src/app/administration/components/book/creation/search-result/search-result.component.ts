@@ -2,18 +2,20 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BookSearch} from '../../../../models/book-search';
 import {BookAdministrationService} from '../../../../services/book-administration.service';
 import {TranslateService} from '@ngx-translate/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {Observable} from 'rxjs';
 import {BookType} from '../../../../../core/model/bookType';
 import {BookTypeService} from '../../../../../core/services/book-type.service';
 import {NewBookTypeModalComponent} from '../../shared/new-book-type-modal/new-book-type-modal.component';
+import {Book} from '../../../../../core/model/book';
+import {DisplayImage} from '../../../../../shared/display-image';
 @Component({
   selector: 'app-search-result',
   templateUrl: './search-result.component.html',
   styleUrls: ['./search-result.component.scss']
 })
-export class SearchResultComponent implements OnInit, OnDestroy {
+export class SearchResultComponent extends DisplayImage implements OnInit, OnDestroy {
   searchResult: BookSearch = {
     editor: 'N/A',
     title: 'N/A'
@@ -25,6 +27,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
               private bookTypeService: BookTypeService,
               private snackBar: MatSnackBar,
               private dialog: MatDialog) {
+    super('/files/covers/search')
   }
   ngOnInit() {
     this.bookAdministrationService.searchResult.subscribe(next => {

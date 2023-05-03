@@ -10,7 +10,7 @@
     </mat-expansion-panel-header>
     <div fxLayout="row">
       <div fxFlex="40" fxLayoutAlign="center center">
-        <img class="cover" [src]="'/files/covers/search/' + searchResult.cover" [alt]="searchResult.cover">
+        <app-loader-img [imgContainerClass]="'mat-elevation-z2 cover'" [img]="getImg(searchResult.cover)"></app-loader-img>
       </div>
       <div fxFlex fxLayout="column">
         <div fxLayout="row">
