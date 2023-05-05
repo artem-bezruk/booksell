@@ -60,10 +60,10 @@ testem.log
 # When using Gradle or Maven with auto-import, you should exclude module files,
 # since they will be recreated, and may cause churn.  Uncomment if using
 # auto-import.
-# .idea/modules.xml
-# .idea/*.iml
-# .idea/modules
-# *.iml
+.idea/modules.xml
+.idea/*.iml
+.idea/modules
+*.iml
 # *.ipr
 
 # CMake
@@ -102,7 +102,6 @@ fabric.properties
 ### Intellij+iml Patch ###
 # Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-249601023
 
-*.iml
 modules.xml
 .idea/misc.xml
 *.ipr
@@ -198,3 +197,5 @@ typings/
 .dynamodb/
 
 # End of https://www.gitignore.io/api/node,angular,intellij+iml
+
+.idea/sonarlint
