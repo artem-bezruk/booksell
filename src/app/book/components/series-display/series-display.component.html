@@ -5,7 +5,7 @@
         </mat-panel-title>
       <mat-panel-description>
         <div fxFlex="20" fxLayoutAlign="space-between" *ngIf="seriesData.seriesBookCount > 0">
-          <span *ngIf="getProgressValue() === 100"> Completed </span>
+          <span *ngIf="getProgressValue() === 100"> {{"BOOK.LIST.SERIES.STATUS.COMPLETED" | translate}} </span>
           <span *ngIf="getProgressValue() < 100"> {{getReadedBooksCount()}} / {{seriesData.seriesBookCount}} </span>
         </div>
         <mat-progress-bar *ngIf="seriesData.seriesBookCount > 0"

@@ -1,4 +1,2 @@
 <mat-spinner *ngIf="loading"></mat-spinner>
-<div [hidden]="loading">
-  <img [class]="imgContainerClass" (error)="onError()" (load)="onLoad()" [src]="src" [alt]="alt"/>
-</div>
+<img [class]="imgContainerClass" [hidden]="loading" (error)="onError()" (load)="onLoad()" [src]="src" [alt]="alt"/>

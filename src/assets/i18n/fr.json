@@ -111,6 +111,9 @@
           "ALL_DESELECT": "Tout désélectionnez",
           "MARK_AS": "Marquez comme",
           "DELETE": "Supprimer"
+        },
+        "STATUS": {
+          "COMPLETED": "Terminée"
         }
       },
       "DETAILS": {

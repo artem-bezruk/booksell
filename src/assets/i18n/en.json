@@ -111,6 +111,9 @@
           "ALL_DESELECT": "Deselect all",
           "MARK_AS": "Mark as",
           "DELETE": "Delete"
+        },
+        "STATUS": {
+          "COMPLETED": "Completed"
         }
       },
       "DETAILS": {
