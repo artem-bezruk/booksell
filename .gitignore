@@ -198,4 +198,4 @@ typings/
 
 # End of https://www.gitignore.io/api/node,angular,intellij+iml
 
-.idea/sonarlint
+  .idea/sonarlint

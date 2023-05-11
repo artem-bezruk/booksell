@@ -27,7 +27,7 @@ export class SearchResultComponent extends DisplayImage implements OnInit, OnDes
               private bookTypeService: BookTypeService,
               private snackBar: MatSnackBar,
               private dialog: MatDialog) {
-    super('/files/covers/search')
+    super('/files/search/covers')
   }
   ngOnInit() {
     this.bookAdministrationService.searchResult.subscribe(next => {
