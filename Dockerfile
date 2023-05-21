@@ -1,10 +1,11 @@
 FROM node:10-alpine as builder
-COPY package.json package-lock.json ./
-RUN npm ci && mkdir /ng-app
-RUN mv ./node_modules ./ng-app
-WORKDIR /ng-app
+RUN mkdir /app
+COPY package.json /app
+COPY package-lock.json /app
+WORKDIR /app
+RUN npm ci
 RUN ./node_modules/.bin/ngcc --properties es2015
-COPY . .
+COPY . /app
 RUN npm run build-ci
 FROM nginx:1.17.1-alpine
 ENV CLIENT_ID="dummy-client-id" \
