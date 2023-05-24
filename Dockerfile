@@ -22,7 +22,7 @@ RUN set -x && \
     apk del build_deps
 COPY docker/nginx/conf.d/default.conf.template /etc/nginx/conf.d
 RUN rm -rf /usr/share/nginx/html/*
-COPY --from=builder /ng-app/dist /usr/share/nginx/html
+COPY --from=builder /app/dist /usr/share/nginx/html
 COPY docker/assets/config/config.json.template /usr/share/nginx/html/assets/config/config.json.template
 COPY docker/setup.sh /setup.sh
 RUN chmod +x /setup.sh
