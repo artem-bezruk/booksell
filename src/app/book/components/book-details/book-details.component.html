@@ -2,10 +2,15 @@
      style="padding: 20px">
   <div fxFlex fxLayoutAlign="space-between center">
     <div fxFlex="70">
-      <h2 *ngIf="bookEvent.book.tome === null; else titleWithSeries"> {{bookEvent.book?.title}}</h2>
-      <ng-template #titleWithSeries>
-        <h2> {{bookEvent.book.series.name}} (T{{bookEvent.book.tome}}) {{bookEvent.book?.title}} </h2>
-      </ng-template>
+      <h2 *ngIf="bookEvent.book.tome === null && isOneShot(bookEvent.book.series)">
+        {{bookEvent.book?.title}}
+      </h2>
+      <h2 *ngIf="bookEvent.book.tome === null && !isOneShot(bookEvent.book.series)">
+        {{bookEvent.book.series.displayName}}: {{bookEvent.book?.title}}
+      </h2>
+      <h2 *ngIf="bookEvent.book.tome !== null && isOneShot(bookEvent.book.series)">
+        {{bookEvent.book.series.displayName}}: (T{{bookEvent.book.tome}}) {{bookEvent.book?.title}}
+      </h2>
       <p *ngIf="bookEvent.book.status === 'UNREAD'">
         <fa-icon [icon]="['fas', 'book']" style="padding-right: 10px"></fa-icon>
         {{'BOOK.STATE.UNREAD' | translate}}
