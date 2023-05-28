@@ -8,7 +8,7 @@
       <h2 *ngIf="bookEvent.book.tome === null && !isOneShot(bookEvent.book.series)">
         {{bookEvent.book.series.displayName}}: {{bookEvent.book?.title}}
       </h2>
-      <h2 *ngIf="bookEvent.book.tome !== null && isOneShot(bookEvent.book.series)">
+      <h2 *ngIf="bookEvent.book.tome !== null">
         {{bookEvent.book.series.displayName}}: (T{{bookEvent.book.tome}}) {{bookEvent.book?.title}}
       </h2>
       <p *ngIf="bookEvent.book.status === 'UNREAD'">
