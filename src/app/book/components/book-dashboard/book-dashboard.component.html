@@ -8,14 +8,8 @@
   <div fxLayout="column">
     <h1>{{'DASHBOARD.RECENT_BOOK.TITLE'| translate}}</h1>
     <div fxLayout="row">
-      <mat-card fxFlex="20" style="margin: 1rem" *ngFor="let book of (statistics|async).recentlyAddedBooks">
-        <mat-card-header>
-          <mat-card-title>{{book.title}}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content style="margin-top: 1rem">
-          {{book.isbn}}
-        </mat-card-content>
-      </mat-card>
+      <app-book-card fxFlex="20" style="margin: 1rem" [book]="book" *ngFor="let book of (statistics|async).recentlyAddedBooks">
+      </app-book-card>
     </div>
   </div>
   <div fxFlexFill

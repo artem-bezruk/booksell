@@ -34,6 +34,7 @@ import {BookListActionBarComponent} from './components/book-list-action-bar/book
 import {AlphabeticalSeriesDisplayComponent} from './components/alphabetical-series-display/alphabetical-series-display.component';
 import { BookDashboardComponent } from './components/book-dashboard/book-dashboard.component';
 import {BarChartModule, NumberCardModule, PieChartModule} from '@swimlane/ngx-charts';
+import { BookCardComponent } from './components/book-card/book-card.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -65,7 +66,8 @@ import {BarChartModule, NumberCardModule, PieChartModule} from '@swimlane/ngx-ch
     ListFilterComponent,
     BookListActionBarComponent,
     AlphabeticalSeriesDisplayComponent,
-    BookDashboardComponent]
+    BookDashboardComponent,
+    BookCardComponent]
 })
 export class BookModule {
   constructor(library: FaIconLibrary) {

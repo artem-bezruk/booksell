@@ -1,0 +1,16 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{book.title}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content style="margin-top: 1rem">
+    <span *ngIf="book.tome === null && isOneShot(book.series)">
+      One-shot
+    </span>
+    <span *ngIf="book.tome === null && !isOneShot(book.series)">
+      {{book.series.displayName}}
+    </span>
+    <span *ngIf="book.tome !== null">
+      {{book.series.displayName}} (T{{book.tome}})
+    </span>
+  </mat-card-content>
+</mat-card>
