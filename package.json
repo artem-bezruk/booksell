@@ -6,12 +6,11 @@
     "start": "ng serve --proxy-config proxy.config.json",
     "build": "ng build",
     "build-ci": "ng build --prod --progress=false --output-path=dist",
-    "test": "ng test --watch=true --progress=false",
-    "test-ci": "ng test --progress=false --watch=false --code-coverage",
+    "test": "jest",
+    "test-ci": "jest --coverage",
     "publish-test-coverage": "cat ./coverage/lcov.info | codacy-coverage",
     "compodoc": "./node_modules/.bin/compodoc -p tsconfig.app.json --theme=material",
     "lint": "ng lint",
-    "e2e": "ng e2e",
     "sonar-scanner": "node_modules/sonarqube-scanner/dist/bin/sonar-scanner"
   },
   "private": true,
@@ -48,21 +47,17 @@
     "@angular/compiler-cli": "^9.1.7",
     "@angular/language-service": "^9.1.7",
     "@types/hammerjs": "^2.0.36",
-    "@types/jasmine": "^3.5.9",
-    "@types/jasminewd2": "^2.0.8",
     "@types/node": "^13.9.0",
     "codelyzer": "^5.1.2",
-    "jasmine-core": "~3.5.0",
-    "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~4.4.1",
-    "karma-chrome-launcher": "~3.1.0",
-    "karma-coverage-istanbul-reporter": "^2.0.6",
-    "karma-jasmine": "~3.1.1",
-    "karma-jasmine-html-reporter": "^1.5.2",
-    "protractor": "^5.4.3",
+    "jest": "^26.1.0",
+    "jest-preset-angular": "^8.2.1",
     "sonarqube-scanner": "^2.5.0",
     "ts-node": "~8.6.2",
     "tslint": "~6.1.0",
     "typescript": "3.8.3"
+  },
+  "jest": {
+    "preset": "jest-preset-angular",
+    "setupFilesAfterEnv": ["<rootDir>/setupJest.ts"]
   }
 }
