@@ -4,7 +4,7 @@ describe('SharedModule', () => {
   beforeEach(() => {
     sharedModule = new SharedModule();
   });
-  it('should create an instance', () => {
+  test('should create an instance', () => {
     expect(sharedModule).toBeTruthy();
   });
 });

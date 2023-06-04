@@ -4,7 +4,7 @@ describe('CoreModule', () => {
   beforeEach(() => {
     coreModule = new CoreModule();
   });
-  it('should create an instance', () => {
+  test('should create an instance', () => {
     expect(coreModule).toBeTruthy();
   });
 });

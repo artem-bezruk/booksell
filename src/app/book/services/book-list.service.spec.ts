@@ -1,10 +1,24 @@
-import { TestBed } from '@angular/core/testing';
-import { BookListService } from './book-list.service';
-import {Type} from '@angular/core';
+import {TestBed} from '@angular/core/testing';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {BookListService} from './book-list.service';
+import {RouterTestingModule} from '@angular/router/testing';
 describe('BookListService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
-  it('should be created', () => {
-    const service: BookListService = TestBed.inject(BookListService as Type<BookListService>);
-    expect(service).toBeTruthy();
+  let httpTestingController: HttpTestingController;
+  let service: BookListService;
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule
+      ]
+    });
+    httpTestingController = TestBed.inject(HttpTestingController);
+    service = TestBed.inject(BookListService);
+  });
+  afterEach(() => httpTestingController.verify());
+  describe('Init test', () => {
+    test('should be created', () => {
+      expect(service).toBeTruthy();
+    });
   });
 });
