@@ -11,7 +11,9 @@ import {Observable} from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
   bookTypes: Observable<BookType[]> = this.bookTypeService.bookTypes;
-  constructor(private authService: AuthService, private router: Router, private bookTypeService: BookTypeService) {
+  constructor(private authService: AuthService,
+              private router: Router,
+              private bookTypeService: BookTypeService) {
   }
   ngOnInit(): void {
     this.bookTypeService.getAllBookType();
