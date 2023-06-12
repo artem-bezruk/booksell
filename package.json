@@ -47,6 +47,7 @@
     "@angular/compiler-cli": "^9.1.7",
     "@angular/language-service": "^9.1.7",
     "@types/hammerjs": "^2.0.36",
+    "@types/jest": "^26.0.4",
     "@types/node": "^13.9.0",
     "codelyzer": "^5.1.2",
     "jest": "^26.1.0",
@@ -58,6 +59,8 @@
   },
   "jest": {
     "preset": "jest-preset-angular",
-    "setupFilesAfterEnv": ["<rootDir>/setupJest.ts"]
+    "setupFilesAfterEnv": [
+      "<rootDir>/setupJest.ts"
+    ]
   }
 }
