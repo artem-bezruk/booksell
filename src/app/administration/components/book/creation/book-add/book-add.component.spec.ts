@@ -11,7 +11,7 @@ import {TranslatePipeMock} from '../../../../../../../__mocks__/@ngx-translate/c
 import {TranslateServiceMock} from '../../../../../../../__mocks__/@ngx-translate/core/translate.service.mock';
 import {TranslateLoaderMock} from '../../../../../../../__mocks__/@ngx-translate/core/translate-loader.mock';
 import {BookAdministrationServiceMock} from '../../../../services/__mocks__/book-administration.service';
-import {CoreServiceMock} from '../../../../../core/services/__mocks__/core.service';
+import {coreServiceMock} from '../../../../../core/services/__mocks__/core.service';
 describe('BookAddComponent', () => {
   let httpTestingController: HttpTestingController;
   let component: BookAddComponent;
@@ -34,8 +34,8 @@ describe('BookAddComponent', () => {
       providers: [
         {provide: TranslateService, useClass: TranslateServiceMock},
         {provide: TranslatePipe, useClass: TranslatePipeMock},
-        {provide: BookAdministrationService, useClass: BookAdministrationServiceMock},
-        {provide: CoreService, useClass: CoreServiceMock}
+        {provide: BookAdministrationService, useValue: BookAdministrationServiceMock},
+        {provide: CoreService, useValue: coreServiceMock}
       ]
     })
       .compileComponents();

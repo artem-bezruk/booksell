@@ -17,7 +17,9 @@ export class BookListComponent implements OnInit {
   filteredBooks: Observable<SeriesByGroupContainer> = this.bookListService.filteredBooks;
   filteredGroupList: Observable<string[]> = this.bookListService.filteredGroupList;
   displayDetails = false;
-  constructor(private bookService: BookService, private bookListService: BookListService, private bookDetailsService: BookDetailsService,
+  constructor(private bookService: BookService,
+              private bookListService: BookListService,
+              private bookDetailsService: BookDetailsService,
               private coreService: CoreService,
               private route: ActivatedRoute,
               private router: Router) {
