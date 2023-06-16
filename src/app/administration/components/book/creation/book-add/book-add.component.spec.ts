@@ -10,7 +10,7 @@ import {MockIsbnSearchComponent} from '../isbn-search/__mocks__/mock-isbn-search
 import {TranslatePipeMock} from '../../../../../../../__mocks__/@ngx-translate/core/translate.pipe.mock';
 import {TranslateServiceMock} from '../../../../../../../__mocks__/@ngx-translate/core/translate.service.mock';
 import {TranslateLoaderMock} from '../../../../../../../__mocks__/@ngx-translate/core/translate-loader.mock';
-import {BookAdministrationServiceMock} from '../../../../services/__mocks__/book-administration.service';
+import {bookAdministrationServiceMock} from '../../../../services/__mocks__/book-administration.service';
 import {coreServiceMock} from '../../../../../core/services/__mocks__/core.service';
 describe('BookAddComponent', () => {
   let httpTestingController: HttpTestingController;
@@ -34,7 +34,7 @@ describe('BookAddComponent', () => {
       providers: [
         {provide: TranslateService, useClass: TranslateServiceMock},
         {provide: TranslatePipe, useClass: TranslatePipeMock},
-        {provide: BookAdministrationService, useValue: BookAdministrationServiceMock},
+        {provide: BookAdministrationService, useValue: bookAdministrationServiceMock},
         {provide: CoreService, useValue: coreServiceMock}
       ]
     })

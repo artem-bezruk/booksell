@@ -1,3 +1,5 @@
+import {of} from 'rxjs';
 export const bookTypeService = {
-  getAllBookType : jest.fn(() => [])
+  getAllBookType : jest.fn(() => []),
+  bookTypes : of([])
 }

@@ -1,4 +1,4 @@
 import {of} from 'rxjs';
-export const BookAdministrationServiceMock = {
+export const bookAdministrationServiceMock = {
   searchResult: of({})
 }

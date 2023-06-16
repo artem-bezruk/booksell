@@ -10,7 +10,7 @@ import {TranslateLoaderMock} from '../../../../../../../__mocks__/@ngx-translate
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {BookAdministrationService} from '../../../../services/book-administration.service';
-import {BookAdministrationServiceMock} from '../../../../services/__mocks__/book-administration.service';
+import {bookAdministrationServiceMock} from '../../../../services/__mocks__/book-administration.service';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 describe('IsbnSearchComponent', () => {
   let component: IsbnSearchComponent;
@@ -33,7 +33,7 @@ describe('IsbnSearchComponent', () => {
       providers: [
         {provide: TranslateService, useClass: TranslateServiceMock},
         {provide: TranslatePipe, useClass: TranslatePipeMock},
-        {provide: BookAdministrationService, useValue: BookAdministrationServiceMock},
+        {provide: BookAdministrationService, useValue: bookAdministrationServiceMock},
       ]
     })
       .compileComponents();
