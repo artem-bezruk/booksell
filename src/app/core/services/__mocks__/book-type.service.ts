@@ -1,5 +1,5 @@
 import {of} from 'rxjs';
-export const bookTypeService = {
+export const bookTypeServiceMock = {
   getAllBookType : jest.fn(() => []),
   bookTypes : of([])
 }

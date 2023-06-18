@@ -17,6 +17,7 @@ import {bookTypeAdministrationServiceMock} from '../../../../services/__mocks__/
 import {BookTypeService} from '../../../../../core/services/book-type.service';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {bookTypeServiceMock} from '../../../../../core/services/__mocks__/book-type.service';
 describe('SearchResultComponent', () => {
   let component: SearchResultComponent;
   let fixture: ComponentFixture<SearchResultComponent>;
@@ -39,7 +40,7 @@ describe('SearchResultComponent', () => {
         {provide: TranslateService, useClass: TranslateServiceMock},
         {provide: TranslatePipe, useClass: TranslatePipeMock},
         {provide: BookAdministrationService, useValue: bookAdministrationServiceMock},
-        {provide: BookTypeService, useValue: bookTypeAdministrationServiceMock},
+        {provide: BookTypeService, useValue: bookTypeServiceMock},
       ]
     })
       .compileComponents();
