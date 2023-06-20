@@ -1,4 +1,4 @@
 import {of} from 'rxjs';
 export const bookDetailsServiceMock = {
-  bookToDisplay: of({})
+  bookToDisplay: of({book: {series: {}, editor: {}}})
 };
