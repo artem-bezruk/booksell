@@ -1,4 +1,7 @@
-<mat-progress-bar *ngIf="isLoading|async" [color]="'primary'" style="margin-top: -20px; margin-bottom: 20px"
+<mat-progress-bar *ngIf="isLoading | async"
+                  [color]="'primary'"
+                  style="margin-top: -20px;
+                  margin-bottom: 20px"
                   [mode]="'indeterminate'">
 </mat-progress-bar>
 <div fxLayout="column">

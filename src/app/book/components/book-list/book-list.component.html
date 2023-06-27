@@ -1,4 +1,7 @@
-<mat-progress-bar *ngIf="isLoading | async" [color]="'primary'" [mode]="'indeterminate'"></mat-progress-bar>
+<mat-progress-bar *ngIf="isLoading | async"
+                  [color]="'primary'"
+                  [mode]="'indeterminate'">
+</mat-progress-bar>
 <div style="height: 100%">
   <mat-sidenav-container class="book-list-container" fxFlex>
     <mat-sidenav #filter mode="side" style="position: fixed; padding-top: 68px">

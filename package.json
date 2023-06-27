@@ -8,6 +8,7 @@
     "build-ci": "ng build --prod --progress=false --output-path=dist",
     "test": "jest",
     "test-ci": "jest --coverage",
+    "test-watch": "jest --watch",
     "publish-test-coverage": "cat ./coverage/lcov.info | codacy-coverage",
     "compodoc": "./node_modules/.bin/compodoc -p tsconfig.app.json --theme=material",
     "lint": "ng lint",

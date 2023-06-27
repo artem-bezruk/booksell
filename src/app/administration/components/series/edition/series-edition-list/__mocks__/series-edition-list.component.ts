@@ -1,20 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {SeriesAdministrationService} from '../../../../services/series-administration.service';
-import {Observable} from 'rxjs';
-import {Series} from '../../../../../core/model/series';
-
 @Component({
   selector: 'app-series-edition-list',
-  templateUrl: './series-edition-list.component.html',
-  styleUrls: ['../../../../administration-edition.scss']
+  template: '<div> Mock Series Edition List</div>'
 })
-export class SeriesEditionListComponent implements OnInit {
-
-  seriesList: Observable<Series[]> = this.seriesService.listFiltered;
-
-  constructor(private seriesService: SeriesAdministrationService) {
-  }
-
-  ngOnInit() {
-  }
+export class MockSeriesEditionListComponent {
 }

@@ -1,28 +1,9 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
-
+import {Component, EventEmitter, Output} from '@angular/core';
 @Component({
   selector: 'app-series-list-filter',
-  templateUrl: './series-list-filter.component.html'
+  template: '<div>Mock Series List Filter</div> '
 })
-export class SeriesListFilterComponent implements OnInit {
-
+export class MockSeriesListFilterComponent {
   @Output()
   private filter: EventEmitter<string> = new EventEmitter<string>();
-
-  form: FormGroup = this.fb.group({
-    filter: this.fb.control('')
-  });
-
-  constructor(private fb: FormBuilder) {
-  }
-
-  ngOnInit() {
-  }
-
-  updateFilter($event: string): void {
-    this.filter.emit($event);
-  }
-
-
 }
