@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewChild, ViewEncapsulation} from '@angular/core';
 import {SeriesInfo} from '../../../core/model/series-by-group-container';
 import {Book} from '../../../core/model/book';
 import { MatExpansionPanel } from '@angular/material/expansion';
