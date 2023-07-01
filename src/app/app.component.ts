@@ -7,7 +7,7 @@ import {ConfigService} from './core/services/config.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(translate: TranslateService, private configService: ConfigService) {
+  constructor(translate: TranslateService) {
     translate.setDefaultLang('fr');
     translate.use('fr');
   }

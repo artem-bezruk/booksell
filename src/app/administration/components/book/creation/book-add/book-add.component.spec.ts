@@ -1,39 +1,31 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {BookAddComponent} from './book-add.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {TranslateLoader, TranslateModule, TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {BookAdministrationService} from '../../../../services/book-administration.service';
 import {CoreService} from '../../../../../core/services/core.service';
 import {MockResultSearchComponent} from '../search-result/__mocks__/mock-result-search.component';
 import {MockIsbnSearchComponent} from '../isbn-search/__mocks__/mock-isbn-search.component';
-import {TranslatePipeMock} from '../../../../../../../__mocks__/@ngx-translate/core/translate.pipe.mock';
-import {TranslateServiceMock} from '../../../../../../../__mocks__/@ngx-translate/core/translate.service.mock';
-import {TranslateLoaderMock} from '../../../../../../../__mocks__/@ngx-translate/core/translate-loader.mock';
 import {bookAdministrationServiceMock} from '../../../../services/__mocks__/book-administration.service';
 import {coreServiceMock} from '../../../../../core/services/__mocks__/core.service';
+import {NgxTranslateTestingModule} from '../../../../../../../__mocks__/@ngx-translate/core/ngx-translate-testing.module';
 describe('BookAddComponent', () => {
   let httpTestingController: HttpTestingController;
   let component: BookAddComponent;
   let fixture: ComponentFixture<BookAddComponent>;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        MatProgressBarModule,
-        TranslateModule.forRoot({
-          loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
-        }),
-        HttpClientTestingModule
-      ],
       declarations: [
         BookAddComponent,
         MockIsbnSearchComponent,
         MockResultSearchComponent,
-        TranslatePipeMock
+      ],
+      imports: [
+        NgxTranslateTestingModule,
+        HttpClientTestingModule,
+        MatProgressBarModule,
       ],
       providers: [
-        {provide: TranslateService, useClass: TranslateServiceMock},
-        {provide: TranslatePipe, useClass: TranslatePipeMock},
         {provide: BookAdministrationService, useValue: bookAdministrationServiceMock},
         {provide: CoreService, useValue: coreServiceMock}
       ]

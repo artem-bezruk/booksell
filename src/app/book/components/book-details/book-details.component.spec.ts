@@ -1,42 +1,29 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { BookDetailsComponent } from './book-details.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {BookDetailsComponent} from './book-details.component';
 import {MatListModule} from '@angular/material/list';
-import {TranslatePipeMock} from '../../../../../__mocks__/@ngx-translate/core/translate.pipe.mock';
 import {MockLoaderImgComponent} from '../../../shared/loader-img/__mocks__/loader-img.component';
 import {FontAwesomeTestingModule} from '@fortawesome/angular-fontawesome/testing';
-import {TranslateLoader, TranslateModule, TranslatePipe, TranslateService} from '@ngx-translate/core';
-import {TranslateLoaderMock} from '../../../../../__mocks__/@ngx-translate/core/translate-loader.mock';
-import {TranslateServiceMock} from '../../../../../__mocks__/@ngx-translate/core/translate.service.mock';
-import {CoreService} from '../../../core/services/core.service';
-import {coreServiceMock} from '../../../core/services/__mocks__/core.service';
-import {AuthService} from '../../../auth/services/auth.service';
-import {authServiceMock} from '../../../auth/services/__mocks__/auth.service';
-import {StatisticService} from '../../services/statistic.service';
-import {statisticServiceMock} from '../../services/__mocks__/statistic.service';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {BookDetailsService} from '../../services/book-details.service';
 import {bookDetailsServiceMock} from '../../services/__mocks__/book-details.service';
+import {NgxTranslateTestingModule} from '../../../../../__mocks__/@ngx-translate/core/ngx-translate-testing.module';
 describe('BookDetailsComponent', () => {
   let component: BookDetailsComponent;
   let fixture: ComponentFixture<BookDetailsComponent>;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BookDetailsComponent, TranslatePipeMock, MockLoaderImgComponent ],
+      declarations: [BookDetailsComponent, MockLoaderImgComponent],
       imports: [
-        MatListModule,
-        FontAwesomeTestingModule,
+        NgxTranslateTestingModule,
         FlexLayoutModule,
-        TranslateModule.forRoot({
-          loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
-        })
+        FontAwesomeTestingModule,
+        MatListModule,
       ],
       providers: [
-        {provide: TranslateService, useClass: TranslateServiceMock},
-        {provide: TranslatePipe, useClass: TranslatePipeMock},
         {provide: BookDetailsService, useValue: bookDetailsServiceMock},
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
   beforeEach(() => {
     fixture = TestBed.createComponent(BookDetailsComponent);

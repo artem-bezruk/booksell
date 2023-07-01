@@ -1,43 +1,34 @@
 import {TestBed, async} from '@angular/core/testing';
 import {AppComponent} from './app.component';
 import {RouterTestingModule} from '@angular/router/testing';
+import {NgxTranslateTestingModule} from '../../__mocks__/@ngx-translate/core/ngx-translate-testing.module';
 import {TranslateService} from '@ngx-translate/core';
-const translateServiceMock = {
-  addLangs: jest.fn((langs: string[]) => {
-  }),
-  setDefaultLang: jest.fn((lang: string) => {
-  }),
-  getBrowserLang: jest.fn(() => 'fr'),
-  use: jest.fn((lang: string) => {
-  }),
-  get: jest.fn(() => 'fr')
-};
 describe('AppComponent', () => {
   let fixture;
   let component;
+  let translateService;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent
       ],
       imports: [
-        RouterTestingModule
-      ],
-      providers: [
-        {provide: TranslateService, useValue: translateServiceMock}
+        RouterTestingModule,
+        NgxTranslateTestingModule
       ]
     }).compileComponents();
   }));
   beforeEach((() => {
     jest.clearAllMocks();
+    translateService = TestBed.inject(TranslateService);
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.debugElement.componentInstance;
   }));
   test('should create the app', () => {
     expect(component).toBeTruthy();
   });
-  it('Default config should be loaded', () => {
-    expect(translateServiceMock.setDefaultLang).toHaveBeenNthCalledWith(1, 'fr');
-    expect(translateServiceMock.use).toHaveBeenNthCalledWith(1, 'fr');
+  test('Default config should be loaded', () => {
+    expect(translateService.setDefaultLang).toHaveBeenNthCalledWith(1, 'fr');
+    expect(translateService.use).toHaveBeenNthCalledWith(1, 'fr');
   });
 });
