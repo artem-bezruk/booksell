@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SeriesEditionListComponent } from './series-edition-list.component';
-describe('SeriesListComponent', () => {
+describe('SeriesEditionListComponent', () => {
   let component: SeriesEditionListComponent;
   let fixture: ComponentFixture<SeriesEditionListComponent>;
   beforeEach(async(() => {

@@ -1,5 +1,4 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {BookTypeGestionListDisplayComponent} from './book-type-gestion-list-display.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FontAwesomeTestingModule} from '@fortawesome/angular-fontawesome/testing';
@@ -11,12 +10,13 @@ import {bookTypeAdministrationServiceMock} from '../../../../services/__mocks__/
 import {BookTypeAdministrationService} from '../../../../services/book-type-administration.service';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {NgxTranslateTestingModule} from '../../../../../../../__mocks__/@ngx-translate/core/ngx-translate-testing.module';
-describe('BookTypeGestionListDisplayComponent', () => {
-  let component: BookTypeGestionListDisplayComponent;
-  let fixture: ComponentFixture<BookTypeGestionListDisplayComponent>;
+import {BookTypeEditionListDisplayComponent} from './book-type-edition-list-display.component';
+describe('BookTypeEditionListDisplayComponent', () => {
+  let component: BookTypeEditionListDisplayComponent;
+  let fixture: ComponentFixture<BookTypeEditionListDisplayComponent>;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [BookTypeGestionListDisplayComponent],
+      declarations: [BookTypeEditionListDisplayComponent],
       imports: [
         NoopAnimationsModule,
         NgxTranslateTestingModule,
@@ -35,7 +35,7 @@ describe('BookTypeGestionListDisplayComponent', () => {
       .compileComponents();
   }));
   beforeEach(() => {
-    fixture = TestBed.createComponent(BookTypeGestionListDisplayComponent);
+    fixture = TestBed.createComponent(BookTypeEditionListDisplayComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

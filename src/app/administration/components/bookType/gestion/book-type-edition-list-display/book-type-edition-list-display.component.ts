@@ -6,9 +6,9 @@ import {BookType} from '../../../../../core/model/bookType';
 import {switchMap, takeWhile} from 'rxjs/operators';
 @Component({
   selector: 'app-book-type-edition-list-display',
-  templateUrl: './book-type-gestion-list-display.component.html'
+  templateUrl: './book-type-edition-list-display.component.html'
 })
-export class BookTypeGestionListDisplayComponent implements OnInit {
+export class BookTypeEditionListDisplayComponent implements OnInit {
   private _isSaved: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   get isSaved(): Observable<boolean> {
     return this._isSaved;

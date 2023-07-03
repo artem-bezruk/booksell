@@ -11,21 +11,15 @@ import {BookAdministrationService} from '../../../../services/book-administratio
   templateUrl: './book-edition-list-display.component.html'
 })
 export class BookEditionListDisplayComponent implements OnInit {
-  get isSaved(): Observable<boolean> {
-    return this._isSaved;
-  }
-  constructor(private fb: FormBuilder,
-              private bookTypeService: BookTypeService,
-              private bookAdministrationService: BookAdministrationService) {
-  }
   @Input()
-  book: Book = {title: '', editor: {}, series: {seriesBookCount: 0, displayName: ''}};
-  private time = 3;
-  private toggle = new BehaviorSubject(false);
-  remainingSeconds = this.toggle.pipe(
-    switchMap((running: boolean) => (running ? timer(0, 1000) : of(0))),
-    takeWhile(t => t <= this.time),
-  );
+  book: Book = {
+    title: '',
+    editor: {},
+    series: {seriesBookCount: 0, displayName: ''},
+    tome: '',
+    bookType: '',
+    status: 'READ',
+  };
   progressBarState = {display: false, type: 'determinate'};
   @Output()
   removeBook: EventEmitter<Book> = new EventEmitter<Book>();
@@ -36,7 +30,20 @@ export class BookEditionListDisplayComponent implements OnInit {
     status: this.fb.control(''),
   });
   bookTypes: Observable<BookType[]> = this.bookTypeService.bookTypes;
+  private time = 3;
+  private toggle = new BehaviorSubject(false);
+  remainingSeconds = this.toggle.pipe(
+    switchMap((running: boolean) => (running ? timer(0, 1000) : of(0))),
+    takeWhile(t => t <= this.time),
+  );
+  constructor(private fb: FormBuilder,
+              private bookTypeService: BookTypeService,
+              private bookAdministrationService: BookAdministrationService) {
+  }
   private _isSaved: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  get isSaved(): Observable<boolean> {
+    return this._isSaved;
+  }
   public getProgressBarValue(val: number) {
     return (val / this.time) * 100;
   }
