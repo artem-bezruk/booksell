@@ -1,5 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { SeriesListFilterComponent } from './series-list-filter.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {SeriesListFilterComponent} from './series-list-filter.component';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -10,7 +10,7 @@ describe('SeriesListFilterComponent', () => {
   let fixture: ComponentFixture<SeriesListFilterComponent>;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SeriesListFilterComponent ],
+      declarations: [SeriesListFilterComponent],
       imports: [
         NoopAnimationsModule,
         ReactiveFormsModule,
@@ -19,7 +19,7 @@ describe('SeriesListFilterComponent', () => {
         MatInputModule,
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
   beforeEach(() => {
     fixture = TestBed.createComponent(SeriesListFilterComponent);
