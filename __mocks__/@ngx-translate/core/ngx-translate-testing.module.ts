@@ -2,9 +2,8 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {TranslatePipeMock} from './translate.pipe.mock';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
-import {TranslateServiceMock} from './translate.service.mock';
 import {TranslateLoaderMock} from './translate-loader.mock';
-import {translateServiceMock} from './translate.service.mock2';
+import {translateServiceMock} from './translate.service.mock';
 @NgModule({
   declarations: [TranslatePipeMock],
   imports: [

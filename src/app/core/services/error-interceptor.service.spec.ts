@@ -3,24 +3,19 @@ import {ErrorInterceptor} from './error-interceptor.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
-import {TranslateLoaderMock} from '../../../../__mocks__/@ngx-translate/core/translate-loader.mock';
-import {TranslateServiceMock} from '../../../../__mocks__/@ngx-translate/core/translate.service.mock';
+import {NgxTranslateTestingModule} from '../../../../__mocks__/@ngx-translate/core/ngx-translate-testing.module';
 describe('ErrorInterceptorService', () => {
   let httpTestingController: HttpTestingController;
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
+        NgxTranslateTestingModule,
         HttpClientTestingModule,
         RouterTestingModule,
-        MatSnackBarModule,
-        TranslateModule.forRoot({
-          loader: {provide: TranslateLoader, useClass: TranslateLoaderMock},
-        }),
+        MatSnackBarModule
       ],
       providers: [
         ErrorInterceptor,
-        {provide: TranslateService, useClass: TranslateServiceMock},
       ]
     });
     httpTestingController = TestBed.inject(HttpTestingController);
