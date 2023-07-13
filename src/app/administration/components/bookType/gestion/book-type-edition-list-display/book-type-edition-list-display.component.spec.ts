@@ -39,7 +39,22 @@ describe('BookTypeEditionListDisplayComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-  test('should create', () => {
-    expect(component).toBeTruthy();
+  describe('Init test', () => {
+    test('should create', () => {
+      expect(component).toBeTruthy();
+    });
+  });
+  describe('Business test', () => {
+    test('should return the progress bar value', () => {
+      component[`time`] = 4
+      expect(component.getProgressBarValue(4)).toStrictEqual(100)
+    });
+    test('should call the delete method on service', () => {
+      const bookType = {nbBooks: 0, id: 0, name: ''};
+      component.bookType = bookType;
+      component.deleteBookType();
+      expect(bookTypeAdministrationServiceMock.delete).toHaveBeenNthCalledWith(1, bookType)
+      expect(bookTypeAdministrationServiceMock.getAll).toHaveBeenCalledTimes(1)
+    });
   });
 });
