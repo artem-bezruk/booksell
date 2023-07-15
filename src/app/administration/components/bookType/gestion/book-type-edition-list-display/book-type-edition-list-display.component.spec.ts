@@ -1,5 +1,5 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FontAwesomeTestingModule} from '@fortawesome/angular-fontawesome/testing';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
@@ -46,15 +46,29 @@ describe('BookTypeEditionListDisplayComponent', () => {
   });
   describe('Business test', () => {
     test('should return the progress bar value', () => {
-      component[`time`] = 4
-      expect(component.getProgressBarValue(4)).toStrictEqual(100)
+      component[`time`] = 4;
+      expect(component.getProgressBarValue(4)).toStrictEqual(100);
     });
     test('should call the delete method on service', () => {
       const bookType = {nbBooks: 0, id: 0, name: ''};
       component.bookType = bookType;
       component.deleteBookType();
-      expect(bookTypeAdministrationServiceMock.delete).toHaveBeenNthCalledWith(1, bookType)
-      expect(bookTypeAdministrationServiceMock.getAll).toHaveBeenCalledTimes(1)
+      expect(bookTypeAdministrationServiceMock.delete).toHaveBeenNthCalledWith(1, bookType);
+      expect(bookTypeAdministrationServiceMock.getAll).toHaveBeenCalledTimes(1);
+    });
+    test('should call the update method on service', () => {
+      component.progressBarState = {display: false, type: 'indeterminate'};
+      const bookType = {id: 100, name: 'bookTypeName'};
+      component.bookType = bookType;
+      component.form = new FormGroup({
+        name: new FormControl(bookType.name + 'Updated')
+      });
+      component.submit();
+      expect(bookTypeAdministrationServiceMock.update).toHaveBeenNthCalledWith(1, {...bookType, name: bookType.name + 'Updated'});
+      expect(component.progressBarState).toStrictEqual({display: false, type: 'indeterminate'});
+      expect(component[`_isSaved`]).toBeTruthy();
+      expect(component.bookType).toStrictEqual({...bookType, name: bookType.name + 'Updated'});
+      expect(bookTypeAdministrationServiceMock.getAll).toHaveBeenCalledTimes(1);
     });
   });
 });

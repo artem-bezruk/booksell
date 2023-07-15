@@ -3,5 +3,6 @@ import fn = jest.fn;
 export const bookTypeAdministrationServiceMock = {
   list: of([]),
   getAll: fn(() => {}),
-  delete: fn((bookType: any) => {})
+  delete: fn((bookType: any) => {}),
+  update: fn((bookType: any) => of(bookType))
 }
