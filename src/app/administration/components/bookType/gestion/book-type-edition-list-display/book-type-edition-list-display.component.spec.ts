@@ -35,6 +35,7 @@ describe('BookTypeEditionListDisplayComponent', () => {
       .compileComponents();
   }));
   beforeEach(() => {
+    jest.clearAllMocks();
     fixture = TestBed.createComponent(BookTypeEditionListDisplayComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
