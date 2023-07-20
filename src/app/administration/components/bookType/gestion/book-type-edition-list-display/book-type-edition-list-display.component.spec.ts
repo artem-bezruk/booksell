@@ -67,7 +67,7 @@ describe('BookTypeEditionListDisplayComponent', () => {
       component.submit();
       expect(bookTypeAdministrationServiceMock.update).toHaveBeenNthCalledWith(1, {...bookType, name: bookType.name + 'Updated'});
       expect(component.progressBarState).toStrictEqual({display: false, type: 'indeterminate'});
-      expect(component[`_isSaved`]).toBeTruthy();
+      expect(component[`isSaved$`]).toBeTruthy();
       expect(component.bookType).toStrictEqual({...bookType, name: bookType.name + 'Updated'});
       expect(bookTypeAdministrationServiceMock.getAll).toHaveBeenCalledTimes(1);
     });
