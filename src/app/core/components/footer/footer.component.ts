@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {SignInModalComponent} from '../../../auth/components/sign-in-modal/sign-in-modal.component';
-import { MatDialog } from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import {AuthService} from '../../../auth/services/auth.service';
 @Component({
   selector: 'app-footer',

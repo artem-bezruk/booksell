@@ -1,5 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { BookTypeCreationListDisplayComponent } from './book-type-creation-list-display.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {BookTypeCreationListDisplayComponent} from './book-type-creation-list-display.component';
 import {FontAwesomeTestingModule} from '@fortawesome/angular-fontawesome/testing';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';

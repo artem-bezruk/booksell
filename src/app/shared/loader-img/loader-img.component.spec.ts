@@ -1,5 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { LoaderImgComponent } from './loader-img.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {LoaderImgComponent} from './loader-img.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 describe('LoaderImgComponent', () => {
   let component: LoaderImgComponent;

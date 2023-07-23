@@ -1,5 +1,5 @@
-import { MultiChartData } from './multiChartData';
-import { SimpleChartData } from './simpleChartData';
+import {MultiChartData} from './multiChartData';
+import {SimpleChartData} from './simpleChartData';
 import {Book} from './book';
 export interface Statistics {
     booksStatus?: Array<SimpleChartData>;

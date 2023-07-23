@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import {MatDialogRef} from '@angular/material/dialog';
 import {FormBuilder} from '@angular/forms';
 @Component({
   selector: 'app-new-book-type-modal',

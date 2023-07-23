@@ -1,5 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { BookCardComponent } from './book-card.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {BookCardComponent} from './book-card.component';
 import {MatCardModule} from '@angular/material/card';
 describe('BookCardComponent', () => {
   let component: BookCardComponent;

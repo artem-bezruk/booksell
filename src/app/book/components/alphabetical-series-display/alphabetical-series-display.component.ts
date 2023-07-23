@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 @Component({
   selector: 'app-alphabetical-series-display',
   templateUrl: './alphabetical-series-display.component.html',

@@ -1,5 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { BookEditionListComponent } from './book-edition-list.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {BookEditionListComponent} from './book-edition-list.component';
 import {MockBookEditionListDisplayComponent} from '../book-edition-list-display/__mocks__/book-edition-list-display.component';
 import {MatListModule} from '@angular/material/list';
 import {BookAdministrationService} from '../../../../services/book-administration.service';

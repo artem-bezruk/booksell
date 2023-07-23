@@ -1,6 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { BookListFilterComponent } from './book-list-filter.component';
-import {SeriesListFilterComponent} from '../../series/edition/series-list-filter/series-list-filter.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {BookListFilterComponent} from './book-list-filter.component';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {ReactiveFormsModule} from '@angular/forms';
 import {NgxTranslateTestingModule} from '../../../../../../__mocks__/@ngx-translate/core/ngx-translate-testing.module';

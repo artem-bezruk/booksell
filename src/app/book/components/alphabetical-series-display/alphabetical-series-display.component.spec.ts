@@ -1,5 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { AlphabeticalSeriesDisplayComponent } from './alphabetical-series-display.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {AlphabeticalSeriesDisplayComponent} from './alphabetical-series-display.component';
 describe('AlphabeticalSeriesDisplayComponent', () => {
   let component: AlphabeticalSeriesDisplayComponent;
   let fixture: ComponentFixture<AlphabeticalSeriesDisplayComponent>;

@@ -1,5 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { BookListComponent } from './book-list.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {BookListComponent} from './book-list.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MockListFilterComponent} from '../list-filter/__mocks__/list-filter.component';

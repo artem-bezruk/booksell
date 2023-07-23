@@ -1,5 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { BookTypeGestionComponent } from './book-type-gestion.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {BookTypeGestionComponent} from './book-type-gestion.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {NgxTranslateTestingModule} from '../../../../../../../__mocks__/@ngx-translate/core/ngx-translate-testing.module';

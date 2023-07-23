@@ -1,5 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { SeriesEditionListComponent } from './series-edition-list.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {SeriesEditionListComponent} from './series-edition-list.component';
 import {MatListModule} from '@angular/material/list';
 import {seriesAdministrationServiceMock} from '../../../../services/__mocks__/series-administration.service';
 import {SeriesAdministrationService} from '../../../../services/series-administration.service';

@@ -1,3 +1,3 @@
-import 'web-animations-js';  
+import 'web-animations-js'; 
 import 'hammerjs/hammer';
-import 'zone.js/dist/zone';  
+import 'zone.js/dist/zone'; 

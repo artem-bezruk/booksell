@@ -3,7 +3,6 @@ import {StatisticService} from '../../services/statistic.service';
 import {Observable} from 'rxjs';
 import {CoreService} from '../../../core/services/core.service';
 import {Statistics} from '../../../core/model/statistics';
-import {SimpleChartData} from '../../../core/model/simpleChartData';
 import {AuthService} from '../../../auth/services/auth.service';
 @Component({
   selector: 'app-book-dashboard',

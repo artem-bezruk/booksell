@@ -8,7 +8,6 @@ import {Observable} from 'rxjs';
 import {BookType} from '../../../../../core/model/bookType';
 import {BookTypeService} from '../../../../../core/services/book-type.service';
 import {NewBookTypeModalComponent} from '../../shared/new-book-type-modal/new-book-type-modal.component';
-import {Book} from '../../../../../core/model/book';
 import {DisplayImage} from '../../../../../shared/display-image';
 @Component({
   selector: 'app-search-result',

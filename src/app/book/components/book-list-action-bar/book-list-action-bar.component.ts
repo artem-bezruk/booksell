@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import {MatSlideToggleChange} from '@angular/material/slide-toggle';
 import {BookListService} from '../../services/book-list.service';
 import {Observable} from 'rxjs';
 @Component({

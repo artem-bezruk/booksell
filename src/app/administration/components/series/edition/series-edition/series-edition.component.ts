@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {SeriesAdministrationService} from '../../../../services/series-administration.service';
 import {CoreService} from '../../../../../core/services/core.service';

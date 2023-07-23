@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, Output, ViewChild, ViewEncapsulation} from '@angular/core';
 import {SeriesInfo} from '../../../core/model/series-by-group-container';
 import {Book} from '../../../core/model/book';
-import { MatExpansionPanel } from '@angular/material/expansion';
-import { MatListOption } from '@angular/material/list';
+import {MatExpansionPanel} from '@angular/material/expansion';
+import {MatListOption} from '@angular/material/list';
 import {BookDetailsEvent} from '../../models/book-details-event';
 import {AuthService} from '../../../auth/services/auth.service';
 import {BookService} from '../../services/book.service';

@@ -1,5 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { BookLayoutComponent } from './book-layout.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {BookLayoutComponent} from './book-layout.component';
 import {SharedModule} from '../../../shared/shared.module';
 import {RouterTestingModule} from '@angular/router/testing';
 describe('BookLayoutComponent', () => {

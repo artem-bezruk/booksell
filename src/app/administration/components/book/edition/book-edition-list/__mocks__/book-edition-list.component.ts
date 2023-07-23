@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 @Component({
   selector: 'app-book-edition-list',
   template: '<div>Mock Book Edition List</div>',
