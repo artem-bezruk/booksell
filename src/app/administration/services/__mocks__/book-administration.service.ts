@@ -3,5 +3,6 @@ import fn = jest.fn;
 export const bookAdministrationServiceMock = {
   searchResult: of({}),
   list: of([]),
-  getAll: fn(() => {})
+  getAll: fn(() => {}),
+  update: fn((series: any) => of(series))
 }

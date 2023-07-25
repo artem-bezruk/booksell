@@ -7,19 +7,21 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {NgxTranslateTestingModule} from '../../../../../../../__mocks__/@ngx-translate/core/ngx-translate-testing.module';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {BookAdministrationService} from '../../../../services/book-administration.service';
 import {bookAdministrationServiceMock} from '../../../../services/__mocks__/book-administration.service';
 import {BookTypeService} from '../../../../../core/services/book-type.service';
 import {bookTypeServiceMock} from '../../../../../core/services/__mocks__/book-type.service';
 import {MatInputModule} from '@angular/material/input';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {Book} from '../../../../../core/model/book';
+import {bookTypeAdministrationServiceMock} from '../../../../services/__mocks__/book-type-administration.service';
 describe('BookEditionListDisplayComponent', () => {
   let component: BookEditionListDisplayComponent;
   let fixture: ComponentFixture<BookEditionListDisplayComponent>;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BookEditionListDisplayComponent ],
+      declarations: [BookEditionListDisplayComponent],
       imports: [
         NoopAnimationsModule,
         NgxTranslateTestingModule,
@@ -37,14 +39,47 @@ describe('BookEditionListDisplayComponent', () => {
         {provide: BookAdministrationService, useValue: bookAdministrationServiceMock},
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
   beforeEach(() => {
     fixture = TestBed.createComponent(BookEditionListDisplayComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-  test('should create', () => {
-    expect(component).toBeTruthy();
+  describe('Init test', () => {
+    test('should create', () => {
+      expect(component).toBeTruthy();
+    });
+  });
+  describe('Business test', () => {
+    test('should return the progress bar value', () => {
+      component[`time`] = 8;
+      expect(component.getProgressBarValue(2)).toStrictEqual(25);
+    });
+    test('should call the update method on service', () => {
+      component.progressBarState = {display: false, type: 'indeterminate'};
+      const book: Book = {
+        title: 'MyTitle',
+        editor: {},
+        series: {seriesBookCount: 0, displayName: ''},
+        tome: '',
+        bookType: '',
+        status: 'READ',
+      };
+      const updatedTitle = book.title + 'Updated';
+      component.book = book;
+      component.form = new FormGroup({
+        title: new FormControl(updatedTitle),
+        tome: new FormControl(book.tome),
+        bookType: new FormControl(book.bookType),
+        status: new FormControl(book.status)
+      });
+      component.submit();
+      expect(bookAdministrationServiceMock.update).toHaveBeenNthCalledWith(1, {...book, title: updatedTitle});
+      expect(component.progressBarState).toStrictEqual({display: false, type: 'indeterminate'});
+      expect(component[`isSaved$`]).toBeTruthy();
+      expect(component.book).toStrictEqual({...book, title: updatedTitle});
+      expect(bookTypeServiceMock.getAllBookType).toHaveBeenCalledTimes(1);
+    });
   });
 });
