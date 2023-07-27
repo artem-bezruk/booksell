@@ -52,8 +52,8 @@ describe('SeriesEditionListDisplayComponent', () => {
       const series = {seriesBookCount: 0, displayName: 'SeriesDisplay', name: 'Series'};
       component.series = series;
       component.form = new FormGroup({
-        displayName:  new FormControl(this.series.displayName + 'Updated'),
-        seriesBookCount:  new FormControl(this.series.seriesBookCount)
+        displayName:  new FormControl(series.displayName + 'Updated'),
+        seriesBookCount:  new FormControl(series.seriesBookCount)
       });
       component.submit();
       expect(seriesAdministrationServiceMock.update).toHaveBeenNthCalledWith(1, {...series, displayName: series.displayName + 'Updated'});
