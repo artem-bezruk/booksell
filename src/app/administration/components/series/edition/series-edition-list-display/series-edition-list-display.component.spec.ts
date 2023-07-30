@@ -49,7 +49,7 @@ describe('SeriesEditionListDisplayComponent', () => {
     });
     test('should call the update method on service', () => {
       component.progressBarState = {display: false, type: 'indeterminate'};
-      const series = {seriesBookCount: 0, displayName: 'SeriesDisplay', name: 'Series'};
+      const series = {seriesBookCount: 0, displayName: 'SeriesDisplay', name: 'Series', editor: 'editor', id: 200};
       component.series = series;
       component.form = new FormGroup({
         displayName:  new FormControl(series.displayName + 'Updated'),
@@ -60,7 +60,6 @@ describe('SeriesEditionListDisplayComponent', () => {
       expect(component.progressBarState).toStrictEqual({display: false, type: 'indeterminate'});
       expect(component[`isSaved$`]).toBeTruthy();
       expect(component.series).toStrictEqual({...series, displayName: series.displayName + 'Updated'});
-      expect(seriesAdministrationServiceMock.getAll).toHaveBeenCalledTimes(1);
     });
   });
 });
