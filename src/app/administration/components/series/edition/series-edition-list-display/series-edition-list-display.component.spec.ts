@@ -10,12 +10,25 @@ import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {seriesAdministrationServiceMock} from '../../../../services/__mocks__/series-administration.service';
 import {SeriesAdministrationService} from '../../../../services/series-administration.service';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: jest.fn().mockImplementation(query => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: jest.fn(), 
+    removeListener: jest.fn(), 
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
+  })),
+});
 describe('SeriesEditionListDisplayComponent', () => {
   let component: SeriesEditionListDisplayComponent;
   let fixture: ComponentFixture<SeriesEditionListDisplayComponent>;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SeriesEditionListDisplayComponent ],
+      declarations: [SeriesEditionListDisplayComponent],
       imports: [
         NoopAnimationsModule,
         NgxTranslateTestingModule,
@@ -30,7 +43,7 @@ describe('SeriesEditionListDisplayComponent', () => {
         {provide: SeriesAdministrationService, useValue: seriesAdministrationServiceMock},
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
   beforeEach(() => {
     fixture = TestBed.createComponent(SeriesEditionListDisplayComponent);
@@ -52,11 +65,13 @@ describe('SeriesEditionListDisplayComponent', () => {
       const series = {seriesBookCount: 0, displayName: 'SeriesDisplay', name: 'Series', editor: 'editor', id: 200};
       component.series = series;
       component.form = new FormGroup({
-        displayName:  new FormControl(series.displayName + 'Updated'),
-        seriesBookCount:  new FormControl(series.seriesBookCount)
+        displayName: new FormControl(series.displayName + 'Updated'),
+        seriesBookCount: new FormControl(series.seriesBookCount)
       });
       component.submit();
-      expect(seriesAdministrationServiceMock.update).toHaveBeenNthCalledWith(1, {...series, displayName: series.displayName + 'Updated'});
+      expect(seriesAdministrationServiceMock.update).toHaveBeenNthCalledWith(1,
+        {...series, displayName: series.displayName + 'Updated'}
+      );
       expect(component.progressBarState).toStrictEqual({display: false, type: 'indeterminate'});
       expect(component[`isSaved$`]).toBeTruthy();
       expect(component.series).toStrictEqual({...series, displayName: series.displayName + 'Updated'});
