@@ -6,19 +6,53 @@ describe('LoaderImgComponent', () => {
   let fixture: ComponentFixture<LoaderImgComponent>;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoaderImgComponent ],
+      declarations: [LoaderImgComponent],
       imports: [
         MatProgressSpinnerModule
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
   beforeEach(() => {
     fixture = TestBed.createComponent(LoaderImgComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-  test('should create', () => {
-    expect(component).toBeTruthy();
+  describe('Init test', () => {
+    test('should create', () => {
+      expect(component).toBeTruthy();
+    });
+  });
+  describe('Business test', () => {
+    test('should set img pass at input at init', () => {
+      const img = {
+        src: 'myImg.jpg',
+        alt: 'Cover found'
+      };
+      component.img = img;
+      component.ngOnInit()
+      expect(component.alt).toStrictEqual(img.alt);
+      expect(component.src).toStrictEqual(img.src);
+    });
+    test('should set img pass at input on changes', () => {
+      const img = {
+        src: 'myImg.jpg',
+        alt: 'Cover found'
+      };
+      component.img = img;
+      component.ngOnChanges({})
+      expect(component.alt).toStrictEqual(img.alt);
+      expect(component.src).toStrictEqual(img.src);
+    });
+    test('should set loading at false', () => {
+      component.onLoad()
+      expect(component.loading).toBeFalsy();
+    });
+    test('should set loading at false and load default image', () => {
+      component.onLoad()
+      expect(component.loading).toBeFalsy();
+      expect(component.alt).toStrictEqual(component[`defaultImg`].alt);
+      expect(component.src).toStrictEqual(component[`defaultImg`].src);
+    });
   });
 });
