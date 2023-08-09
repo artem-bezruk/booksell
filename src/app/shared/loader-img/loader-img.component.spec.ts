@@ -34,6 +34,11 @@ describe('LoaderImgComponent', () => {
       expect(component.alt).toStrictEqual(img.alt);
       expect(component.src).toStrictEqual(img.src);
     });
+    test('should set default img on changes', () => {
+      component.ngOnChanges({})
+      expect(component.alt).toStrictEqual(component[`defaultImg`].alt);
+      expect(component.src).toStrictEqual(component[`defaultImg`].src);
+    });
     test('should set img pass at input on changes', () => {
       const img = {
         src: 'myImg.jpg',
@@ -49,7 +54,7 @@ describe('LoaderImgComponent', () => {
       expect(component.loading).toBeFalsy();
     });
     test('should set loading at false and load default image', () => {
-      component.onLoad()
+      component.onError()
       expect(component.loading).toBeFalsy();
       expect(component.alt).toStrictEqual(component[`defaultImg`].alt);
       expect(component.src).toStrictEqual(component[`defaultImg`].src);
