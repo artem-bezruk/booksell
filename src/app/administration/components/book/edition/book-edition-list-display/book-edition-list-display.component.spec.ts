@@ -15,7 +15,6 @@ import {bookTypeServiceMock} from '../../../../../core/services/__mocks__/book-t
 import {MatInputModule} from '@angular/material/input';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {Book} from '../../../../../core/model/book';
-import {bookTypeAdministrationServiceMock} from '../../../../services/__mocks__/book-type-administration.service';
 describe('BookEditionListDisplayComponent', () => {
   let component: BookEditionListDisplayComponent;
   let fixture: ComponentFixture<BookEditionListDisplayComponent>;

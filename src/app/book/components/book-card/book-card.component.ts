@@ -3,8 +3,7 @@ import {Book} from '../../../core/model/book';
 import {Series} from '../../../core/model/series';
 @Component({
   selector: 'app-book-card',
-  templateUrl: './book-card.component.html',
-  styleUrls: ['./book-card.component.css']
+  templateUrl: './book-card.component.html'
 })
 export class BookCardComponent implements OnInit {
   @Input()
