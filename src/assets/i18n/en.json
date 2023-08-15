@@ -162,6 +162,7 @@
     "GENERIC": "An error occured!"
   },
   "SERIES": {
+    "ONE_SHOT": "One Shot",
     "EDITION": {
       "TITLE": "Series edition",
       "FILTER_PLACEHOLDER": "Filter",

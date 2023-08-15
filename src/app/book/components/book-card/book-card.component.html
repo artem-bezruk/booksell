@@ -4,7 +4,7 @@
   </mat-card-header>
   <mat-card-content style="margin-top: 1rem">
     <span *ngIf="book.tome === null && isOneShot(book.series)">
-      One-shot
+      {{'SERIES.ONE_SHOT' | translate}}
     </span>
     <span *ngIf="book.tome === null && !isOneShot(book.series)">
       {{book.series.displayName}}

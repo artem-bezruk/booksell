@@ -162,6 +162,7 @@
     "GENERIC": "Une erreur est survenue!"
   },
   "SERIES": {
+    "ONE_SHOT": "Récit complet",
     "EDITION": {
       "TITLE": "Edition des séries",
       "FILTER_PLACEHOLDER": "Filtre",
