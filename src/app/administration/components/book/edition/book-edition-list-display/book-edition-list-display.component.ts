@@ -6,16 +6,21 @@ import {BookType} from '../../../../../core/model/bookType';
 import {BookTypeService} from '../../../../../core/services/book-type.service';
 import {BookAdministrationService} from '../../../../services/book-administration.service';
 import {HasTimedProgressBar} from '../../../../../shared/has-timed-progress-bar';
+import {SeriesImpl} from '../../../../../core/model/impl/series-impl';
+import {TranslateService} from '@ngx-translate/core';
 @Component({
   selector: 'app-book-edition-list-display',
   templateUrl: './book-edition-list-display.component.html'
 })
 export class BookEditionListDisplayComponent extends HasTimedProgressBar implements OnInit {
   @Input()
-  book: Book = {
+  set book(book: Book) {
+    this._book = {...book, series: SeriesImpl.fromSeries(book.series)};
+  }
+  _book: Book = {
     title: '',
-    editor: {},
-    series: {seriesBookCount: 0, displayName: ''},
+    editor: {name: ''},
+    series: new SeriesImpl(),
     tome: '',
     bookType: '',
     status: 'READ',
@@ -31,7 +36,9 @@ export class BookEditionListDisplayComponent extends HasTimedProgressBar impleme
   bookTypes: Observable<BookType[]> = this.bookTypeService.bookTypes;
   constructor(private fb: FormBuilder,
               private bookTypeService: BookTypeService,
-              private bookAdministrationService: BookAdministrationService) {
+              private bookAdministrationService: BookAdministrationService,
+              private translateService: TranslateService,
+  ) {
     super();
   }
   ngOnInit() {
@@ -39,8 +46,7 @@ export class BookEditionListDisplayComponent extends HasTimedProgressBar impleme
   }
   submit(): void {
     this.progressBarState = {display: true, type: 'indeterminate'};
-    Object.keys(this.form.value).forEach(key => this.book[key] = this.form.value[key]);
-    this.bookAdministrationService.update(this.book).subscribe(value => {
+    this.bookAdministrationService.update({...this._book, ...this.form.value}).subscribe(value => {
       this.bookTypeService.getAllBookType();
       this.book = value;
       this.updateIsSaved();
@@ -49,13 +55,20 @@ export class BookEditionListDisplayComponent extends HasTimedProgressBar impleme
   }
   initForm(): void {
     this.form.setValue({
-      title: this.book.title,
-      tome: this.book.tome,
-      bookType: this.book.bookType,
-      status: this.book.status
+      title: this._book.title,
+      tome: this._book.tome,
+      bookType: this._book.bookType,
+      status: this._book.status
     });
   }
   deleteBook() {
     this.removeBook.emit(this.book);
+  }
+  public getInputHeader(): string {
+    let displayName = this._book.series.displayName;
+    if (this._book.series.isOneShot()) {
+      displayName = this.translateService.instant('SERIES.ONE_SHOT');
+    }
+    return `${this._book.editor.name} - ${displayName}`;
   }
 }

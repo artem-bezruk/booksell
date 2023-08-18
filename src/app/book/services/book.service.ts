@@ -1,16 +1,18 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, forkJoin, Observable} from 'rxjs';
-import {shareReplay} from 'rxjs/operators';
+import {map, shareReplay} from 'rxjs/operators';
 import {Book} from '../../core/model/book';
 import {CoreService} from '../../core/services/core.service';
 import {BookBySeriesContainer, SeriesByGroupContainer, SeriesInfo} from '../../core/model/series-by-group-container';
 import {Utils} from '../../shared/utils';
+import {SeriesImpl} from '../../core/model/impl/series-impl';
+import {TranslateService} from '@ngx-translate/core';
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
-  constructor(private http: HttpClient, private coreService: CoreService) {
+  constructor(private http: HttpClient, private coreService: CoreService, private translateService: TranslateService) {
   }
   get searchResult(): Observable<Book[]> {
     return this._searchResult.asObservable();
@@ -66,11 +68,19 @@ export class BookService {
       this.currentBookType = bookType;
     }
     const o = this.http.get<Book[]>(`/api/books/type/${this.currentBookType}`).pipe(shareReplay());
-    o.subscribe(
-      res => this._searchResult.next(res),
-      err => console.error('an error occured!', err),
-      () => this.coreService.updateLoadingState(false));
+    o.pipe(map(books => books.map(book => ({...book, series: this.instenciateSeries(book)}))))
+      .subscribe(
+        res => this._searchResult.next(res),
+        err => console.error('an error occured!', err),
+        () => this.coreService.updateLoadingState(false));
     return o;
+  }
+  private instenciateSeries(book: Book): SeriesImpl {
+    const series = SeriesImpl.fromSeries(book.series);
+    if (series.isOneShot()) {
+      series.displayName = this.translateService.instant('SERIES.ONE_SHOT');
+    }
+    return series;
   }
   bulkUpdate(books: Book[]) {
     this.coreService.updateLoadingState(true);

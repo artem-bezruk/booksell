@@ -2,10 +2,10 @@
      style="padding: 20px">
   <div fxFlex fxLayoutAlign="space-between center">
     <div fxFlex="70">
-      <h2 *ngIf="bookEvent.book.tome === null && isOneShot(bookEvent.book.series)">
+      <h2 *ngIf="bookEvent.book.tome === null && bookEvent.book.series.isOneShot()">
         {{bookEvent.book?.title}}
       </h2>
-      <h2 *ngIf="bookEvent.book.tome === null && !isOneShot(bookEvent.book.series)">
+      <h2 *ngIf="bookEvent.book.tome === null && !bookEvent.book.series.isOneShot()">
         {{bookEvent.book.series.displayName}}: {{bookEvent.book?.title}}
       </h2>
       <h2 *ngIf="bookEvent.book.tome !== null">
@@ -50,7 +50,7 @@
         </mat-list-item>
         <mat-list-item>
           <h4 mat-line
-              [innerHTML]="'BOOK.LIST.DETAILS.SERIES' | translate:{value: bookEvent.book.series.name}">
+              [innerHTML]="'BOOK.LIST.DETAILS.SERIES' | translate:{value: getSeriesDisplayName(bookEvent.book.series)}">
           </h4>
           <p mat-line *ngIf="bookEvent.book.tome !== null"
              [innerHTML]="'BOOK.LIST.DETAILS.TOME' | translate:{value: bookEvent.book.tome}">

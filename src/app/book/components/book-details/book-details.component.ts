@@ -4,6 +4,7 @@ import {BookDetailsEvent} from '../../models/book-details-event';
 import {BookDetailsService} from '../../services/book-details.service';
 import {DisplayImage} from '../../../shared/display-image';
 import {Series} from '../../../core/model/series';
+import {TranslateService} from '@ngx-translate/core';
 @Component({
   selector: 'app-book-details',
   templateUrl: './book-details.component.html'
@@ -11,7 +12,10 @@ import {Series} from '../../../core/model/series';
 export class BookDetailsComponent extends DisplayImage implements OnInit {
   bookEvent: { book: Book | null, asNext: BookDetailsEvent | null, asPrevious: BookDetailsEvent | null } | null = null;
   public displayImg = false;
-  constructor(private bookDetailsService: BookDetailsService) {
+  constructor(
+    private bookDetailsService: BookDetailsService,
+    private translateService: TranslateService,
+  ) {
     super('/files/covers')
   }
   ngOnInit() {
@@ -24,7 +28,7 @@ export class BookDetailsComponent extends DisplayImage implements OnInit {
     this.displayImg = false;
     this.bookDetailsService.showDetails(bookDetailsEvent);
   }
-  isOneShot(series: Series) {
-    return series.name === 'One-shot'
+  getSeriesDisplayName(series: Series) {
+    return series.isOneShot() ? this.translateService.instant('SERIES.ONE_SHOT') : series.displayName
   }
 }
