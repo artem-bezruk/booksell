@@ -2,6 +2,7 @@ import {TestBed} from '@angular/core/testing';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {BookListService} from './book-list.service';
 import {RouterTestingModule} from '@angular/router/testing';
+import {NgxTranslateTestingModule} from '../../../../__mocks__/@ngx-translate/core/ngx-translate-testing.module';
 describe('BookListService', () => {
   let httpTestingController: HttpTestingController;
   let service: BookListService;
@@ -9,7 +10,8 @@ describe('BookListService', () => {
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
-        RouterTestingModule
+        RouterTestingModule,
+        NgxTranslateTestingModule
       ]
     });
     httpTestingController = TestBed.inject(HttpTestingController);

@@ -13,6 +13,7 @@ export class SeriesImpl implements Series {
   static fromSeries(series: Series): SeriesImpl {
     const seriesImpl = new SeriesImpl(series.name, series.editor, series.displayName);
     seriesImpl.seriesBookCount = series.seriesBookCount;
+    seriesImpl.id = series.id;
     return seriesImpl;
   }
   isOneShot(): boolean {

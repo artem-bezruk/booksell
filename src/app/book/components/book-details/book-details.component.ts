@@ -5,6 +5,7 @@ import {BookDetailsService} from '../../services/book-details.service';
 import {DisplayImage} from '../../../shared/display-image';
 import {Series} from '../../../core/model/series';
 import {TranslateService} from '@ngx-translate/core';
+import {SeriesImpl} from '../../../core/model/impl/series-impl';
 @Component({
   selector: 'app-book-details',
   templateUrl: './book-details.component.html'
@@ -29,6 +30,7 @@ export class BookDetailsComponent extends DisplayImage implements OnInit {
     this.bookDetailsService.showDetails(bookDetailsEvent);
   }
   getSeriesDisplayName(series: Series) {
+    series = SeriesImpl.fromSeries(series);
     return series.isOneShot() ? this.translateService.instant('SERIES.ONE_SHOT') : series.displayName
   }
 }

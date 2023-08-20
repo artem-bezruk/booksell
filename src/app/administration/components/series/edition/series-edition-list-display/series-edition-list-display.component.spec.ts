@@ -10,6 +10,7 @@ import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {seriesAdministrationServiceMock} from '../../../../services/__mocks__/series-administration.service';
 import {SeriesAdministrationService} from '../../../../services/series-administration.service';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {SeriesImpl} from '../../../../../core/model/impl/series-impl';
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: jest.fn().mockImplementation(query => ({
@@ -69,12 +70,11 @@ describe('SeriesEditionListDisplayComponent', () => {
         seriesBookCount: new FormControl(series.seriesBookCount)
       });
       component.submit();
-      expect(seriesAdministrationServiceMock.update).toHaveBeenNthCalledWith(1,
-        {...series, displayName: series.displayName + 'Updated'}
-      );
+      const seriesImpl = SeriesImpl.fromSeries({...series, displayName: series.displayName + 'Updated'});
+      expect(seriesAdministrationServiceMock.update).toHaveBeenNthCalledWith(1, seriesImpl);
       expect(component.progressBarState).toStrictEqual({display: false, type: 'indeterminate'});
       expect(component[`isSaved$`]).toBeTruthy();
-      expect(component.series).toStrictEqual({...series, displayName: series.displayName + 'Updated'});
+      expect(component.series).toStrictEqual(seriesImpl);
     });
   });
 });
