@@ -15,6 +15,7 @@ import {bookTypeServiceMock} from '../../../../../core/services/__mocks__/book-t
 import {MatInputModule} from '@angular/material/input';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {Book} from '../../../../../core/model/book';
+import {SeriesImpl} from '../../../../../core/model/impl/series-impl';
 describe('BookEditionListDisplayComponent', () => {
   let component: BookEditionListDisplayComponent;
   let fixture: ComponentFixture<BookEditionListDisplayComponent>;
@@ -60,7 +61,7 @@ describe('BookEditionListDisplayComponent', () => {
       const book: Book = {
         title: 'MyTitle',
         editor: {},
-        series: {seriesBookCount: 0, displayName: ''},
+        series: new SeriesImpl(),
         tome: '',
         bookType: '',
         status: 'READ',
@@ -77,7 +78,7 @@ describe('BookEditionListDisplayComponent', () => {
       expect(bookAdministrationServiceMock.update).toHaveBeenNthCalledWith(1, {...book, title: updatedTitle});
       expect(component.progressBarState).toStrictEqual({display: false, type: 'indeterminate'});
       expect(component[`isSaved$`]).toBeTruthy();
-      expect(component.book).toStrictEqual({...book, title: updatedTitle});
+      expect(component[`_book`]).toStrictEqual({...book, title: updatedTitle});
       expect(bookTypeServiceMock.getAllBookType).toHaveBeenCalledTimes(1);
     });
   });
