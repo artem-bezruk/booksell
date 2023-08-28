@@ -1,7 +1,9 @@
+import {Image} from './models/image';
+import {ImageImpl} from './models/impl/image-impl';
 export class DisplayImage {
   constructor(private imgPath: string) {
   }
-  getImg(cover: string) {
-    return cover !== null ? {src: this.imgPath + '/' + cover, alt: cover} : null;
+  getImg(cover: string): Image | null {
+    return cover !== null ? new ImageImpl(`${this.imgPath}/${cover}`, cover) : null;
   }
 }

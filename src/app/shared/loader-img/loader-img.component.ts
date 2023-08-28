@@ -1,11 +1,12 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Image} from '../models/image';
 @Component({
   selector: 'app-loader-img',
   templateUrl: './loader-img.component.html',
   styleUrls: ['./loader-img.component.scss']
 })
 export class LoaderImgComponent implements OnInit, OnChanges {
-  @Input() img: { src: string, alt: string } | null = null;
+  @Input() img: Image | null = null;
   @Input() imgContainerClass: string | null = null;
   private defaultImg = {
     src: 'assets/images/no_cover.jpg',
@@ -26,7 +27,7 @@ export class LoaderImgComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.loadImg(this.img !== null ? this.img : this.defaultImg);
   }
-  loadImg(img: { src: string, alt: string } | null) {
+  loadImg(img: Image | null) {
     this.alt = img.alt;
     this.src = img.src;
   }
