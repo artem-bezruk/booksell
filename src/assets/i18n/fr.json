@@ -45,6 +45,29 @@
     }
   },
   "BOOK": {
+    "FORM": {
+      "ISBN": "ISBN",
+      "ARK_ID": "ARK Id",
+      "TITLE": "Titre",
+      "SERIES": "Séries",
+      "TOME": "Tome",
+      "YEAR": "Année",
+      "EDITOR": "Editeur",
+      "COLLECTION": "Collection",
+      "AUTHOR": {
+        "NAME": "Nom",
+        "ROLES": "Rôle(s)"
+      },
+      "SECTION_TITLE": {
+        "GLOBAL_INFORMATION": "Informations générale",
+        "AUTHOR": "Auteurs",
+        "RAW_DATA": "Données brutes"
+      },
+      "ACTION": {
+        "ADD": "Ajouter",
+        "NEW_BOOK_TYPE": "Nouveau type de livre"
+      }
+    },
     "STATE": {
       "UNREAD": "Non lus",
       "READ": "Lus",
@@ -59,31 +82,8 @@
       },
       "TITLE": "Ajouter des livres",
       "BUTTON_SEARCH": "Rechercher",
-      "BUTTON_CLEAR": "Reset",
-      "RESULTS": {
-        "SECTION_TITLE": {
-          "GLOBAL_INFORMATION": "Informations générale",
-          "AUTHOR": "Auteurs",
-          "RAW_DATA": "Données brutes"
-        },
-        "ISBN": "<strong>ISBN: </strong>{{value}}",
-        "ARK_ID": "<strong>ARK Id: </strong>{{value}}",
-        "TITLE": "<strong>Titre: </strong>{{value}}",
-        "SERIES": "<strong>Séries: </strong>{{value}}",
-        "TOME": "<strong>Tome: </strong>{{value}}",
-        "YEAR": "<strong>Année: </strong>{{value}}",
-        "EDITOR": "<strong>Editeur: </strong>{{value}}",
-        "COLLECTION": "<strong>Collection: </strong>{{value}}",
-        "AUTHOR": {
-          "NAME": "<strong>Nom: </strong>{{value}}",
-          "ROLES": "<strong>Rôle(s): </strong>{{value}}"
-        },
-        "ACTION_ROW": {
-          "ADD": "Ajouter",
-          "NEW_BOOK_TYPE": "Nouveau type de livre"
-        }
-      }
-    },
+      "BUTTON_CLEAR": "Reset"
+      },
     "ADD": {
       "SUCCESS": "Vous avez ajouté le livre {{isbn}}"
     },

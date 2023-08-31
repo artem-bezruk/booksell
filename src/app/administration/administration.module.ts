@@ -27,6 +27,8 @@ import {BookTypeGestionComponent} from './components/bookType/gestion/book-type-
 import {BookTypeGestionListComponent} from './components/bookType/gestion/book-type-gestion-list/book-type-gestion-list.component';
 import {BookTypeCreationListDisplayComponent} from './components/bookType/gestion/book-type-creation-list-display/book-type-creation-list-display.component';
 import {BookTypeEditionListDisplayComponent} from './components/bookType/gestion/book-type-edition-list-display/book-type-edition-list-display.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 @NgModule({
   imports: [
     CommonModule,
@@ -39,7 +41,9 @@ import {BookTypeEditionListDisplayComponent} from './components/bookType/gestion
     MatProgressBarModule,
     MatSelectModule,
     MatButtonToggleModule,
-    FontAwesomeModule
+    MatAutocompleteModule,
+    FontAwesomeModule,
+    MatSlideToggleModule
   ],
   declarations: [
     AdministrationLayoutComponent,
@@ -60,6 +64,7 @@ import {BookTypeEditionListDisplayComponent} from './components/bookType/gestion
     BookTypeGestionListComponent,
     BookTypeEditionListDisplayComponent,
     BookTypeCreationListDisplayComponent
+    BookFormComponent
   ],
   entryComponents: [NewBookTypeModalComponent]
 })
