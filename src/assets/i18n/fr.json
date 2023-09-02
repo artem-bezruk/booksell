@@ -48,11 +48,16 @@
     "FORM": {
       "ISBN": "ISBN",
       "ARK_ID": "ARK Id",
-      "TITLE": "Titre",
-      "SERIES": "Séries",
       "TOME": "Tome",
+      "TITLE": "Titre",
       "YEAR": "Année",
-      "EDITOR": "Editeur",
+      "SERIES": {
+        "NAME": "Nom",
+        "DISPLAY_NAME": "Nom d'affichage"
+      },
+      "EDITOR": {
+        "NAME": "Nom"
+      },
       "COLLECTION": "Collection",
       "AUTHOR": {
         "NAME": "Nom",
@@ -60,6 +65,8 @@
       },
       "SECTION_TITLE": {
         "GLOBAL_INFORMATION": "Informations générale",
+        "SERIES": "Série",
+        "EDITOR": "Editeur",
         "AUTHOR": "Auteurs",
         "RAW_DATA": "Données brutes"
       },
@@ -83,7 +90,7 @@
       "TITLE": "Ajouter des livres",
       "BUTTON_SEARCH": "Rechercher",
       "BUTTON_CLEAR": "Reset"
-      },
+    },
     "ADD": {
       "SUCCESS": "Vous avez ajouté le livre {{isbn}}"
     },

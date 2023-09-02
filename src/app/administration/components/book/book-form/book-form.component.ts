@@ -1,53 +1,53 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BookAdministrationService} from '../../../services/book-administration.service';
 import {DisplayImage} from '../../../../shared/display-image';
-import {Observable} from 'rxjs';
-import {BookSearch} from '../../../models/book-search';
-import {TranslateService} from '@ngx-translate/core';
-import {FormControl} from '@angular/forms';
-import {map, startWith} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
+import {FormArray, FormGroup} from '@angular/forms';
+import {BookFormService} from '../../../services/book-form.service';
+import {Book} from '../../../../core/model/book';
+import {BookImpl} from '../../../../core/model/impl/book-impl';
 @Component({
   selector: 'app-book-form',
-  templateUrl: './book-form.component.html',
-  styleUrls: ['./book-form.component.css']
+  templateUrl: './book-form.component.html'
 })
-export class BookFormComponent extends DisplayImage implements OnInit {
+export class BookFormComponent extends DisplayImage implements OnInit, OnDestroy {
   constructor(private bookAdministrationService: BookAdministrationService,
-              private translateService: TranslateService
-  ) {
+              private bookFormService: BookFormService) {
     super('/files/search/covers');
   }
-  public book$: Observable<BookSearch | null>;
-  editorControl = new FormControl();
-  editors: string[] = ['Urban Comics', 'Panini'];
-  filteredEditor: Observable<string[]>;
-  seriesControl = new FormControl();
-  series: string[] = ['Watchmen', 'Lanfeust'];
-  filteredSeries: Observable<string[]>;
+  public form: FormGroup;
+  private formSub: Subscription;
+  public authors: FormArray;
+  public editor: FormGroup;
+  public series: FormGroup;
+  public book: Book = new BookImpl();
   roles = ['scénario', 'dessins', 'couleurs'];
   ngOnInit(): void {
-    this.book$ = this.bookAdministrationService.searchResult;
-    this.bookAdministrationService.searchResult.subscribe(b => {
-      this.editorControl.patchValue(b.editor);
-      this.filteredEditor = this.editorControl.valueChanges
-        .pipe(
-          startWith(b.editor),
-          map(value => this._filter(value, this.editors))
-        );
-      this.seriesControl.patchValue(b.series);
-      this.filteredSeries = this.seriesControl.valueChanges
-        .pipe(
-          startWith(b.series),
-          map(value => this._filter(value, this.series))
-        );
+    this.formSub = this.bookFormService.bookForm$
+      .subscribe(bookForm => {
+        this.form = bookForm;
+        this.editor = this.form.get('editor') as FormGroup;
+        this.series = this.form.get('series') as FormGroup;
+      });
+    this.bookAdministrationService.searchResult.subscribe((book) => {
+      if (book !== null) {
+        this.book = BookImpl.fromBookSearch(book);
+        this.bookFormService.initForm(this.book);
+      }
     });
   }
-  isBookOneShot(bookSearch: BookSearch): boolean {
-    return bookSearch.series === null || bookSearch.series === '';
+  addAuthor() {
+    this.bookFormService.addAuthor();
   }
-  private _filter(value: string, source: string[]): string[] {
-    return source.filter(option =>
-      option.toLowerCase().includes(value.toLowerCase())
-    );
+  deleteAuthor(index: number) {
+    this.bookFormService.deleteAuthor(index);
+  }
+  ngOnDestroy() {
+    this.formSub.unsubscribe();
+  }
+  submit() {
+    const editor = {...this.book.editor, ...this.form.value.editor}
+    const series = {...this.book.series, ...this.form.value.series, editor: editor.name}
+    console.log({...this.book, ...this.form.value, series, editor});
   }
 }

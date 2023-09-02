@@ -29,6 +29,10 @@ import {BookTypeCreationListDisplayComponent} from './components/bookType/gestio
 import {BookTypeEditionListDisplayComponent} from './components/bookType/gestion/book-type-edition-list-display/book-type-edition-list-display.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {BookFormComponent} from './components/book/book-form/book-form.component';
+import { AuthorFormComponent } from './components/book/author-form/author-form.component';
+import { EditorFormComponent } from './components/book/editor-form/editor-form.component';
+import { SeriesFormComponent } from './components/book/series-form/series-form.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -63,8 +67,11 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     BookTypeGestionComponent,
     BookTypeGestionListComponent,
     BookTypeEditionListDisplayComponent,
-    BookTypeCreationListDisplayComponent
-    BookFormComponent
+    BookTypeCreationListDisplayComponent,
+    BookFormComponent,
+    AuthorFormComponent,
+    EditorFormComponent,
+    SeriesFormComponent
   ],
   entryComponents: [NewBookTypeModalComponent]
 })

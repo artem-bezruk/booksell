@@ -1,15 +1,17 @@
-<div *ngIf="book$ | async as book">
-  <div formGroup="form" fxLayout="column" fxLayoutGap="2rem">
+<div>
+  <div [formGroup]="form" (submit)="submit()" fxLayout="column" fxLayoutGap="2rem">
     <div fxLayout="row" fxLayoutAlign="space-between">
       <h2>
-        <span *ngIf="book.tome === null && book.series === 'One-shot'">{{book.title}}</span>
-        <span *ngIf="book.tome === null && book.series !== 'One-shot'">{{book.series}} {{book.title}}</span>
-        <span *ngIf="book.tome !== null">{{book.series}} (T{{book.tome}}) {{book.title}}</span>
+        <span *ngIf="book.tome === null && book.series.isOneShot()">{{form.controls.title.value}}</span>
+        <span
+          *ngIf="book.tome === null && book.series.isOneShot()">{{book.series.displayName}} {{form.controls.title.value}}</span>
+        <span *ngIf="book.tome !== null">{{book.series.displayName}} (T{{book.tome}}
+          ) {{form.controls.title.value}}</span>
         <span class="mat-small"> {{book.isbn}}</span>
       </h2>
       <div>
         <mat-form-field style="padding-right: 1rem">
-          <mat-select #select [placeholder]="'Book Type'">
+          <mat-select [placeholder]="'Book Type'">
             <mat-option [value]="'0'">
               {{'BOOK.FORM.ACTION.NEW_BOOK_TYPE' | translate}}
             </mat-option>
@@ -18,7 +20,7 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <button mat-stroked-button mat-raised-button color="primary">
+        <button type="submit" (click)="submit()" mat-stroked-button mat-raised-button color="primary">
           <mat-label>{{'BOOK.FORM.ACTION.ADD' | translate}}</mat-label>
         </button>
       </div>
@@ -37,100 +39,47 @@
       <div fxFlex fxLayout="column">
         <div fxLayout="row" fxLayoutGap="2rem">
           <div fxLayout="column" fxFlex="45" fxLayoutGap="2rem">
-            <h3>{{'BOOK.FORM.SECTION_TITLE.GLOBAL_INFORMATION' | translate}}</h3>
             <div fxLayout="column">
-              <mat-slide-toggle labelPosition="before" fxFlexAlign="end"> One-shot</mat-slide-toggle>
-              <mat-form-field>
-                <label>
-                  <input matInput [placeholder]="'BOOK.FORM.TITLE' | translate"
-                         [value]="book.title"/>
-                </label>
-              </mat-form-field>
-              <div fxLayout="row" fxLayoutGap="1rem">
-                <mat-form-field fxFlex="85">
-                  <label>
-                    <input type="text"
-                           matInput
-                           [placeholder]="'BOOK.FORM.SERIES' | translate"
-                           aria-label="book's series"
-                           [formControl]="seriesControl"
-                           [matAutocomplete]="series">
-                    <mat-autocomplete #series="matAutocomplete">
-                      <mat-option *ngFor="let option of filteredSeries | async" [value]="option">
-                        {{option}}
-                      </mat-option>
-                    </mat-autocomplete>
-                  </label>
-                </mat-form-field>
-                <mat-form-field fxFlex="15">
-                  <label>
-                    <input matInput type="number" [placeholder]="'BOOK.FORM.TOME' | translate"
-                           [value]="book.tome"/>
-                  </label>
-                </mat-form-field>
-              </div>
-              <mat-form-field>
-                <label>
-                  <input matInput [placeholder]="'BOOK.FORM.YEAR' | translate"
-                         [value]="book.year"/>
-                </label>
-              </mat-form-field>
-            </div>
-            <div fxLayout="column">
-              <mat-form-field>
-                <label>
-                  <input type="text"
-                         matInput [placeholder]="'BOOK.FORM.EDITOR' | translate"
-                         aria-label="book's editor"
-                         [formControl]="editorControl"
-                         [matAutocomplete]="editor">
-                  <mat-autocomplete #editor="matAutocomplete">
-                    <mat-option *ngFor="let option of filteredEditor | async" [value]="option">
-                      {{option}}
-                    </mat-option>
-                  </mat-autocomplete>
-                </label>
-              </mat-form-field>
-              <mat-form-field>
-                <label>
-                  <input matInput [placeholder]="'BOOK.FORM.COLLECTION' | translate"
-                         [value]="book.collection"/>
-                </label>
-              </mat-form-field>
-            </div>
-          </div>
-          <div fxLayout="column">
-            <h3>{{'BOOK.FORM.SECTION_TITLE.AUTHOR' | translate}}</h3>
-            <div fxFlexFill fxFlex fxLayout="row wrap" fxLayoutGap="2rem grid">
-              <div fxLayout="column" fxFlex="50" *ngFor="let author of book.authors">
+              <h3>{{'BOOK.FORM.SECTION_TITLE.GLOBAL_INFORMATION' | translate}}</h3>
+              <div fxLayout="column">
+                <mat-slide-toggle labelPosition="before" fxFlexAlign="end"> One-shot</mat-slide-toggle>
+                <div fxLayout="row" fxLayoutGap="1rem">
+                  <mat-form-field fxFlex="15">
+                    <label>
+                      <input matInput type="number" [placeholder]="'BOOK.FORM.TOME' | translate"
+                             [value]="book.tome"/>
+                    </label>
+                  </mat-form-field>
+                  <mat-form-field fxFlex>
+                    <label>
+                      <input matInput [placeholder]="'BOOK.FORM.TITLE' | translate" formControlName="title"/>
+                    </label>
+                  </mat-form-field>
+                  <mat-form-field fxFlex="15">
+                    <label>
+                      <input matInput [placeholder]="'BOOK.FORM.YEAR' | translate"
+                             [value]="book.year"/>
+                    </label>
+                  </mat-form-field>
+                </div>
                 <mat-form-field>
                   <label>
-                    <input matInput [placeholder]="'BOOK.FORM.AUTHOR.NAME' | translate"
-                           [value]="author.name"/>
+                    <input matInput [placeholder]="'BOOK.FORM.COLLECTION' | translate" [value]="book.collection"/>
                   </label>
                 </mat-form-field>
-                <mat-form-field>
-                  <mat-label>{{'BOOK.FORM.AUTHOR.ROLES' | translate}}</mat-label>
-                  <mat-select multiple>
-                    <mat-option *ngFor="let role of roles" [value]="role">{{role}}</mat-option>
-                  </mat-select>
-                </mat-form-field>
               </div>
-              <div fxFlex="50" fxFlexAlign="center center">
-                <button fxFlexFill mat-button mat-stroked-button> Add author</button>
-              </div>
+            </div>
+            <div fxLayout="column">
+              <h3>{{'BOOK.FORM.SECTION_TITLE.SERIES' | translate}}</h3>
+              <app-series-form fxFlex [form]="series"></app-series-form>
+            </div>
+            <div fxLayout="column">
+              <h3>{{'BOOK.FORM.SECTION_TITLE.EDITOR' | translate}}</h3>
+              <app-editor-form fxFlex [form]="editor"></app-editor-form>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div fxLayout="row">
-      <mat-list dense>
-        <h3>{{'BOOK.FORM.SECTION_TITLE.RAW_DATA' | translate}}</h3>
-        <mat-list-item *ngFor="let rolesByAuthor of book.rolesByAuthors">
-          {{rolesByAuthor}}
-        </mat-list-item>
-      </mat-list>
     </div>
   </div>
 </div>

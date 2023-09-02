@@ -39,7 +39,7 @@ export class BookAdministrationService extends AdministrationService<Book> {
     this.coreService.updateLoadingState(true);
     const o = this.http.post<Book>('/api/books/', BookMapper.mapBook(bookSearch, bookType)).pipe(shareReplay());
     o.subscribe(
-      res => console.log('Books added', res),
+      () => {},
       err => console.error('an error occured!', err),
       () => {
         this.bookTypeService.getAllBookType();

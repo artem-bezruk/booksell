@@ -1,5 +1,5 @@
-export interface Author {
-  id?: number;
-  name?: string;
-  role?: Array<string>;
+import {RestEntity} from './rest-entity';
+export interface Author extends RestEntity {
+  name: string;
+  role: Array<string>;
 }

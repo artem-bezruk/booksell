@@ -4,5 +4,5 @@ export interface Series extends RestEntity {
   displayName: string;
   name?: string;
   editor?: string;
-  isOneShot?(): boolean
+  isOneShot(): boolean;
 }

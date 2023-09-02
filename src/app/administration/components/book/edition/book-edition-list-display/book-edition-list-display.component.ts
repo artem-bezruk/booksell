@@ -6,7 +6,9 @@ import {BookType} from '../../../../../core/model/bookType';
 import {BookTypeService} from '../../../../../core/services/book-type.service';
 import {BookAdministrationService} from '../../../../services/book-administration.service';
 import {HasTimedProgressBar} from '../../../../../shared/has-timed-progress-bar';
+import {EditorImpl} from '../../../../../core/model/impl/editor-impl';
 import {SeriesImpl} from '../../../../../core/model/impl/series-impl';
+import {AuthorImpl} from '../../../../../core/model/impl/author-impl';
 import {TranslateService} from '@ngx-translate/core';
 @Component({
   selector: 'app-book-edition-list-display',
@@ -19,8 +21,9 @@ export class BookEditionListDisplayComponent extends HasTimedProgressBar impleme
   }
   _book: Book = {
     title: '',
-    editor: {name: ''},
+    editor: new EditorImpl(),
     series: new SeriesImpl(),
+    authors: [new AuthorImpl()],
     tome: '',
     bookType: '',
     status: 'READ',

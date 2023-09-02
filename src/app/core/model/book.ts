@@ -4,17 +4,17 @@ import {Series} from './series';
 import {RestEntity} from './rest-entity';
 export interface Book extends RestEntity {
   arkId?: string;
-  authors?: Array<Author>;
+  authors: Author[];
   collection?: string;
   cover?: string;
   editor: Editor;
   isbn?: string;
-  series?: Series;
-  status?: Book.StatusEnum;
+  series: Series | null;
+  status: Book.StatusEnum;
   title: string;
   tome?: string;
   year?: string;
-  bookType?: string;
+  bookType: string;
 }
 export namespace Book {
   export type StatusEnum = 'UNREAD' | 'READ' | 'READING';

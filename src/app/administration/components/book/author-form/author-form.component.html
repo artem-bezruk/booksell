@@ -1,0 +1,14 @@
+<form [formGroup]="form">
+<mat-form-field>
+    <label>
+      <input matInput [placeholder]="'BOOK.FORM.AUTHOR.NAME' | translate"
+             formControlName="name"/>
+    </label>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>{{'BOOK.FORM.AUTHOR.ROLES' | translate}}</mat-label>
+    <mat-select multiple>
+      <mat-option *ngFor="let role of roles" [value]="role">{{role}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>

@@ -1,0 +1,33 @@
+<div fxFlex fxLayout="column" [formGroup]="form">
+  <div fxLayout="row">
+    <mat-form-field fxFlex>
+      <label>
+        <input type="text"
+               matInput
+               [placeholder]="'BOOK.FORM.SERIES.NAME' | translate"
+               aria-label="book's series"
+               formControlName="name"
+               [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"
+                          (optionSelected)="update($event.option.value)">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option.name}}
+          </mat-option>
+        </mat-autocomplete>
+      </label>
+    </mat-form-field>
+    <button mat-button (click)="toggleMore()">
+      <fa-icon [icon]="['fas', getIconName()]"></fa-icon>
+    </button>
+  </div>
+  <div [fxHide]="!display">
+    <mat-form-field fxFlex>
+      <label>
+        <input type="text"
+               [placeholder]="'BOOK.FORM.SERIES.DISPLAY_NAME' | translate"
+               formControlName="displayName"
+               matInput>
+      </label>
+    </mat-form-field>
+  </div>
+</div>
